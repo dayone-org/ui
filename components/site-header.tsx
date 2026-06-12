@@ -1,73 +1,120 @@
+"use client";
+
+import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
+import {
+  DOCS_PAGE_PADDING,
+  DOCS_SIDEBAR_INSET,
+  DOCS_SIDEBAR_WIDTH,
+} from "@/lib/docs-layout";
 
 type SiteHeaderProps = {
-  active?: "home" | "playground";
+  active?: "home" | "playground" | "how-to" | "komponenten";
 };
 
+const navLinkClass = "text-sm font-normal transition-opacity hover:opacity-70";
+
+function navLinkStyle(isActive: boolean) {
+  return {
+    color: isActive ? "var(--black)" : "var(--gray-400)",
+    fontWeight: isActive ? 600 : 400,
+  } as const;
+}
+
+function DayoneMark({ className }: { className?: string }) {
+  return (
+    <Link
+      href="/"
+      className={`inline-flex shrink-0 items-center gap-2.5 ${className ?? ""}`}
+    >
+      <Image
+        src="/dayone-icon.svg"
+        alt=""
+        width={28}
+        height={28}
+        priority
+        className="size-7 shrink-0"
+        aria-hidden
+      />
+      <span
+        className="text-sm font-semibold uppercase tracking-[0.08em]"
+        style={{ color: "var(--black)" }}
+      >
+        DAYONE
+      </span>
+    </Link>
+  );
+}
+
 export function SiteHeader({ active = "home" }: SiteHeaderProps) {
+  const [mobileOpen, setMobileOpen] = useState(false);
+
   return (
     <header
-      className="sticky top-0 z-50 border-b"
-      style={{
-        backgroundColor: "var(--black)",
-        borderColor: "var(--gray-500)",
-      }}
+      className="sticky top-0 z-50 bg-white/80 backdrop-blur-md"
     >
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 lg:px-8">
-        <Link href="/" className="group flex items-center gap-3">
-          <span
-            className="text-xs font-semibold uppercase tracking-[0.2em]"
-            style={{ color: "var(--sand-dark)" }}
+      <div className={DOCS_PAGE_PADDING}>
+        <div className="flex h-16 items-center justify-between gap-6">
+          <div
+            className={`flex shrink-0 items-center ${DOCS_SIDEBAR_WIDTH} ${DOCS_SIDEBAR_INSET}`}
           >
-            DAYONE
-          </span>
-          <span
-            className="hidden h-4 w-px sm:block"
-            style={{ backgroundColor: "var(--gray-500)" }}
-          />
-          <span
-            className="hidden text-sm font-semibold sm:block"
-            style={{ color: "var(--white)" }}
-          >
-            UI Foundation
-          </span>
-        </Link>
+            <DayoneMark />
+          </div>
 
-        <nav className="flex items-center gap-1 sm:gap-2">
-          <Link
-            href="/"
-            className="rounded-md px-3 py-2 text-sm font-medium transition-colors"
-            style={{
-              color: active === "home" ? "var(--white)" : "var(--sand-dark)",
-              backgroundColor:
-                active === "home" ? "var(--gray-500)" : "transparent",
-            }}
+          <nav className="hidden items-center gap-10 sm:flex">
+            <Link
+              href="/komponenten"
+              className={navLinkClass}
+              style={navLinkStyle(active === "komponenten")}
+            >
+              Komponenten
+            </Link>
+            <Link
+              href="/how-to-use"
+              className={navLinkClass}
+              style={navLinkStyle(active === "how-to")}
+            >
+              How to use
+            </Link>
+          </nav>
+
+          <button
+            type="button"
+            className="sm:hidden"
+            style={{ color: "var(--black)" }}
+            onClick={() => setMobileOpen((o) => !o)}
+            aria-label={mobileOpen ? "Menü schließen" : "Menü öffnen"}
           >
-            Start
-          </Link>
+            {mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}
+          </button>
+        </div>
+      </div>
+
+      {mobileOpen && (
+        <nav
+          className={`flex flex-col gap-4 border-t py-6 sm:hidden ${DOCS_PAGE_PADDING}`}
+          style={{ borderColor: "var(--gray-100)" }}
+        >
           <Link
             href="/playground"
-            className="rounded-md px-3 py-2 text-sm font-medium transition-colors"
-            style={{
-              color:
-                active === "playground" ? "var(--white)" : "var(--sand-dark)",
-              backgroundColor:
-                active === "playground" ? "var(--gray-500)" : "transparent",
-            }}
+            onClick={() => setMobileOpen(false)}
+            className={navLinkClass}
+            style={navLinkStyle(active === "playground")}
           >
             Komponenten
           </Link>
-          <span
-            className="ml-2 hidden rounded-md px-2 py-1 text-xs font-medium sm:inline-block"
-            style={{
-              color: "var(--sand-dark)",
-              backgroundColor: "var(--gray-500)",
-            }}
+          <Link
+            href="/how-to-use"
+            onClick={() => setMobileOpen(false)}
+            className={navLinkClass}
+            style={navLinkStyle(active === "how-to")}
           >
-            v1.0
-          </span>
+            How to use
+          </Link>
         </nav>
-      </div>
+      )}
     </header>
   );
 }

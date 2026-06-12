@@ -1,6 +1,6 @@
 import type { DocsSection } from "@/lib/docs-section";
 
-export const PLAYGROUND_SECTIONS = [
+export const KOMPONENTEN_SECTIONS = [
   { id: "typography", label: "Typography" },
   { id: "colors", label: "Colors" },
   { id: "buttons", label: "Buttons" },
@@ -14,4 +14,4 @@ export const PLAYGROUND_SECTIONS = [
   { id: "misc", label: "Misc" },
 ] as const satisfies readonly DocsSection[];
 
-export type PlaygroundSectionId = (typeof PLAYGROUND_SECTIONS)[number]["id"];
+export type KomponentenSectionId = (typeof KOMPONENTEN_SECTIONS)[number]["id"];

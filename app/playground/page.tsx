@@ -1,14 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Checkbox } from "@/components/ui/checkbox";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Switch } from "@/components/ui/switch";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -22,32 +14,14 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-
-
-function Section({
-  id,
-  title,
-  children,
-}: {
-  id: string;
-  title: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <section id={id} className="mb-16 scroll-mt-32">
-      <div className="mb-8 flex items-center gap-4">
-        <h2
-          className="whitespace-nowrap text-xl font-semibold"
-          style={{ color: "var(--black)" }}
-        >
-          {title}
-        </h2>
-        <div className="h-px flex-1" style={{ backgroundColor: "var(--gray-200)" }} />
-      </div>
-      {children}
-    </section>
-  );
-}
+import { DayoneButtonsShowcase } from "@/components/dayone-buttons";
+import { DayoneSelectionControlsShowcase } from "@/components/dayone-selection-controls";
+import { DayoneInputsShowcase } from "@/components/dayone-inputs-showcase";
+import { DayoneTypographyShowcase } from "@/components/dayone-typography-showcase";
+import { DocsDivider } from "@/components/docs-divider";
+import { PlaygroundSection } from "@/components/playground-section";
+import { PlaygroundVariantHeading } from "@/components/playground-variant-heading";
+import { PLAYGROUND_SHOWCASE } from "@/lib/playground-layout";
 
 function Row({ label, children }: { label?: string; children: React.ReactNode }) {
   return (
@@ -63,57 +37,15 @@ export default function PlaygroundPage() {
 
   return (
     <TooltipProvider>
-      <main className="px-6 py-10 lg:px-10 lg:py-14">
-        <div className="mb-14">
-          <p
-            className="mb-2 text-xs font-semibold uppercase tracking-[0.2em]"
-            style={{ color: "var(--sand-dark)" }}
-          >
-            Komponenten
-          </p>
-          <h1
-            className="font-semibold"
-            style={{
-              fontSize: "var(--text-display-xl)",
-              lineHeight: "var(--leading-display)",
-              color: "var(--black)",
-            }}
-          >
-            UI Playground
-          </h1>
-          <p
-            className="mt-3 max-w-2xl"
-            style={{
-              fontSize: "var(--text-body-md)",
-              lineHeight: "var(--leading-body)",
-              color: "var(--gray-400)",
-            }}
-          >
-            Visuelle Referenz aller Primitive — Tokens, Varianten und Zustände
-            im DAYONE Designsystem.
-          </p>
-        </div>
+      <main className="py-12 lg:py-16">
+          <PlaygroundSection id="typography" title="Typography">
+            <DayoneTypographyShowcase />
+          </PlaygroundSection>
 
-          <Section id="typography" title="Typography">
-            <div className="bg-white rounded-lg p-8 space-y-4">
-              <p className="font-semibold" style={{ fontSize: "48px", lineHeight: "1.2", color: "var(--black)" }}>Display 3XL - SemiBold</p>
-              <p className="font-normal" style={{ fontSize: "40px", lineHeight: "1.2", color: "var(--black)" }}>Display 2XL - Regular</p>
-              <p className="font-semibold" style={{ fontSize: "32px", lineHeight: "1.2", color: "var(--black)" }}>Display XL - SemiBold</p>
-              <p className="font-semibold" style={{ fontSize: "28px", lineHeight: "1.2", color: "var(--black)" }}>Display LG - SemiBold</p>
-              <p className="font-semibold" style={{ fontSize: "24px", lineHeight: "1.2", color: "var(--black)" }}>Display MD - SemiBold</p>
-              <p className="font-semibold" style={{ fontSize: "20px", lineHeight: "1.2", color: "var(--black)" }}>Display SM - SemiBold</p>
-              <Separator style={{ backgroundColor: "var(--gray-100)" }} />
-              <p className="font-normal" style={{ fontSize: "18px", lineHeight: "1.5", color: "var(--black)", letterSpacing: "0.36px" }}>Body LG - Regular. Fuer Intro-Texte und Leads.</p>
-              <p className="font-normal" style={{ fontSize: "16px", lineHeight: "1.5", color: "var(--gray-500)", letterSpacing: "0.32px" }}>Body MD - Regular. Standard Fliesstext.</p>
-              <p className="font-normal" style={{ fontSize: "14px", lineHeight: "1.5", color: "var(--gray-400)" }}>Body SM - Regular. Labels und Captions.</p>
-              <p className="font-normal" style={{ fontSize: "12px", lineHeight: "1.5", color: "var(--gray-300)" }}>Body XS - Regular. Kleingedrucktes.</p>
-            </div>
-          </Section>
-
-          <Section id="colors" title="Colors">
-            <div className="bg-white rounded-lg p-8 space-y-8">
+          <PlaygroundSection id="colors" title="Colors">
+            <div className={PLAYGROUND_SHOWCASE}>
               <div>
-                <p className="text-xs uppercase tracking-wider mb-5" style={{ color: "var(--gray-400)" }}>Grays</p>
+                <PlaygroundVariantHeading className="mb-5">Grays</PlaygroundVariantHeading>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {[
                     { name: "$Black", token: "--black", hex: "#1A1A1A" },
@@ -135,9 +67,9 @@ export default function PlaygroundPage() {
                   ))}
                 </div>
               </div>
-              <Separator style={{ backgroundColor: "var(--gray-100)" }} />
+              <DocsDivider />
               <div>
-                <p className="text-xs uppercase tracking-wider mb-5" style={{ color: "var(--gray-400)" }}>Sand</p>
+                <PlaygroundVariantHeading className="mb-5">Sand</PlaygroundVariantHeading>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {[
                     { name: "$SandDark", token: "--sand-dark", hex: "#9E9A94" },
@@ -155,9 +87,9 @@ export default function PlaygroundPage() {
                   ))}
                 </div>
               </div>
-              <Separator style={{ backgroundColor: "var(--gray-100)" }} />
+              <DocsDivider />
               <div>
-                <p className="text-xs uppercase tracking-wider mb-5" style={{ color: "var(--gray-400)" }}>Red</p>
+                <PlaygroundVariantHeading className="mb-5">Red</PlaygroundVariantHeading>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {[
                     { name: "$RedDark", token: "--red-dark", hex: "#CC443D" },
@@ -175,9 +107,9 @@ export default function PlaygroundPage() {
                   ))}
                 </div>
               </div>
-              <Separator style={{ backgroundColor: "var(--gray-100)" }} />
+              <DocsDivider />
               <div>
-                <p className="text-xs uppercase tracking-wider mb-5" style={{ color: "var(--gray-400)" }}>Blue</p>
+                <PlaygroundVariantHeading className="mb-5">Blue</PlaygroundVariantHeading>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {[{ name: "Blue Highlight", token: "--blue-highlight", hex: "#1487DD" }].map((color) => (
                     <div key={color.token} className="rounded-md overflow-hidden" style={{ border: "1px solid var(--gray-100)" }}>
@@ -191,231 +123,24 @@ export default function PlaygroundPage() {
                   ))}
                 </div>
               </div>
+              <DocsDivider />
             </div>
-          </Section>
+          </PlaygroundSection>
 
-          <Section id="buttons" title="Buttons">
-            <div className="bg-white rounded-lg p-8 space-y-8">
-              <div>
-                <p className="text-xs uppercase tracking-wider mb-6" style={{ color: "var(--gray-400)" }}>Primary</p>
-                <div className="space-y-4">
-                  {[
-                    { label: "Default", bg: "var(--black)", text: "var(--white)", border: "var(--black)" },
-                    { label: "Hover", bg: "var(--sand-dark)", text: "var(--white)", border: "var(--sand-dark)" },
-                    { label: "Focused", bg: "var(--black)", text: "var(--white)", border: "var(--sand-dark)", outline: true },
-                    { label: "Disabled", bg: "var(--sand-medium)", text: "var(--white)", border: "var(--sand-medium)" },
-                  ].map((s) => (
-                    <div key={s.label} className="flex items-center gap-6">
-                      <span className="text-sm w-20 shrink-0" style={{ color: "var(--gray-300)" }}>{s.label}</span>
-                      <button style={{ backgroundColor: s.bg, color: s.text, border: s.outline ? "2px solid " + s.border : "1px solid " + s.border }} className="flex items-center gap-2 px-[18px] py-[14px] rounded-md text-sm font-semibold" disabled={s.label === "Disabled"}>Button CTA <span>&#8594;</span></button>
-                      <button style={{ backgroundColor: s.bg, color: s.text, border: s.outline ? "2px solid " + s.border : "1px solid " + s.border }} className="flex items-center gap-2 px-[28px] py-[16px] rounded-md text-base font-semibold" disabled={s.label === "Disabled"}>Button CTA <span>&#8594;</span></button>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <Separator style={{ backgroundColor: "var(--gray-100)" }} />
-              <div>
-                <p className="text-xs uppercase tracking-wider mb-6" style={{ color: "var(--gray-400)" }}>Secondary</p>
-                <div className="space-y-4">
-                  {[
-                    { label: "Default", bg: "var(--white)", text: "var(--black)", border: "var(--white)" },
-                    { label: "Hover", bg: "var(--sand-dark)", text: "var(--white)", border: "var(--sand-dark)" },
-                    { label: "Focused", bg: "var(--white)", text: "var(--black)", border: "var(--sand-dark)", outline: true },
-                    { label: "Disabled", bg: "var(--white)", text: "var(--sand-medium)", border: "var(--white)" },
-                  ].map((s) => (
-                    <div key={s.label} className="flex items-center gap-6">
-                      <span className="text-sm w-20 shrink-0" style={{ color: "var(--gray-300)" }}>{s.label}</span>
-                      <button style={{ backgroundColor: s.bg, color: s.text, border: "2px solid " + s.border }} className="flex items-center gap-2 px-[18px] py-[14px] rounded-md text-sm font-semibold" disabled={s.label === "Disabled"}>Button CTA <span>&#8594;</span></button>
-                      <button style={{ backgroundColor: s.bg, color: s.text, border: "2px solid " + s.border }} className="flex items-center gap-2 px-[28px] py-[16px] rounded-md text-base font-semibold" disabled={s.label === "Disabled"}>Button CTA <span>&#8594;</span></button>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <Separator style={{ backgroundColor: "var(--gray-100)" }} />
-              <div>
-                <p className="text-xs uppercase tracking-wider mb-6" style={{ color: "var(--gray-400)" }}>Link</p>
-                <div className="space-y-4">
-                  {[
-                    { label: "Default", color: "var(--black)", borderColor: "var(--black)" },
-                    { label: "Hover", color: "var(--sand-dark)", borderColor: "var(--sand-dark)" },
-                    { label: "Focused", color: "var(--black)", borderColor: "var(--black)", bg: "var(--sand-medium)" },
-                    { label: "Disabled", color: "var(--sand-medium)", borderColor: "transparent" },
-                  ].map((s) => (
-                    <div key={s.label} className="flex items-center gap-6">
-                      <span className="text-sm w-20 shrink-0" style={{ color: "var(--gray-300)" }}>{s.label}</span>
-                      <button style={{ color: s.color, borderBottom: "2px solid " + s.borderColor, backgroundColor: s.bg || "transparent", paddingBottom: "8px" }} className="flex items-center gap-2 text-sm font-semibold" disabled={s.label === "Disabled"}>Button CTA <span>&#8594;</span></button>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <Separator style={{ backgroundColor: "var(--gray-100)" }} />
-              <div>
-                <p className="text-xs uppercase tracking-wider mb-6" style={{ color: "var(--gray-400)" }}>Inline-Link</p>
-                <div className="space-y-4">
-                  {[
-                    { label: "Default", color: "var(--black)", borderColor: "var(--black)", bg: "transparent" },
-                    { label: "Hover", color: "var(--white)", borderColor: "var(--black)", bg: "var(--black)" },
-                    { label: "Focused", color: "var(--white)", borderColor: "var(--black)", bg: "var(--black)" },
-                    { label: "Disabled", color: "var(--sand-medium)", borderColor: "transparent", bg: "transparent" },
-                  ].map((s) => (
-                    <div key={s.label} className="flex items-center gap-6">
-                      <span className="text-sm w-20 shrink-0" style={{ color: "var(--gray-300)" }}>{s.label}</span>
-                      <button style={{ color: s.color, borderBottom: "2px solid " + s.borderColor, backgroundColor: s.bg, paddingBottom: "8px" }} className="text-sm font-semibold" disabled={s.label === "Disabled"}>Button CTA</button>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <Separator style={{ backgroundColor: "var(--gray-100)" }} />
-              <div>
-                <p className="text-xs uppercase tracking-wider mb-4" style={{ color: "var(--gray-400)" }}>Mobile (full-width)</p>
-                <button className="w-full px-5 py-[14px] rounded-md flex items-center justify-center gap-2 font-semibold text-base" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>Button CTA <span>&#8594;</span></button>
-              </div>
-            </div>
-          </Section>
+          <PlaygroundSection id="buttons" title="Buttons">
+            <DayoneButtonsShowcase />
+          </PlaygroundSection>
 
-          <Section id="inputs-forms" title="Inputs & Forms">
-            <div className="bg-white rounded-lg p-8 space-y-8">
-              <div>
-                <p className="text-xs uppercase tracking-wider mb-6" style={{ color: "var(--gray-400)" }}>States</p>
-                <div className="space-y-4">
-                  {[
-                    { label: "Default", state: "default" },
-                    { label: "Filled", state: "filled" },
-                    { label: "Hover", state: "hover" },
-                    { label: "Focused", state: "focused" },
-                    { label: "Disabled", state: "disabled" },
-                    { label: "Helper Text", state: "helper" },
-                  ].map(({ label, state }) => (
-                    <div key={state} className="flex items-start gap-6">
-                      <span className="text-sm w-24 shrink-0 pt-6" style={{ color: "var(--gray-400)" }}>{label}</span>
-                      <div className="flex flex-col gap-1 w-64">
-                        <p className="text-[12px] font-normal leading-[1.5]" style={{ color: state === "disabled" ? "var(--sand-dark)" : "var(--black)" }}>Vorname</p>
-                        <div className="flex items-center px-3 py-[10px] rounded-sm" style={{ backgroundColor: "var(--sand-light)", border: state === "focused" ? "2px solid var(--black)" : "none", borderBottom: state !== "focused" ? "2px solid var(--sand-dark)" : undefined, opacity: state === "disabled" ? 0.3 : 1 }}>
-                          <span className="text-[18px] font-semibold tracking-[0.54px]" style={{ color: state === "filled" ? "var(--black)" : "var(--sand-dark)" }}>
-                            {state === "filled" ? "Victoria" : "Dein Vorname"}
-                          </span>
-                        </div>
-                        {state === "helper" && (
-                          <div className="flex items-center gap-2 pt-2">
-                            <span className="text-sm" style={{ color: "var(--sand-dark)" }}>i</span>
-                            <p className="text-[14px]" style={{ color: "var(--sand-dark)" }}>Helper Text</p>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <Separator style={{ backgroundColor: "var(--gray-100)" }} />
-              <div>
-                <p className="text-xs uppercase tracking-wider mb-6" style={{ color: "var(--gray-400)" }}>Formular-Beispiel</p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {[
-                    { label: "Name", placeholder: "Victoria Itter", type: "text" },
-                    { label: "E-Mail", placeholder: "victoria@dayone.de", type: "email" },
-                  ].map(({ label, placeholder, type }) => (
-                    <div key={label} className="flex flex-col gap-1">
-                      <label className="text-[12px] font-normal" style={{ color: "var(--black)" }}>{label}</label>
-                      <div className="flex items-center px-3 py-[10px]" style={{ backgroundColor: "var(--sand-light)", borderBottom: "2px solid var(--sand-dark)" }}>
-                        <input type={type} placeholder={placeholder} className="bg-transparent text-[18px] font-semibold tracking-[0.54px] w-full outline-none" style={{ color: "var(--sand-dark)" }} />
-                      </div>
-                    </div>
-                  ))}
-                  <div className="flex flex-col gap-1 md:col-span-2">
-                    <label className="text-[12px] font-normal" style={{ color: "var(--black)" }}>Nachricht</label>
-                    <div className="px-3 py-[10px]" style={{ backgroundColor: "var(--sand-light)", borderBottom: "2px solid var(--sand-dark)" }}>
-                      <textarea placeholder="Deine Nachricht..." className="bg-transparent text-[18px] font-semibold tracking-[0.54px] w-full outline-none min-h-[80px] resize-none" style={{ color: "var(--sand-dark)" }} />
-                    </div>
-                  </div>
-                  <div className="flex flex-col gap-1" style={{ opacity: 0.3 }}>
-                    <label className="text-[12px] font-normal" style={{ color: "var(--sand-dark)" }}>Disabled</label>
-                    <div className="flex items-center px-3 py-[10px]" style={{ backgroundColor: "var(--sand-light)", borderBottom: "2px solid var(--sand-dark)" }}>
-                      <input disabled placeholder="Nicht bearbeitbar" className="bg-transparent text-[18px] font-semibold tracking-[0.54px] w-full outline-none" style={{ color: "var(--sand-dark)" }} />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Section>
+          <PlaygroundSection id="inputs-forms" title="Inputs & Forms">
+            <DayoneInputsShowcase />
+          </PlaygroundSection>
 
+          <PlaygroundSection id="selection-controls" title="Selection Controls">
+            <DayoneSelectionControlsShowcase />
+          </PlaygroundSection>
 
-          
-          <Section id="selection-controls" title="Selection Controls">
-            <div className="bg-white rounded-lg p-8 space-y-8">
-
-              <div>
-                <p className="text-xs uppercase tracking-wider mb-6" style={{ color: "var(--gray-400)" }}>Checkbox</p>
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3">
-                    <Checkbox id="cb1" />
-                    <label htmlFor="cb1" className="text-sm font-normal" style={{ color: "var(--black)" }}>Unchecked</label>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Checkbox id="cb2" defaultChecked />
-                    <label htmlFor="cb2" className="text-sm font-normal" style={{ color: "var(--black)" }}>Checked</label>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Checkbox id="cb3" disabled />
-                    <label htmlFor="cb3" className="text-sm font-normal" style={{ color: "var(--gray-300)" }}>Disabled unchecked</label>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Checkbox id="cb4" defaultChecked disabled />
-                    <label htmlFor="cb4" className="text-sm font-normal" style={{ color: "var(--gray-300)" }}>Disabled checked</label>
-                  </div>
-                </div>
-              </div>
-
-              <Separator style={{ backgroundColor: "var(--gray-100)" }} />
-
-              <div>
-                <p className="text-xs uppercase tracking-wider mb-6" style={{ color: "var(--gray-400)" }}>Radio</p>
-                <RadioGroup defaultValue="r1" className="space-y-3">
-                  <div className="flex items-center gap-3">
-                    <RadioGroupItem value="r1" id="r1" />
-                    <label htmlFor="r1" className="text-sm font-normal" style={{ color: "var(--black)" }}>Option 1</label>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <RadioGroupItem value="r2" id="r2" />
-                    <label htmlFor="r2" className="text-sm font-normal" style={{ color: "var(--black)" }}>Option 2</label>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <RadioGroupItem value="r3" id="r3" disabled />
-                    <label htmlFor="r3" className="text-sm font-normal" style={{ color: "var(--gray-300)" }}>Disabled</label>
-                  </div>
-                </RadioGroup>
-              </div>
-
-              <Separator style={{ backgroundColor: "var(--gray-100)" }} />
-
-              <div>
-                <p className="text-xs uppercase tracking-wider mb-6" style={{ color: "var(--gray-400)" }}>Switch</p>
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3">
-                    <Switch id="sw1" />
-                    <label htmlFor="sw1" className="text-sm font-normal" style={{ color: "var(--black)" }}>Off</label>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Switch id="sw2" defaultChecked />
-                    <label htmlFor="sw2" className="text-sm font-normal" style={{ color: "var(--black)" }}>On</label>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Switch id="sw3" disabled />
-                    <label htmlFor="sw3" className="text-sm font-normal" style={{ color: "var(--gray-300)" }}>Disabled off</label>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Switch id="sw4" defaultChecked disabled />
-                    <label htmlFor="sw4" className="text-sm font-normal" style={{ color: "var(--gray-300)" }}>Disabled on</label>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </Section>
-
-        
-
-          <Section id="navigation" title="Navigation">
-            <div className="bg-white rounded-lg p-8">
+          <PlaygroundSection id="navigation" title="Navigation">
+            <div className={PLAYGROUND_SHOWCASE}>
               <Tabs defaultValue="overview">
                 <TabsList className="mb-6" style={{ backgroundColor: "var(--gray-100)" }}>
                   <TabsTrigger value="overview" className="data-[state=active]:text-white">Uebersicht</TabsTrigger>
@@ -426,14 +151,15 @@ export default function PlaygroundPage() {
                 <TabsContent value="details"><p style={{ color: "var(--gray-500)" }}>Detail-Ansicht.</p></TabsContent>
                 <TabsContent value="settings"><p style={{ color: "var(--gray-500)" }}>Einstellungen.</p></TabsContent>
               </Tabs>
+              <DocsDivider />
             </div>
-          </Section>
+          </PlaygroundSection>
 
-          <Section id="overlays" title="Overlays">
-            <div className="bg-white rounded-lg p-8 space-y-8">
+          <PlaygroundSection id="overlays" title="Overlays">
+            <div className={PLAYGROUND_SHOWCASE}>
 
               <div>
-                <p className="text-xs uppercase tracking-wider mb-6" style={{ color: "var(--gray-400)" }}>Dialog</p>
+                <PlaygroundVariantHeading>Dialog</PlaygroundVariantHeading>
                 <div className="flex flex-wrap gap-4">
                   <Dialog>
                     <DialogTrigger asChild>
@@ -493,10 +219,10 @@ export default function PlaygroundPage() {
                 </div>
               </div>
 
-              <Separator style={{ backgroundColor: "var(--gray-100)" }} />
+              <DocsDivider />
 
               <div>
-                <p className="text-xs uppercase tracking-wider mb-6" style={{ color: "var(--gray-400)" }}>Tooltip</p>
+                <PlaygroundVariantHeading>Tooltip</PlaygroundVariantHeading>
                 <div className="flex flex-wrap gap-6">
                   <TooltipProvider>
                     <Tooltip>
@@ -525,10 +251,10 @@ export default function PlaygroundPage() {
                 </div>
               </div>
 
-              <Separator style={{ backgroundColor: "var(--gray-100)" }} />
+              <DocsDivider />
 
               <div>
-                <p className="text-xs uppercase tracking-wider mb-6" style={{ color: "var(--gray-400)" }}>Sheet</p>
+                <PlaygroundVariantHeading>Sheet</PlaygroundVariantHeading>
                 <div className="flex flex-wrap gap-4">
                   {(["right", "bottom"] as const).map((side) => (
                     <Sheet key={side}>
@@ -562,13 +288,13 @@ export default function PlaygroundPage() {
                   ))}
                 </div>
               </div>
-
+              <DocsDivider />
             </div>
-          </Section>
+          </PlaygroundSection>
 
 
-          <Section id="feedback" title="Feedback">
-            <div className="bg-white rounded-lg p-8 space-y-4">
+          <PlaygroundSection id="feedback" title="Feedback">
+            <div className={`${PLAYGROUND_SHOWCASE} space-y-4`}>
               <Row label="Badges">
                 <Badge style={{ backgroundColor: "var(--black)", color: "var(--white)" }} className="rounded-full">Default</Badge>
                 <Badge style={{ backgroundColor: "var(--sand-medium)", color: "var(--black)" }} className="rounded-full">Sand</Badge>
@@ -584,11 +310,12 @@ export default function PlaygroundPage() {
                 <AlertDescription style={{ color: "var(--gray-500)" }}>Etwas ist schiefgelaufen.</AlertDescription>
               </Alert>
               <Progress value={60} className="h-2" style={{ backgroundColor: "var(--gray-100)" }} />
+              <DocsDivider />
             </div>
-          </Section>
+          </PlaygroundSection>
 
-          <Section id="data-display" title="Data Display">
-            <div className="bg-white rounded-lg p-8">
+          <PlaygroundSection id="data-display" title="Data Display">
+            <div className={PLAYGROUND_SHOWCASE}>
               <Table>
                 <TableHeader>
                   <TableRow style={{ borderColor: "var(--gray-100)" }}>
@@ -615,10 +342,11 @@ export default function PlaygroundPage() {
                   ))}
                 </TableBody>
               </Table>
+              <DocsDivider />
             </div>
-          </Section>
+          </PlaygroundSection>
 
-          <Section id="layout" title="Layout">
+          <PlaygroundSection id="layout" title="Layout">
             <div className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {["Design", "Development", "Strategy"].map((title) => (
@@ -634,7 +362,7 @@ export default function PlaygroundPage() {
                   </Card>
                 ))}
               </div>
-              <div className="bg-white rounded-lg p-8">
+              <div className={PLAYGROUND_SHOWCASE}>
                 <Accordion type="single" collapsible>
                   <AccordionItem value="item-1" style={{ borderColor: "var(--gray-100)" }}>
                     <AccordionTrigger className="font-semibold hover:no-underline" style={{ color: "var(--black)" }}>Was ist shadcn/ui?</AccordionTrigger>
@@ -645,12 +373,13 @@ export default function PlaygroundPage() {
                     <AccordionContent style={{ color: "var(--gray-400)" }}>Damit alle internen Tools sofort on-brand aussehen.</AccordionContent>
                   </AccordionItem>
                 </Accordion>
+                <DocsDivider />
               </div>
             </div>
-          </Section>
+          </PlaygroundSection>
 
-          <Section id="misc" title="Misc">
-            <div className="bg-white rounded-lg p-8 space-y-6">
+          <PlaygroundSection id="misc" title="Misc">
+            <div className={`${PLAYGROUND_SHOWCASE} space-y-6`}>
               <Row label="Avatar">
                 <Avatar><AvatarFallback className="font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>VI</AvatarFallback></Avatar>
                 <Avatar><AvatarFallback className="font-semibold" style={{ backgroundColor: "var(--sand-medium)", color: "var(--black)" }}>BD</AvatarFallback></Avatar>
@@ -665,12 +394,13 @@ export default function PlaygroundPage() {
               <Row label="Divider">
                 <div className="w-full space-y-3">
                   <Separator style={{ backgroundColor: "var(--gray-200)" }} />
-                  <Separator style={{ backgroundColor: "var(--gray-100)" }} />
+                  <DocsDivider />
                   <Separator style={{ backgroundColor: "var(--black)" }} />
                 </div>
               </Row>
+              <DocsDivider />
             </div>
-          </Section>
+          </PlaygroundSection>
 
       </main>
     </TooltipProvider>

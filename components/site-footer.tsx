@@ -3,29 +3,18 @@ import Link from "next/link";
 export function SiteFooter() {
   return (
     <footer
-      className="mt-auto border-t px-6 py-10 lg:px-8"
-      style={{
-        backgroundColor: "var(--black)",
-        borderColor: "var(--gray-500)",
-      }}
+      className="mt-auto px-8 py-8"
+      style={{ backgroundColor: "var(--black)" }}
     >
-      <div className="mx-auto flex max-w-7xl flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <p
-            className="text-xs font-semibold uppercase tracking-[0.2em]"
-            style={{ color: "var(--sand-dark)" }}
-          >
-            Growing Forward
-          </p>
-          <p className="mt-2 text-sm" style={{ color: "var(--gray-300)" }}>
-            DAYONE UI Foundation — Interne Designsystem-Referenz
-          </p>
-        </div>
-        <div className="flex flex-wrap items-center gap-4 text-sm">
+      <div className="mx-auto flex max-w-5xl flex-col items-center gap-4 text-center sm:flex-row sm:justify-between sm:text-left">
+        <p className="text-sm" style={{ color: "var(--sand-dark)" }}>
+          DAYONE UI Foundation — Intern
+        </p>
+        <div className="flex items-center gap-6 text-sm">
           <Link
             href="/playground"
-            className="font-medium transition-colors hover:underline"
-            style={{ color: "var(--white)" }}
+            className="transition-opacity hover:opacity-70"
+            style={{ color: "var(--gray-300)" }}
           >
             Komponenten
           </Link>
@@ -33,14 +22,11 @@ export function SiteFooter() {
             href="https://www.dayone.de"
             target="_blank"
             rel="noopener noreferrer"
-            className="transition-colors hover:underline"
-            style={{ color: "var(--sand-dark)" }}
+            className="transition-opacity hover:opacity-70"
+            style={{ color: "var(--gray-300)" }}
           >
             dayone.de
           </a>
-          <span style={{ color: "var(--gray-500)" }}>
-            © {new Date().getFullYear()} DAYONE
-          </span>
         </div>
       </div>
     </footer>
