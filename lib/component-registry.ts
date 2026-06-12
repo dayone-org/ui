@@ -40,7 +40,6 @@ export const COMPONENT_REGISTRY: ComponentCategory[] = [
       { slug: "colors", name: "Colors", description: "DAYONE Farbpalette und Design-Tokens", playgroundAnchor: "colors" },
       { slug: "empty", name: "Empty", description: "Leer-Zustand für Listen und Datenbereiche", playgroundAnchor: "feedback" },
       { slug: "item", name: "Item", description: "Universeller Listen- oder Menüeintrag", playgroundAnchor: "misc" },
-      { slug: "label", name: "Label", description: "Zugängliches Beschriftungselement für Felder", playgroundAnchor: "inputs-forms" },
       { slug: "loading", name: "Loading", description: "Ladezustände — Skeleton-Platzhalter und Spinner", playgroundAnchor: "feedback" },
       { slug: "separator", name: "Separator", description: "Horizontale Trennlinie zwischen Inhaltsbereichen", playgroundAnchor: "misc" },
       { slug: "typography", name: "Typography", description: "Typografische Skalierung und Schriftstile", playgroundAnchor: "typography" },
@@ -55,7 +54,6 @@ export const COMPONENT_REGISTRY: ComponentCategory[] = [
       { slug: "textarea", name: "Textarea", description: "Mehrzeiliges Texteingabefeld", playgroundAnchor: "inputs-forms" },
       // Pair: both dropdown selects
       { slug: "select", name: "Select", description: "Auswahlmenü mit Such- und Scroll-Funktion", playgroundAnchor: "inputs-forms" },
-      { slug: "native-select", name: "Native Select", description: "Natives Browser-Auswahlelement", playgroundAnchor: "inputs-forms" },
       // Pair: both enhanced input combos
       { slug: "combobox", name: "Combobox", description: "Kombination aus Eingabe und Dropdown-Suche", playgroundAnchor: "inputs-forms" },
       { slug: "input-group", name: "Input Group", description: "Eingabefeld mit Prefix oder Suffix", playgroundAnchor: "inputs-forms" },
@@ -67,8 +65,6 @@ export const COMPONENT_REGISTRY: ComponentCategory[] = [
       // Pair: both numeric/code inputs
       { slug: "slider", name: "Slider", description: "Schieberegler für numerische Wertauswahl", playgroundAnchor: "misc" },
       { slug: "input-otp", name: "Input OTP", description: "Einmalcode-Eingabe mit einzelnen Feldern", playgroundAnchor: "inputs-forms" },
-      // Full-width: field has label + input + description
-      { slug: "field", name: "Field", description: "Label-Feld-Kombination mit Helfertext", playgroundAnchor: "inputs-forms", span: 2 },
     ],
   },
   {
@@ -84,8 +80,6 @@ export const COMPONENT_REGISTRY: ComponentCategory[] = [
       { slug: "dropdown-menu", name: "Dropdown Menu", description: "Aufklappmenü für Aktionen und Optionen", playgroundAnchor: "navigation" },
       // Full-width: complex nav patterns
       { slug: "navigation-menu", name: "Navigation Menu", description: "Mehrstufiges Navigationsmenü mit Untermenüs", playgroundAnchor: "navigation", span: 2 },
-      { slug: "menubar", name: "Menubar", description: "Horizontale Menüleiste im Desktop-Stil", playgroundAnchor: "navigation", span: 2 },
-      { slug: "sidebar", name: "Sidebar", description: "Kollabierbare Seitenleiste für App-Navigation", playgroundAnchor: "navigation", span: 2 },
     ],
   },
   {

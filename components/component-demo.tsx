@@ -9,7 +9,8 @@ import { Bold, Italic, Underline, Search, ChevronRight, ChevronDown } from "luci
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Spinner } from "@/components/ui/spinner";
+// Spinner import kept for potential future use
+// import { Spinner } from "@/components/ui/spinner";
 import { Empty, EmptyHeader, EmptyTitle, EmptyDescription } from "@/components/ui/empty";
 import { Kbd } from "@/components/ui/kbd";
 import { Label } from "@/components/ui/label";
@@ -122,16 +123,19 @@ function ButtonGroupDemo() {
   const [active, setActive] = useState("monat");
   const items = [{ key: "woche", label: "Woche" }, { key: "monat", label: "Monat" }, { key: "jahr", label: "Jahr" }];
   return (
-    <ButtonGroup>
+    <ButtonGroup className="w-fit">
       {items.map((item) => (
         <button
           key={item.key}
           onClick={() => setActive(item.key)}
-          className="rounded-md border px-4 py-2 text-sm font-medium transition-colors"
+          /* flex-1 inside a fixed container makes all buttons equal width */
+          className="flex-1 rounded-md border px-6 py-3 text-sm font-medium transition-colors"
           style={{
             backgroundColor: active === item.key ? "var(--black)" : "var(--white)",
             color: active === item.key ? "var(--white)" : "var(--black)",
-            borderColor: "var(--gray-200)",
+            borderColor: active === item.key ? "var(--black)" : "var(--gray-200)",
+            /* min-width matches longest label so all cells are equal */
+            minWidth: "5.5rem",
           }}
         >
           {item.label}
@@ -144,11 +148,21 @@ function ButtonGroupDemo() {
 function BadgeDemo() {
   return (
     <div className="flex flex-wrap gap-3">
-      <Badge style={{ backgroundColor: "var(--black)", color: "var(--white)" }} className="rounded-full">Default</Badge>
-      <Badge style={{ backgroundColor: "var(--sand-medium)", color: "var(--black)" }} className="rounded-full">Sand</Badge>
-      <Badge style={{ backgroundColor: "var(--blue-highlight)", color: "var(--white)" }} className="rounded-full">Info</Badge>
-      <Badge style={{ backgroundColor: "var(--red-medium)", color: "var(--white)" }} className="rounded-full">Fehler</Badge>
-      <Badge style={{ backgroundColor: "var(--gray-100)", color: "var(--gray-400)" }} className="rounded-full">Inaktiv</Badge>
+      {[
+        { bg: "var(--black)", color: "var(--white)", label: "Default" },
+        { bg: "var(--sand-medium)", color: "var(--black)", label: "Sand" },
+        { bg: "var(--blue-highlight)", color: "var(--white)", label: "Info" },
+        { bg: "var(--red-medium)", color: "var(--white)", label: "Fehler" },
+        { bg: "var(--gray-100)", color: "var(--gray-400)", label: "Inaktiv" },
+      ].map(({ bg, color, label }) => (
+        <Badge
+          key={label}
+          className="rounded-full"
+          style={{ backgroundColor: bg, color, padding: "0.375rem 0.875rem 0.5rem", fontSize: "0.75rem" }}
+        >
+          {label}
+        </Badge>
+      ))}
     </div>
   );
 }
@@ -156,21 +170,21 @@ function BadgeDemo() {
 function SeparatorDemo() {
   return (
     <div className="w-full max-w-xs space-y-4">
-      <p className="text-sm font-semibold" style={{ color: "var(--black)" }}>Abschnitt A</p>
-      <Separator style={{ backgroundColor: "var(--gray-200)" }} />
-      <p className="text-sm font-semibold" style={{ color: "var(--black)" }}>Abschnitt B</p>
-      <Separator style={{ backgroundColor: "var(--black)" }} />
-      <p className="text-sm font-semibold" style={{ color: "var(--black)" }}>Abschnitt C</p>
+      <p className="text-sm" style={{ color: "var(--black)" }}>Abschnitt A</p>
+      <Separator style={{ backgroundColor: "var(--gray-200)", height: "1px", display: "block" }} />
+      <p className="text-sm" style={{ color: "var(--black)" }}>Abschnitt B</p>
     </div>
   );
 }
 
 function SkeletonDemo() {
+  // Mix between --gray-100 (#F1F1F1) and --sand-medium (#EDE7DD)
+  const skeletonColor = "#E8E3DB";
   return (
     <div className="w-full max-w-xs space-y-3">
-      <Skeleton className="h-5 w-3/4 rounded-md" style={{ backgroundColor: "var(--gray-200)" }} />
-      <Skeleton className="h-5 w-full rounded-md" style={{ backgroundColor: "var(--gray-200)" }} />
-      <Skeleton className="h-5 w-1/2 rounded-md" style={{ backgroundColor: "var(--gray-200)" }} />
+      <Skeleton className="h-5 w-3/4 rounded-md" style={{ backgroundColor: skeletonColor }} />
+      <Skeleton className="h-5 w-full rounded-md" style={{ backgroundColor: skeletonColor }} />
+      <Skeleton className="h-5 w-1/2 rounded-md" style={{ backgroundColor: skeletonColor }} />
     </div>
   );
 }
@@ -178,9 +192,9 @@ function SkeletonDemo() {
 function SpinnerDemo() {
   return (
     <div className="flex items-center gap-6">
-      <Spinner className="size-4" style={{ color: "var(--black)" }} />
-      <Spinner className="size-6" style={{ color: "var(--gray-400)" }} />
-      <Spinner className="size-8" style={{ color: "var(--black)" }} />
+      {[20, 28, 36].map((size) => (
+        <div key={size} className="dayone-spinner" style={{ width: size, height: size }} />
+      ))}
     </div>
   );
 }
@@ -263,15 +277,15 @@ function ItemDemo() {
         { title: "Bean Duong", description: "Development" },
         { title: "Max Moldovan", description: "IT" },
       ].map((item) => (
-        <Item key={item.title} variant="outline">
-          <Avatar className="size-8">
-            <AvatarFallback style={{ backgroundColor: "var(--black)", color: "var(--white)", fontSize: "11px" }}>
+        <Item key={item.title} variant="outline" className="gap-4">
+          <Avatar className="size-11 shrink-0">
+            <AvatarFallback style={{ backgroundColor: "var(--black)", color: "var(--white)", fontSize: "12px" }}>
               {item.title.split(" ").map((n) => n[0]).join("")}
             </AvatarFallback>
           </Avatar>
-          <ItemContent>
-            <ItemTitle style={{ color: "var(--black)" }}>{item.title}</ItemTitle>
-            <ItemDescription style={{ color: "var(--gray-400)" }}>{item.description}</ItemDescription>
+          <ItemContent className="gap-0.5">
+            <ItemTitle className="font-semibold" style={{ color: "var(--black)" }}>{item.title}</ItemTitle>
+            <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>{item.description}</ItemDescription>
           </ItemContent>
         </Item>
       ))}
@@ -304,10 +318,13 @@ function TextareaDemo() {
 function SelectDemo() {
   return (
     <Select>
-      <SelectTrigger className="w-48" style={{ borderColor: "var(--gray-200)" }}>
+      <SelectTrigger
+        className="w-52"
+        style={{ borderColor: "#D4CEC7", padding: "0.75rem 1rem", height: "auto" }}
+      >
         <SelectValue placeholder="Kategorie wählen" />
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent position="popper" sideOffset={4}>
         <SelectItem value="design">Design</SelectItem>
         <SelectItem value="dev">Development</SelectItem>
         <SelectItem value="strategy">Strategy</SelectItem>
@@ -471,9 +488,13 @@ function SwitchDemo() {
 function SliderDemo() {
   const [value, setValue] = useState([60]);
   return (
-    <div className="w-full max-w-xs space-y-3">
+    <div className="w-full max-w-sm space-y-4">
       <Slider value={value} onValueChange={setValue} max={100} step={1} />
-      <p className="text-sm text-right" style={{ color: "var(--gray-400)" }}>{value[0]}%</p>
+      <div className="flex justify-between text-xs" style={{ color: "var(--gray-400)" }}>
+        <span>0</span>
+        <span className="font-semibold" style={{ color: "var(--black)" }}>{value[0]}%</span>
+        <span>100</span>
+      </div>
     </div>
   );
 }
@@ -495,15 +516,15 @@ function InputOTPDemo() {
 
 function InputGroupDemo() {
   return (
-    <div className="flex flex-col gap-3 w-full max-w-xs">
-      <InputGroup>
+    <div className="flex flex-col gap-4 w-full max-w-xs">
+      <InputGroup style={{ borderColor: "#D4CEC7" }}>
         <InputGroupAddon align="inline-start">
           <Search className="size-4" style={{ color: "var(--gray-400)" }} />
         </InputGroupAddon>
-        <InputGroupInput placeholder="Suchen..." />
+        <InputGroupInput placeholder="Suchen..." className="py-3 px-2" />
       </InputGroup>
-      <InputGroup>
-        <InputGroupInput placeholder="Betrag" />
+      <InputGroup style={{ borderColor: "#D4CEC7" }}>
+        <InputGroupInput placeholder="Betrag" className="py-3 px-4" />
         <InputGroupAddon align="inline-end">
           <span className="text-sm" style={{ color: "var(--gray-400)" }}>€</span>
         </InputGroupAddon>
@@ -529,59 +550,21 @@ function FieldDemo() {
 // ─── Navigation ─────────────────────────────────────────────────────────────
 
 function TabsDemo() {
-  const rows = [
-    { label: "Typ", value: "Designsystem" },
-    { label: "Version", value: "1.0.0" },
-    { label: "Framework", value: "Next.js + shadcn/ui" },
-    { label: "Status", value: "Aktiv" },
-  ];
   return (
-    <Tabs defaultValue="overview" className="w-full">
-      <TabsList
-        className="h-auto w-full justify-start gap-0 rounded-none bg-transparent p-0"
-        style={{ borderBottom: "1px solid var(--gray-100)" }}
-      >
-        {[
-          { value: "overview", label: "Übersicht" },
-          { value: "details", label: "Details" },
-          { value: "settings", label: "Einstellungen" },
-        ].map(({ value, label }) => (
-          <TabsTrigger
-            key={value}
-            value={value}
-            className="relative -mb-px rounded-none border-b-2 border-transparent bg-transparent px-5 pb-3 pt-1 text-sm font-medium shadow-none data-[state=active]:border-black data-[state=active]:bg-transparent data-[state=active]:shadow-none"
-            style={{ color: "var(--black)" }}
-          >
-            {label}
-          </TabsTrigger>
-        ))}
+    <Tabs defaultValue="overview" className="w-full max-w-sm">
+      <TabsList style={{ backgroundColor: "var(--gray-100)" }}>
+        <TabsTrigger value="overview" className="data-[state=active]:text-white">Übersicht</TabsTrigger>
+        <TabsTrigger value="details" className="data-[state=active]:text-white">Details</TabsTrigger>
+        <TabsTrigger value="settings" className="data-[state=active]:text-white">Einstellungen</TabsTrigger>
       </TabsList>
-
-      <TabsContent value="overview" className="mt-0">
-        <div>
-          {rows.map(({ label, value }) => (
-            <div
-              key={label}
-              className="flex items-center justify-between py-4"
-              style={{ borderBottom: "1px solid var(--gray-100)" }}
-            >
-              <span className="text-sm" style={{ color: "var(--gray-400)" }}>{label}</span>
-              <span className="text-sm font-semibold" style={{ color: "var(--black)" }}>{value}</span>
-            </div>
-          ))}
-        </div>
+      <TabsContent value="overview">
+        <p className="mt-4 text-sm" style={{ color: "var(--gray-500)" }}>Überblick über alle wichtigen Informationen.</p>
       </TabsContent>
-
-      <TabsContent value="details" className="mt-0 pt-6">
-        <p className="text-sm" style={{ color: "var(--gray-400)" }}>
-          Detaillierte Informationen zu Komponenten, Design-Tokens und Varianten.
-        </p>
+      <TabsContent value="details">
+        <p className="mt-4 text-sm" style={{ color: "var(--gray-500)" }}>Detaillierte Ansicht und weitere Optionen.</p>
       </TabsContent>
-
-      <TabsContent value="settings" className="mt-0 pt-6">
-        <p className="text-sm" style={{ color: "var(--gray-400)" }}>
-          Einstellungen für Theme, Sprache und Darstellung.
-        </p>
+      <TabsContent value="settings">
+        <p className="mt-4 text-sm" style={{ color: "var(--gray-500)" }}>Konfiguration und Einstellungen.</p>
       </TabsContent>
     </Tabs>
   );

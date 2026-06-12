@@ -68,6 +68,7 @@ const CTA_ICON_SM_SIZE = 44;
 const CTA_ICON_LG_SIZE = 56;
 const CTA_PADDING_X = 18;
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function ctaMd(style: CtaStyle): CSSProperties {
   return {
     ...ctaBase(style),
@@ -82,6 +83,7 @@ function ctaMd(style: CtaStyle): CSSProperties {
   };
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function ctaLg(style: CtaStyle): CSSProperties {
   return {
     ...ctaBase(style),
@@ -91,6 +93,7 @@ function ctaLg(style: CtaStyle): CSSProperties {
   };
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function ctaIconSm(style: CtaStyle): CSSProperties {
   return {
     ...ctaBase(style),
@@ -101,6 +104,7 @@ function ctaIconSm(style: CtaStyle): CSSProperties {
   };
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function ctaIconLg(style: CtaStyle): CSSProperties {
   return {
     ...ctaBase(style),
@@ -157,86 +161,19 @@ const SECONDARY_STYLES: Record<StateName, CtaStyle> = {
   },
 };
 
-function CtaFourPack({
-  style,
-  state,
-  variant,
-}: {
-  style: CtaStyle;
-  state: StateName;
-  variant: "primary" | "secondary";
-}) {
-  const isInteractive = state === "Default";
-  const base = `dayone-btn dayone-btn--${variant}`;
-  const classes = isInteractive
-    ? `${base} dayone-btn--interactive`
-    : `${base} dayone-btn--static`;
+const SIZE_ROWS = [
+  { key: "sm", label: "Small" },
+  { key: "md", label: "Medium" },
+  { key: "lg", label: "Large" },
+] as const;
 
-  const staticProps = isInteractive
-    ? { type: "button" as const }
-    : { type: "button" as const, tabIndex: -1, "aria-hidden": true as const };
-
-  if (isInteractive) {
-    return (
-      <>
-        <button {...staticProps} className={`${classes} dayone-btn--md`}>
-          <CtaInner />
-        </button>
-        <button {...staticProps} className={`${classes} dayone-btn--lg`}>
-          <CtaInner />
-        </button>
-        <button
-          {...staticProps}
-          className={`${classes} dayone-btn--icon-sm`}
-          aria-label="Weiter"
-        >
-          <CtaInner showLabel={false} />
-        </button>
-        <button
-          {...staticProps}
-          className={`${classes} dayone-btn--icon-lg`}
-          aria-label="Weiter"
-        >
-          <CtaInner showLabel={false} />
-        </button>
-      </>
-    );
-  }
-
-  return (
-    <>
-      <button
-        {...staticProps}
-        className={`${classes} dayone-btn--md`}
-        style={ctaMd(style)}
-      >
-        <CtaInner />
-      </button>
-      <button
-        {...staticProps}
-        className={`${classes} dayone-btn--lg`}
-        style={ctaLg(style)}
-      >
-        <CtaInner />
-      </button>
-      <button
-        {...staticProps}
-        className={`${classes} dayone-btn--icon-sm`}
-        style={ctaIconSm(style)}
-        aria-label="Weiter"
-      >
-        <CtaInner showLabel={false} />
-      </button>
-      <button
-        {...staticProps}
-        className={`${classes} dayone-btn--icon-lg`}
-        style={ctaIconLg(style)}
-        aria-label="Weiter"
-      >
-        <CtaInner showLabel={false} />
-      </button>
-    </>
-  );
+/** Appearance-only style — NO size properties, those come from the CSS class */
+function appearanceStyle(style: CtaStyle): CSSProperties {
+  return {
+    backgroundColor: style.backgroundColor,
+    color: style.color,
+    border: style.border,
+  };
 }
 
 function CtaVariantBlock({
@@ -252,16 +189,39 @@ function CtaVariantBlock({
     <div>
       <PlaygroundVariantHeading>{title}</PlaygroundVariantHeading>
       <div className="space-y-4">
-        {STATE_LABELS.map((state) => (
-          <div key={state} className="flex items-center gap-6">
-            <span
-              className="w-20 shrink-0 text-sm"
-              style={{ color: "var(--gray-300)" }}
-            >
-              {state}
+        {SIZE_ROWS.map(({ key, label }) => (
+          <div key={key} className="flex items-center gap-6">
+            <span className="w-16 shrink-0 text-sm" style={{ color: "var(--gray-300)" }}>
+              {label}
             </span>
-            <div className="flex flex-wrap items-center gap-4 [&>.dayone-btn--md]:shrink-0">
-              <CtaFourPack style={styles[state]} state={state} variant={variant} />
+            <div className="flex flex-wrap items-center gap-4">
+              {/* Default — interactive, CSS class handles ALL styling */}
+              <button
+                type="button"
+                className={`dayone-btn dayone-btn--${variant} dayone-btn--interactive dayone-btn--${key}`}
+              >
+                <CtaInner />
+              </button>
+              {/* Focused — CSS class for size, inline for appearance only */}
+              <button
+                type="button"
+                tabIndex={-1}
+                aria-hidden
+                className={`dayone-btn dayone-btn--${variant} dayone-btn--static dayone-btn--${key}`}
+                style={appearanceStyle(styles["Focused"])}
+              >
+                <CtaInner />
+              </button>
+              {/* Disabled — CSS class for size, inline for appearance only */}
+              <button
+                type="button"
+                tabIndex={-1}
+                aria-hidden
+                className={`dayone-btn dayone-btn--${variant} dayone-btn--static dayone-btn--${key}`}
+                style={appearanceStyle(styles["Disabled"])}
+              >
+                <CtaInner />
+              </button>
             </div>
           </div>
         ))}

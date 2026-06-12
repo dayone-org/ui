@@ -11,14 +11,19 @@ npm run dev
 
 - **Landing:** [http://localhost:3000](http://localhost:3000)
 - **Playground:** [http://localhost:3000/playground](http://localhost:3000/playground)
+- **How to use:** [http://localhost:3000/how-to-use](http://localhost:3000/how-to-use)
+
+## Live
+
+- **Production:** https://dayone-ui.vercel.app
+- **Playground:** https://dayone-ui.vercel.app/playground
+- **How to use:** https://dayone-ui.vercel.app/how-to-use
 
 ## Deploy (Vercel)
 
 ```bash
 npx vercel --prod
 ```
-
-Oder: Repo auf GitHub pushen und auf [vercel.com/new](https://vercel.com/new) importieren.
 
 ## Struktur
 
