@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { useState, useRef } from "react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import {
   DOCS_PAGE_PADDING,
   DOCS_SIDEBAR_INSET,
@@ -11,7 +11,7 @@ import {
 } from "@/lib/docs-layout";
 
 type SiteHeaderProps = {
-  active?: "home" | "playground" | "how-to" | "komponenten";
+  active?: "home" | "playground" | "how-to" | "komponenten" | "anwendung";
 };
 
 const navLinkClass = "text-sm font-normal transition-opacity hover:opacity-70";
@@ -48,6 +48,52 @@ function DayoneMark({ className }: { className?: string }) {
   );
 }
 
+function AnwendungDropdown({ active }: { active: boolean }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  return (
+    <div
+      ref={ref}
+      className="relative"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      <button
+        type="button"
+        className={`${navLinkClass} flex items-center gap-1`}
+        style={navLinkStyle(active)}
+        onClick={() => setOpen((o) => !o)}
+        aria-expanded={open}
+      >
+        Anwendung
+        <ChevronDown
+          className="size-3 transition-transform"
+          style={{ transform: open ? "rotate(180deg)" : undefined }}
+        />
+      </button>
+      {open && (
+        <div
+          className="absolute right-0 top-full z-50 mt-1 min-w-36 rounded-xl py-1.5 shadow-lg"
+          style={{
+            backgroundColor: "var(--white)",
+            border: "1px solid var(--gray-100)",
+          }}
+        >
+          <Link
+            href="/anwendung/pdc-hub"
+            className="block px-4 py-2 text-sm transition-colors hover:opacity-70"
+            style={{ color: "var(--black)", fontWeight: 500 }}
+            onClick={() => setOpen(false)}
+          >
+            PDC Hub
+          </Link>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export function SiteHeader({ active = "home" }: SiteHeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -79,6 +125,7 @@ export function SiteHeader({ active = "home" }: SiteHeaderProps) {
             >
               How to use
             </Link>
+            <AnwendungDropdown active={active === "anwendung"} />
           </nav>
 
           <button
@@ -113,6 +160,14 @@ export function SiteHeader({ active = "home" }: SiteHeaderProps) {
             style={navLinkStyle(active === "how-to")}
           >
             How to use
+          </Link>
+          <Link
+            href="/anwendung/pdc-hub"
+            onClick={() => setMobileOpen(false)}
+            className={navLinkClass}
+            style={navLinkStyle(active === "anwendung")}
+          >
+            PDC Hub
           </Link>
         </nav>
       )}
