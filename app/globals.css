@@ -734,6 +734,55 @@
     border-bottom-color: transparent;
   }
 
+  /* Arrow — text + → arrow, no box */
+  :is(button, a).dayone-btn--arrow {
+    height: auto;
+    padding: 0;
+    background: transparent;
+    border: none;
+    font-size: var(--dayone-btn-link-font-size);
+    color: #1a1a1a;
+  }
+
+  :is(button, a).dayone-btn--arrow .dayone-btn__inner {
+    gap: var(--dayone-btn-inner-gap);
+  }
+
+  :is(button, a).dayone-btn--arrow-white {
+    height: auto;
+    padding: 0;
+    background: transparent;
+    border: none;
+    font-size: var(--dayone-btn-link-font-size);
+    color: #ffffff;
+  }
+
+  :is(button, a).dayone-btn--arrow-white .dayone-btn__inner {
+    gap: var(--dayone-btn-inner-gap);
+  }
+
+  /* Anchor — text + ↓ arrow, no box */
+  :is(button, a).dayone-btn--anchor {
+    height: auto;
+    padding: 0;
+    background: transparent;
+    border: none;
+    font-size: var(--dayone-btn-link-font-size);
+    color: #1a1a1a;
+  }
+
+  :is(button, a).dayone-btn--anchor .dayone-btn__inner {
+    gap: var(--dayone-btn-inner-gap);
+  }
+
+  :is(button, a).dayone-btn--anchor .dayone-btn__arrow {
+    transform: translateY(0) translateX(0);
+  }
+
+  :is(button, a).dayone-btn--anchor:hover:not(:disabled) .dayone-btn__arrow {
+    transform: translateY(4px) translateX(0);
+  }
+
   /* Static preview rows — no hover override */
   :is(button, a).dayone-btn--static {
     pointer-events: none;

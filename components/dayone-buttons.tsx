@@ -1,4 +1,4 @@
-import type { CSSProperties } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { DocsDivider } from "@/components/docs-divider";
 import { PlaygroundVariantHeading } from "@/components/playground-variant-heading";
 import { PLAYGROUND_SHOWCASE } from "@/lib/playground-layout";
@@ -8,6 +8,14 @@ function Arrow() {
   return (
     <span className="dayone-btn__arrow" aria-hidden>
       &#8594;
+    </span>
+  );
+}
+
+function AnchorArrow() {
+  return (
+    <span className="dayone-btn__arrow" aria-hidden>
+      &#8595;
     </span>
   );
 }
@@ -329,6 +337,79 @@ function LinkVariantBlock({
   );
 }
 
+type SimpleStyle = { color: string; opacity?: number };
+
+const ARROW_STYLES: Record<StateName, SimpleStyle> = {
+  Default: { color: "#1A1A1A" },
+  Hover: { color: "#9E9A94" },
+  Focused: { color: "#1A1A1A" },
+  Disabled: { color: "#EDE7DD" },
+};
+
+const ARROW_WHITE_STYLES: Record<StateName, SimpleStyle> = {
+  Default: { color: "#FFFFFF" },
+  Hover: { color: "rgba(255,255,255,0.6)" },
+  Focused: { color: "#FFFFFF" },
+  Disabled: { color: "rgba(255,255,255,0.3)" },
+};
+
+const ANCHOR_STYLES: Record<StateName, SimpleStyle> = {
+  Default: { color: "#1A1A1A" },
+  Hover: { color: "#9E9A94" },
+  Focused: { color: "#1A1A1A" },
+  Disabled: { color: "#EDE7DD" },
+};
+
+function SimpleVariantBlock({
+  title,
+  variant,
+  styles,
+  arrowNode,
+  darkBg,
+}: {
+  title: string;
+  variant: "arrow" | "arrow-white" | "anchor";
+  styles: Record<StateName, SimpleStyle>;
+  arrowNode: ReactNode;
+  darkBg?: boolean;
+}) {
+  return (
+    <div>
+      <PlaygroundVariantHeading>{title}</PlaygroundVariantHeading>
+      <div
+        className="space-y-4 rounded-md p-4"
+        style={darkBg ? { backgroundColor: "#1A1A1A" } : undefined}
+      >
+        {STATE_LABELS.map((state) => {
+          const isInteractive = state === "Default";
+          const classes = `dayone-btn dayone-btn--${variant} ${isInteractive ? "dayone-btn--interactive" : "dayone-btn--static"}`;
+          return (
+            <div key={state} className="flex items-center gap-6">
+              <span
+                className="w-20 shrink-0 text-sm"
+                style={{ color: darkBg ? "rgba(255,255,255,0.4)" : "var(--gray-300)" }}
+              >
+                {state}
+              </span>
+              <button
+                type="button"
+                {...(!isInteractive && { tabIndex: -1, "aria-hidden": true as const })}
+                className={classes}
+                style={!isInteractive ? { color: styles[state].color } : undefined}
+              >
+                <span className="dayone-btn__inner">
+                  <CtaLabel />
+                  {arrowNode}
+                </span>
+              </button>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 export function DayoneButtonsContent() {
   return (
     <div className="space-y-14">
@@ -336,6 +417,9 @@ export function DayoneButtonsContent() {
       <CtaVariantBlock title="Secondary" variant="secondary" styles={SECONDARY_STYLES} />
       <LinkVariantBlock title="Link" variant="link" styles={LINK_STYLES} />
       <LinkVariantBlock title="Inline-Link" variant="inline-link" styles={INLINE_STYLES} />
+      <SimpleVariantBlock title="Arrow" variant="arrow" styles={ARROW_STYLES} arrowNode={<Arrow />} />
+      <SimpleVariantBlock title="Arrow White" variant="arrow-white" styles={ARROW_WHITE_STYLES} arrowNode={<Arrow />} darkBg />
+      <SimpleVariantBlock title="Anchor" variant="anchor" styles={ANCHOR_STYLES} arrowNode={<AnchorArrow />} />
       <div>
         <PlaygroundVariantHeading className="mb-4">Mobile (width filled)</PlaygroundVariantHeading>
         <button type="button" className="dayone-btn dayone-btn--primary dayone-btn--interactive dayone-btn--mobile">
@@ -368,6 +452,12 @@ export function DayoneButtonsShowcase() {
         variant="inline-link"
         styles={INLINE_STYLES}
       />
+      <DocsDivider />
+      <SimpleVariantBlock title="Arrow" variant="arrow" styles={ARROW_STYLES} arrowNode={<Arrow />} />
+      <DocsDivider />
+      <SimpleVariantBlock title="Arrow White" variant="arrow-white" styles={ARROW_WHITE_STYLES} arrowNode={<Arrow />} darkBg />
+      <DocsDivider />
+      <SimpleVariantBlock title="Anchor" variant="anchor" styles={ANCHOR_STYLES} arrowNode={<AnchorArrow />} />
       <DocsDivider />
       <div>
         <PlaygroundVariantHeading className="mb-4">
