@@ -3,17 +3,19 @@ import { ComponentDemo } from "@/components/component-demo";
 
 function CategoryHeading({ children }: { children: React.ReactNode }) {
   return (
-    <h2
-      className="font-semibold"
-      style={{
-        fontSize: "26px",
-        color: "var(--black)",
-        textTransform: "uppercase",
-        letterSpacing: "0.05em",
-      }}
-    >
-      {children}
-    </h2>
+    <div className="flex items-center gap-4">
+      <h2
+        className="shrink-0 font-medium"
+        style={{
+          fontSize: "var(--text-body-sm)",
+          color: "var(--gray-400)",
+          letterSpacing: "0.02em",
+        }}
+      >
+        {children}
+      </h2>
+      <div className="flex-1" style={{ height: "1px", backgroundColor: "var(--gray-100)" }} />
+    </div>
   );
 }
 
