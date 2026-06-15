@@ -415,8 +415,6 @@ export function DayoneButtonsContent() {
     <div className="space-y-14">
       <CtaVariantBlock title="Primary" variant="primary" styles={PRIMARY_STYLES} />
       <CtaVariantBlock title="Secondary" variant="secondary" styles={SECONDARY_STYLES} />
-      <LinkVariantBlock title="Link" variant="link" styles={LINK_STYLES} />
-      <LinkVariantBlock title="Inline-Link" variant="inline-link" styles={INLINE_STYLES} />
       <SimpleVariantBlock title="Arrow" variant="arrow" styles={ARROW_STYLES} arrowNode={<Arrow />} />
       <SimpleVariantBlock title="Arrow White" variant="arrow-white" styles={ARROW_WHITE_STYLES} arrowNode={<Arrow />} darkBg />
       <SimpleVariantBlock title="Anchor" variant="anchor" styles={ANCHOR_STYLES} arrowNode={<AnchorArrow />} />
@@ -443,14 +441,6 @@ export function DayoneButtonsShowcase() {
         title="Secondary"
         variant="secondary"
         styles={SECONDARY_STYLES}
-      />
-      <DocsDivider />
-      <LinkVariantBlock title="Link" variant="link" styles={LINK_STYLES} />
-      <DocsDivider />
-      <LinkVariantBlock
-        title="Inline-Link"
-        variant="inline-link"
-        styles={INLINE_STYLES}
       />
       <DocsDivider />
       <SimpleVariantBlock title="Arrow" variant="arrow" styles={ARROW_STYLES} arrowNode={<Arrow />} />
