@@ -38,6 +38,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de" className={`${roobert.variable} h-full antialiased`}>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: "if('scrollRestoration'in history)history.scrollRestoration='manual'" }} />
+      </head>
       <body className="min-h-full flex flex-col">
         <NavigationTopScroller />
         {children}
