@@ -68,7 +68,7 @@ export function SiteHeader({ active = "home" }: SiteHeaderProps) {
               href="/komponenten"
               className={navLinkClass}
               style={navLinkStyle(active === "komponenten")}
-              onClick={() => window.scrollTo(0, 0)}
+              onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "instant" })}
             >
               Komponenten
             </Link>
