@@ -535,30 +535,26 @@
 
   /* CTA text — sm: compact · md: default · lg: large */
   :is(button, a).dayone-btn--sm {
-    width: 110px;
-    min-width: 110px;
-    max-width: 110px;
-    height: 32px;
-    min-height: 32px;
-    max-height: 32px;
-    padding: 0 12px;
+    height: 38px;
+    min-height: 38px;
+    max-height: 38px;
+    width: auto;
+    padding: 0 16px;
     font-size: 11px;
   }
 
   :is(button, a).dayone-btn--md {
-    width: var(--dayone-btn-md-width);
-    min-width: var(--dayone-btn-md-width);
-    max-width: var(--dayone-btn-md-width);
     height: var(--dayone-btn-md-height);
     min-height: var(--dayone-btn-md-height);
     max-height: var(--dayone-btn-md-height);
-    padding: 0 var(--dayone-btn-cta-padding-r) 0 var(--dayone-btn-cta-padding-x);
+    width: auto;
+    padding: 0 var(--dayone-btn-cta-padding-x);
     font-size: var(--dayone-btn-md-font-size);
   }
 
   :is(button, a).dayone-btn--lg {
-    height: var(--dayone-btn-lg-height);
-    min-height: var(--dayone-btn-lg-height);
+    height: 52px;
+    min-height: 52px;
     width: auto;
     padding: 0 32px;
     font-size: var(--dayone-btn-lg-font-size);
