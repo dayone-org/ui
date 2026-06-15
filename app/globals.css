@@ -455,7 +455,7 @@
 /* DAYONE Buttons — spacing from Primary CTA MD Default (Figma 19085-391) */
 @layer components {
   :is(button, a).dayone-btn {
-    --dayone-btn-inner-gap: 10px;
+    --dayone-btn-inner-gap: 6px;
     --dayone-btn-cta-padding-x: 24px;
     --dayone-btn-cta-padding-r: 24px;
     --dayone-btn-md-height: 48px;
