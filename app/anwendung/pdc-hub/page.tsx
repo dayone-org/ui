@@ -75,7 +75,6 @@ import {
   AvatarFallback,
   AvatarGroup,
 } from "@/components/ui/avatar";
-import { Calendar } from "@/components/ui/calendar";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -1191,7 +1190,6 @@ function SuggestDrawer({
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
-const NEXT_PDC = new Date("2026-07-02");
 const SESSIONS_WITH_PARTICIPANTS = SESSIONS.filter((s) => s.participants != null);
 const AVG_PARTICIPANTS = Math.round(
   SESSIONS_WITH_PARTICIPANTS.reduce((acc, s) => acc + (s.participants ?? 0), 0) /
@@ -1259,63 +1257,24 @@ export default function PDCHubPage() {
           </div>
         </div>
 
-        {/* Mini calendar + Tabs side by side */}
-        <div className="flex gap-8 items-start">
-          {/* Main tabs */}
-          <div className="flex-1 min-w-0">
-            <Tabs defaultValue="sessions">
-              <TabsList variant="text" className="mb-8">
-                <TabsTrigger value="sessions">
-                  Sessions
-                </TabsTrigger>
-                <TabsTrigger value="backlog">
-                  Themen-Backlog
-                </TabsTrigger>
-                <TabsTrigger value="ressourcen">
-                  Ressourcen
-                </TabsTrigger>
-              </TabsList>
+        {/* Tabs */}
+        <Tabs defaultValue="sessions" className="flex-col">
+          <TabsList variant="text" className="mb-8">
+            <TabsTrigger value="sessions">Sessions</TabsTrigger>
+            <TabsTrigger value="backlog">Themen-Backlog</TabsTrigger>
+            <TabsTrigger value="ressourcen">Ressourcen</TabsTrigger>
+          </TabsList>
 
-              <TabsContent value="sessions">
-                <SessionsTab />
-              </TabsContent>
-              <TabsContent value="backlog">
-                <BacklogTab onSuggest={() => setSuggestOpen(true)} />
-              </TabsContent>
-              <TabsContent value="ressourcen">
-                <RessourcenTab />
-              </TabsContent>
-            </Tabs>
-          </div>
-
-          {/* Sidebar: next session calendar */}
-          <div className="hidden lg:block shrink-0">
-            <div
-              className="rounded-xl p-4"
-              style={{ border: "1px solid var(--gray-100)" }}
-            >
-              <p className="text-xs font-medium mb-3" style={{ color: "var(--gray-400)" }}>
-                Nächste Session
-              </p>
-              <Calendar
-                mode="single"
-                selected={NEXT_PDC}
-                className="rounded-lg"
-              />
-              <div
-                className="mt-3 rounded-lg px-3 py-2.5"
-                style={{ backgroundColor: "var(--gray-50, #F7F7F7)" }}
-              >
-                <p className="text-xs font-semibold" style={{ color: "var(--black)" }}>
-                  02. Juli 2026
-                </p>
-                <p className="text-xs mt-0.5" style={{ color: "var(--gray-400)" }}>
-                  PDC #11 · 3 Wochen
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
+          <TabsContent value="sessions">
+            <SessionsTab />
+          </TabsContent>
+          <TabsContent value="backlog">
+            <BacklogTab onSuggest={() => setSuggestOpen(true)} />
+          </TabsContent>
+          <TabsContent value="ressourcen">
+            <RessourcenTab />
+          </TabsContent>
+        </Tabs>
       </div>
 
       {/* Suggest Drawer */}
