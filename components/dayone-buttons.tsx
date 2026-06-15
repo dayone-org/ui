@@ -139,9 +139,9 @@ const PRIMARY_STYLES: Record<StateName, CtaStyle> = {
     border: "2px solid #9E9A94",
   },
   Disabled: {
-    backgroundColor: "#EDE7DD",
-    color: "#FFFFFF",
-    border: "2px solid #EDE7DD",
+    backgroundColor: "#D4D4D4",
+    color: "#9E9E9E",
+    border: "2px solid #D4D4D4",
   },
 };
 
@@ -162,9 +162,9 @@ const SECONDARY_STYLES: Record<StateName, CtaStyle> = {
     border: "2px solid #9E9A94",
   },
   Disabled: {
-    backgroundColor: "#FFFFFF",
-    color: "#EDE7DD",
-    border: "2px solid #FFFFFF",
+    backgroundColor: "#F5F5F5",
+    color: "#C0C0C0",
+    border: "2px solid #F5F5F5",
   },
 };
 
@@ -250,7 +250,7 @@ const LINK_STYLES: Record<StateName, LinkStyle> = {
     borderBottom: "2px solid #1A1A1A",
     backgroundColor: "#EDE7DD",
   },
-  Disabled: { color: "#EDE7DD", borderBottom: "2px solid transparent" },
+  Disabled: { color: "#C0C0C0", borderBottom: "2px solid transparent" },
 };
 
 const INLINE_STYLES: Record<StateName, LinkStyle> = {
@@ -265,7 +265,7 @@ const INLINE_STYLES: Record<StateName, LinkStyle> = {
     borderBottom: "2px solid #1A1A1A",
     backgroundColor: "#1A1A1A",
   },
-  Disabled: { color: "#EDE7DD", borderBottom: "2px solid transparent" },
+  Disabled: { color: "#C0C0C0", borderBottom: "2px solid transparent" },
 };
 
 function LinkVariantBlock({
@@ -343,21 +343,21 @@ const ARROW_STYLES: Record<StateName, SimpleStyle> = {
   Default: { color: "#1A1A1A" },
   Hover: { color: "#9E9A94" },
   Focused: { color: "#1A1A1A" },
-  Disabled: { color: "#EDE7DD" },
+  Disabled: { color: "#C0C0C0" },
 };
 
 const ARROW_WHITE_STYLES: Record<StateName, SimpleStyle> = {
   Default: { color: "#FFFFFF" },
   Hover: { color: "rgba(255,255,255,0.6)" },
   Focused: { color: "#FFFFFF" },
-  Disabled: { color: "rgba(255,255,255,0.3)" },
+  Disabled: { color: "rgba(255,255,255,0.25)" },
 };
 
 const ANCHOR_STYLES: Record<StateName, SimpleStyle> = {
   Default: { color: "#1A1A1A" },
   Hover: { color: "#9E9A94" },
   Focused: { color: "#1A1A1A" },
-  Disabled: { color: "#EDE7DD" },
+  Disabled: { color: "#C0C0C0" },
 };
 
 function SimpleVariantBlock({
