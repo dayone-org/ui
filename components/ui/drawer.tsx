@@ -64,14 +64,11 @@ function DrawerContent({
         )}
         {...props}
       >
-        {/* Drag handle — mobile only */}
-        <div className="mx-auto mt-4 hidden h-1 w-[100px] shrink-0 rounded-full bg-muted group-data-[vaul-drawer-direction=bottom]/drawer-content:block sm:hidden" />
-        {/* Close button — desktop only */}
         <DrawerPrimitive.Close asChild>
           <Button
             variant="ghost"
             size="icon-sm"
-            className="absolute top-4 right-4 hidden sm:flex"
+            className="absolute top-4 right-4"
           >
             <XIcon />
             <span className="sr-only">Schließen</span>

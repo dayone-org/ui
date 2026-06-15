@@ -33,14 +33,14 @@ import { Field, FieldLabel, FieldDescription } from "@/components/ui/field";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
-import { NavigationMenu, NavigationMenuItem, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
+import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
 import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarTrigger } from "@/components/ui/menubar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger } from "@/components/ui/context-menu";
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { Drawer, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
@@ -585,20 +585,33 @@ function TabsDemo() {
 }
 
 function BreadcrumbDemo() {
+  const [active, setActive] = useState("breadcrumb");
+  const items = [
+    { key: "start", label: "Start" },
+    { key: "komponenten", label: "Komponenten" },
+    { key: "breadcrumb", label: "Breadcrumb" },
+  ];
   return (
     <Breadcrumb>
       <BreadcrumbList>
-        <BreadcrumbItem>
-          <BreadcrumbLink href="#" style={{ color: "var(--gray-400)" }}>Start</BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator style={{ color: "var(--gray-200)" }} />
-        <BreadcrumbItem>
-          <BreadcrumbLink href="#" style={{ color: "var(--gray-400)" }}>Komponenten</BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator style={{ color: "var(--gray-200)" }} />
-        <BreadcrumbItem>
-          <BreadcrumbPage style={{ color: "var(--black)", fontWeight: 600 }}>Breadcrumb</BreadcrumbPage>
-        </BreadcrumbItem>
+        {items.map((item, idx) => (
+          <React.Fragment key={item.key}>
+            {idx > 0 && <BreadcrumbSeparator style={{ color: "var(--gray-200)" }} />}
+            <BreadcrumbItem>
+              {active === item.key ? (
+                <BreadcrumbPage style={{ color: "var(--black)", fontWeight: 600 }}>{item.label}</BreadcrumbPage>
+              ) : (
+                <BreadcrumbLink
+                  href="#"
+                  style={{ color: "var(--gray-400)" }}
+                  onClick={(e) => { e.preventDefault(); setActive(item.key); }}
+                >
+                  {item.label}
+                </BreadcrumbLink>
+              )}
+            </BreadcrumbItem>
+          </React.Fragment>
+        ))}
       </BreadcrumbList>
     </Breadcrumb>
   );
@@ -641,17 +654,38 @@ function PaginationDemo() {
 }
 
 function NavigationMenuDemo() {
+  const menus = [
+    { label: "Produkte", items: ["App", "API", "Dashboard"] },
+    { label: "Lösungen", items: ["Enterprise", "Startup", "Education"] },
+    { label: "Über uns", items: ["Team", "Blog", "Karriere"] },
+  ];
   return (
     <NavigationMenu>
       <NavigationMenuList>
-        {["Produkte", "Lösungen", "Über uns"].map((item) => (
-          <NavigationMenuItem key={item}>
+        {menus.map((menu) => (
+          <NavigationMenuItem key={menu.label}>
             <NavigationMenuTrigger
               className="text-sm font-medium"
               style={{ color: "var(--black)", backgroundColor: "transparent" }}
             >
-              {item}
+              {menu.label}
             </NavigationMenuTrigger>
+            <NavigationMenuContent>
+              <ul className="grid w-[180px] gap-0.5 p-2">
+                {menu.items.map((item) => (
+                  <li key={item}>
+                    <NavigationMenuLink
+                      href="#"
+                      onClick={(e) => e.preventDefault()}
+                      className="block rounded-md px-3 py-1.5 text-sm transition-colors hover:bg-[var(--gray-100)]"
+                      style={{ color: "var(--black)" }}
+                    >
+                      {item}
+                    </NavigationMenuLink>
+                  </li>
+                ))}
+              </ul>
+            </NavigationMenuContent>
           </NavigationMenuItem>
         ))}
       </NavigationMenuList>
@@ -767,7 +801,7 @@ function DialogDemo() {
             Dialog öffnen
           </button>
         </DialogTrigger>
-        <DialogContent style={{ backgroundColor: "var(--white)", borderColor: "var(--gray-200)" }}>
+        <DialogContent style={{ backgroundColor: "var(--white)" }}>
           <DialogHeader>
             <DialogTitle style={{ color: "var(--black)" }}>Änderungen speichern?</DialogTitle>
             <DialogDescription style={{ color: "var(--gray-400)" }}>
@@ -775,8 +809,12 @@ function DialogDemo() {
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <button className="rounded-md px-4 py-2 text-sm" style={{ color: "var(--black)", border: "1px solid var(--gray-200)" }}>Abbrechen</button>
-            <button className="rounded-md px-4 py-2 text-sm font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>Speichern</button>
+            <DialogClose asChild>
+              <button className="rounded-md px-4 py-2 text-sm" style={{ color: "var(--black)", border: "1px solid var(--gray-200)" }}>Abbrechen</button>
+            </DialogClose>
+            <DialogClose asChild>
+              <button className="rounded-md px-4 py-2 text-sm font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>Speichern</button>
+            </DialogClose>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -792,7 +830,7 @@ function AlertDialogDemo() {
           Löschen
         </button>
       </AlertDialogTrigger>
-      <AlertDialogContent style={{ backgroundColor: "var(--white)", borderColor: "var(--gray-200)" }}>
+      <AlertDialogContent style={{ backgroundColor: "var(--white)" }}>
         <AlertDialogHeader>
           <AlertDialogTitle style={{ color: "var(--black)" }}>Wirklich löschen?</AlertDialogTitle>
           <AlertDialogDescription style={{ color: "var(--gray-400)" }}>
@@ -800,8 +838,8 @@ function AlertDialogDemo() {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel style={{ borderColor: "var(--gray-200)", color: "var(--black)" }}>Abbrechen</AlertDialogCancel>
-          <AlertDialogAction style={{ backgroundColor: "var(--red-medium)", color: "var(--white)" }}>Löschen</AlertDialogAction>
+          <AlertDialogCancel style={{ color: "var(--black)", border: "1px solid var(--gray-200)", backgroundColor: "transparent" }}>Abbrechen</AlertDialogCancel>
+          <AlertDialogAction style={{ backgroundColor: "var(--red-medium)", color: "var(--white)", border: "none" }}>Löschen</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
@@ -824,7 +862,7 @@ function DrawerDemo() {
           </DrawerDescription>
         </DrawerHeader>
         <DrawerFooter>
-          <button className="w-full rounded-md py-2.5 text-sm font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>
+          <button className="rounded-md px-4 py-2.5 text-sm font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>
             Übernehmen
           </button>
         </DrawerFooter>
@@ -841,13 +879,27 @@ function SheetDemo() {
           Sheet öffnen
         </button>
       </SheetTrigger>
-      <SheetContent side="right" style={{ backgroundColor: "var(--white)", borderColor: "var(--gray-200)" }}>
-        <SheetHeader>
+      <SheetContent side="right" showCloseButton={false} style={{ backgroundColor: "var(--white)", borderColor: "var(--gray-200)" }}>
+        <div className="flex justify-end p-4 pb-2">
+          <SheetClose asChild>
+            <button className="rounded-md px-3 py-1.5 text-sm" style={{ color: "var(--black)", border: "1px solid var(--gray-200)" }}>
+              Schließen
+            </button>
+          </SheetClose>
+        </div>
+        <SheetHeader className="px-4 pb-4">
           <SheetTitle style={{ color: "var(--black)" }}>Einstellungen</SheetTitle>
           <SheetDescription style={{ color: "var(--gray-400)" }}>
             Passe deine Einstellungen hier an.
           </SheetDescription>
         </SheetHeader>
+        <div className="flex-1" />
+        <SheetFooter className="flex-row justify-end gap-2">
+          <SheetClose asChild>
+            <button className="rounded-md px-4 py-2 text-sm" style={{ color: "var(--black)", border: "1px solid var(--gray-200)" }}>Abbrechen</button>
+          </SheetClose>
+          <button className="rounded-md px-4 py-2 text-sm font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>Speichern</button>
+        </SheetFooter>
       </SheetContent>
     </Sheet>
   );
@@ -871,7 +923,7 @@ function PopoverDemo() {
 
 function HoverCardDemo() {
   return (
-    <HoverCard>
+    <HoverCard openDelay={0} closeDelay={150}>
       <HoverCardTrigger asChild>
         <button className="text-sm font-semibold underline underline-offset-4" style={{ color: "var(--black)" }}>
           @victoria.itter
@@ -1069,19 +1121,22 @@ function ChartDemo() {
 
 function AvatarDemo() {
   return (
-    <div className="flex items-center gap-3">
-      <Avatar className="size-10">
-        <AvatarFallback className="font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>VI</AvatarFallback>
-      </Avatar>
-      <Avatar className="size-10">
-        <AvatarFallback className="font-semibold" style={{ backgroundColor: "var(--sand-medium)", color: "var(--black)" }}>BD</AvatarFallback>
-      </Avatar>
-      <Avatar className="size-10">
-        <AvatarFallback className="font-semibold" style={{ backgroundColor: "var(--gray-100)", color: "var(--gray-400)" }}>MM</AvatarFallback>
-      </Avatar>
-      <Avatar className="size-8">
-        <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--blue-highlight)", color: "var(--white)" }}>+3</AvatarFallback>
-      </Avatar>
+    <div className="flex items-center -space-x-2">
+      {[
+        { initials: "VI", bg: "var(--black)", fg: "var(--white)" },
+        { initials: "BD", bg: "var(--sand-medium)", fg: "var(--black)" },
+        { initials: "MM", bg: "var(--gray-100)", fg: "var(--gray-400)" },
+      ].map(({ initials, bg, fg }) => (
+        <Avatar key={initials} className="size-10 ring-2 ring-white">
+          <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: bg, color: fg }}>{initials}</AvatarFallback>
+        </Avatar>
+      ))}
+      <div
+        className="flex size-10 items-center justify-center rounded-full ring-2 ring-white text-xs font-semibold"
+        style={{ backgroundColor: "var(--gray-100)", color: "var(--gray-500)" }}
+      >
+        +3
+      </div>
     </div>
   );
 }

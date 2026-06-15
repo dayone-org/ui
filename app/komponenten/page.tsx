@@ -6,7 +6,7 @@ function CategoryHeading({ children }: { children: React.ReactNode }) {
     <h2
       className="font-semibold"
       style={{
-        fontSize: "20px",
+        fontSize: "26px",
         color: "var(--black)",
       }}
     >
