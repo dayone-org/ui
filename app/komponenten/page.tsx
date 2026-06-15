@@ -5,11 +5,12 @@ function CategoryHeading({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex items-center gap-4">
       <h2
-        className="shrink-0 font-medium"
+        className="shrink-0 font-semibold"
         style={{
-          fontSize: "var(--text-body-sm)",
-          color: "var(--gray-400)",
-          letterSpacing: "0.02em",
+          fontSize: "var(--text-display-3xl)",
+          color: "var(--black)",
+          letterSpacing: "var(--tracking-display)",
+          lineHeight: "var(--leading-display)",
         }}
       >
         {children}
