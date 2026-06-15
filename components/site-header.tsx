@@ -68,6 +68,7 @@ export function SiteHeader({ active = "home" }: SiteHeaderProps) {
               href="/komponenten"
               className={navLinkClass}
               style={navLinkStyle(active === "komponenten")}
+              onClick={() => window.scrollTo(0, 0)}
             >
               Komponenten
             </Link>
@@ -99,7 +100,7 @@ export function SiteHeader({ active = "home" }: SiteHeaderProps) {
         >
           <Link
             href="/playground"
-            onClick={() => setMobileOpen(false)}
+            onClick={() => { setMobileOpen(false); window.scrollTo(0, 0); }}
             className={navLinkClass}
             style={navLinkStyle(active === "playground")}
           >
