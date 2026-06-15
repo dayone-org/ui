@@ -109,7 +109,7 @@ export const COMPONENT_REGISTRY: ComponentCategory[] = [
       { slug: "alert", name: "Alert", description: "Hinweis- oder Fehlerbox für Systemzustände", playgroundAnchor: "feedback", span: 2 },
       // Pair: both progress/status indicators
       { slug: "progress", name: "Progress", description: "Fortschrittsbalken für laufende Prozesse", playgroundAnchor: "feedback" },
-      { slug: "sonner", name: "Sonner", description: "Toast-Benachrichtigungen am Bildschirmrand", playgroundAnchor: "feedback" },
+      { slug: "sonner", name: "Toast", description: "Toast-Benachrichtigungen am Bildschirmrand", playgroundAnchor: "feedback" },
     ],
   },
   {

@@ -561,18 +561,6 @@ function TabsDemo() {
           <TabsTrigger key={value} value={value}>{label}</TabsTrigger>
         ))}
       </TabsList>
-      <TabsContent value="all" className="mt-6">
-        <p className="text-sm" style={{ color: "var(--gray-400)" }}>Alle Projekte.</p>
-      </TabsContent>
-      <TabsContent value="strategie" className="mt-6">
-        <p className="text-sm" style={{ color: "var(--gray-400)" }}>Strategie-Projekte.</p>
-      </TabsContent>
-      <TabsContent value="design" className="mt-6">
-        <p className="text-sm" style={{ color: "var(--gray-400)" }}>Design-Projekte.</p>
-      </TabsContent>
-      <TabsContent value="traktion" className="mt-6">
-        <p className="text-sm" style={{ color: "var(--gray-400)" }}>Traktion-Projekte.</p>
-      </TabsContent>
     </Tabs>
   );
 }
@@ -933,14 +921,17 @@ function HoverCardDemo() {
 
 function CommandDemo() {
   return (
-    <Command className="rounded-lg" style={{ border: "1px solid var(--gray-200)", maxWidth: "280px" }}>
-      <CommandInput placeholder="Suchen..." />
+    <Command
+      className="rounded-lg"
+      style={{ border: "1px solid #D3D1CF", maxWidth: "280px", boxShadow: "0 0 24px rgba(0,0,0,0.10)" }}
+    >
+      <CommandInput placeholder="Suchen..." style={{ color: "#969696" }} />
       <CommandList>
         <CommandEmpty style={{ color: "var(--gray-400)" }}>Kein Ergebnis</CommandEmpty>
         <CommandGroup heading="Komponenten">
-          <CommandItem>Button</CommandItem>
-          <CommandItem>Input</CommandItem>
-          <CommandItem>Dialog</CommandItem>
+          <CommandItem style={{ color: "var(--black)", paddingLeft: "12px", paddingTop: "8px", paddingBottom: "8px" }}>Button</CommandItem>
+          <CommandItem style={{ color: "var(--black)", paddingLeft: "12px", paddingTop: "8px", paddingBottom: "8px" }}>Input</CommandItem>
+          <CommandItem style={{ color: "var(--black)", paddingLeft: "12px", paddingTop: "8px", paddingBottom: "8px" }}>Dialog</CommandItem>
         </CommandGroup>
       </CommandList>
     </Command>
