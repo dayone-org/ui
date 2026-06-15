@@ -171,7 +171,7 @@ function SeparatorDemo() {
   return (
     <div className="w-full max-w-xs space-y-4">
       <p className="text-sm" style={{ color: "var(--black)" }}>Abschnitt A</p>
-      <Separator style={{ backgroundColor: "var(--gray-200)", height: "1px", display: "block" }} />
+      <Separator style={{ backgroundColor: "var(--gray-100)", height: "1px", display: "block" }} />
       <p className="text-sm" style={{ color: "var(--black)" }}>Abschnitt B</p>
     </div>
   );
@@ -298,8 +298,8 @@ function ItemDemo() {
 function InputDemo() {
   return (
     <div className="flex flex-col gap-3 w-full max-w-xs">
-      <Input placeholder="Normales Eingabefeld" style={{ borderColor: "var(--gray-200)" }} />
-      <Input placeholder="Deaktiviert" disabled style={{ borderColor: "var(--gray-200)" }} />
+      <Input placeholder="Normales Eingabefeld" />
+      <Input placeholder="Deaktiviert" disabled />
     </div>
   );
 }
@@ -310,7 +310,6 @@ function TextareaDemo() {
       placeholder="Schreibe hier deinen Text..."
       className="w-full max-w-xs resize-none"
       rows={4}
-      style={{ borderColor: "var(--gray-200)" }}
     />
   );
 }
@@ -538,7 +537,7 @@ function FieldDemo() {
     <div className="w-full max-w-xs space-y-4">
       <Field>
         <FieldLabel htmlFor="field-name">Vollständiger Name</FieldLabel>
-        <Input id="field-name" placeholder="Victoria Itter" style={{ borderColor: "var(--gray-200)" }} />
+        <Input id="field-name" placeholder="Victoria Itter" />
         <FieldDescription style={{ color: "var(--gray-400)", fontSize: "var(--text-body-sm)" }}>
           Dieser Name wird öffentlich angezeigt.
         </FieldDescription>
@@ -552,19 +551,34 @@ function FieldDemo() {
 function TabsDemo() {
   return (
     <Tabs defaultValue="overview" className="w-full max-w-sm">
-      <TabsList style={{ backgroundColor: "var(--gray-100)" }}>
-        <TabsTrigger value="overview" className="data-[state=active]:text-white">Übersicht</TabsTrigger>
-        <TabsTrigger value="details" className="data-[state=active]:text-white">Details</TabsTrigger>
-        <TabsTrigger value="settings" className="data-[state=active]:text-white">Einstellungen</TabsTrigger>
+      <TabsList
+        variant="line"
+        className="w-full justify-start h-auto rounded-none bg-transparent p-0 gap-0"
+        style={{ borderBottom: "1px solid var(--gray-100)" }}
+      >
+        {[
+          { value: "overview", label: "Übersicht" },
+          { value: "details", label: "Details" },
+          { value: "settings", label: "Einstellungen" },
+        ].map(({ value, label }) => (
+          <TabsTrigger
+            key={value}
+            value={value}
+            className="h-auto rounded-none px-0 mr-8 last:mr-0 pb-3 text-sm font-medium bg-transparent border-0 shadow-none data-active:bg-transparent data-active:shadow-none data-active:text-[var(--black)] hover:text-[var(--black)] transition-colors"
+            style={{ color: undefined }}
+          >
+            {label}
+          </TabsTrigger>
+        ))}
       </TabsList>
-      <TabsContent value="overview">
-        <p className="mt-4 text-sm" style={{ color: "var(--gray-500)" }}>Überblick über alle wichtigen Informationen.</p>
+      <TabsContent value="overview" className="mt-5">
+        <p className="text-sm" style={{ color: "var(--gray-400)" }}>Überblick über alle wichtigen Informationen.</p>
       </TabsContent>
-      <TabsContent value="details">
-        <p className="mt-4 text-sm" style={{ color: "var(--gray-500)" }}>Detaillierte Ansicht und weitere Optionen.</p>
+      <TabsContent value="details" className="mt-5">
+        <p className="text-sm" style={{ color: "var(--gray-400)" }}>Detaillierte Ansicht und weitere Optionen.</p>
       </TabsContent>
-      <TabsContent value="settings">
-        <p className="mt-4 text-sm" style={{ color: "var(--gray-500)" }}>Konfiguration und Einstellungen.</p>
+      <TabsContent value="settings" className="mt-5">
+        <p className="text-sm" style={{ color: "var(--gray-400)" }}>Konfiguration und Einstellungen.</p>
       </TabsContent>
     </Tabs>
   );
@@ -591,14 +605,36 @@ function BreadcrumbDemo() {
 }
 
 function PaginationDemo() {
+  const [page, setPage] = useState(2);
   return (
     <Pagination>
       <PaginationContent>
-        <PaginationItem><PaginationPrevious href="#" style={{ color: "var(--black)" }} /></PaginationItem>
-        <PaginationItem><PaginationLink href="#" style={{ color: "var(--gray-400)" }}>1</PaginationLink></PaginationItem>
-        <PaginationItem><PaginationLink href="#" isActive style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>2</PaginationLink></PaginationItem>
-        <PaginationItem><PaginationLink href="#" style={{ color: "var(--gray-400)" }}>3</PaginationLink></PaginationItem>
-        <PaginationItem><PaginationNext href="#" style={{ color: "var(--black)" }} /></PaginationItem>
+        <PaginationItem>
+          <PaginationPrevious
+            href="#"
+            onClick={(e) => { e.preventDefault(); setPage((p) => Math.max(1, p - 1)); }}
+            style={{ color: "var(--black)" }}
+          />
+        </PaginationItem>
+        {[1, 2, 3].map((p) => (
+          <PaginationItem key={p}>
+            <PaginationLink
+              href="#"
+              isActive={page === p}
+              onClick={(e) => { e.preventDefault(); setPage(p); }}
+              style={page === p ? { backgroundColor: "var(--black)", color: "var(--white)" } : { color: "var(--gray-400)" }}
+            >
+              {p}
+            </PaginationLink>
+          </PaginationItem>
+        ))}
+        <PaginationItem>
+          <PaginationNext
+            href="#"
+            onClick={(e) => { e.preventDefault(); setPage((p) => Math.min(3, p + 1)); }}
+            style={{ color: "var(--black)" }}
+          />
+        </PaginationItem>
       </PaginationContent>
     </Pagination>
   );
