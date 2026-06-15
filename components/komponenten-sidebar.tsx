@@ -197,7 +197,7 @@ function SidebarNav({ activeSlug, search, onNavigate }: NavProps) {
                       color: "var(--black)",
                       fontWeight: isActive ? 600 : 400,
                       transition: "transform 0.2s cubic-bezier(0.34,1.56,0.64,1)",
-                      transformOrigin: "center center",
+                      transformOrigin: "left center",
                       background: "none",
                       border: "none",
                       cursor: "pointer",
