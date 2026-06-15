@@ -170,7 +170,7 @@ function SidebarNav({ activeSlug, search, onNavigate }: NavProps) {
       {filtered.map((category) => (
         <li key={category.id}>
           <p
-            className="mb-1.5 px-3 text-[10px] font-medium"
+            className="mb-1.5 px-3 text-xs font-medium"
             style={{ color: "var(--gray-300)" }}
           >
             {category.label}
