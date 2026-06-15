@@ -7,7 +7,7 @@ function CategoryHeading({ children }: { children: React.ReactNode }) {
       <h2
         className="shrink-0 font-semibold"
         style={{
-          fontSize: "var(--text-display-3xl)",
+          fontSize: "var(--text-display-xl)",
           color: "var(--black)",
           letterSpacing: "var(--tracking-display)",
           lineHeight: "var(--leading-display)",

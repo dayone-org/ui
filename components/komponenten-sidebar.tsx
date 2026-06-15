@@ -170,8 +170,8 @@ function SidebarNav({ activeSlug, search, onNavigate }: NavProps) {
       {filtered.map((category) => (
         <li key={category.id}>
           <p
-            className="mb-1.5 px-3 text-[10px] font-semibold uppercase tracking-widest"
-            style={{ color: "var(--black)" }}
+            className="mb-1.5 px-3 text-[10px] font-medium"
+            style={{ color: "var(--gray-300)" }}
           >
             {category.label}
           </p>
@@ -235,12 +235,6 @@ export function KomponentenSidebarDesktop() {
   return (
     <aside className="hidden w-52 shrink-0 lg:flex xl:w-60 sticky top-16 h-[calc(100vh-4rem)] self-start">
       <div className={`flex h-full w-full flex-col justify-start pt-16 ${DOCS_SIDEBAR_INSET}`}>
-        <p
-          className="mb-5 px-3 text-[10px] font-semibold uppercase tracking-widest"
-          style={{ color: "var(--gray-400)" }}
-        >
-          Komponenten
-        </p>
         <SearchBox value={search} onChange={setSearch} />
         {/* data-sidebar-scroll marks the scrollable container for SidebarNav */}
         <nav
