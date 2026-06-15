@@ -2,13 +2,16 @@
 
 import * as React from "react"
 import { Drawer as DrawerPrimitive } from "vaul"
+import { XIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
 
 function Drawer({
+  shouldScaleBackground = false,
   ...props
 }: React.ComponentProps<typeof DrawerPrimitive.Root>) {
-  return <DrawerPrimitive.Root data-slot="drawer" {...props} />
+  return <DrawerPrimitive.Root data-slot="drawer" shouldScaleBackground={shouldScaleBackground} {...props} />
 }
 
 function DrawerTrigger({
@@ -61,7 +64,19 @@ function DrawerContent({
         )}
         {...props}
       >
-        <div className="mx-auto mt-4 hidden h-1 w-[100px] shrink-0 rounded-full bg-muted group-data-[vaul-drawer-direction=bottom]/drawer-content:block" />
+        {/* Drag handle — mobile only */}
+        <div className="mx-auto mt-4 hidden h-1 w-[100px] shrink-0 rounded-full bg-muted group-data-[vaul-drawer-direction=bottom]/drawer-content:block sm:hidden" />
+        {/* Close button — desktop only */}
+        <DrawerPrimitive.Close asChild>
+          <Button
+            variant="ghost"
+            size="icon-sm"
+            className="absolute top-4 right-4 hidden sm:flex"
+          >
+            <XIcon />
+            <span className="sr-only">Schließen</span>
+          </Button>
+        </DrawerPrimitive.Close>
         {children}
       </DrawerPrimitive.Content>
     </DrawerPortal>
@@ -85,7 +100,7 @@ function DrawerFooter({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="drawer-footer"
-      className={cn("mt-auto flex flex-col gap-2 p-4", className)}
+      className={cn("mt-auto flex flex-col gap-2 p-4 sm:flex-row sm:justify-end", className)}
       {...props}
     />
   )
