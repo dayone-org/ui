@@ -601,12 +601,13 @@ function BreadcrumbDemo() {
               {active === item.key ? (
                 <BreadcrumbPage style={{ color: "var(--black)", fontWeight: 600 }}>{item.label}</BreadcrumbPage>
               ) : (
-                <BreadcrumbLink
-                  href="#"
-                  style={{ color: "var(--gray-400)" }}
-                  onClick={(e) => { e.preventDefault(); setActive(item.key); }}
-                >
-                  {item.label}
+                <BreadcrumbLink asChild>
+                  <button
+                    style={{ color: "var(--gray-400)", background: "none", border: "none", padding: 0, cursor: "pointer", font: "inherit" }}
+                    onClick={() => setActive(item.key)}
+                  >
+                    {item.label}
+                  </button>
                 </BreadcrumbLink>
               )}
             </BreadcrumbItem>
@@ -861,7 +862,7 @@ function DrawerDemo() {
             Zusätzliche Informationen und Aktionen.
           </DrawerDescription>
         </DrawerHeader>
-        <DrawerFooter>
+        <DrawerFooter className="items-center">
           <button className="rounded-md px-4 py-2.5 text-sm font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>
             Übernehmen
           </button>
@@ -879,14 +880,7 @@ function SheetDemo() {
           Sheet öffnen
         </button>
       </SheetTrigger>
-      <SheetContent side="right" showCloseButton={false} style={{ backgroundColor: "var(--white)", borderColor: "var(--gray-200)" }}>
-        <div className="flex justify-end p-4 pb-2">
-          <SheetClose asChild>
-            <button className="rounded-md px-3 py-1.5 text-sm" style={{ color: "var(--black)", border: "1px solid var(--gray-200)" }}>
-              Schließen
-            </button>
-          </SheetClose>
-        </div>
+      <SheetContent side="right" showCloseButton={true} style={{ backgroundColor: "var(--white)", borderColor: "var(--gray-200)" }}>
         <SheetHeader className="px-4 pb-4">
           <SheetTitle style={{ color: "var(--black)" }}>Einstellungen</SheetTitle>
           <SheetDescription style={{ color: "var(--gray-400)" }}>

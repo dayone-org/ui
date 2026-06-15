@@ -9,9 +9,10 @@ import { Button } from "@/components/ui/button"
 
 function Drawer({
   shouldScaleBackground = false,
+  noBodyStyles = true,
   ...props
 }: React.ComponentProps<typeof DrawerPrimitive.Root>) {
-  return <DrawerPrimitive.Root data-slot="drawer" shouldScaleBackground={shouldScaleBackground} {...props} />
+  return <DrawerPrimitive.Root data-slot="drawer" shouldScaleBackground={shouldScaleBackground} noBodyStyles={noBodyStyles} {...props} />
 }
 
 function DrawerTrigger({
