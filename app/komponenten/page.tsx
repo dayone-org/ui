@@ -8,6 +8,8 @@ function CategoryHeading({ children }: { children: React.ReactNode }) {
       style={{
         fontSize: "26px",
         color: "var(--black)",
+        textTransform: "uppercase",
+        letterSpacing: "0.05em",
       }}
     >
       {children}

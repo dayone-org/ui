@@ -51,6 +51,7 @@ import { toast } from "sonner";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Calendar } from "@/components/ui/calendar";
+import { de } from "date-fns/locale";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
@@ -642,7 +643,7 @@ function NavigationMenuDemo() {
     { label: "Über uns", items: ["Team", "Blog", "Karriere"] },
   ];
   return (
-    <NavigationMenu>
+    <NavigationMenu viewport={false}>
       <NavigationMenuList>
         {menus.map((menu) => (
           <NavigationMenuItem key={menu.label}>
@@ -708,7 +709,7 @@ function DropdownMenuDemo() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button
-          className="flex items-center gap-2 rounded-md px-4 py-2 text-sm font-semibold"
+          className="flex w-48 items-center justify-between rounded-md px-4 py-2 text-sm font-semibold"
           style={{ backgroundColor: "var(--black)", color: "var(--white)" }}
         >
           Aktionen <ChevronDown className="size-4" />
@@ -717,7 +718,6 @@ function DropdownMenuDemo() {
       <DropdownMenuContent align="start">
         <DropdownMenuItem>Bearbeiten</DropdownMenuItem>
         <DropdownMenuItem>Duplizieren</DropdownMenuItem>
-        <DropdownMenuSeparator />
         <DropdownMenuItem style={{ color: "var(--red-medium)" }}>Löschen</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
@@ -1068,7 +1068,12 @@ function CalendarDemo() {
       mode="single"
       selected={date}
       onSelect={setDate}
-      className="rounded-lg"
+      locale={de}
+      weekStartsOn={1}
+      formatters={{
+        formatWeekdayName: (day) => ["SO", "MO", "DI", "MI", "DO", "FR", "SA"][day.getDay()],
+      }}
+      className="rounded-lg w-full"
       style={{ border: "1px solid var(--gray-200)", backgroundColor: "var(--white)" }}
     />
   );
