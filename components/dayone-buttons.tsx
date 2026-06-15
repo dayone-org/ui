@@ -9,9 +9,8 @@ import { PLAYGROUND_SHOWCASE } from "@/lib/playground-layout";
 type ButtonVariant = "default" | "outline" | "secondary" | "ghost" | "destructive" | "link";
 
 const VARIANTS: { label: string; variant: ButtonVariant }[] = [
-  { label: "Default", variant: "default" },
-  { label: "Outline", variant: "outline" },
-  { label: "Secondary", variant: "secondary" },
+  { label: "Primary", variant: "default" },
+  { label: "Secondary", variant: "outline" },
   { label: "Ghost", variant: "ghost" },
   { label: "Destructive", variant: "destructive" },
 ];
