@@ -62,7 +62,7 @@ export default function HomePage() {
 
             <div className="mt-12 flex flex-wrap items-center gap-8">
               <Link
-                href="/playground"
+                href="/komponenten"
                 className="dayone-btn dayone-btn--primary dayone-btn--interactive dayone-btn--md"
               >
                 <span className="dayone-btn__inner">
