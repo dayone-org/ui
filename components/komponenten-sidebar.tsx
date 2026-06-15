@@ -23,40 +23,34 @@ const SCROLL_IDS = ALL_COMPONENTS.map((c) => c.slug);
  */
 function useScrollActiveSlug(ids: string[], enabled: boolean) {
   const [activeId, setActiveId] = useState("");
-  const rafRef = useRef<number | null>(null);
-  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const latestRef = useRef(""); // tracks latest without triggering renders
+  const visibleRef = useRef<Set<string>>(new Set());
 
   useEffect(() => {
     if (!enabled) return;
 
-    function compute() {
-      const threshold = window.innerHeight * 0.35;
-      let current = "";
-      for (const id of ids) {
-        const el = document.getElementById(id);
-        if (!el) continue;
-        if (el.getBoundingClientRect().top <= threshold) current = id;
-      }
-      latestRef.current = current;
+    // Pick the last visible section (= lowest one that crossed the top threshold).
+    // rootMargin top offset is -35% so an element becomes "intersecting" once
+    // its top edge has scrolled past 35% down from the viewport top.
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            visibleRef.current.add(entry.target.id);
+          } else {
+            visibleRef.current.delete(entry.target.id);
+          }
+        }
+        // Active = the last id (in DOM order) that is currently visible
+        const active = ids.findLast((id) => visibleRef.current.has(id)) ?? "";
+        setActiveId(active);
+      },
+      { rootMargin: "-35% 0px -55% 0px" }
+    );
 
-      // Debounce state update — only fires after scroll settles
-      if (debounceRef.current) clearTimeout(debounceRef.current);
-      debounceRef.current = setTimeout(() => setActiveId(latestRef.current), 120);
-    }
+    const els = ids.map((id) => document.getElementById(id)).filter(Boolean) as HTMLElement[];
+    els.forEach((el) => observer.observe(el));
 
-    function onScroll() {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-      rafRef.current = requestAnimationFrame(compute);
-    }
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    compute();
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-      if (debounceRef.current) clearTimeout(debounceRef.current);
-    };
+    return () => observer.disconnect();
   }, [ids, enabled]);
 
   return activeId;
