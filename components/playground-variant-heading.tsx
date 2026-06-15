@@ -11,13 +11,13 @@ export function PlaygroundVariantHeading({
   return (
     <p
       className={cn(
-        "mb-6 font-semibold uppercase tracking-wider",
+        "mb-4 font-medium uppercase tracking-[0.12em]",
         className
       )}
       style={{
-        fontSize: "var(--text-body-sm)",
+        fontSize: "10px",
         lineHeight: "var(--leading-body)",
-        color: "var(--gray-500)",
+        color: "var(--gray-300)",
       }}
     >
       {children}
