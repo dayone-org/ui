@@ -636,19 +636,19 @@
   :is(button, a).dayone-btn--secondary.dayone-btn--interactive {
     background-color: #ffffff;
     color: #1a1a1a;
-    border: 2px solid #e0e0e0;
+    border: 1px solid #ececec;
   }
 
   :is(button, a).dayone-btn--secondary.dayone-btn--interactive:hover:not(:disabled) {
     background-color: #f1f1f1;
     color: #1a1a1a;
-    border-color: #d0d0d0;
+    border-color: #e4e4e4;
   }
 
   :is(button, a).dayone-btn--secondary.dayone-btn--interactive:active:not(:disabled) {
     background-color: #ffffff;
     color: #1a1a1a;
-    border-color: #e0e0e0;
+    border-color: #ececec;
   }
 
   :is(button, a).dayone-btn--secondary.dayone-btn--interactive:focus-visible {
@@ -659,7 +659,7 @@
   :is(button, a).dayone-btn--secondary.dayone-btn--interactive:disabled {
     background-color: #f5f5f5;
     color: #c0c0c0;
-    border-color: #ebebeb;
+    border-color: #f0f0f0;
   }
 
   /* Link — text + arrow, 8px inner gap (interactive + static preview) */
