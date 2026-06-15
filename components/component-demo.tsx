@@ -550,35 +550,28 @@ function FieldDemo() {
 
 function TabsDemo() {
   return (
-    <Tabs defaultValue="overview" className="w-full max-w-sm">
-      <TabsList
-        variant="line"
-        className="w-full justify-start h-auto rounded-none bg-transparent p-0 gap-0"
-        style={{ borderBottom: "1px solid var(--gray-100)" }}
-      >
+    <Tabs defaultValue="all" className="w-full">
+      <TabsList variant="text">
         {[
-          { value: "overview", label: "Übersicht" },
-          { value: "details", label: "Details" },
-          { value: "settings", label: "Einstellungen" },
+          { value: "all", label: "Alle" },
+          { value: "strategie", label: "Strategie" },
+          { value: "design", label: "Design" },
+          { value: "traktion", label: "Traktion" },
         ].map(({ value, label }) => (
-          <TabsTrigger
-            key={value}
-            value={value}
-            className="h-auto rounded-none px-0 mr-8 last:mr-0 pb-3 text-sm font-medium bg-transparent border-0 shadow-none data-active:bg-transparent data-active:shadow-none data-active:text-[var(--black)] hover:text-[var(--black)] transition-colors"
-            style={{ color: undefined }}
-          >
-            {label}
-          </TabsTrigger>
+          <TabsTrigger key={value} value={value}>{label}</TabsTrigger>
         ))}
       </TabsList>
-      <TabsContent value="overview" className="mt-5">
-        <p className="text-sm" style={{ color: "var(--gray-400)" }}>Überblick über alle wichtigen Informationen.</p>
+      <TabsContent value="all" className="mt-6">
+        <p className="text-sm" style={{ color: "var(--gray-400)" }}>Alle Projekte.</p>
       </TabsContent>
-      <TabsContent value="details" className="mt-5">
-        <p className="text-sm" style={{ color: "var(--gray-400)" }}>Detaillierte Ansicht und weitere Optionen.</p>
+      <TabsContent value="strategie" className="mt-6">
+        <p className="text-sm" style={{ color: "var(--gray-400)" }}>Strategie-Projekte.</p>
       </TabsContent>
-      <TabsContent value="settings" className="mt-5">
-        <p className="text-sm" style={{ color: "var(--gray-400)" }}>Konfiguration und Einstellungen.</p>
+      <TabsContent value="design" className="mt-6">
+        <p className="text-sm" style={{ color: "var(--gray-400)" }}>Design-Projekte.</p>
+      </TabsContent>
+      <TabsContent value="traktion" className="mt-6">
+        <p className="text-sm" style={{ color: "var(--gray-400)" }}>Traktion-Projekte.</p>
       </TabsContent>
     </Tabs>
   );
