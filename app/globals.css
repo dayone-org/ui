@@ -530,11 +530,21 @@
   }
 
   :is(button, a).dayone-btn--interactive:active:not(:disabled) {
-    transform: translateY(1px);
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
   }
 
-  /* CTA text — sm: compact · md: default · lg: large */
+  /* CTA text — sm: compact · md: default (was sm) */
   :is(button, a).dayone-btn--sm {
+    height: 32px;
+    min-height: 32px;
+    max-height: 32px;
+    width: auto;
+    padding: 0 10px 0 12px;
+    font-size: 10px;
+  }
+
+  :is(button, a).dayone-btn--md {
     height: 38px;
     min-height: 38px;
     max-height: 38px;
@@ -543,21 +553,13 @@
     font-size: 11px;
   }
 
-  :is(button, a).dayone-btn--md {
+  :is(button, a).dayone-btn--lg {
     height: var(--dayone-btn-md-height);
     min-height: var(--dayone-btn-md-height);
     max-height: var(--dayone-btn-md-height);
     width: auto;
     padding: 0 21px 0 24px;
     font-size: var(--dayone-btn-md-font-size);
-  }
-
-  :is(button, a).dayone-btn--lg {
-    height: 52px;
-    min-height: 52px;
-    width: auto;
-    padding: 0 29px 0 32px;
-    font-size: var(--dayone-btn-lg-font-size);
   }
 
   /* Icon — sm: 44×44 · lg: 56×56 */

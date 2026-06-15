@@ -193,7 +193,7 @@ function CtaVariantBlock({
     { key: "Focused" as const,  label: "Focused"  },
     { key: "Disabled" as const, label: "Disabled" },
   ];
-  const SIZES = ["sm", "md", "lg"] as const;
+  const SIZES = ["sm", "md"] as const;
 
   return (
     <div>
