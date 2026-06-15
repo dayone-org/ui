@@ -749,6 +749,24 @@
   animation: dayone-spin 0.65s linear infinite;
 }
 
+/* Inputs — black border on focus, no ring */
+[data-slot="input"]:focus {
+  border-color: var(--black);
+  box-shadow: none;
+}
+[data-slot="textarea"]:focus {
+  border-color: var(--black);
+  box-shadow: none;
+}
+[data-slot="select-trigger"]:focus,
+[data-slot="select-trigger"]:focus-visible {
+  border-color: var(--black);
+  box-shadow: none;
+}
+[data-slot="input-group"]:focus-within {
+  border-color: var(--black);
+}
+
 /* Inputs — hide placeholder on focus */
 input:focus::placeholder,
 textarea:focus::placeholder {

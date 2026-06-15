@@ -161,12 +161,6 @@ const SECONDARY_STYLES: Record<StateName, CtaStyle> = {
   },
 };
 
-const SIZE_ROWS = [
-  { key: "sm", label: "Small" },
-  { key: "md", label: "Medium" },
-  { key: "lg", label: "Large" },
-] as const;
-
 /** Appearance-only style — NO size properties, those come from the CSS class */
 function appearanceStyle(style: CtaStyle): CSSProperties {
   return {
@@ -176,6 +170,8 @@ function appearanceStyle(style: CtaStyle): CSSProperties {
   };
 }
 
+// Y axis = state (Default, Focused, Disabled)
+// X axis = size  (Small, Medium, Large)
 function CtaVariantBlock({
   title,
   variant,
@@ -185,46 +181,40 @@ function CtaVariantBlock({
   variant: "primary" | "secondary";
   styles: Record<StateName, CtaStyle>;
 }) {
+  const STATE_ROWS = [
+    { key: "Default" as const,  label: "Default"  },
+    { key: "Focused" as const,  label: "Focused"  },
+    { key: "Disabled" as const, label: "Disabled" },
+  ];
+  const SIZES = ["sm", "md", "lg"] as const;
+
   return (
     <div>
       <PlaygroundVariantHeading>{title}</PlaygroundVariantHeading>
       <div className="space-y-4">
-        {SIZE_ROWS.map(({ key, label }) => (
-          <div key={key} className="flex items-center gap-6">
-            <span className="w-16 shrink-0 text-sm" style={{ color: "var(--gray-300)" }}>
-              {label}
-            </span>
-            <div className="flex flex-wrap items-center gap-4">
-              {/* Default — interactive, CSS class handles ALL styling */}
-              <button
-                type="button"
-                className={`dayone-btn dayone-btn--${variant} dayone-btn--interactive dayone-btn--${key}`}
-              >
-                <CtaInner />
-              </button>
-              {/* Focused — CSS class for size, inline for appearance only */}
-              <button
-                type="button"
-                tabIndex={-1}
-                aria-hidden
-                className={`dayone-btn dayone-btn--${variant} dayone-btn--static dayone-btn--${key}`}
-                style={appearanceStyle(styles["Focused"])}
-              >
-                <CtaInner />
-              </button>
-              {/* Disabled — CSS class for size, inline for appearance only */}
-              <button
-                type="button"
-                tabIndex={-1}
-                aria-hidden
-                className={`dayone-btn dayone-btn--${variant} dayone-btn--static dayone-btn--${key}`}
-                style={appearanceStyle(styles["Disabled"])}
-              >
-                <CtaInner />
-              </button>
+        {STATE_ROWS.map(({ key, label }) => {
+          const isInteractive = key === "Default";
+          return (
+            <div key={key} className="flex items-center gap-6">
+              <span className="w-16 shrink-0 text-sm" style={{ color: "var(--gray-300)" }}>
+                {label}
+              </span>
+              <div className="flex flex-wrap items-center gap-4">
+                {SIZES.map((size) => (
+                  <button
+                    key={size}
+                    type="button"
+                    {...(!isInteractive && { tabIndex: -1, "aria-hidden": true as const })}
+                    className={`dayone-btn dayone-btn--${variant} ${isInteractive ? "dayone-btn--interactive" : "dayone-btn--static"} dayone-btn--${size}`}
+                    style={!isInteractive ? appearanceStyle(styles[key]) : undefined}
+                  >
+                    <CtaInner />
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
@@ -348,7 +338,7 @@ export function DayoneButtonsContent() {
       <LinkVariantBlock title="Link" variant="link" styles={LINK_STYLES} />
       <LinkVariantBlock title="Inline-Link" variant="inline-link" styles={INLINE_STYLES} />
       <div>
-        <PlaygroundVariantHeading className="mb-4">Mobile (375px)</PlaygroundVariantHeading>
+        <PlaygroundVariantHeading className="mb-4">Mobile (width filled)</PlaygroundVariantHeading>
         <button type="button" className="dayone-btn dayone-btn--primary dayone-btn--interactive dayone-btn--mobile">
           <CtaInner />
         </button>
