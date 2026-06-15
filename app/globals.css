@@ -502,13 +502,18 @@
     display: grid;
     place-items: center;
     flex-shrink: 0;
-    width: 1em;
-    height: 1em;
+    width: 1.35em;
+    height: 1.35em;
     font-family: inherit;
     font-weight: inherit;
-    font-size: inherit;
+    font-size: 1.35em;
     line-height: 1;
-    transform: translateY(-2px);
+    transform: translateY(-2px) translateX(0);
+    transition: transform 0.2s ease;
+  }
+
+  :is(button, a).dayone-btn:hover:not(:disabled) .dayone-btn__arrow {
+    transform: translateY(-2px) translateX(4px);
   }
 
   :is(button, a).dayone-btn .dayone-btn__label {

@@ -1073,7 +1073,7 @@ function CalendarDemo() {
       formatters={{
         formatWeekdayName: (day) => ["SO", "MO", "DI", "MI", "DO", "FR", "SA"][day.getDay()],
       }}
-      className="rounded-lg w-full"
+      className="rounded-lg [--cell-size:--spacing(8)]"
       style={{ border: "1px solid var(--gray-200)", backgroundColor: "var(--white)" }}
     />
   );
