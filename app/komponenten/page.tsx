@@ -1,6 +1,5 @@
 import { COMPONENT_REGISTRY } from "@/lib/component-registry";
 import { ComponentDemo } from "@/components/component-demo";
-import { ScrollToTop } from "@/components/scroll-to-top";
 
 function CategoryHeading({ children }: { children: React.ReactNode }) {
   return (
@@ -23,7 +22,6 @@ const DIVIDER = (
 export default function KomponentenPage() {
   return (
     <main className="py-12 lg:py-16">
-      <ScrollToTop />
       <div className="space-y-40">
         {COMPONENT_REGISTRY.map((category) => (
           <div key={category.id}>

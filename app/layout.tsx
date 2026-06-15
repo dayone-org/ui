@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { NavigationTopScroller } from "@/components/navigation-top-scroller";
 import "./globals.css";
 
 const roobert = localFont({
@@ -36,7 +37,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de" className={`${roobert.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <NavigationTopScroller />
+        {children}
+      </body>
     </html>
   );
 }
