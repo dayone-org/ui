@@ -27,10 +27,9 @@ export default function KomponentenPage() {
       <div className="space-y-40">
         {COMPONENT_REGISTRY.map((category) => (
           <div key={category.id}>
-            {/* Category heading + divider below */}
+            {/* Category heading */}
             <div className="mb-12">
               <CategoryHeading>{category.label}</CategoryHeading>
-              <div className="mt-5" style={{ height: "1px", backgroundColor: "var(--gray-100)" }} />
             </div>
 
             {/* Each component — py-16 gives breathing room, divider between */}
