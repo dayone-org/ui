@@ -21,7 +21,7 @@ function AnchorArrow() {
 }
 
 function CtaLabel() {
-  return <span className="dayone-btn__label">Button CTA</span>;
+  return <span className="dayone-btn__label">Button</span>;
 }
 
 function CtaInner({ showLabel = true }: { showLabel?: boolean }) {
