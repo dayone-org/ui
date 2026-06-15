@@ -612,8 +612,8 @@
   }
 
   :is(button, a).dayone-btn--primary.dayone-btn--interactive:hover:not(:disabled) {
-    background-color: #383838;
-    border-color: #383838;
+    background-color: #333333;
+    border-color: #333333;
   }
 
   :is(button, a).dayone-btn--primary.dayone-btn--interactive:active:not(:disabled) {

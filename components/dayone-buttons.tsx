@@ -121,9 +121,9 @@ const PRIMARY_STYLES: Record<StateName, CtaStyle> = {
     border: "2px solid #1A1A1A",
   },
   Hover: {
-    backgroundColor: "#383838",
+    backgroundColor: "#333333",
     color: "#FFFFFF",
-    border: "2px solid #383838",
+    border: "2px solid #333333",
   },
   Focused: {
     backgroundColor: "#1A1A1A",
