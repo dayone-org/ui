@@ -184,7 +184,7 @@ function SidebarNav({ activeSlug, search, onNavigate }: NavProps) {
                     type="button"
                     data-active={isActive ? "true" : undefined}
                     onClick={() => handleClick(component.slug)}
-                    className="block w-full text-left rounded-md py-1 pl-4 pr-3 text-xs"
+                    className="block w-fit rounded-md py-1 pl-4 pr-3 text-xs"
                     style={{
                       color: "var(--black)",
                       fontWeight: isActive ? 600 : 400,
