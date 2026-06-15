@@ -17,7 +17,7 @@ export function PlaygroundVariantHeading({
       style={{
         fontSize: "10px",
         lineHeight: "var(--leading-body)",
-        color: "var(--gray-300)",
+        color: "var(--gray-400)",
       }}
     >
       {children}

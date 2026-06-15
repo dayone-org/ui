@@ -237,7 +237,7 @@ export function KomponentenSidebarDesktop() {
       <div className={`flex h-full w-full flex-col justify-start pt-16 ${DOCS_SIDEBAR_INSET}`}>
         <p
           className="mb-5 px-3 text-[10px] font-semibold uppercase tracking-widest"
-          style={{ color: "var(--gray-300)" }}
+          style={{ color: "var(--gray-400)" }}
         >
           Komponenten
         </p>

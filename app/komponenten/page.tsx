@@ -5,10 +5,10 @@ import { ScrollToTop } from "@/components/scroll-to-top";
 function CategoryHeading({ children }: { children: React.ReactNode }) {
   return (
     <h2
-      className="font-semibold uppercase tracking-[0.14em]"
+      className="font-semibold"
       style={{
-        fontSize: "10px",
-        color: "var(--gray-300)",
+        fontSize: "20px",
+        color: "var(--black)",
       }}
     >
       {children}
@@ -24,13 +24,13 @@ export default function KomponentenPage() {
   return (
     <main className="py-12 lg:py-16">
       <ScrollToTop />
-      <div className="space-y-28">
+      <div className="space-y-40">
         {COMPONENT_REGISTRY.map((category) => (
           <div key={category.id}>
-            {/* Category label + opening line */}
-            <div className="flex items-center gap-4 mb-10">
+            {/* Category heading + divider below */}
+            <div className="mb-12">
               <CategoryHeading>{category.label}</CategoryHeading>
-              <div className="flex-1" style={{ height: "1px", backgroundColor: "var(--gray-100)" }} />
+              <div className="mt-5" style={{ height: "1px", backgroundColor: "var(--gray-100)" }} />
             </div>
 
             {/* Each component — py-16 gives breathing room, divider between */}
@@ -52,19 +52,15 @@ export default function KomponentenPage() {
                     style={{
                       fontSize: "var(--text-body-sm)",
                       lineHeight: "var(--leading-body)",
-                      color: "var(--gray-300)",
+                      color: "var(--gray-400)",
                     }}
                   >
                     {component.description}
                   </p>
-                  {/* No wrapper box — content aligns with heading */}
                   <ComponentDemo slug={component.slug} />
                 </section>
               </div>
             ))}
-
-            {/* Closing line after last component */}
-            <div style={{ height: "1px", backgroundColor: "var(--gray-100)" }} />
           </div>
         ))}
       </div>
