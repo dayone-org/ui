@@ -453,11 +453,11 @@
 /* DAYONE Buttons — spacing from Primary CTA MD Default (Figma 19085-391) */
 @layer components {
   :is(button, a).dayone-btn {
-    --dayone-btn-inner-gap: 16px;
+    --dayone-btn-inner-gap: 10px;
     --dayone-btn-cta-padding-x: 24px;
-    --dayone-btn-cta-padding-r: 30px;
+    --dayone-btn-cta-padding-r: 24px;
     --dayone-btn-md-height: 48px;
-    --dayone-btn-md-width: 168px;
+    --dayone-btn-md-width: 160px;
     --dayone-btn-lg-height: 56px;
     --dayone-btn-icon-sm-size: 36px;
     --dayone-btn-icon-lg-size: 44px;
@@ -503,11 +503,11 @@
     display: grid;
     place-items: center;
     flex-shrink: 0;
-    width: 1.35em;
-    height: 1.35em;
+    width: 1.5em;
+    height: 1.5em;
     font-family: inherit;
     font-weight: inherit;
-    font-size: 1.35em;
+    font-size: 1.5em;
     line-height: 1;
     transform: translateY(-2px) translateX(0);
     transition: transform 0.2s ease;
