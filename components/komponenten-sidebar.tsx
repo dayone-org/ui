@@ -170,7 +170,7 @@ function SidebarNav({ activeSlug, search, onNavigate }: NavProps) {
       {filtered.map((category) => (
         <li key={category.id}>
           <p
-            className="mb-1.5 px-3 text-xs font-medium"
+            className="mb-1.5 px-3 text-sm font-medium"
             style={{ color: "var(--gray-300)" }}
           >
             {category.label}
@@ -180,14 +180,6 @@ function SidebarNav({ activeSlug, search, onNavigate }: NavProps) {
               const isActive = activeSlug === component.slug;
               return (
                 <li key={component.slug} className="relative">
-                  <span
-                    className="absolute left-0 top-1/2 -translate-y-1/2 h-3 w-[2px] rounded-full"
-                    style={{
-                      backgroundColor: "var(--black)",
-                      opacity: isActive ? 1 : 0,
-                      transition: "opacity 0.2s ease",
-                    }}
-                  />
                   <button
                     type="button"
                     data-active={isActive ? "true" : undefined}
@@ -197,7 +189,7 @@ function SidebarNav({ activeSlug, search, onNavigate }: NavProps) {
                       color: "var(--black)",
                       fontWeight: isActive ? 600 : 400,
                       transition: "transform 0.2s cubic-bezier(0.34,1.56,0.64,1)",
-                      transformOrigin: "left center",
+                      transformOrigin: "center",
                       background: "none",
                       border: "none",
                       cursor: "pointer",
