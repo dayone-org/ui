@@ -27,7 +27,6 @@ function CtaInner({ showLabel = true }: { showLabel?: boolean }) {
 
   return (
     <span className="dayone-btn__inner">
-      <Arrow />
       <CtaLabel />
       <Arrow />
     </span>
@@ -122,9 +121,9 @@ const PRIMARY_STYLES: Record<StateName, CtaStyle> = {
     border: "2px solid #1A1A1A",
   },
   Hover: {
-    backgroundColor: "#9E9A94",
+    backgroundColor: "#383838",
     color: "#FFFFFF",
-    border: "2px solid #9E9A94",
+    border: "2px solid #383838",
   },
   Focused: {
     backgroundColor: "#1A1A1A",
@@ -145,9 +144,9 @@ const SECONDARY_STYLES: Record<StateName, CtaStyle> = {
     border: "2px solid #FFFFFF",
   },
   Hover: {
-    backgroundColor: "#9E9A94",
-    color: "#FFFFFF",
-    border: "2px solid #9E9A94",
+    backgroundColor: "#F1F1F1",
+    color: "#1A1A1A",
+    border: "2px solid #F1F1F1",
   },
   Focused: {
     backgroundColor: "#FFFFFF",

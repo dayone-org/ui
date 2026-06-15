@@ -455,8 +455,9 @@
   :is(button, a).dayone-btn {
     --dayone-btn-inner-gap: var(--space-2);
     --dayone-btn-cta-padding-x: 16px;
+    --dayone-btn-cta-padding-r: 22px;
     --dayone-btn-md-height: 40px;
-    --dayone-btn-md-width: 148px;
+    --dayone-btn-md-width: 156px;
     --dayone-btn-lg-height: 48px;
     --dayone-btn-icon-sm-size: 36px;
     --dayone-btn-icon-lg-size: 44px;
@@ -551,7 +552,7 @@
     height: var(--dayone-btn-md-height);
     min-height: var(--dayone-btn-md-height);
     max-height: var(--dayone-btn-md-height);
-    padding: 0 var(--dayone-btn-cta-padding-x);
+    padding: 0 var(--dayone-btn-cta-padding-r) 0 var(--dayone-btn-cta-padding-x);
     font-size: var(--dayone-btn-md-font-size);
   }
 
@@ -559,7 +560,7 @@
     height: var(--dayone-btn-lg-height);
     min-height: var(--dayone-btn-lg-height);
     width: auto;
-    padding: 0 var(--dayone-btn-cta-padding-x);
+    padding: 0 var(--dayone-btn-cta-padding-r) 0 var(--dayone-btn-cta-padding-x);
     font-size: var(--dayone-btn-lg-font-size);
   }
 
@@ -611,8 +612,8 @@
   }
 
   :is(button, a).dayone-btn--primary.dayone-btn--interactive:hover:not(:disabled) {
-    background-color: #9e9a94;
-    border-color: #9e9a94;
+    background-color: #383838;
+    border-color: #383838;
   }
 
   :is(button, a).dayone-btn--primary.dayone-btn--interactive:active:not(:disabled) {
@@ -639,9 +640,9 @@
   }
 
   :is(button, a).dayone-btn--secondary.dayone-btn--interactive:hover:not(:disabled) {
-    background-color: #9e9a94;
-    color: #ffffff;
-    border-color: #9e9a94;
+    background-color: #f1f1f1;
+    color: #1a1a1a;
+    border-color: #f1f1f1;
   }
 
   :is(button, a).dayone-btn--secondary.dayone-btn--interactive:active:not(:disabled) {
