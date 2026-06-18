@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteStamp } from "@/components/site-stamp";
 import { Badge } from "@/components/ui/badge";
@@ -32,13 +32,38 @@ const chartData = [
   { name: "Jun", value: 88 },
 ];
 
-function BentoCell({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+function BentoCell({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   return (
     <div
-      className={`rounded-2xl p-5 overflow-hidden select-none pointer-events-none ${className}`}
-      style={{ border: "1px solid var(--gray-100)" }}
+      className={`rounded-2xl p-5 overflow-hidden select-none pointer-events-none animate-in fade-in slide-in-from-bottom-3 ${className}`}
+      style={{
+        border: "1px solid var(--gray-100)",
+        animationDuration: "0.5s",
+        animationDelay: `${delay}ms`,
+        animationFillMode: "both",
+      }}
     >
       {children}
+    </div>
+  );
+}
+
+function AnimatedProgress({ value, delay = 0 }: { value: number; delay?: number }) {
+  const [current, setCurrent] = useState(0);
+  useEffect(() => {
+    const t = setTimeout(() => setCurrent(value), delay + 200);
+    return () => clearTimeout(t);
+  }, [value, delay]);
+  return (
+    <div className="h-1.5 w-full rounded-full overflow-hidden" style={{ backgroundColor: "var(--gray-100)" }}>
+      <div
+        className="h-full rounded-full"
+        style={{
+          width: `${current}%`,
+          backgroundColor: "var(--black)",
+          transition: "width 0.9s cubic-bezier(0.4, 0, 0.2, 1)",
+        }}
+      />
     </div>
   );
 }
@@ -60,7 +85,7 @@ function ShowcaseGrid() {
       {/* Row 1 */}
 
       {/* Buttons — col 1–4 */}
-      <BentoCell className="col-span-4">
+      <BentoCell className="col-span-4" delay={0}>
         <CellLabel>Button</CellLabel>
         <div className="space-y-3">
           <div className="flex flex-wrap gap-2">
@@ -84,7 +109,7 @@ function ShowcaseGrid() {
       </BentoCell>
 
       {/* Calendar — col 5–8 */}
-      <BentoCell className="col-span-4 flex flex-col items-center justify-center">
+      <BentoCell className="col-span-4 flex flex-col items-center justify-center" delay={80}>
         <CellLabel>Calendar</CellLabel>
         <Calendar
           mode="single"
@@ -98,7 +123,7 @@ function ShowcaseGrid() {
       </BentoCell>
 
       {/* Chart — col 9–12 */}
-      <BentoCell className="col-span-4">
+      <BentoCell className="col-span-4" delay={160}>
         <CellLabel>Chart</CellLabel>
         <p className="text-sm font-semibold mb-1" style={{ color: "var(--black)" }}>Monatliche Aufrufe</p>
         <p className="text-xs mb-4" style={{ color: "var(--gray-300)" }}>Jan – Jun 2026</p>
@@ -113,7 +138,7 @@ function ShowcaseGrid() {
       {/* Row 2 */}
 
       {/* Form / Inputs — col 1–3 */}
-      <BentoCell className="col-span-3">
+      <BentoCell className="col-span-3" delay={120}>
         <CellLabel>Input</CellLabel>
         <div className="space-y-2.5">
           <div className="relative">
@@ -127,7 +152,7 @@ function ShowcaseGrid() {
       </BentoCell>
 
       {/* Progress / Stats — col 4–6 */}
-      <BentoCell className="col-span-3">
+      <BentoCell className="col-span-3" delay={200}>
         <CellLabel>Progress</CellLabel>
         <div className="space-y-4">
           {[
@@ -135,20 +160,20 @@ function ShowcaseGrid() {
             { label: "Komponenten", value: 78 },
             { label: "Dokumentation", value: 60 },
             { label: "Tests", value: 41 },
-          ].map(({ label, value }) => (
+          ].map(({ label, value }, i) => (
             <div key={label}>
               <div className="flex justify-between mb-1.5">
                 <span className="text-xs" style={{ color: "var(--gray-400)" }}>{label}</span>
                 <span className="text-xs font-semibold tabular-nums" style={{ color: "var(--black)" }}>{value}%</span>
               </div>
-              <Progress value={value} className="h-1.5" />
+              <AnimatedProgress value={value} delay={i * 150} />
             </div>
           ))}
         </div>
       </BentoCell>
 
       {/* Toggle / Switch / Slider — col 7–9 */}
-      <BentoCell className="col-span-3">
+      <BentoCell className="col-span-3" delay={280}>
         <CellLabel>Controls</CellLabel>
         <div className="space-y-5">
           <div className="flex items-center justify-between">
@@ -184,15 +209,30 @@ function ShowcaseGrid() {
       </BentoCell>
 
       {/* Notifications card — col 10–12 */}
-      <BentoCell className="col-span-3">
-        <CellLabel>Notification</CellLabel>
+      <BentoCell className="col-span-3" delay={360}>
+        <div className="flex items-center gap-2 mb-4">
+          <p className="text-xs font-medium" style={{ color: "var(--gray-300)" }}>Notification</p>
+          <div className="relative ml-auto">
+            <Bell className="size-4" style={{ color: "var(--gray-400)" }} />
+            <span className="absolute -top-1 -right-1 size-2 rounded-full animate-pulse" style={{ backgroundColor: "var(--red-medium)" }} />
+          </div>
+        </div>
         <div className="space-y-2">
           {[
-            { icon: <Bell className="size-4" />, title: "Neue Komponente", desc: "Button wurde aktualisiert.", time: "Jetzt" },
-            { icon: <Check className="size-4" />, title: "Build erfolgreich", desc: "Vercel deployment fertig.", time: "2 Min." },
-            { icon: <Sparkles className="size-4" />, title: "Update verfügbar", desc: "shadcn/ui 3.0 ist live.", time: "1 Std." },
-          ].map(({ icon, title, desc, time }) => (
-            <div key={title} className="flex items-start gap-3 rounded-xl p-3" style={{ backgroundColor: "var(--gray-100)" }}>
+            { icon: <Sparkles className="size-4" />, title: "Neue Komponente", desc: "Button wurde aktualisiert.", time: "Jetzt", delay: 500 },
+            { icon: <Check className="size-4" />, title: "Build erfolgreich", desc: "Vercel deployment fertig.", time: "2 Min.", delay: 650 },
+            { icon: <Bell className="size-4" />, title: "Update verfügbar", desc: "shadcn/ui 3.0 ist live.", time: "1 Std.", delay: 800 },
+          ].map(({ icon, title, desc, time, delay }) => (
+            <div
+              key={title}
+              className="flex items-start gap-3 rounded-xl p-3 animate-in fade-in slide-in-from-right-3"
+              style={{
+                backgroundColor: "var(--gray-100)",
+                animationDuration: "0.4s",
+                animationDelay: `${delay}ms`,
+                animationFillMode: "both",
+              }}
+            >
               <div className="mt-0.5 shrink-0" style={{ color: "var(--black)" }}>{icon}</div>
               <div className="flex-1 min-w-0">
                 <p className="text-xs font-semibold" style={{ color: "var(--black)" }}>{title}</p>
@@ -207,7 +247,7 @@ function ShowcaseGrid() {
       {/* Row 3 */}
 
       {/* Accordion — col 1–4 */}
-      <BentoCell className="col-span-4">
+      <BentoCell className="col-span-4" delay={240}>
         <CellLabel>Accordion</CellLabel>
         <Accordion type="single" defaultValue="1" className="w-full">
           {[
@@ -228,7 +268,7 @@ function ShowcaseGrid() {
       </BentoCell>
 
       {/* Badges + Avatars — col 5–8 */}
-      <BentoCell className="col-span-4">
+      <BentoCell className="col-span-4" delay={320}>
         <CellLabel>Badge & Avatar</CellLabel>
         <div className="space-y-4">
           <div className="flex flex-wrap gap-2">
@@ -265,7 +305,7 @@ function ShowcaseGrid() {
       </BentoCell>
 
       {/* Tabs + Checkbox — col 9–12 */}
-      <BentoCell className="col-span-4">
+      <BentoCell className="col-span-4" delay={400}>
         <CellLabel>Tabs & Checkbox</CellLabel>
         <Tabs defaultValue="design" className="w-full mb-4">
           <TabsList variant="text">
@@ -295,7 +335,7 @@ function ShowcaseGrid() {
       {/* Row 4 */}
 
       {/* Table — col 1–8 */}
-      <BentoCell className="col-span-8">
+      <BentoCell className="col-span-8" delay={360}>
         <CellLabel>Table</CellLabel>
         <table className="w-full text-sm">
           <thead>
@@ -329,7 +369,7 @@ function ShowcaseGrid() {
       </BentoCell>
 
       {/* Card — col 9–12 */}
-      <BentoCell className="col-span-4">
+      <BentoCell className="col-span-4" delay={440}>
         <CellLabel>Card</CellLabel>
         <Card style={{ borderColor: "var(--gray-100)" }}>
           <CardHeader className="pb-3">
@@ -345,8 +385,8 @@ function ShowcaseGrid() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Progress value={82} className="h-1.5 mb-2" />
-            <p className="text-xs" style={{ color: "var(--gray-300)" }}>82% der Kern-Komponenten fertig</p>
+            <AnimatedProgress value={82} delay={600} />
+            <p className="text-xs mt-2" style={{ color: "var(--gray-300)" }}>82% der Kern-Komponenten fertig</p>
           </CardContent>
         </Card>
       </BentoCell>
