@@ -11,6 +11,7 @@ import {
   ExternalLink,
   Lightbulb,
   BookOpen,
+  ArrowRight,
 } from "lucide-react";
 
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -798,11 +799,7 @@ function SessionsTab() {
 
             <DrawerFooter className="px-6 py-6">
               <DrawerClose asChild>
-                <button className="dayone-btn dayone-btn--secondary dayone-btn--interactive dayone-btn--md">
-                  <span className="dayone-btn__inner">
-                    <span className="dayone-btn__label">Schließen</span>
-                  </span>
-                </button>
+                <Button variant="outline">Schließen</Button>
               </DrawerClose>
             </DrawerFooter>
           </div>
@@ -839,14 +836,7 @@ function BacklogTab({ onSuggest }: { onSuggest: () => void }) {
               Jedes Thema sollte in max. 10 Min. mit der Gruppe besprochen werden können
             </p>
           </div>
-          <button
-            onClick={onSuggest}
-            className="dayone-btn dayone-btn--primary dayone-btn--interactive dayone-btn--sm"
-          >
-            <span className="dayone-btn__inner">
-              <span className="dayone-btn__label">+ Thema vorschlagen</span>
-            </span>
-          </button>
+          <Button size="sm" onClick={onSuggest}>+ Thema vorschlagen</Button>
         </div>
 
         <div className="rounded-xl overflow-hidden" style={{ border: "1px solid var(--gray-100)" }}>
@@ -1164,22 +1154,11 @@ function SuggestDrawer({
           </div>
 
           <DrawerFooter className="px-6 py-6 gap-3">
-            <button
-              onClick={submit}
-              disabled={!title.trim()}
-              className="dayone-btn dayone-btn--primary dayone-btn--interactive dayone-btn--md disabled:opacity-40"
-            >
-              <span className="dayone-btn__inner">
-                <span className="dayone-btn__label">Einreichen</span>
-                <span className="dayone-btn__arrow" aria-hidden>→</span>
-              </span>
-            </button>
+            <Button onClick={submit} disabled={!title.trim()}>
+              Einreichen <ArrowRight className="size-4" />
+            </Button>
             <DrawerClose asChild>
-              <button className="dayone-btn dayone-btn--secondary dayone-btn--interactive dayone-btn--md">
-                <span className="dayone-btn__inner">
-                  <span className="dayone-btn__label">Abbrechen</span>
-                </span>
-              </button>
+              <Button variant="outline">Abbrechen</Button>
             </DrawerClose>
           </DrawerFooter>
         </div>
@@ -1221,15 +1200,9 @@ export default function PDCHubPage() {
                 Product Design Community · alle 3 Wochen · DAYONE
               </p>
             </div>
-            <button
-              onClick={() => setSuggestOpen(true)}
-              className="dayone-btn dayone-btn--primary dayone-btn--interactive dayone-btn--md shrink-0"
-            >
-              <span className="dayone-btn__inner">
-                <span className="dayone-btn__label">Thema vorschlagen</span>
-                <span className="dayone-btn__arrow" aria-hidden>→</span>
-              </span>
-            </button>
+            <Button onClick={() => setSuggestOpen(true)} className="shrink-0">
+              Thema vorschlagen <ArrowRight className="size-4" />
+            </Button>
           </div>
 
           {/* Stats */}
