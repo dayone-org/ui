@@ -76,6 +76,52 @@ function SmoothBar({ value }: { value: number }) {
   );
 }
 
+// ─── Buttons ─────────────────────────────────────────────────────────────────
+
+function ButtonsCell() {
+  return (
+    <BentoCell className="col-span-4" delay={0}>
+      <CellLabel>Button</CellLabel>
+      <div className="space-y-3">
+        <div className="flex flex-wrap gap-2">
+          <Button size="sm">Primary</Button>
+          <Button size="sm" variant="outline">Secondary</Button>
+          <Button size="sm" variant="ghost">Ghost</Button>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <Button size="default">Primary <ArrowRight className="size-3.5" /></Button>
+          <Button size="default" variant="outline">Secondary</Button>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <Button size="lg">Primary <ArrowRight className="size-4" /></Button>
+          <Button size="lg" variant="outline">Secondary</Button>
+        </div>
+      </div>
+    </BentoCell>
+  );
+}
+
+// ─── Calendar ────────────────────────────────────────────────────────────────
+
+function CalendarCell() {
+  const [date, setDate] = useState<Date | undefined>(new Date(2026, 5, 18));
+  return (
+    <BentoCell className="col-span-4 flex flex-col items-center justify-center" delay={80}>
+      <CellLabel>Calendar</CellLabel>
+      <Calendar
+        mode="single"
+        selected={date}
+        onSelect={setDate}
+        locale={de}
+        weekStartsOn={1}
+        formatters={{ formatWeekdayName: (d) => ["SO","MO","DI","MI","DO","FR","SA"][d.getDay()] }}
+        className="rounded-xl [--cell-size:--spacing(8)] scale-90 origin-top"
+        style={{ border: "1px solid var(--gray-100)" }}
+      />
+    </BentoCell>
+  );
+}
+
 // ─── Notifications ────────────────────────────────────────────────────────────
 
 type Notif = {
@@ -165,7 +211,7 @@ function NotificationsCell() {
   }, []);
 
   return (
-    <BentoCell className="col-span-4 row-span-2 flex flex-col" delay={0}>
+    <BentoCell className="col-span-3" delay={360}>
       <div className="flex items-center gap-2 mb-5">
         <p className="text-xs font-medium" style={{ color: "var(--gray-300)" }}>Notification</p>
         <div className="relative ml-auto">
@@ -212,7 +258,7 @@ function ChartCell() {
   }, []);
 
   return (
-    <BentoCell className="col-span-8" delay={60}>
+    <BentoCell className="col-span-4" delay={160}>
       <CellLabel>Chart</CellLabel>
       <div className="flex items-baseline gap-3 mb-6">
         <span className="text-3xl font-bold tabular-nums" style={{ color: "var(--black)" }}>
@@ -255,39 +301,6 @@ function ChartCell() {
   );
 }
 
-// ─── Buttons ─────────────────────────────────────────────────────────────────
-
-function ButtonsCell() {
-  return (
-    <BentoCell className="col-span-4" delay={120}>
-      <CellLabel>Button</CellLabel>
-      <div className="space-y-3">
-        <div className="flex flex-wrap gap-2">
-          <Button>Primary</Button>
-          <Button variant="outline">Secondary</Button>
-          <Button variant="ghost">Ghost</Button>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          <Button size="sm">Small</Button>
-          <Button>Default</Button>
-          <Button size="lg">Large</Button>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          <Button>Weiter <ArrowRight /></Button>
-          <Button variant="outline">Abbrechen</Button>
-          <Button variant="destructive">Löschen</Button>
-        </div>
-        <div className="flex gap-2">
-          <Button size="icon"><ArrowRight /></Button>
-          <Button size="icon" variant="outline"><ArrowRight /></Button>
-          <Button size="icon" variant="ghost"><ArrowRight /></Button>
-          <Button size="icon" variant="destructive"><ArrowRight /></Button>
-        </div>
-      </div>
-    </BentoCell>
-  );
-}
-
 // ─── Controls ────────────────────────────────────────────────────────────────
 
 function ControlsCell() {
@@ -300,7 +313,7 @@ function ControlsCell() {
   const [under, setUnder] = useState(true);
 
   return (
-    <BentoCell className="col-span-4" delay={180}>
+    <BentoCell className="col-span-3" delay={280}>
       <CellLabel>Controls</CellLabel>
       <div className="space-y-4">
         <div className="flex items-center justify-between">
@@ -363,7 +376,7 @@ function ProgressCell() {
   }, []);
 
   return (
-    <BentoCell className="col-span-4" delay={240}>
+    <BentoCell className="col-span-3" delay={200}>
       <CellLabel>Progress</CellLabel>
       <div className="space-y-5">
         {PROG_LABELS.map((label, i) => (
@@ -378,27 +391,6 @@ function ProgressCell() {
           </div>
         ))}
       </div>
-    </BentoCell>
-  );
-}
-
-// ─── Calendar ────────────────────────────────────────────────────────────────
-
-function CalendarCell() {
-  const [date, setDate] = useState<Date | undefined>(new Date(2026, 5, 18));
-  return (
-    <BentoCell className="col-span-4 flex flex-col items-center" delay={300}>
-      <CellLabel>Calendar</CellLabel>
-      <Calendar
-        mode="single"
-        selected={date}
-        onSelect={setDate}
-        locale={de}
-        weekStartsOn={1}
-        formatters={{ formatWeekdayName: (d) => ["SO","MO","DI","MI","DO","FR","SA"][d.getDay()] }}
-        className="rounded-xl [--cell-size:--spacing(8)]"
-        style={{ border: "1px solid var(--gray-100)" }}
-      />
     </BentoCell>
   );
 }
@@ -443,7 +435,7 @@ function InputCell() {
   }, []);
 
   return (
-    <BentoCell className="col-span-4" delay={360}>
+    <BentoCell className="col-span-3" delay={120}>
       <CellLabel>Input</CellLabel>
       <div className="space-y-2.5">
         <div className="relative">
@@ -670,25 +662,25 @@ function CardCell() {
 function ShowcaseGrid() {
   return (
     <div className="w-full grid grid-cols-12 gap-4">
-      {/* Notifications spans rows 1–2; Chart + Buttons + Controls fill the right */}
-      <NotificationsCell />  {/* col-4, row-span-2 */}
-      <ChartCell />           {/* col-8, row 1 */}
-      <ButtonsCell />         {/* col-4, row 2 right */}
-      <ControlsCell />        {/* col-4, row 2 right */}
+      {/* Row 1: 4 + 4 + 4 */}
+      <ButtonsCell />
+      <CalendarCell />
+      <ChartCell />
 
-      {/* Row 3 */}
-      <ProgressCell />        {/* col-4 */}
-      <CalendarCell />        {/* col-4 */}
-      <InputCell />           {/* col-4 */}
+      {/* Row 2: 3 + 3 + 3 + 3 */}
+      <InputCell />
+      <ProgressCell />
+      <ControlsCell />
+      <NotificationsCell />
 
-      {/* Row 4 */}
-      <TableCell />           {/* col-8 */}
-      <BadgesCell />          {/* col-4 */}
+      {/* Row 3: 4 + 4 + 4 */}
+      <AccordionCell />
+      <BadgesCell />
+      <ChecklistCell />
 
-      {/* Row 5 */}
-      <AccordionCell />       {/* col-4 */}
-      <ChecklistCell />       {/* col-4 */}
-      <CardCell />            {/* col-4 */}
+      {/* Row 4: 8 + 4 */}
+      <TableCell />
+      <CardCell />
     </div>
   );
 }
