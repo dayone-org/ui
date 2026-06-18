@@ -114,7 +114,6 @@ type NavProps = {
 function SidebarNav({ activeSlug, search, onNavigate }: NavProps) {
   const listRef = useRef<HTMLUListElement>(null);
 
-  // Scroll sidebar so active item is centered — only when it's in a fade zone
   useEffect(() => {
     const list = listRef.current;
     if (!list) return;
@@ -122,24 +121,19 @@ function SidebarNav({ activeSlug, search, onNavigate }: NavProps) {
     const active = list.querySelector<HTMLElement>('[data-active="true"]');
     if (!active) return;
 
-    // The scrollable container is the nav element (overflow-y-scroll)
     const scrollEl = list.closest<HTMLElement>("[data-sidebar-scroll]");
     if (!scrollEl) return;
 
     const scrollRect = scrollEl.getBoundingClientRect();
     const activeRect = active.getBoundingClientRect();
-    const fadeZone = 80; // matches the 5rem mask gradient
+    const fadeZone = 80;
 
     const topVisible = activeRect.top >= scrollRect.top + fadeZone;
     const bottomVisible = activeRect.bottom <= scrollRect.bottom - fadeZone;
 
     if (!topVisible || !bottomVisible) {
-      // Calculate precise center position within the scroll container
-      const offsetTop =
-        activeRect.top - scrollRect.top + scrollEl.scrollTop;
-      const targetTop =
-        offsetTop - scrollEl.clientHeight / 2 + active.clientHeight / 2;
-
+      const offsetTop = activeRect.top - scrollRect.top + scrollEl.scrollTop;
+      const targetTop = offsetTop - scrollEl.clientHeight / 2 + active.clientHeight / 2;
       scrollEl.scrollTo({ top: Math.max(0, targetTop), behavior: "smooth" });
     }
   }, [activeSlug]);
@@ -164,39 +158,27 @@ function SidebarNav({ activeSlug, search, onNavigate }: NavProps) {
       {filtered.map((category) => (
         <li key={category.id}>
           <p
-            className="mb-1.5 px-3 text-sm font-medium"
+            className="mb-1 px-3 text-xs font-medium uppercase tracking-wider"
             style={{ color: "var(--gray-300)" }}
           >
             {category.label}
           </p>
-          <ul className="space-y-0">
+          <ul className="space-y-0.5">
             {category.components.map((component) => {
               const isActive = activeSlug === component.slug;
               return (
-                <li key={component.slug} className="relative">
+                <li key={component.slug}>
                   <button
                     type="button"
                     data-active={isActive ? "true" : undefined}
                     onClick={() => handleClick(component.slug)}
-                    className="block w-fit rounded-md py-1 pl-4 pr-3 text-xs"
+                    className="block w-full rounded-md px-3 py-1.5 text-left text-sm transition-colors"
                     style={{
-                      color: "var(--black)",
+                      color: isActive ? "var(--black)" : "var(--gray-400)",
                       fontWeight: isActive ? 600 : 400,
-                      transition: "transform 0.2s cubic-bezier(0.34,1.56,0.64,1)",
-                      transformOrigin: "center",
-                      background: "none",
+                      backgroundColor: isActive ? "var(--gray-100)" : "transparent",
                       border: "none",
                       cursor: "pointer",
-                    }}
-                    onMouseEnter={(e) => {
-                      const el = e.currentTarget as HTMLElement;
-                      el.style.transform = "scale(1.06)";
-                      el.style.fontWeight = "600";
-                    }}
-                    onMouseLeave={(e) => {
-                      const el = e.currentTarget as HTMLElement;
-                      el.style.transform = "scale(1)";
-                      el.style.fontWeight = isActive ? "600" : "400";
                     }}
                   >
                     {component.name}
@@ -220,21 +202,20 @@ export function KomponentenSidebarDesktop() {
 
   return (
     <aside className="hidden w-52 shrink-0 lg:flex xl:w-60 sticky top-16 h-[calc(100vh-4rem)] self-start">
-      <div className={`flex h-full w-full flex-col justify-start pt-16 ${DOCS_SIDEBAR_INSET}`}>
+      <div className={`flex h-full w-full flex-col pt-12 ${DOCS_SIDEBAR_INSET}`}>
         <SearchBox value={search} onChange={setSearch} />
         {/* data-sidebar-scroll marks the scrollable container for SidebarNav */}
         <nav
           data-sidebar-scroll
-          className="overflow-y-scroll pr-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="flex-1 overflow-y-scroll pr-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           style={{
-            maxHeight: "560px",
             maskImage:
-              "linear-gradient(to bottom, transparent 0%, black 5rem, black calc(100% - 5rem), transparent 100%)",
+              "linear-gradient(to bottom, transparent 0%, black 3rem, black calc(100% - 3rem), transparent 100%)",
             WebkitMaskImage:
-              "linear-gradient(to bottom, transparent 0%, black 5rem, black calc(100% - 5rem), transparent 100%)",
+              "linear-gradient(to bottom, transparent 0%, black 3rem, black calc(100% - 3rem), transparent 100%)",
           }}
         >
-          <div className="py-16">
+          <div className="py-10">
             <SidebarNav activeSlug={activeSlug} search={search} />
           </div>
         </nav>

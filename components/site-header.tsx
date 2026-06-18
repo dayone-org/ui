@@ -25,39 +25,36 @@ function navLinkStyle(isActive: boolean) {
 
 function DayoneMark({ className }: { className?: string }) {
   return (
-    <Link
-      href="/"
-      className={`inline-flex shrink-0 items-center gap-2.5 ${className ?? ""}`}
-    >
+    <Link href="/" className={`inline-flex shrink-0 items-center ${className ?? ""}`}>
       <Image
-        src="/dayone-icon.svg"
-        alt=""
-        width={28}
-        height={28}
+        src="/dayone-logo.svg"
+        alt="DAYONE"
+        width={110}
+        height={20}
         priority
-        className="size-7 shrink-0"
-        aria-hidden
+        className="h-5 w-auto"
       />
-      <span
-        className="text-sm font-semibold uppercase tracking-[0.08em]"
-        style={{ color: "var(--black)" }}
-      >
-        DAYONE
-      </span>
     </Link>
   );
 }
 
 function AnwendungDropdown({ active }: { active: boolean }) {
   const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  function scheduleClose() {
+    closeTimer.current = setTimeout(() => setOpen(false), 150);
+  }
+
+  function cancelClose() {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+  }
 
   return (
     <div
-      ref={ref}
       className="relative"
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
+      onMouseEnter={() => { cancelClose(); setOpen(true); }}
+      onMouseLeave={scheduleClose}
     >
       <button
         type="button"
@@ -68,21 +65,26 @@ function AnwendungDropdown({ active }: { active: boolean }) {
       >
         Anwendung
         <ChevronDown
-          className="size-3 transition-transform"
+          className="size-3 transition-transform duration-150"
           style={{ transform: open ? "rotate(180deg)" : undefined }}
         />
       </button>
+
       {open && (
         <div
-          className="absolute right-0 top-full z-50 mt-1 min-w-36 rounded-xl py-1.5 shadow-lg"
+          className="absolute right-0 top-full z-50 min-w-36 rounded-xl py-1.5 shadow-lg"
           style={{
+            paddingTop: "calc(0.375rem + 6px)",
+            marginTop: "-6px",
             backgroundColor: "var(--white)",
             border: "1px solid var(--gray-100)",
           }}
+          onMouseEnter={cancelClose}
+          onMouseLeave={scheduleClose}
         >
           <Link
             href="/anwendung/pdc-hub"
-            className="block px-4 py-2 text-sm transition-colors hover:opacity-70"
+            className="block px-4 py-2 text-sm transition-opacity hover:opacity-70"
             style={{ color: "var(--black)", fontWeight: 500 }}
             onClick={() => setOpen(false)}
           >
@@ -98,14 +100,10 @@ export function SiteHeader({ active = "home" }: SiteHeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header
-      className="sticky top-0 z-50 bg-white/80 backdrop-blur-md"
-    >
+    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md">
       <div className={DOCS_PAGE_PADDING}>
         <div className="flex h-16 items-center justify-between gap-6">
-          <div
-            className={`flex shrink-0 items-center ${DOCS_SIDEBAR_WIDTH} ${DOCS_SIDEBAR_INSET}`}
-          >
+          <div className={`flex shrink-0 items-center ${DOCS_SIDEBAR_WIDTH} ${DOCS_SIDEBAR_INSET}`}>
             <DayoneMark />
           </div>
 
@@ -146,10 +144,10 @@ export function SiteHeader({ active = "home" }: SiteHeaderProps) {
           style={{ borderColor: "var(--gray-100)" }}
         >
           <Link
-            href="/playground"
+            href="/komponenten"
             onClick={() => { setMobileOpen(false); window.scrollTo(0, 0); }}
             className={navLinkClass}
-            style={navLinkStyle(active === "playground")}
+            style={navLinkStyle(active === "komponenten")}
           >
             Komponenten
           </Link>
