@@ -17,14 +17,24 @@ import { Calendar } from "@/components/ui/calendar";
 import { Separator } from "@/components/ui/separator";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowRight, Bold, Italic, Underline, Search, Bell, Check, Moon, Sun, Sparkles, BarChart3, Zap, GitMerge } from "lucide-react";
+import {
+  ArrowRight, Bold, Italic, Underline, Search, Bell,
+  Check, Moon, Sun, Sparkles, BarChart3, Zap, GitMerge, TrendingUp,
+} from "lucide-react";
 import { DOCS_PAGE_PADDING } from "@/lib/docs-layout";
 import { de } from "date-fns/locale";
-import { BarChart, Bar, XAxis, ResponsiveContainer } from "recharts";
 
 // ─── BentoCell ───────────────────────────────────────────────────────────────
 
-function BentoCell({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
+function BentoCell({
+  children,
+  className = "",
+  delay = 0,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+}) {
   return (
     <div
       className={`rounded-2xl p-5 overflow-hidden animate-in fade-in slide-in-from-bottom-3 ${className}`}
@@ -41,74 +51,138 @@ function BentoCell({ children, className = "", delay = 0 }: { children: React.Re
 }
 
 function CellLabel({ children }: { children: React.ReactNode }) {
-  return <p className="text-xs font-medium mb-4" style={{ color: "var(--gray-300)" }}>{children}</p>;
+  return (
+    <p className="text-xs font-medium mb-4" style={{ color: "var(--gray-300)" }}>
+      {children}
+    </p>
+  );
 }
 
-// ─── Animated Progress Bar ────────────────────────────────────────────────────
+// ─── Smooth Progress Bar ──────────────────────────────────────────────────────
 
-function AnimatedProgressBar({ value }: { value: number }) {
-  const [width, setWidth] = useState(0);
+function SmoothBar({ value }: { value: number }) {
+  const [w, setW] = useState(0);
   useEffect(() => {
-    const t = setTimeout(() => setWidth(value), 100);
+    const t = setTimeout(() => setW(value), 120);
     return () => clearTimeout(t);
   }, [value]);
   return (
     <div className="h-1.5 w-full rounded-full overflow-hidden" style={{ backgroundColor: "var(--gray-100)" }}>
       <div
         className="h-full rounded-full"
-        style={{ width: `${width}%`, backgroundColor: "var(--black)", transition: "width 0.7s cubic-bezier(0.4,0,0.2,1)" }}
+        style={{ width: `${w}%`, backgroundColor: "var(--black)", transition: "width 1.3s cubic-bezier(0.4,0,0.2,1)" }}
       />
     </div>
   );
 }
 
-// ─── Button Showcase ─────────────────────────────────────────────────────────
+// ─── Notifications ────────────────────────────────────────────────────────────
 
-function ButtonsCell() {
+type Notif = {
+  id: number;
+  icon: React.ReactNode;
+  title: string;
+  desc: string;
+  time: string;
+  exiting: boolean;
+};
+
+const NOTIF_POOL: Omit<Notif, "id" | "exiting">[] = [
+  { icon: <Sparkles className="size-4" />, title: "Neue Komponente", desc: "Button wurde aktualisiert.", time: "Jetzt" },
+  { icon: <Check className="size-4" />, title: "Build erfolgreich", desc: "Vercel deployment abgeschlossen.", time: "Jetzt" },
+  { icon: <Zap className="size-4" />, title: "Update verfügbar", desc: "shadcn/ui 3.0 ist jetzt live.", time: "Jetzt" },
+  { icon: <GitMerge className="size-4" />, title: "PR gemerged", desc: "feature/calendar wurde gemerged.", time: "Jetzt" },
+  { icon: <Bell className="size-4" />, title: "Neue Nachricht", desc: "Victoria hat kommentiert.", time: "Jetzt" },
+];
+
+let notifId = 0;
+
+const INITIAL_NOTIFS: Notif[] = [
+  { id: notifId++, ...NOTIF_POOL[0], time: "3 Min.", exiting: false },
+  { id: notifId++, ...NOTIF_POOL[2], time: "12 Min.", exiting: false },
+  { id: notifId++, ...NOTIF_POOL[4], time: "1 Std.", exiting: false },
+];
+
+function NotifRow({ item, isFirst, isNew }: { item: Notif; isFirst: boolean; isNew: boolean }) {
+  const [visible, setVisible] = useState(!isNew);
+
+  useEffect(() => {
+    if (!isNew) return;
+    const id = requestAnimationFrame(() => requestAnimationFrame(() => setVisible(true)));
+    return () => cancelAnimationFrame(id);
+  }, [isNew]);
+
   return (
-    <BentoCell className="col-span-4" delay={0}>
-      <CellLabel>Button</CellLabel>
-      <div className="space-y-3">
-        <div className="flex flex-wrap gap-2">
-          <Button size="sm">Primary</Button>
-          <Button size="sm" variant="outline">Secondary</Button>
-          <Button size="sm" variant="ghost">Ghost</Button>
+    <div
+      className="flex items-start gap-3 rounded-xl p-3"
+      style={{
+        backgroundColor: isFirst ? "var(--black)" : "var(--gray-100)",
+        opacity: item.exiting ? 0 : visible ? 1 : 0,
+        transform: item.exiting
+          ? "translateY(6px) scale(0.97)"
+          : visible
+          ? "none"
+          : "translateY(-10px) scale(0.97)",
+        transition: "opacity 0.45s ease, transform 0.45s ease",
+      }}
+    >
+      <div className="mt-0.5 shrink-0" style={{ color: isFirst ? "var(--white)" : "var(--black)" }}>
+        {item.icon}
+      </div>
+      <div className="flex-1 min-w-0">
+        <p className="text-xs font-semibold" style={{ color: isFirst ? "var(--white)" : "var(--black)" }}>
+          {item.title}
+        </p>
+        <p className="text-xs truncate" style={{ color: isFirst ? "rgba(255,255,255,0.6)" : "var(--gray-400)" }}>
+          {item.desc}
+        </p>
+      </div>
+      <span className="text-[10px] shrink-0 pt-0.5" style={{ color: isFirst ? "rgba(255,255,255,0.45)" : "var(--gray-300)" }}>
+        {item.time}
+      </span>
+    </div>
+  );
+}
+
+function NotificationsCell() {
+  const [items, setItems] = useState<Notif[]>(INITIAL_NOTIFS);
+  const poolIdx = useRef(1);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      poolIdx.current = (poolIdx.current + 1) % NOTIF_POOL.length;
+      const next: Notif = { id: notifId++, ...NOTIF_POOL[poolIdx.current], exiting: false };
+
+      setItems((prev) => {
+        const list = [...prev];
+        if (list.length >= 3) list[list.length - 1] = { ...list[list.length - 1], exiting: true };
+        return [next, ...list];
+      });
+
+      setTimeout(() => setItems((prev) => prev.filter((n) => !n.exiting)), 500);
+    }, 2800);
+    return () => clearInterval(id);
+  }, []);
+
+  return (
+    <BentoCell className="col-span-4 row-span-2 flex flex-col" delay={0}>
+      <div className="flex items-center gap-2 mb-5">
+        <p className="text-xs font-medium" style={{ color: "var(--gray-300)" }}>Notification</p>
+        <div className="relative ml-auto">
+          <Bell className="size-4" style={{ color: "var(--gray-400)" }} />
+          <span className="absolute -top-1 -right-1 size-2 rounded-full animate-pulse" style={{ backgroundColor: "var(--red-medium)" }} />
         </div>
-        <div className="flex flex-wrap gap-2">
-          <Button size="default">Primary <ArrowRight className="size-3.5" /></Button>
-          <Button size="default" variant="outline">Secondary</Button>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          <Button size="lg">Primary <ArrowRight className="size-4" /></Button>
-          <Button size="lg" variant="outline">Secondary</Button>
-        </div>
+      </div>
+      <div className="space-y-2 flex-1">
+        {items.map((item, idx) => (
+          <NotifRow key={item.id} item={item} isFirst={idx === 0} isNew={item.time === "Jetzt"} />
+        ))}
       </div>
     </BentoCell>
   );
 }
 
-// ─── Calendar ────────────────────────────────────────────────────────────────
-
-function CalendarCell() {
-  const [date, setDate] = useState<Date | undefined>(new Date(2026, 5, 18));
-  return (
-    <BentoCell className="col-span-4 flex flex-col items-center justify-center" delay={80}>
-      <CellLabel>Calendar</CellLabel>
-      <Calendar
-        mode="single"
-        selected={date}
-        onSelect={setDate}
-        locale={de}
-        weekStartsOn={1}
-        formatters={{ formatWeekdayName: (d) => ["SO","MO","DI","MI","DO","FR","SA"][d.getDay()] }}
-        className="rounded-xl [--cell-size:--spacing(8)] scale-90 origin-top"
-        style={{ border: "1px solid var(--gray-100)" }}
-      />
-    </BentoCell>
-  );
-}
-
-// ─── Animated Chart ──────────────────────────────────────────────────────────
+// ─── Chart ───────────────────────────────────────────────────────────────────
 
 const BASE_CHART = [
   { name: "Jan", value: 32 },
@@ -121,33 +195,215 @@ const BASE_CHART = [
 
 function ChartCell() {
   const [data, setData] = useState(BASE_CHART);
+  const [total, setTotal] = useState(356);
+  const [trend, setTrend] = useState(12.4);
   useEffect(() => {
     const id = setInterval(() => {
       setData((prev) =>
         prev.map((d) => ({
           ...d,
-          value: Math.max(15, Math.min(95, d.value + Math.round((Math.random() - 0.48) * 18))),
+          value: Math.max(12, Math.min(97, d.value + Math.round((Math.random() - 0.48) * 18))),
         }))
       );
-    }, 2200);
+      setTotal((prev) => Math.max(280, Math.min(430, prev + Math.round((Math.random() - 0.44) * 14))));
+      setTrend((prev) => +Math.max(-6, Math.min(28, prev + (Math.random() - 0.44) * 2.2)).toFixed(1));
+    }, 2500);
     return () => clearInterval(id);
   }, []);
+
   return (
-    <BentoCell className="col-span-4" delay={160}>
+    <BentoCell className="col-span-8" delay={60}>
       <CellLabel>Chart</CellLabel>
-      <p className="text-sm font-semibold mb-1" style={{ color: "var(--black)" }}>Monatliche Aufrufe</p>
-      <p className="text-xs mb-4" style={{ color: "var(--gray-300)" }}>Jan – Jun 2026</p>
-      <ResponsiveContainer width="100%" height={120}>
-        <BarChart data={data} barSize={16}>
-          <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: "var(--gray-300)" }} />
-          <Bar dataKey="value" fill="var(--black)" radius={[3,3,0,0]} isAnimationActive animationDuration={600} />
-        </BarChart>
-      </ResponsiveContainer>
+      <div className="flex items-baseline gap-3 mb-6">
+        <span className="text-3xl font-bold tabular-nums" style={{ color: "var(--black)" }}>
+          {total.toLocaleString("de")}
+        </span>
+        <span
+          className="flex items-center gap-1 text-xs font-medium"
+          style={{ color: trend >= 0 ? "var(--black)" : "#e63946", transition: "color 0.5s ease" }}
+        >
+          <TrendingUp className="size-3" />
+          {trend >= 0 ? "+" : ""}{trend}%
+        </span>
+        <span className="text-xs ml-auto" style={{ color: "#999" }}>Aufrufe Jan – Jun 2026</span>
+      </div>
+      {/* Pure-CSS bar chart — columns stretch to 160px so height-% resolves correctly */}
+      <div className="flex flex-col gap-2">
+        <div className="flex gap-3" style={{ height: 160 }}>
+          {data.map((d) => (
+            <div key={d.name} className="flex-1 flex flex-col justify-end">
+              <div
+                style={{
+                  height: `${d.value}%`,
+                  backgroundColor: "#1a1a1a",
+                  borderRadius: "4px 4px 0 0",
+                  transition: "height 1s cubic-bezier(0.4,0,0.2,1)",
+                }}
+              />
+            </div>
+          ))}
+        </div>
+        <div className="flex gap-3">
+          {data.map((d) => (
+            <div key={d.name} className="flex-1 text-center" style={{ fontSize: 10, color: "#999" }}>
+              {d.name}
+            </div>
+          ))}
+        </div>
+      </div>
     </BentoCell>
   );
 }
 
-// ─── Input with Typing Loop ───────────────────────────────────────────────────
+// ─── Buttons ─────────────────────────────────────────────────────────────────
+
+function ButtonsCell() {
+  return (
+    <BentoCell className="col-span-4" delay={120}>
+      <CellLabel>Button</CellLabel>
+      <div className="space-y-3">
+        <div className="flex flex-wrap gap-2">
+          <Button>Primary</Button>
+          <Button variant="outline">Secondary</Button>
+          <Button variant="ghost">Ghost</Button>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <Button size="sm">Small</Button>
+          <Button>Default</Button>
+          <Button size="lg">Large</Button>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <Button>Weiter <ArrowRight /></Button>
+          <Button variant="outline">Abbrechen</Button>
+          <Button variant="destructive">Löschen</Button>
+        </div>
+        <div className="flex gap-2">
+          <Button size="icon"><ArrowRight /></Button>
+          <Button size="icon" variant="outline"><ArrowRight /></Button>
+          <Button size="icon" variant="ghost"><ArrowRight /></Button>
+          <Button size="icon" variant="destructive"><ArrowRight /></Button>
+        </div>
+      </div>
+    </BentoCell>
+  );
+}
+
+// ─── Controls ────────────────────────────────────────────────────────────────
+
+function ControlsCell() {
+  const [dark, setDark] = useState(false);
+  const [notifs, setNotifs] = useState(true);
+  const [auto, setAuto] = useState(true);
+  const [vol, setVol] = useState([72]);
+  const [bold, setBold] = useState(false);
+  const [italic, setItalic] = useState(false);
+  const [under, setUnder] = useState(true);
+
+  return (
+    <BentoCell className="col-span-4" delay={180}>
+      <CellLabel>Controls</CellLabel>
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
+          <span className="text-xs" style={{ color: "var(--gray-400)" }}>Dark mode</span>
+          <div className="flex items-center gap-1.5">
+            <Sun className="size-3.5" style={{ color: "var(--gray-300)" }} />
+            <Switch checked={dark} onCheckedChange={setDark} />
+            <Moon className="size-3.5" style={{ color: "var(--gray-300)" }} />
+          </div>
+        </div>
+        <div className="flex items-center justify-between">
+          <span className="text-xs" style={{ color: "var(--gray-400)" }}>Benachrichtigungen</span>
+          <Switch checked={notifs} onCheckedChange={setNotifs} />
+        </div>
+        <div className="flex items-center justify-between">
+          <span className="text-xs" style={{ color: "var(--gray-400)" }}>Auto-Speichern</span>
+          <Switch checked={auto} onCheckedChange={setAuto} />
+        </div>
+        <Separator style={{ backgroundColor: "var(--gray-100)" }} />
+        <div>
+          <div className="flex justify-between mb-2">
+            <span className="text-xs" style={{ color: "var(--gray-400)" }}>Lautstärke</span>
+            <span className="text-xs font-semibold tabular-nums" style={{ color: "var(--black)" }}>{vol[0]}%</span>
+          </div>
+          <Slider value={vol} onValueChange={setVol} max={100} step={1} />
+        </div>
+        <div className="flex items-center gap-1">
+          <Toggle pressed={bold} onPressedChange={setBold} aria-label="Fett" size="sm"><Bold className="size-3.5" /></Toggle>
+          <Toggle pressed={italic} onPressedChange={setItalic} aria-label="Kursiv" size="sm"><Italic className="size-3.5" /></Toggle>
+          <Toggle pressed={under} onPressedChange={setUnder} aria-label="Unterstrichen" size="sm"><Underline className="size-3.5" /></Toggle>
+        </div>
+      </div>
+    </BentoCell>
+  );
+}
+
+// ─── Progress ────────────────────────────────────────────────────────────────
+
+const PROG_LABELS = ["Design Tokens", "Komponenten", "Dokumentation", "Tests"];
+const PROG_TARGETS = [92, 78, 60, 41];
+
+function ProgressCell() {
+  const [values, setValues] = useState([0, 0, 0, 0]);
+
+  useEffect(() => {
+    const t = setTimeout(() => setValues(PROG_TARGETS), 220);
+    return () => clearTimeout(t);
+  }, []);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setValues((prev) =>
+        prev.map((v, i) => {
+          const t = PROG_TARGETS[i];
+          return Math.max(t - 14, Math.min(t + 5, v + (Math.random() - 0.42) * 6));
+        })
+      );
+    }, 1900);
+    return () => clearInterval(id);
+  }, []);
+
+  return (
+    <BentoCell className="col-span-4" delay={240}>
+      <CellLabel>Progress</CellLabel>
+      <div className="space-y-5">
+        {PROG_LABELS.map((label, i) => (
+          <div key={label}>
+            <div className="flex justify-between mb-2">
+              <span className="text-xs" style={{ color: "var(--gray-400)" }}>{label}</span>
+              <span className="text-xs font-semibold tabular-nums" style={{ color: "var(--black)" }}>
+                {Math.round(values[i])}%
+              </span>
+            </div>
+            <SmoothBar value={values[i]} />
+          </div>
+        ))}
+      </div>
+    </BentoCell>
+  );
+}
+
+// ─── Calendar ────────────────────────────────────────────────────────────────
+
+function CalendarCell() {
+  const [date, setDate] = useState<Date | undefined>(new Date(2026, 5, 18));
+  return (
+    <BentoCell className="col-span-4 flex flex-col items-center" delay={300}>
+      <CellLabel>Calendar</CellLabel>
+      <Calendar
+        mode="single"
+        selected={date}
+        onSelect={setDate}
+        locale={de}
+        weekStartsOn={1}
+        formatters={{ formatWeekdayName: (d) => ["SO","MO","DI","MI","DO","FR","SA"][d.getDay()] }}
+        className="rounded-xl [--cell-size:--spacing(8)]"
+        style={{ border: "1px solid var(--gray-100)" }}
+      />
+    </BentoCell>
+  );
+}
+
+// ─── Input ───────────────────────────────────────────────────────────────────
 
 const SEARCH_TERMS = ["Button", "Calendar", "Input", "Accordion", "Dialog", "Tabs"];
 
@@ -187,199 +443,69 @@ function InputCell() {
   }, []);
 
   return (
-    <BentoCell className="col-span-3" delay={120}>
+    <BentoCell className="col-span-4" delay={360}>
       <CellLabel>Input</CellLabel>
       <div className="space-y-2.5">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-3.5 pointer-events-none" style={{ color: "var(--gray-300)" }} />
           <Input className="pl-8 text-sm" value={typed} readOnly placeholder="Suchen…" />
         </div>
-        <Input className="text-sm" value={name} onChange={e => setName(e.target.value)} placeholder="Name" />
-        <Input className="text-sm" value={email} onChange={e => setEmail(e.target.value)} placeholder="E-Mail-Adresse" type="email" />
-        <Button className="w-full mt-1" size="sm">Absenden</Button>
+        <Input className="text-sm" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" />
+        <Input className="text-sm" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="E-Mail-Adresse" type="email" />
+        <Button className="w-full" size="sm">Absenden</Button>
       </div>
     </BentoCell>
   );
 }
 
-// ─── Progress with Live Slider ────────────────────────────────────────────────
+// ─── Table ───────────────────────────────────────────────────────────────────
 
-const LABELS = ["Design Tokens", "Komponenten", "Dokumentation", "Tests"];
-const TARGETS = [92, 78, 60, 41];
-
-function ProgressCell() {
-  const [values, setValues] = useState([0, 0, 0, 0]);
-
-  // Animate to targets on mount
-  useEffect(() => {
-    const t = setTimeout(() => setValues(TARGETS), 200);
-    return () => clearTimeout(t);
-  }, []);
-
-  // Slowly drift values
-  useEffect(() => {
-    const id = setInterval(() => {
-      setValues((prev) =>
-        prev.map((v, i) => {
-          const target = TARGETS[i];
-          const delta = (Math.random() - 0.42) * 6;
-          return Math.max(target - 15, Math.min(target + 5, v + delta));
-        })
-      );
-    }, 1800);
-    return () => clearInterval(id);
-  }, []);
+function TableCell() {
+  const [hovered, setHovered] = useState<string | null>(null);
+  const ROWS = [
+    { name: "Button", cat: "Grundelemente", version: "2.1", status: "Stabil", bg: "var(--black)", fg: "var(--white)" },
+    { name: "Input", cat: "Formulare", version: "2.0", status: "Stabil", bg: "var(--black)", fg: "var(--white)" },
+    { name: "Calendar", cat: "Datendarstellung", version: "1.4", status: "Beta", bg: "var(--blue-highlight)", fg: "var(--white)" },
+    { name: "Drawer", cat: "Overlays", version: "1.2", status: "Beta", bg: "var(--blue-highlight)", fg: "var(--white)" },
+    { name: "Chart", cat: "Datendarstellung", version: "0.9", status: "Alpha", bg: "var(--gray-100)", fg: "var(--gray-400)" },
+  ];
 
   return (
-    <BentoCell className="col-span-3" delay={200}>
-      <CellLabel>Progress</CellLabel>
-      <div className="space-y-4">
-        {LABELS.map((label, i) => (
-          <div key={label}>
-            <div className="flex justify-between mb-1.5">
-              <span className="text-xs" style={{ color: "var(--gray-400)" }}>{label}</span>
-              <span className="text-xs font-semibold tabular-nums" style={{ color: "var(--black)" }}>{Math.round(values[i])}%</span>
-            </div>
-            <AnimatedProgressBar value={values[i]} />
-          </div>
-        ))}
-      </div>
-    </BentoCell>
-  );
-}
-
-// ─── Controls ────────────────────────────────────────────────────────────────
-
-function ControlsCell() {
-  const [dark, setDark] = useState(false);
-  const [notifs, setNotifs] = useState(true);
-  const [auto, setAuto] = useState(true);
-  const [vol, setVol] = useState([72]);
-  const [bold, setBold] = useState(false);
-  const [italic, setItalic] = useState(false);
-  const [under, setUnder] = useState(true);
-
-  return (
-    <BentoCell className="col-span-3" delay={280}>
-      <CellLabel>Controls</CellLabel>
-      <div className="space-y-5">
-        <div className="flex items-center justify-between">
-          <span className="text-xs" style={{ color: "var(--gray-400)" }}>Dark mode</span>
-          <div className="flex items-center gap-1.5">
-            <Sun className="size-3.5" style={{ color: "var(--gray-300)" }} />
-            <Switch checked={dark} onCheckedChange={setDark} />
-            <Moon className="size-3.5" style={{ color: "var(--gray-300)" }} />
-          </div>
-        </div>
-        <div className="flex items-center justify-between">
-          <span className="text-xs" style={{ color: "var(--gray-400)" }}>Benachrichtigungen</span>
-          <Switch checked={notifs} onCheckedChange={setNotifs} />
-        </div>
-        <div className="flex items-center justify-between">
-          <span className="text-xs" style={{ color: "var(--gray-400)" }}>Auto-Speichern</span>
-          <Switch checked={auto} onCheckedChange={setAuto} />
-        </div>
-        <Separator style={{ backgroundColor: "var(--gray-100)" }} />
-        <div>
-          <div className="flex justify-between mb-2">
-            <span className="text-xs" style={{ color: "var(--gray-400)" }}>Lautstärke</span>
-            <span className="text-xs font-semibold" style={{ color: "var(--black)" }}>{vol[0]}%</span>
-          </div>
-          <Slider value={vol} onValueChange={setVol} max={100} step={1} />
-        </div>
-        <div className="flex items-center gap-1">
-          <Toggle pressed={bold} onPressedChange={setBold} aria-label="Fett" size="sm"><Bold className="size-3.5" /></Toggle>
-          <Toggle pressed={italic} onPressedChange={setItalic} aria-label="Kursiv" size="sm"><Italic className="size-3.5" /></Toggle>
-          <Toggle pressed={under} onPressedChange={setUnder} aria-label="Unterstrichen" size="sm"><Underline className="size-3.5" /></Toggle>
-        </div>
-      </div>
-    </BentoCell>
-  );
-}
-
-// ─── Notifications with Loop ──────────────────────────────────────────────────
-
-type Notif = { id: number; icon: React.ReactNode; title: string; desc: string; time: string };
-
-const NOTIF_POOL: Omit<Notif, "id">[] = [
-  { icon: <Sparkles className="size-4" />, title: "Neue Komponente", desc: "Button wurde aktualisiert.", time: "Jetzt" },
-  { icon: <Check className="size-4" />, title: "Build erfolgreich", desc: "Vercel deployment fertig.", time: "Jetzt" },
-  { icon: <Zap className="size-4" />, title: "Update verfügbar", desc: "shadcn/ui 3.0 ist live.", time: "Jetzt" },
-  { icon: <GitMerge className="size-4" />, title: "PR gemerged", desc: "feature/calendar wurde gemerged.", time: "Jetzt" },
-  { icon: <Bell className="size-4" />, title: "Neue Nachricht", desc: "Victoria hat kommentiert.", time: "Jetzt" },
-];
-
-let notifId = 0;
-
-function NotificationsCell() {
-  const [items, setItems] = useState<Notif[]>([
-    { id: notifId++, ...NOTIF_POOL[0], time: "2 Min." },
-    { id: notifId++, ...NOTIF_POOL[2], time: "1 Std." },
-  ]);
-  const poolIdx = useRef(1);
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      poolIdx.current = (poolIdx.current + 1) % NOTIF_POOL.length;
-      const next: Notif = { id: notifId++, ...NOTIF_POOL[poolIdx.current], time: "Jetzt" };
-      setItems((prev) => [next, ...prev.slice(0, 2)]);
-    }, 2800);
-    return () => clearInterval(id);
-  }, []);
-
-  return (
-    <BentoCell className="col-span-3" delay={360}>
-      <div className="flex items-center gap-2 mb-4">
-        <p className="text-xs font-medium" style={{ color: "var(--gray-300)" }}>Notification</p>
-        <div className="relative ml-auto">
-          <Bell className="size-4" style={{ color: "var(--gray-400)" }} />
-          <span className="absolute -top-1 -right-1 size-2 rounded-full animate-pulse" style={{ backgroundColor: "var(--red-medium)" }} />
-        </div>
-      </div>
-      <div className="space-y-2">
-        {items.map((item, idx) => (
-          <div
-            key={item.id}
-            className="flex items-start gap-3 rounded-xl p-3 animate-in fade-in slide-in-from-top-2"
-            style={{
-              backgroundColor: idx === 0 ? "var(--black)" : "var(--gray-100)",
-              animationDuration: "0.35s",
-              animationFillMode: "both",
-            }}
-          >
-            <div className="mt-0.5 shrink-0" style={{ color: idx === 0 ? "var(--white)" : "var(--black)" }}>{item.icon}</div>
-            <div className="flex-1 min-w-0">
-              <p className="text-xs font-semibold" style={{ color: idx === 0 ? "var(--white)" : "var(--black)" }}>{item.title}</p>
-              <p className="text-xs truncate" style={{ color: idx === 0 ? "rgba(255,255,255,0.6)" : "var(--gray-400)" }}>{item.desc}</p>
-            </div>
-            <span className="text-[10px] shrink-0" style={{ color: idx === 0 ? "rgba(255,255,255,0.5)" : "var(--gray-300)" }}>{item.time}</span>
-          </div>
-        ))}
-      </div>
-    </BentoCell>
-  );
-}
-
-// ─── Accordion ───────────────────────────────────────────────────────────────
-
-function AccordionCell() {
-  return (
-    <BentoCell className="col-span-4" delay={240}>
-      <CellLabel>Accordion</CellLabel>
-      <Accordion type="single" collapsible defaultValue="1" className="w-full">
-        {[
-          { id: "1", q: "Was ist DAYONE UI?", a: "Eine Komponenten-Bibliothek für alle DAYONE-Projekte, gebaut auf shadcn/ui." },
-          { id: "2", q: "Welche Technologien?", a: "Next.js, Tailwind CSS v4, Radix UI und Recharts." },
-          { id: "3", q: "Open Source?", a: "Ja – der Code ist öffentlich zugänglich und erweiterbar." },
-        ].map(({ id, q, a }) => (
-          <AccordionItem key={id} value={id} style={{ borderColor: "var(--gray-100)" }}>
-            <AccordionTrigger className="text-sm font-medium hover:no-underline" style={{ color: "var(--black)" }}>
-              {q}
-            </AccordionTrigger>
-            <AccordionContent className="text-sm" style={{ color: "var(--gray-400)" }}>{a}</AccordionContent>
-          </AccordionItem>
-        ))}
-      </Accordion>
+    <BentoCell className="col-span-8" delay={420}>
+      <CellLabel>Table</CellLabel>
+      <table className="w-full text-sm">
+        <thead>
+          <tr style={{ borderBottom: "1px solid var(--gray-100)" }}>
+            {["Komponente", "Kategorie", "Version", "Status"].map((h) => (
+              <th key={h} className="pb-3 pr-6 text-left text-xs font-semibold" style={{ color: "var(--gray-300)" }}>{h}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {ROWS.map((row) => (
+            <tr
+              key={row.name}
+              className="cursor-pointer"
+              style={{
+                borderBottom: "1px solid var(--gray-100)",
+                backgroundColor: hovered === row.name ? "var(--gray-100)" : "transparent",
+                transition: "background-color 0.15s ease",
+              }}
+              onMouseEnter={() => setHovered(row.name)}
+              onMouseLeave={() => setHovered(null)}
+            >
+              <td className="py-3 pr-6 font-medium" style={{ color: "var(--black)" }}>{row.name}</td>
+              <td className="py-3 pr-6" style={{ color: "var(--gray-400)" }}>{row.cat}</td>
+              <td className="py-3 pr-6 font-mono text-xs" style={{ color: "var(--gray-400)" }}>{row.version}</td>
+              <td className="py-3">
+                <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium" style={{ backgroundColor: row.bg, color: row.fg }}>
+                  {row.status}
+                </span>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </BentoCell>
   );
 }
@@ -388,7 +514,7 @@ function AccordionCell() {
 
 function BadgesCell() {
   return (
-    <BentoCell className="col-span-4" delay={320}>
+    <BentoCell className="col-span-4" delay={480}>
       <CellLabel>Badge & Avatar</CellLabel>
       <div className="space-y-4">
         <div className="flex flex-wrap gap-2">
@@ -426,15 +552,37 @@ function BadgesCell() {
   );
 }
 
-// ─── Tabs + Checklist ─────────────────────────────────────────────────────────
+// ─── Accordion ───────────────────────────────────────────────────────────────
+
+function AccordionCell() {
+  return (
+    <BentoCell className="col-span-4" delay={540}>
+      <CellLabel>Accordion</CellLabel>
+      <Accordion type="single" collapsible defaultValue="1" className="w-full">
+        {[
+          { id: "1", q: "Was ist DAYONE UI?", a: "Eine Komponenten-Bibliothek für alle DAYONE-Projekte, gebaut auf shadcn/ui und Tailwind CSS." },
+          { id: "2", q: "Welche Technologien?", a: "Next.js, Tailwind CSS v4, Radix UI und Recharts." },
+          { id: "3", q: "Ist es Open Source?", a: "Ja – der Code ist öffentlich zugänglich und erweiterbar." },
+        ].map(({ id, q, a }) => (
+          <AccordionItem key={id} value={id} style={{ borderColor: "var(--gray-100)" }}>
+            <AccordionTrigger className="text-sm font-medium hover:no-underline" style={{ color: "var(--black)" }}>
+              {q}
+            </AccordionTrigger>
+            <AccordionContent className="text-sm" style={{ color: "var(--gray-400)" }}>{a}</AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
+    </BentoCell>
+  );
+}
+
+// ─── Checklist ───────────────────────────────────────────────────────────────
 
 function ChecklistCell() {
   const [tab, setTab] = useState("design");
   const [checked, setChecked] = useState([true, true, true, false, false]);
 
-  function toggle(i: number) {
-    setChecked((prev) => prev.map((v, idx) => (idx === i ? !v : v)));
-  }
+  const toggle = (i: number) => setChecked((prev) => prev.map((v, idx) => (idx === i ? !v : v)));
 
   const ITEMS = [
     "Farbsystem definieren",
@@ -445,7 +593,7 @@ function ChecklistCell() {
   ];
 
   return (
-    <BentoCell className="col-span-4" delay={400}>
+    <BentoCell className="col-span-4" delay={600}>
       <CellLabel>Tabs & Checkbox</CellLabel>
       <Tabs value={tab} onValueChange={setTab} className="w-full mb-4">
         <TabsList variant="text">
@@ -471,78 +619,24 @@ function ChecklistCell() {
   );
 }
 
-// ─── Table ────────────────────────────────────────────────────────────────────
-
-function TableCell() {
-  const [hovered, setHovered] = useState<string | null>(null);
-  const ROWS = [
-    { name: "Button", cat: "Grundelemente", version: "2.1", status: "Stabil", statusBg: "var(--black)", statusFg: "var(--white)" },
-    { name: "Input", cat: "Formulare", version: "2.0", status: "Stabil", statusBg: "var(--black)", statusFg: "var(--white)" },
-    { name: "Calendar", cat: "Datendarstellung", version: "1.4", status: "Beta", statusBg: "var(--blue-highlight)", statusFg: "var(--white)" },
-    { name: "Drawer", cat: "Overlays", version: "1.2", status: "Beta", statusBg: "var(--blue-highlight)", statusFg: "var(--white)" },
-    { name: "Chart", cat: "Datendarstellung", version: "0.9", status: "Alpha", statusBg: "var(--gray-100)", statusFg: "var(--gray-400)" },
-  ];
-
-  return (
-    <BentoCell className="col-span-8" delay={360}>
-      <CellLabel>Table</CellLabel>
-      <table className="w-full text-sm">
-        <thead>
-          <tr style={{ borderBottom: "1px solid var(--gray-100)" }}>
-            {["Komponente", "Kategorie", "Version", "Status"].map((h) => (
-              <th key={h} className="pb-3 pr-6 text-left text-xs font-semibold" style={{ color: "var(--gray-300)" }}>{h}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {ROWS.map((row) => (
-            <tr
-              key={row.name}
-              className="cursor-pointer transition-colors"
-              style={{
-                borderBottom: "1px solid var(--gray-100)",
-                backgroundColor: hovered === row.name ? "var(--gray-100)" : "transparent",
-              }}
-              onMouseEnter={() => setHovered(row.name)}
-              onMouseLeave={() => setHovered(null)}
-            >
-              <td className="py-3 pr-6 font-medium" style={{ color: "var(--black)" }}>{row.name}</td>
-              <td className="py-3 pr-6" style={{ color: "var(--gray-400)" }}>{row.cat}</td>
-              <td className="py-3 pr-6 font-mono text-xs" style={{ color: "var(--gray-400)" }}>{row.version}</td>
-              <td className="py-3">
-                <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium" style={{ backgroundColor: row.statusBg, color: row.statusFg }}>
-                  {row.status}
-                </span>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </BentoCell>
-  );
-}
-
-// ─── Card with animated counter ───────────────────────────────────────────────
+// ─── Card ────────────────────────────────────────────────────────────────────
 
 function CardCell() {
   const [count, setCount] = useState(0);
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const t = setTimeout(() => { setCount(50); setProgress(82); }, 300);
+    const t = setTimeout(() => { setCount(50); setProgress(82); }, 320);
     return () => clearTimeout(t);
   }, []);
 
-  // Slowly pulse the counter
   useEffect(() => {
-    const id = setInterval(() => {
-      setCount((c) => (c >= 55 ? 50 : c + 1));
-    }, 900);
+    const id = setInterval(() => setCount((c) => (c >= 55 ? 50 : c + 1)), 900);
     return () => clearInterval(id);
   }, []);
 
   return (
-    <BentoCell className="col-span-4" delay={440}>
+    <BentoCell className="col-span-4" delay={660}>
       <CellLabel>Card</CellLabel>
       <Card style={{ borderColor: "var(--gray-100)" }}>
         <CardHeader className="pb-3">
@@ -571,23 +665,30 @@ function CardCell() {
   );
 }
 
-// ─── Showcase Grid ─────────────────────────────────────────────────────────────
+// ─── Grid ────────────────────────────────────────────────────────────────────
 
 function ShowcaseGrid() {
   return (
     <div className="w-full grid grid-cols-12 gap-4">
-      <ButtonsCell />
-      <CalendarCell />
-      <ChartCell />
-      <InputCell />
-      <ProgressCell />
-      <ControlsCell />
-      <NotificationsCell />
-      <AccordionCell />
-      <BadgesCell />
-      <ChecklistCell />
-      <TableCell />
-      <CardCell />
+      {/* Notifications spans rows 1–2; Chart + Buttons + Controls fill the right */}
+      <NotificationsCell />  {/* col-4, row-span-2 */}
+      <ChartCell />           {/* col-8, row 1 */}
+      <ButtonsCell />         {/* col-4, row 2 right */}
+      <ControlsCell />        {/* col-4, row 2 right */}
+
+      {/* Row 3 */}
+      <ProgressCell />        {/* col-4 */}
+      <CalendarCell />        {/* col-4 */}
+      <InputCell />           {/* col-4 */}
+
+      {/* Row 4 */}
+      <TableCell />           {/* col-8 */}
+      <BadgesCell />          {/* col-4 */}
+
+      {/* Row 5 */}
+      <AccordionCell />       {/* col-4 */}
+      <ChecklistCell />       {/* col-4 */}
+      <CardCell />            {/* col-4 */}
     </div>
   );
 }
@@ -600,7 +701,6 @@ export default function HomePage() {
       <SiteHeader active="home" />
 
       <main className={`flex flex-1 flex-col items-center gap-16 px-8 py-16 ${DOCS_PAGE_PADDING}`}>
-
         <div className="flex flex-col items-center text-center gap-6 max-w-2xl">
           <Badge variant="outline" className="rounded-full text-xs" style={{ color: "var(--gray-400)" }}>
             DAYONE UI Foundation
@@ -625,7 +725,6 @@ export default function HomePage() {
         </div>
 
         <ShowcaseGrid />
-
       </main>
 
       <div className={`pointer-events-none absolute bottom-8 ${DOCS_PAGE_PADDING} right-0 left-0 flex justify-end`}>
