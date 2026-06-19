@@ -36,7 +36,7 @@ function NavLinks({
             <Link
               href={`#${section.id}`}
               onClick={onNavigate}
-              className="block rounded-md px-3 py-2 text-sm transition-colors"
+              className="block rounded-md px-3 py-1.5 text-sm transition-colors"
               style={{
                 color: isActive ? "var(--black)" : "var(--gray-400)",
                 backgroundColor: isActive ? "var(--gray-100)" : "transparent",

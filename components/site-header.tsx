@@ -70,12 +70,13 @@ function AnwendungDropdown({ active }: { active: boolean }) {
         />
       </button>
 
+      {/* invisible hover bridge so mouse can travel from button to panel */}
+      {open && <div className="absolute left-0 right-0 top-full h-3" onMouseEnter={cancelClose} />}
+
       {open && (
         <div
-          className="absolute right-0 top-full z-50 min-w-36 rounded-xl py-1.5 shadow-lg"
+          className="absolute right-0 top-full z-50 mt-3 min-w-36 rounded-xl py-1.5 shadow-lg nav-dropdown"
           style={{
-            paddingTop: "calc(0.375rem + 6px)",
-            marginTop: "-6px",
             backgroundColor: "var(--white)",
             border: "1px solid var(--gray-100)",
           }}

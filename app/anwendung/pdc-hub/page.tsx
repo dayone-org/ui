@@ -445,9 +445,9 @@ function TagBadge({ tag }: { tag: Tag }) {
 
 function PresenterAvatar({ name }: { name: string }) {
   return (
-    <Avatar size="sm">
+    <Avatar>
       <AvatarFallback
-        className="text-[10px] font-semibold"
+        className="font-semibold"
         style={{
           backgroundColor: PRESENTER_COLORS[name] ?? "#F0F0F0",
           color: "#1A1A1A",
@@ -495,7 +495,7 @@ function StatCard({
 
 const SESSIONS_PER_PAGE = 6;
 
-function SessionsTab() {
+function SessionsTab({ onSuggest }: { onSuggest: () => void }) {
   const [search, setSearch] = useState("");
   const [tagFilter, setTagFilter] = useState("alle");
   const [page, setPage] = useState(1);
@@ -528,7 +528,7 @@ function SessionsTab() {
         <div className="relative flex-1 max-w-xs">
           <Search
             className="absolute left-3 top-1/2 -translate-y-1/2 size-3.5"
-            style={{ color: "var(--gray-300)" }}
+            style={{ color: "var(--gray-400)" }}
           />
           <Input
             placeholder="Thema oder Person suchen…"
@@ -558,9 +558,15 @@ function SessionsTab() {
             <SelectItem value="Workshop">Workshop</SelectItem>
           </SelectContent>
         </Select>
-        <span className="text-xs ml-auto" style={{ color: "var(--gray-300)" }}>
-          {filtered.length} Session{filtered.length !== 1 ? "s" : ""}
-        </span>
+        <button
+          onClick={onSuggest}
+          className="dayone-btn dayone-btn--primary dayone-btn--interactive dayone-btn--sm ml-auto"
+        >
+          <span className="dayone-btn__inner">
+            <span className="dayone-btn__label">Thema vorschlagen</span>
+            <span className="dayone-btn__arrow" aria-hidden>→</span>
+          </span>
+        </button>
       </div>
 
       {/* Table */}
@@ -568,19 +574,19 @@ function SessionsTab() {
         <Table>
           <TableHeader>
             <TableRow style={{ borderColor: "var(--gray-100)" }}>
-              <TableHead className="pl-5 text-xs uppercase tracking-wider" style={{ color: "var(--gray-300)" }}>
+              <TableHead className="pl-5 text-xs uppercase tracking-wider" style={{ color: "var(--gray-400)" }}>
                 Datum
               </TableHead>
-              <TableHead className="text-xs uppercase tracking-wider" style={{ color: "var(--gray-300)" }}>
+              <TableHead className="text-xs uppercase tracking-wider" style={{ color: "var(--gray-400)" }}>
                 Thema
               </TableHead>
-              <TableHead className="text-xs uppercase tracking-wider" style={{ color: "var(--gray-300)" }}>
+              <TableHead className="text-xs uppercase tracking-wider" style={{ color: "var(--gray-400)" }}>
                 Presenter
               </TableHead>
-              <TableHead className="text-xs uppercase tracking-wider text-center" style={{ color: "var(--gray-300)" }}>
+              <TableHead className="text-xs uppercase tracking-wider text-center" style={{ color: "var(--gray-400)" }}>
                 Teiln.
               </TableHead>
-              <TableHead className="text-xs uppercase tracking-wider" style={{ color: "var(--gray-300)" }}>
+              <TableHead className="text-xs uppercase tracking-wider" style={{ color: "var(--gray-400)" }}>
                 Tags
               </TableHead>
               <TableHead className="w-10" />
@@ -589,7 +595,7 @@ function SessionsTab() {
           <TableBody>
             {paginated.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={6} className="py-16 text-center text-sm" style={{ color: "var(--gray-300)" }}>
+                <TableCell colSpan={6} className="py-16 text-center text-sm" style={{ color: "var(--gray-400)" }}>
                   Keine Sessions gefunden
                 </TableCell>
               </TableRow>
@@ -701,7 +707,7 @@ function SessionsTab() {
 
       {/* Pagination */}
       {totalPages > 1 && (
-        <div className="mt-6 flex justify-center">
+        <div className="mt-16 flex justify-center">
           <Pagination>
             <PaginationContent>
               <PaginationItem>
@@ -792,7 +798,7 @@ function SessionsTab() {
                 >
                   <Video className="size-4" />
                   Aufzeichnung ansehen
-                  <ExternalLink className="size-3 ml-auto" style={{ color: "var(--gray-300)" }} />
+                  <ExternalLink className="size-3 ml-auto" style={{ color: "var(--gray-400)" }} />
                 </a>
               )}
             </div>
@@ -844,16 +850,16 @@ function BacklogTab({ onSuggest }: { onSuggest: () => void }) {
             <TableHeader>
               <TableRow style={{ borderColor: "var(--gray-100)" }}>
                 <TableHead className="pl-5 w-8" />
-                <TableHead className="text-xs uppercase tracking-wider" style={{ color: "var(--gray-300)" }}>
+                <TableHead className="text-xs uppercase tracking-wider" style={{ color: "var(--gray-400)" }}>
                   Thema
                 </TableHead>
-                <TableHead className="text-xs uppercase tracking-wider" style={{ color: "var(--gray-300)" }}>
+                <TableHead className="text-xs uppercase tracking-wider" style={{ color: "var(--gray-400)" }}>
                   Details
                 </TableHead>
-                <TableHead className="text-xs uppercase tracking-wider" style={{ color: "var(--gray-300)" }}>
+                <TableHead className="text-xs uppercase tracking-wider" style={{ color: "var(--gray-400)" }}>
                   Person
                 </TableHead>
-                <TableHead className="text-xs uppercase tracking-wider" style={{ color: "var(--gray-300)" }}>
+                <TableHead className="text-xs uppercase tracking-wider" style={{ color: "var(--gray-400)" }}>
                   Zeit
                 </TableHead>
               </TableRow>
@@ -1051,7 +1057,7 @@ function RessourcenTab() {
                 <p className="text-sm font-medium">{survey.label}</p>
                 <p className="text-xs" style={{ color: "var(--gray-400)" }}>{survey.sub}</p>
               </div>
-              <ExternalLink className="size-3.5 shrink-0" style={{ color: "var(--gray-300)" }} />
+              <ExternalLink className="size-3.5 shrink-0" style={{ color: "var(--gray-400)" }} />
             </a>
           ))}
         </div>
@@ -1180,7 +1186,7 @@ export default function PDCHubPage() {
 
   return (
     <main className="min-h-screen pb-24" style={{ backgroundColor: "var(--white)" }}>
-      <div className="mx-auto max-w-5xl px-8 lg:px-12">
+      <div className="mx-auto max-w-6xl px-8 lg:px-16">
         {/* Page header */}
         <div className="pt-14 pb-10">
           <div className="flex items-start justify-between gap-6">
@@ -1200,13 +1206,10 @@ export default function PDCHubPage() {
                 Product Design Community · alle 3 Wochen · DAYONE
               </p>
             </div>
-            <Button onClick={() => setSuggestOpen(true)} className="shrink-0">
-              Thema vorschlagen <ArrowRight className="size-4" />
-            </Button>
           </div>
 
           {/* Stats */}
-          <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <div className="mt-8 grid grid-cols-3 gap-3">
             <StatCard
               icon={<CalendarDays className="size-4" />}
               label="Sessions gesamt"
@@ -1222,11 +1225,6 @@ export default function PDCHubPage() {
               label="Backlog Themen"
               value={`${BACKLOG_OPEN.length} offen`}
             />
-            <StatCard
-              icon={<CalendarDays className="size-4" />}
-              label="Nächste Session"
-              value="02 Jul 2026"
-            />
           </div>
         </div>
 
@@ -1239,7 +1237,7 @@ export default function PDCHubPage() {
           </TabsList>
 
           <TabsContent value="sessions">
-            <SessionsTab />
+            <SessionsTab onSuggest={() => setSuggestOpen(true)} />
           </TabsContent>
           <TabsContent value="backlog">
             <BacklogTab onSuggest={() => setSuggestOpen(true)} />

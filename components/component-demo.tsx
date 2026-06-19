@@ -609,7 +609,7 @@ function PaginationDemo() {
           <PaginationPrevious
             href="#"
             onClick={(e) => { e.preventDefault(); setPage((p) => Math.max(1, p - 1)); }}
-            style={{ color: "var(--black)" }}
+            text="Zurück"
           />
         </PaginationItem>
         {[1, 2, 3].map((p) => (
@@ -618,7 +618,6 @@ function PaginationDemo() {
               href="#"
               isActive={page === p}
               onClick={(e) => { e.preventDefault(); setPage(p); }}
-              style={page === p ? { backgroundColor: "var(--black)", color: "var(--white)" } : { color: "var(--gray-400)" }}
             >
               {p}
             </PaginationLink>
@@ -628,7 +627,7 @@ function PaginationDemo() {
           <PaginationNext
             href="#"
             onClick={(e) => { e.preventDefault(); setPage((p) => Math.min(3, p + 1)); }}
-            style={{ color: "var(--black)" }}
+            text="Weiter"
           />
         </PaginationItem>
       </PaginationContent>

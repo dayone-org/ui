@@ -23,7 +23,7 @@ function PaginationContent({
   return (
     <ul
       data-slot="pagination-content"
-      className={cn("flex items-center gap-0.5", className)}
+      className={cn("flex items-center gap-1", className)}
       {...props}
     />
   )
@@ -49,7 +49,11 @@ function PaginationLink({
       asChild
       variant="ghost"
       size={size}
-      className={cn(className)}
+      className={cn(
+        "font-normal",
+        isActive && "font-semibold! text-[15px]!",
+        className
+      )}
     >
       <a
         aria-current={isActive ? "page" : undefined}
@@ -70,10 +74,10 @@ function PaginationPrevious({
     <PaginationLink
       aria-label="Go to previous page"
       size="default"
-      className={cn("pl-1.5!", className)}
+      className={cn("gap-1.5 font-normal! mr-4", className)}
       {...props}
     >
-      <ChevronLeftIcon data-icon="inline-start" />
+      <ChevronLeftIcon className="size-4 translate-y-px" />
       <span className="hidden sm:block">{text}</span>
     </PaginationLink>
   )
@@ -88,11 +92,11 @@ function PaginationNext({
     <PaginationLink
       aria-label="Go to next page"
       size="default"
-      className={cn("pr-1.5!", className)}
+      className={cn("gap-1.5 font-normal! ml-4", className)}
       {...props}
     >
       <span className="hidden sm:block">{text}</span>
-      <ChevronRightIcon data-icon="inline-end" />
+      <ChevronRightIcon className="size-4 translate-y-px" />
     </PaginationLink>
   )
 }

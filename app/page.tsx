@@ -82,7 +82,7 @@ function ButtonsCell() {
   return (
     <BentoCell className="col-span-4" delay={0}>
       <CellLabel>Button</CellLabel>
-      <div className="space-y-3">
+      <div className="space-y-6">
         <div className="flex flex-wrap gap-2">
           <Button size="sm">Primary</Button>
           <Button size="sm" variant="outline">Secondary</Button>
@@ -130,10 +130,9 @@ type Notif = {
   title: string;
   desc: string;
   time: string;
-  exiting: boolean;
 };
 
-const NOTIF_POOL: Omit<Notif, "id" | "exiting">[] = [
+const NOTIF_POOL: Omit<Notif, "id">[] = [
   { icon: <Sparkles className="size-4" />, title: "Neue Komponente", desc: "Button wurde aktualisiert.", time: "Jetzt" },
   { icon: <Check className="size-4" />, title: "Build erfolgreich", desc: "Vercel deployment abgeschlossen.", time: "Jetzt" },
   { icon: <Zap className="size-4" />, title: "Update verfügbar", desc: "shadcn/ui 3.0 ist jetzt live.", time: "Jetzt" },
@@ -144,69 +143,29 @@ const NOTIF_POOL: Omit<Notif, "id" | "exiting">[] = [
 let notifId = 0;
 
 const INITIAL_NOTIFS: Notif[] = [
-  { id: notifId++, ...NOTIF_POOL[0], time: "3 Min.", exiting: false },
-  { id: notifId++, ...NOTIF_POOL[2], time: "12 Min.", exiting: false },
-  { id: notifId++, ...NOTIF_POOL[4], time: "1 Std.", exiting: false },
+  { id: notifId++, ...NOTIF_POOL[0], time: "3 Min." },
+  { id: notifId++, ...NOTIF_POOL[2], time: "12 Min." },
+  { id: notifId++, ...NOTIF_POOL[4], time: "1 Std." },
 ];
-
-function NotifRow({ item, isFirst, isNew }: { item: Notif; isFirst: boolean; isNew: boolean }) {
-  const [visible, setVisible] = useState(!isNew);
-
-  useEffect(() => {
-    if (!isNew) return;
-    const id = requestAnimationFrame(() => requestAnimationFrame(() => setVisible(true)));
-    return () => cancelAnimationFrame(id);
-  }, [isNew]);
-
-  return (
-    <div
-      className="flex items-start gap-3 rounded-xl p-3"
-      style={{
-        backgroundColor: isFirst ? "var(--black)" : "var(--gray-100)",
-        opacity: item.exiting ? 0 : visible ? 1 : 0,
-        transform: item.exiting
-          ? "translateY(6px) scale(0.97)"
-          : visible
-          ? "none"
-          : "translateY(-10px) scale(0.97)",
-        transition: "opacity 0.45s ease, transform 0.45s ease",
-      }}
-    >
-      <div className="mt-0.5 shrink-0" style={{ color: isFirst ? "var(--white)" : "var(--black)" }}>
-        {item.icon}
-      </div>
-      <div className="flex-1 min-w-0">
-        <p className="text-xs font-semibold" style={{ color: isFirst ? "var(--white)" : "var(--black)" }}>
-          {item.title}
-        </p>
-        <p className="text-xs truncate" style={{ color: isFirst ? "rgba(255,255,255,0.6)" : "var(--gray-400)" }}>
-          {item.desc}
-        </p>
-      </div>
-      <span className="text-[10px] shrink-0 pt-0.5" style={{ color: isFirst ? "rgba(255,255,255,0.45)" : "var(--gray-300)" }}>
-        {item.time}
-      </span>
-    </div>
-  );
-}
 
 function NotificationsCell() {
   const [items, setItems] = useState<Notif[]>(INITIAL_NOTIFS);
+  const [visible, setVisible] = useState(true);
   const poolIdx = useRef(1);
 
   useEffect(() => {
     const id = setInterval(() => {
-      poolIdx.current = (poolIdx.current + 1) % NOTIF_POOL.length;
-      const next: Notif = { id: notifId++, ...NOTIF_POOL[poolIdx.current], exiting: false };
-
-      setItems((prev) => {
-        const list = [...prev];
-        if (list.length >= 3) list[list.length - 1] = { ...list[list.length - 1], exiting: true };
-        return [next, ...list];
-      });
-
-      setTimeout(() => setItems((prev) => prev.filter((n) => !n.exiting)), 500);
-    }, 2800);
+      // 1) fade out entire list
+      setVisible(false);
+      setTimeout(() => {
+        // 2) swap items while invisible
+        poolIdx.current = (poolIdx.current + 1) % NOTIF_POOL.length;
+        const next: Notif = { id: notifId++, ...NOTIF_POOL[poolIdx.current] };
+        setItems((prev) => [next, ...prev.slice(0, 2)]);
+        // 3) fade back in
+        setVisible(true);
+      }, 500);
+    }, 3200);
     return () => clearInterval(id);
   }, []);
 
@@ -219,9 +178,31 @@ function NotificationsCell() {
           <span className="absolute -top-1 -right-1 size-2 rounded-full animate-pulse" style={{ backgroundColor: "var(--red-medium)" }} />
         </div>
       </div>
-      <div className="space-y-2 flex-1">
+      <div
+        className="space-y-2"
+        style={{ opacity: visible ? 1 : 0, transition: "opacity 0.5s ease" }}
+      >
         {items.map((item, idx) => (
-          <NotifRow key={item.id} item={item} isFirst={idx === 0} isNew={item.time === "Jetzt"} />
+          <div
+            key={item.id}
+            className="flex items-start gap-3 rounded-xl p-3"
+            style={{ backgroundColor: idx === 0 ? "var(--black)" : "var(--gray-100)" }}
+          >
+            <div className="mt-0.5 shrink-0" style={{ color: idx === 0 ? "var(--white)" : "var(--black)" }}>
+              {item.icon}
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-xs font-semibold" style={{ color: idx === 0 ? "var(--white)" : "var(--black)" }}>
+                {item.title}
+              </p>
+              <p className="text-xs truncate" style={{ color: idx === 0 ? "rgba(255,255,255,0.6)" : "var(--gray-400)" }}>
+                {item.desc}
+              </p>
+            </div>
+            <span className="text-[10px] shrink-0 pt-0.5" style={{ color: idx === 0 ? "rgba(255,255,255,0.45)" : "var(--gray-300)" }}>
+              {item.time}
+            </span>
+          </div>
         ))}
       </div>
     </BentoCell>
@@ -277,7 +258,7 @@ function ChartCell() {
       <div className="flex flex-col gap-2">
         <div className="flex gap-3" style={{ height: 160 }}>
           {data.map((d) => (
-            <div key={d.name} className="flex-1 flex flex-col justify-end">
+            <div key={d.name} className="flex-1 flex flex-col justify-end px-1.5">
               <div
                 style={{
                   height: `${d.value}%`,
@@ -444,7 +425,7 @@ function InputCell() {
         </div>
         <Input className="text-sm" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" />
         <Input className="text-sm" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="E-Mail-Adresse" type="email" />
-        <Button className="w-full" size="sm">Absenden</Button>
+        <Button size="sm">Absenden</Button>
       </div>
     </BentoCell>
   );

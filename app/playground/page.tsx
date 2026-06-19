@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -152,6 +153,28 @@ export default function PlaygroundPage() {
                 <TabsContent value="settings"><p style={{ color: "var(--gray-500)" }}>Einstellungen.</p></TabsContent>
               </Tabs>
               <DocsDivider />
+              <div>
+                <PlaygroundVariantHeading>Pagination</PlaygroundVariantHeading>
+                <Pagination>
+                  <PaginationContent>
+                    <PaginationItem>
+                      <PaginationPrevious href="#" onClick={(e) => e.preventDefault()} text="Zurück" />
+                    </PaginationItem>
+                    <PaginationItem>
+                      <PaginationLink href="#" onClick={(e) => e.preventDefault()} isActive>1</PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem>
+                      <PaginationLink href="#" onClick={(e) => e.preventDefault()}>2</PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem>
+                      <PaginationLink href="#" onClick={(e) => e.preventDefault()}>3</PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem>
+                      <PaginationNext href="#" onClick={(e) => e.preventDefault()} text="Weiter" />
+                    </PaginationItem>
+                  </PaginationContent>
+                </Pagination>
+              </div>
             </div>
           </PlaygroundSection>
 
