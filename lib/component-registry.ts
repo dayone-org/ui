@@ -30,6 +30,14 @@ export const ALL_COMPONENTS: Array<ComponentEntry & { categoryLabel: string; cat
 
 export const COMPONENT_REGISTRY: ComponentCategory[] = [
   {
+    id: "grundlagen",
+    label: "Grundlagen",
+    components: [
+      { slug: "colors", name: "Colors", description: "DAYONE Farbpalette und Design-Tokens", playgroundAnchor: "colors" },
+      { slug: "typography", name: "Typography", description: "Typografische Skalierung und Schriftstile", playgroundAnchor: "typography" },
+    ],
+  },
+  {
     id: "grundelemente",
     label: "Grundelemente",
     components: [
@@ -37,12 +45,10 @@ export const COMPONENT_REGISTRY: ComponentCategory[] = [
       { slug: "badge", name: "Badge", description: "Kleines Label für Status oder Kategorien", playgroundAnchor: "feedback" },
       { slug: "button", name: "Button", description: "Primäre und sekundäre Aktionsschaltflächen", playgroundAnchor: "buttons" },
       { slug: "button-group", name: "Button Group", description: "Mehrere Buttons als zusammengehörige Gruppe", playgroundAnchor: "buttons" },
-      { slug: "colors", name: "Colors", description: "DAYONE Farbpalette und Design-Tokens", playgroundAnchor: "colors" },
       { slug: "empty", name: "Empty", description: "Leer-Zustand für Listen und Datenbereiche", playgroundAnchor: "feedback" },
       { slug: "item", name: "Item", description: "Universeller Listen- oder Menüeintrag", playgroundAnchor: "misc" },
       { slug: "loading", name: "Loading", description: "Ladezustände — Skeleton-Platzhalter und Spinner", playgroundAnchor: "feedback" },
       { slug: "separator", name: "Separator", description: "Horizontale Trennlinie zwischen Inhaltsbereichen", playgroundAnchor: "misc" },
-      { slug: "typography", name: "Typography", description: "Typografische Skalierung und Schriftstile", playgroundAnchor: "typography" },
     ],
   },
   {

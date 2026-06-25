@@ -558,15 +558,9 @@ function SessionsTab({ onSuggest }: { onSuggest: () => void }) {
             <SelectItem value="Workshop">Workshop</SelectItem>
           </SelectContent>
         </Select>
-        <button
-          onClick={onSuggest}
-          className="dayone-btn dayone-btn--primary dayone-btn--interactive dayone-btn--sm ml-auto"
-        >
-          <span className="dayone-btn__inner">
-            <span className="dayone-btn__label">Thema vorschlagen</span>
-            <span className="dayone-btn__arrow" aria-hidden>→</span>
-          </span>
-        </button>
+        <Button size="sm" className="ml-auto" onClick={onSuggest}>
+          Thema vorschlagen
+        </Button>
       </div>
 
       {/* Table */}

@@ -549,20 +549,47 @@ function FieldDemo() {
 
 // ─── Navigation ─────────────────────────────────────────────────────────────
 
+const TAB_ITEMS = [
+  { value: "alle", label: "Alle" },
+  { value: "strategie", label: "Strategie" },
+  { value: "design", label: "Design" },
+  { value: "traktion", label: "Traktion" },
+];
+
 function TabsDemo() {
   return (
-    <Tabs defaultValue="all" className="w-full">
-      <TabsList variant="text">
-        {[
-          { value: "all", label: "Alle" },
-          { value: "strategie", label: "Strategie" },
-          { value: "design", label: "Design" },
-          { value: "traktion", label: "Traktion" },
-        ].map(({ value, label }) => (
-          <TabsTrigger key={value} value={value}>{label}</TabsTrigger>
-        ))}
-      </TabsList>
-    </Tabs>
+    <div className="space-y-8 w-full">
+      <div>
+        <PlaygroundVariantHeading>Default</PlaygroundVariantHeading>
+        <Tabs defaultValue="alle" className="w-full">
+          <TabsList variant="default">
+            {TAB_ITEMS.map(({ value, label }) => (
+              <TabsTrigger key={value} value={value}>{label}</TabsTrigger>
+            ))}
+          </TabsList>
+        </Tabs>
+      </div>
+      <div>
+        <PlaygroundVariantHeading>Line</PlaygroundVariantHeading>
+        <Tabs defaultValue="alle" className="w-full">
+          <TabsList variant="line">
+            {TAB_ITEMS.map(({ value, label }) => (
+              <TabsTrigger key={value} value={value}>{label}</TabsTrigger>
+            ))}
+          </TabsList>
+        </Tabs>
+      </div>
+      <div>
+        <PlaygroundVariantHeading>Text</PlaygroundVariantHeading>
+        <Tabs defaultValue="alle" className="w-full">
+          <TabsList variant="text">
+            {TAB_ITEMS.map(({ value, label }) => (
+              <TabsTrigger key={value} value={value}>{label}</TabsTrigger>
+            ))}
+          </TabsList>
+        </Tabs>
+      </div>
+    </div>
   );
 }
 
