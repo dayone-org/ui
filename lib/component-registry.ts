@@ -56,6 +56,7 @@ export const COMPONENT_REGISTRY: ComponentCategory[] = [
     label: "Formulare",
     components: [
       // Pair: both text inputs
+      { slug: "field", name: "Field", description: "Label, Eingabe und Beschreibungstext als Einheit", playgroundAnchor: "inputs-forms" },
       { slug: "input", name: "Input", description: "Einzeiliges Texteingabefeld", playgroundAnchor: "inputs-forms" },
       { slug: "textarea", name: "Textarea", description: "Mehrzeiliges Texteingabefeld", playgroundAnchor: "inputs-forms" },
       // Pair: both dropdown selects

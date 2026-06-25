@@ -94,7 +94,7 @@
   --secondary-foreground:       var(--black);
   --muted:                      var(--sand-medium);
   --muted-foreground:           var(--gray-400);
-  --accent:                     var(--sand-medium);
+  --accent:                     var(--gray-100);
   --accent-foreground:          var(--black);
   --destructive:                var(--red-medium);
   --destructive-foreground:     var(--white);
