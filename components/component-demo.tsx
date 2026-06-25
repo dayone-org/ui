@@ -43,7 +43,7 @@ import { Drawer, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, D
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator } from "@/components/ui/command";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Progress } from "@/components/ui/progress";
@@ -955,9 +955,11 @@ function CommandDemo() {
       <CommandList>
         <CommandEmpty style={{ color: "var(--gray-400)" }}>Kein Ergebnis</CommandEmpty>
         <CommandGroup heading="Komponenten">
-          <CommandItem style={{ color: "var(--black)", paddingLeft: "12px", paddingTop: "8px", paddingBottom: "8px" }}>Button</CommandItem>
-          <CommandItem style={{ color: "var(--black)", paddingLeft: "12px", paddingTop: "8px", paddingBottom: "8px" }}>Input</CommandItem>
-          <CommandItem style={{ color: "var(--black)", paddingLeft: "12px", paddingTop: "8px", paddingBottom: "8px" }}>Dialog</CommandItem>
+          <CommandItem>Button</CommandItem>
+          <CommandSeparator />
+          <CommandItem>Input</CommandItem>
+          <CommandSeparator />
+          <CommandItem>Dialog</CommandItem>
         </CommandGroup>
       </CommandList>
     </Command>
