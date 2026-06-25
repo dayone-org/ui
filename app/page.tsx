@@ -82,17 +82,17 @@ function ButtonsCell() {
   return (
     <BentoCell className="col-span-4" delay={0}>
       <CellLabel>Button</CellLabel>
-      <div className="space-y-6">
-        <div className="flex flex-wrap gap-2">
+      <div className="flex flex-col justify-between min-h-36">
+        <div className="flex flex-wrap gap-3">
           <Button size="sm">Primary</Button>
           <Button size="sm" variant="outline">Secondary</Button>
           <Button size="sm" variant="ghost">Ghost</Button>
         </div>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-3">
           <Button size="default">Primary <ArrowRight className="size-3.5" /></Button>
           <Button size="default" variant="outline">Secondary</Button>
         </div>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-3">
           <Button size="lg">Primary <ArrowRight className="size-4" /></Button>
           <Button size="lg" variant="outline">Secondary</Button>
         </div>
