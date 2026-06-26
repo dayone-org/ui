@@ -2,7 +2,7 @@
 
 export const DOCS_PAGE_PADDING = "px-8 lg:px-12";
 
-export const DOCS_SIDEBAR_WIDTH = "w-44 shrink-0 xl:w-52";
+export const DOCS_SIDEBAR_WIDTH = "w-52 shrink-0 xl:w-60";
 
 /** Logo + section nav — further left; main column padding compensates so content stays put. */
 export const DOCS_SIDEBAR_INSET = "pl-4 xl:pl-6";
