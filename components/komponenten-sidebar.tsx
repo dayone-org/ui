@@ -158,7 +158,7 @@ function SidebarNav({ activeSlug, search, onNavigate }: NavProps) {
       {filtered.map((category) => (
         <li key={category.id}>
           <p
-            className="mb-1 px-3 text-xs font-medium uppercase tracking-wider"
+            className="mb-1 px-3 text-xs font-medium"
             style={{ color: "var(--gray-300)" }}
           >
             {category.label}
@@ -176,7 +176,7 @@ function SidebarNav({ activeSlug, search, onNavigate }: NavProps) {
                     style={{
                       color: isActive ? "var(--black)" : "var(--gray-400)",
                       fontWeight: isActive ? 600 : 400,
-                      backgroundColor: isActive ? "var(--gray-100)" : "transparent",
+                      backgroundColor: isActive ? "var(--sand-light)" : "transparent",
                       border: "none",
                       cursor: "pointer",
                     }}

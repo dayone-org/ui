@@ -39,7 +39,7 @@ function NavLinks({
               className="block rounded-md px-3 py-1.5 text-sm transition-colors"
               style={{
                 color: isActive ? "var(--black)" : "var(--gray-400)",
-                backgroundColor: isActive ? "var(--gray-100)" : "transparent",
+                backgroundColor: isActive ? "var(--sand-light)" : "transparent",
                 fontWeight: isActive ? 600 : 400,
               }}
             >
