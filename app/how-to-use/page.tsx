@@ -2,7 +2,7 @@ import { HowToGuide } from "@/components/how-to-guide";
 
 export default function HowToUsePage() {
   return (
-    <main className="py-12 lg:py-16">
+    <main className="pt-12 pb-12 lg:pb-16">
       <HowToGuide />
     </main>
   );

@@ -64,6 +64,7 @@ export const COMPONENT_REGISTRY: ComponentCategory[] = [
       // Pair: both enhanced input combos
       { slug: "combobox", name: "Combobox", description: "Kombination aus Eingabe und Dropdown-Suche", playgroundAnchor: "inputs-forms" },
       { slug: "input-group", name: "Input Group", description: "Eingabefeld mit Prefix oder Suffix", playgroundAnchor: "inputs-forms" },
+      { slug: "search-bar", name: "Search Bar", description: "Minimales Suchfeld mit Unterstrich — für Sidebar, Filter und Tabellen", playgroundAnchor: "inputs-forms" },
       // Full-width: multi-state showcase needs width
       { slug: "checkbox", name: "Checkbox", description: "Mehrfachauswahl-Kontrollkästchen", playgroundAnchor: "selection-controls", span: 2 },
       { slug: "radio-group", name: "Radio Group", description: "Einzelauswahl aus einer Gruppe von Optionen", playgroundAnchor: "selection-controls", span: 2 },

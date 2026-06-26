@@ -29,6 +29,7 @@ import { Switch } from "@/components/ui/switch";
 import { Slider } from "@/components/ui/slider";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
+import { SearchBar } from "@/components/ui/search-bar";
 import { Field, FieldLabel, FieldDescription } from "@/components/ui/field";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
@@ -77,6 +78,7 @@ const COLOR_GROUPS = [
     { name: "$SandDark", token: "--sand-dark", hex: "#9E9A94" },
     { name: "$SandMedium", token: "--sand-medium", hex: "#EDE7DD" },
     { name: "$SandLight", token: "--sand-light", hex: "#F7F3EB" },
+    { name: "$SandLight (Test)", token: "--sand-light", hex: "#F4F2EE" },
   ]},
   { label: "Red", colors: [
     { name: "$RedDark", token: "--red-dark", hex: "#CC443D" },
@@ -84,7 +86,9 @@ const COLOR_GROUPS = [
     { name: "$RedLight", token: "--red-light", hex: "#FF8580" },
   ]},
   { label: "Blue", colors: [
-    { name: "Blue Highlight", token: "--blue-highlight", hex: "#1487DD" },
+    { name: "$BlueDark", token: "--blue-dark", hex: "#0E72C4" },
+    { name: "$BlueHighlight", token: "--blue-highlight", hex: "#1487DD" },
+    { name: "$BlueLight", token: "--blue-light", hex: "#D6ECFA" },
   ]},
 ];
 
@@ -96,7 +100,7 @@ function ColorsDemo() {
           <PlaygroundVariantHeading className="mb-4">{group.label}</PlaygroundVariantHeading>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 md:grid-cols-7">
             {group.colors.map((color) => (
-              <div key={color.token} className="overflow-hidden rounded-md" style={{ border: "1px solid var(--gray-100)" }}>
+              <div key={color.hex} className="overflow-hidden rounded-md" style={{ border: "1px solid var(--gray-100)" }}>
                 <div className="h-16" style={{ backgroundColor: color.hex, boxShadow: color.hex === "#FFFFFF" ? "inset 0 0 0 1px var(--gray-100)" : undefined }} />
                 <div className="space-y-0.5 px-2.5 py-2.5">
                   <p className="text-xs font-semibold" style={{ color: "var(--black)" }}>{color.name}</p>
@@ -147,19 +151,21 @@ function ButtonGroupDemo() {
 }
 
 function BadgeDemo() {
+  const tags = [
+    { bg: "var(--black)", color: "var(--white)", border: "none", label: "Default" },
+    { bg: "var(--sand-medium)", color: "var(--black)", border: "none", label: "Secondary" },
+    { bg: "transparent", color: "var(--black)", border: "1px solid var(--gray-100)", label: "Ghost" },
+    { bg: "var(--blue-dark)", color: "var(--white)", border: "none", label: "Aktiv" },
+    { bg: "var(--red-dark)", color: "var(--white)", border: "none", label: "Fehler" },
+    { bg: "var(--gray-100)", color: "var(--gray-400)", border: "none", label: "Inaktiv" },
+  ];
   return (
-    <div className="flex flex-wrap gap-3">
-      {[
-        { bg: "var(--black)", color: "var(--white)", label: "Default" },
-        { bg: "var(--sand-medium)", color: "var(--black)", label: "Sand" },
-        { bg: "var(--blue-highlight)", color: "var(--white)", label: "Info" },
-        { bg: "var(--red-medium)", color: "var(--white)", label: "Fehler" },
-        { bg: "var(--gray-100)", color: "var(--gray-400)", label: "Inaktiv" },
-      ].map(({ bg, color, label }) => (
+    <div className="flex flex-wrap gap-2">
+      {tags.map(({ bg, color, border, label }) => (
         <Badge
           key={label}
-          className="rounded-full"
-          style={{ backgroundColor: bg, color, padding: "0.375rem 0.875rem 0.5rem", fontSize: "0.75rem" }}
+          className="rounded-full px-[15px] py-[13px] text-[13px] font-medium"
+          style={{ backgroundColor: bg, color, border }}
         >
           {label}
         </Badge>
@@ -271,26 +277,51 @@ function LabelDemo() {
 
 
 function ItemDemo() {
+  const PALETTE = [
+    { bg: "var(--black)", fg: "var(--white)" },
+    { bg: "var(--sand-medium)", fg: "var(--black)" },
+    { bg: "var(--blue-light)", fg: "var(--black)" },
+  ];
+  const people = [
+    { title: "Victoria Itter", description: "Product Design" },
+    { title: "Bean Duong", description: "Development" },
+    { title: "Max Moldovan", description: "IT" },
+  ];
   return (
-    <ItemGroup className="max-w-xs">
-      {[
-        { title: "Victoria Itter", description: "Product Design" },
-        { title: "Bean Duong", description: "Development" },
-        { title: "Max Moldovan", description: "IT" },
-      ].map((item) => (
-        <Item key={item.title} variant="outline" className="gap-4">
-          <Avatar className="size-11 shrink-0">
-            <AvatarFallback style={{ backgroundColor: "var(--black)", color: "var(--white)", fontSize: "12px" }}>
-              {item.title.split(" ").map((n) => n[0]).join("")}
-            </AvatarFallback>
-          </Avatar>
-          <ItemContent className="gap-0.5">
-            <ItemTitle className="font-semibold" style={{ color: "var(--black)" }}>{item.title}</ItemTitle>
-            <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>{item.description}</ItemDescription>
-          </ItemContent>
-        </Item>
-      ))}
-    </ItemGroup>
+    <div className="flex gap-3">
+      {/* Outline */}
+      <ItemGroup className="w-56">
+        {people.map(({ title, description }, i) => (
+          <Item key={title} variant="outline" className="gap-3">
+            <Avatar className="size-10 shrink-0 ring-2 ring-white">
+              <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: PALETTE[i].bg, color: PALETTE[i].fg }}>
+                {title.split(" ").map((n) => n[0]).join("")}
+              </AvatarFallback>
+            </Avatar>
+            <ItemContent className="gap-0.5">
+              <ItemTitle className="font-semibold" style={{ color: "var(--black)" }}>{title}</ItemTitle>
+              <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>{description}</ItemDescription>
+            </ItemContent>
+          </Item>
+        ))}
+      </ItemGroup>
+      {/* Fill sand-light */}
+      <ItemGroup className="w-56">
+        {people.map(({ title, description }, i) => (
+          <Item key={title} variant="outline" className="gap-3" style={{ backgroundColor: "var(--sand-light)" }}>
+            <Avatar className="size-10 shrink-0 ring-2 ring-white">
+              <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: PALETTE[i].bg, color: PALETTE[i].fg }}>
+                {title.split(" ").map((n) => n[0]).join("")}
+              </AvatarFallback>
+            </Avatar>
+            <ItemContent className="gap-0.5">
+              <ItemTitle className="font-semibold" style={{ color: "var(--black)" }}>{title}</ItemTitle>
+              <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>{description}</ItemDescription>
+            </ItemContent>
+          </Item>
+        ))}
+      </ItemGroup>
+    </div>
   );
 }
 
@@ -526,6 +557,15 @@ function InputGroupDemo() {
           <span className="text-sm" style={{ color: "var(--gray-400)" }}>€</span>
         </InputGroupAddon>
       </InputGroup>
+    </div>
+  );
+}
+
+function SearchBarDemo() {
+  return (
+    <div className="w-full max-w-xs space-y-6">
+      <SearchBar placeholder="Suchen..." />
+      <SearchBar placeholder="Komponenten filtern..." defaultValue="But" />
     </div>
   );
 }
@@ -1133,17 +1173,19 @@ function AvatarDemo() {
       {[
         { initials: "VI", bg: "var(--black)", fg: "var(--white)" },
         { initials: "BD", bg: "var(--sand-medium)", fg: "var(--black)" },
-        { initials: "MM", bg: "var(--gray-100)", fg: "var(--gray-400)" },
+        { initials: "AK", bg: "var(--blue-light)", fg: "var(--black)" },
+        { initials: "LR", bg: "var(--red-light)", fg: "var(--black)" },
+        { initials: "TM", bg: "var(--sand-dark)", fg: "var(--black)" },
       ].map(({ initials, bg, fg }) => (
-        <Avatar key={initials} className="size-10 ring-2 ring-white">
+        <Avatar key={initials} className="size-10 after:hidden ring-2 ring-white">
           <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: bg, color: fg }}>{initials}</AvatarFallback>
         </Avatar>
       ))}
       <div
         className="flex size-10 items-center justify-center rounded-full ring-2 ring-white text-xs font-semibold"
-        style={{ backgroundColor: "var(--gray-100)", color: "var(--gray-500)" }}
+        style={{ backgroundColor: "transparent", color: "var(--gray-400)", border: "1px solid var(--gray-100)" }}
       >
-        +3
+        +4
       </div>
     </div>
   );
@@ -1237,7 +1279,7 @@ function CardDemo() {
           </div>
           <span className="text-xs shrink-0" style={{ color: "rgba(255,255,255,0.4)" }}>Jetzt</span>
         </div>
-        <div className="flex items-start gap-3 rounded-xl p-3" style={{ backgroundColor: "var(--sand-light)" }}>
+        <div className="flex items-start gap-3 rounded-xl p-3" style={{ backgroundColor: "#F4F2EE" }}>
           <Sparkles className="size-4 mt-0.5 shrink-0" style={{ color: "var(--black)" }} />
           <div className="flex-1 min-w-0">
             <p className="text-xs font-semibold" style={{ color: "var(--black)" }}>Neue Komponente</p>
@@ -1245,7 +1287,7 @@ function CardDemo() {
           </div>
           <span className="text-xs shrink-0" style={{ color: "var(--gray-400)" }}>Jetzt</span>
         </div>
-        <div className="flex items-start gap-3 rounded-xl p-3" style={{ backgroundColor: "var(--sand-light)" }}>
+        <div className="flex items-start gap-3 rounded-xl p-3" style={{ backgroundColor: "#F4F2EE" }}>
           <Bell className="size-4 mt-0.5 shrink-0" style={{ color: "var(--black)" }} />
           <div className="flex-1 min-w-0">
             <p className="text-xs font-semibold" style={{ color: "var(--black)" }}>Neue Nachricht</p>
@@ -1332,6 +1374,7 @@ const DEMOS: Record<string, () => React.ReactElement> = {
   slider: SliderDemo,
   "input-otp": InputOTPDemo,
   "input-group": InputGroupDemo,
+  "search-bar": SearchBarDemo,
   field: FieldDemo,
   tabs: TabsDemo,
   breadcrumb: BreadcrumbDemo,

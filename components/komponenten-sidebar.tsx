@@ -91,7 +91,7 @@ function SearchBox({
         className="flex items-center gap-2 pb-1.5"
         style={{ borderBottom: "1px solid var(--gray-100)" }}
       >
-        <Search className="size-3 shrink-0" style={{ color: "var(--gray-200)" }} />
+        <Search className="size-3 shrink-0" style={{ color: "var(--gray-400)" }} />
         <input
           type="text"
           value={value}
@@ -176,7 +176,7 @@ function SidebarNav({ activeSlug, search, onNavigate }: NavProps) {
                     style={{
                       color: isActive ? "var(--black)" : "var(--gray-400)",
                       fontWeight: isActive ? 600 : 400,
-                      backgroundColor: isActive ? "var(--sand-light)" : "transparent",
+                      backgroundColor: isActive ? "#F4F2EE" : "transparent",
                       border: "none",
                       cursor: "pointer",
                     }}

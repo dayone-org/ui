@@ -402,19 +402,20 @@ const OKRS = [
 
 // ─── Helper ───────────────────────────────────────────────────────────────────
 
-const PRESENTER_COLORS: Record<string, string> = {
-  Bean: "#D4E4F7",
-  Lia: "#F7E4D4",
-  Vicy: "#D4F7E4",
-  Felix: "#E4D4F7",
-  Jasmin: "#F7D4E4",
-  Anina: "#F7F4D4",
-  Helena: "#D4F7F4",
-  Kaja: "#F4D4F7",
-  "Chris M.": "#D4D4F7",
-  Theodamius: "#F7D4D4",
-  Clemens: "#D4F7D4",
-};
+const AVATAR_PALETTE = [
+  { bg: "var(--black)", fg: "var(--white)" },
+  { bg: "var(--sand-medium)", fg: "var(--black)" },
+  { bg: "var(--blue-light)", fg: "var(--black)" },
+  { bg: "var(--red-light)", fg: "var(--black)" },
+  { bg: "var(--sand-dark)", fg: "var(--black)" },
+];
+
+const PRESENTER_ORDER = ["Bean", "Lia", "Vicy", "Felix", "Jasmin", "Anina", "Helena", "Kaja", "Chris M.", "Theodamius", "Clemens"];
+
+function getPresenterColor(name: string) {
+  const idx = PRESENTER_ORDER.indexOf(name);
+  return AVATAR_PALETTE[(idx >= 0 ? idx : 0) % AVATAR_PALETTE.length];
+}
 
 function getInitials(name: string) {
   const parts = name.trim().split(/\s+/);
@@ -423,20 +424,16 @@ function getInitials(name: string) {
 }
 
 function TagBadge({ tag }: { tag: Tag }) {
-  const styles: Record<Tag, string> = {
-    "KI & Tools":
-      "bg-[#E8F2FC] text-[#1074C4] border-[#C4DDF5]",
-    "Design Praxis":
-      "bg-[#F5F0E8] text-[#8B6914] border-[#E8D9B8]",
-    Austausch:
-      "bg-[#F0F0F0] text-[#5A5A5A] border-[#DCDCDC]",
-    Workshop:
-      "bg-[#1A1A1A] text-white border-transparent",
+  const styles: Record<Tag, React.CSSProperties> = {
+    "KI & Tools":  { backgroundColor: "transparent", color: "var(--black)", border: "1px solid var(--gray-100)" },
+    "Design Praxis": { backgroundColor: "var(--sand-medium)", color: "var(--black)", border: "none" },
+    "Austausch":   { backgroundColor: "var(--gray-100)", color: "var(--gray-400)", border: "none" },
+    "Workshop":    { backgroundColor: "var(--black)", color: "var(--white)", border: "none" },
   };
   return (
     <Badge
-      className={`text-[10px] font-medium border ${styles[tag]}`}
-      style={{ backgroundColor: undefined }}
+      className="rounded-full px-[10px] py-[5px] text-[11px] font-medium"
+      style={styles[tag]}
     >
       {tag}
     </Badge>
@@ -444,14 +441,12 @@ function TagBadge({ tag }: { tag: Tag }) {
 }
 
 function PresenterAvatar({ name }: { name: string }) {
+  const { bg, fg } = getPresenterColor(name);
   return (
-    <Avatar>
+    <Avatar className="after:hidden ring-2 ring-white">
       <AvatarFallback
         className="font-semibold"
-        style={{
-          backgroundColor: PRESENTER_COLORS[name] ?? "#F0F0F0",
-          color: "#1A1A1A",
-        }}
+        style={{ backgroundColor: bg, color: fg }}
       >
         {getInitials(name)}
       </AvatarFallback>

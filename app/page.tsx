@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, Fragment } from "react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteStamp } from "@/components/site-stamp";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Avatar, AvatarFallback, AvatarGroup } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -14,6 +15,9 @@ import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/in
 import { Switch } from "@/components/ui/switch";
 import { Slider } from "@/components/ui/slider";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Toggle } from "@/components/ui/toggle";
 import { Calendar } from "@/components/ui/calendar";
@@ -33,10 +37,12 @@ function BentoCell({
   children,
   className = "",
   delay = 0,
+  style: styleProp,
 }: {
   children: React.ReactNode;
   className?: string;
   delay?: number;
+  style?: React.CSSProperties;
 }) {
   return (
     <div
@@ -46,6 +52,7 @@ function BentoCell({
         animationDuration: "0.5s",
         animationDelay: `${delay}ms`,
         animationFillMode: "both",
+        ...styleProp,
       }}
     >
       {children}
@@ -55,7 +62,7 @@ function BentoCell({
 
 function CellLabel({ children }: { children: React.ReactNode }) {
   return (
-    <p className="text-xs font-medium mb-4" style={{ color: "var(--gray-300)" }}>
+    <p className="text-xs font-medium mb-6" style={{ color: "var(--gray-300)" }}>
       {children}
     </p>
   );
@@ -70,7 +77,7 @@ function SmoothBar({ value }: { value: number }) {
     return () => clearTimeout(t);
   }, [value]);
   return (
-    <div className="h-1.5 w-full rounded-full overflow-hidden" style={{ backgroundColor: "var(--sand-medium)" }}>
+    <div className="h-1.5 w-full rounded-full overflow-hidden" style={{ backgroundColor: "#F4F2EE" }}>
       <div
         className="h-full rounded-full"
         style={{ width: `${w}%`, backgroundColor: "var(--black)", transition: "width 1.3s cubic-bezier(0.4,0,0.2,1)" }}
@@ -81,22 +88,24 @@ function SmoothBar({ value }: { value: number }) {
 
 // ─── Buttons ─────────────────────────────────────────────────────────────────
 
-function ButtonsCell() {
+function LoadingCell() {
+  // Skeleton-Farbe wie in den Komponenten: Mix aus --gray-100 und --sand-medium
+  const skeletonColor = "#E8E3DB";
   return (
-    <BentoCell className="col-span-3 flex flex-col" delay={0}>
-      <CellLabel>Button</CellLabel>
-      <div className="flex flex-col justify-center gap-4 flex-1">
-        <div className="flex flex-wrap gap-3">
-          <Button size="sm">Primary</Button>
-          <Button size="sm" variant="outline">Secondary</Button>
+    <BentoCell className="col-span-3 flex flex-col min-h-72" delay={0}>
+      <CellLabel>Skeleton & Spinner</CellLabel>
+      <div className="flex flex-col justify-center gap-8 flex-1">
+        {/* Skeleton */}
+        <div className="w-full space-y-3">
+          <Skeleton className="h-5 w-3/4 rounded-md" style={{ backgroundColor: skeletonColor }} />
+          <Skeleton className="h-5 w-full rounded-md" style={{ backgroundColor: skeletonColor }} />
+          <Skeleton className="h-5 w-1/2 rounded-md" style={{ backgroundColor: skeletonColor }} />
         </div>
-        <div className="flex flex-wrap gap-3">
-          <Button size="default">Primary</Button>
-          <Button size="default" variant="outline">Secondary</Button>
-        </div>
-        <div className="flex flex-wrap gap-3">
-          <Button size="lg">Primary</Button>
-          <Button size="lg" variant="outline">Secondary</Button>
+        {/* Spinner */}
+        <div className="flex items-center gap-6">
+          {[20, 28, 36].map((size) => (
+            <div key={size} className="dayone-spinner" style={{ width: size, height: size }} />
+          ))}
         </div>
       </div>
     </BentoCell>
@@ -108,18 +117,23 @@ function ButtonsCell() {
 function CalendarCell() {
   const [date, setDate] = useState<Date | undefined>(new Date(2026, 5, 18));
   return (
-    <BentoCell className="col-span-4 flex flex-col items-center justify-center" delay={80}>
+    <BentoCell className="flex flex-col" delay={80}>
       <CellLabel>Calendar</CellLabel>
-      <Calendar
-        mode="single"
-        selected={date}
-        onSelect={setDate}
-        locale={de}
-        weekStartsOn={1}
-        formatters={{ formatWeekdayName: (d) => ["SO","MO","DI","MI","DO","FR","SA"][d.getDay()] }}
-        className="rounded-xl [--cell-size:--spacing(8)] scale-95 origin-top"
-        style={{ border: "1px solid var(--gray-100)" }}
-      />
+      <div className="flex justify-center">
+      <div style={{ width: "268px" }}>
+        <Calendar
+          mode="single"
+          selected={date}
+          onSelect={setDate}
+          locale={de}
+          weekStartsOn={1}
+          formatters={{ formatWeekdayName: (d) => ["SO","MO","DI","MI","DO","FR","SA"][d.getDay()] }}
+          className="rounded-xl w-full [--cell-size:--spacing(7)]"
+          classNames={{ week: "mt-1 flex w-full" }}
+          style={{ border: "1px solid var(--gray-100)" }}
+        />
+      </div>
+      </div>
     </BentoCell>
   );
 }
@@ -152,27 +166,22 @@ const INITIAL_NOTIFS: Notif[] = [
 
 function NotificationsCell() {
   const [items, setItems] = useState<Notif[]>(INITIAL_NOTIFS);
-  const [visible, setVisible] = useState(true);
+  const [newestId, setNewestId] = useState<number | null>(null);
   const poolIdx = useRef(1);
 
   useEffect(() => {
     const id = setInterval(() => {
-      // 1) fade out entire list
-      setVisible(false);
-      setTimeout(() => {
-        // 2) swap items while invisible
-        poolIdx.current = (poolIdx.current + 1) % NOTIF_POOL.length;
-        const next: Notif = { id: notifId++, ...NOTIF_POOL[poolIdx.current] };
-        setItems((prev) => [next, ...prev.slice(0, 2)]);
-        // 3) fade back in
-        setVisible(true);
-      }, 500);
-    }, 3200);
+      poolIdx.current = (poolIdx.current + 1) % NOTIF_POOL.length;
+      const next: Notif = { id: notifId++, ...NOTIF_POOL[poolIdx.current] };
+      setNewestId(next.id);
+      setItems((prev) => [next, ...prev.slice(0, 2)]);
+      setTimeout(() => setNewestId(null), 700);
+    }, 5000);
     return () => clearInterval(id);
   }, []);
 
   return (
-    <BentoCell className="col-span-3" delay={360}>
+    <BentoCell className="col-span-3 flex flex-col" delay={360}>
       <div className="flex items-center gap-2 mb-5">
         <p className="text-xs font-medium" style={{ color: "var(--gray-300)" }}>Notification</p>
         <div className="relative ml-auto">
@@ -180,32 +189,34 @@ function NotificationsCell() {
           <span className="absolute -top-1 -right-1 size-2 rounded-full animate-pulse" style={{ backgroundColor: "var(--red-medium)" }} />
         </div>
       </div>
-      <div
-        className="space-y-2"
-        style={{ opacity: visible ? 1 : 0, transition: "opacity 0.5s ease" }}
-      >
-        {items.map((item, idx) => (
-          <div
-            key={item.id}
-            className="flex items-start gap-3 rounded-xl p-3"
-            style={{ backgroundColor: idx === 0 ? "var(--black)" : "var(--sand-light)" }}
-          >
-            <div className="mt-0.5 shrink-0" style={{ color: idx === 0 ? "var(--white)" : "var(--black)" }}>
-              {item.icon}
+      <div className="flex-1 flex flex-col justify-center overflow-hidden">
+        <div className="space-y-3">
+          {items.map((item, idx) => (
+            <div
+              key={item.id}
+              className={`flex items-start gap-3 rounded-xl p-3 ${item.id === newestId ? "notif-enter" : ""}`}
+              style={{
+                backgroundColor: idx === 0 ? "var(--black)" : "#F4F2EE",
+                transition: "background-color 0.5s ease, color 0.5s ease",
+              }}
+            >
+              <div className="mt-0.5 shrink-0" style={{ color: idx === 0 ? "var(--white)" : "var(--black)", transition: "color 0.5s ease" }}>
+                {item.icon}
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-xs font-semibold" style={{ color: idx === 0 ? "var(--white)" : "var(--black)", transition: "color 0.5s ease" }}>
+                  {item.title}
+                </p>
+                <p className="text-xs truncate" style={{ color: idx === 0 ? "rgba(255,255,255,0.6)" : "var(--gray-400)", transition: "color 0.5s ease" }}>
+                  {item.desc}
+                </p>
+              </div>
+              <span className="text-[10px] shrink-0 pt-0.5" style={{ color: idx === 0 ? "rgba(255,255,255,0.45)" : "var(--gray-300)", transition: "color 0.5s ease" }}>
+                {item.time}
+              </span>
             </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-xs font-semibold" style={{ color: idx === 0 ? "var(--white)" : "var(--black)" }}>
-                {item.title}
-              </p>
-              <p className="text-xs truncate" style={{ color: idx === 0 ? "rgba(255,255,255,0.6)" : "var(--gray-400)" }}>
-                {item.desc}
-              </p>
-            </div>
-            <span className="text-[10px] shrink-0 pt-0.5" style={{ color: idx === 0 ? "rgba(255,255,255,0.45)" : "var(--gray-300)" }}>
-              {item.time}
-            </span>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </BentoCell>
   );
@@ -220,6 +231,8 @@ const BASE_CHART = [
   { name: "Apr", value: 72 },
   { name: "Mai", value: 61 },
   { name: "Jun", value: 88 },
+  { name: "Jul", value: 75 },
+  { name: "Aug", value: 52 },
 ];
 
 function ChartCell() {
@@ -241,7 +254,7 @@ function ChartCell() {
   }, []);
 
   return (
-    <BentoCell className="col-span-4" delay={160}>
+    <BentoCell className="flex flex-col" delay={160}>
       <CellLabel>Chart</CellLabel>
       <div className="flex items-baseline gap-3 mb-6">
         <span className="text-3xl font-bold tabular-nums" style={{ color: "var(--black)" }}>
@@ -254,10 +267,10 @@ function ChartCell() {
           <TrendingUp className="size-3" />
           {trend >= 0 ? "+" : ""}{trend}%
         </span>
-        <span className="text-xs ml-auto" style={{ color: "#999" }}>Aufrufe Jan – Jun 2026</span>
+        <span className="text-xs ml-auto" style={{ color: "#999" }}>Aufrufe Jan – Aug 2026</span>
       </div>
       {/* Pure-CSS bar chart — columns stretch to 160px so height-% resolves correctly */}
-      <div className="flex flex-col gap-2">
+      <div className="mt-auto flex flex-col gap-2">
         <div className="flex gap-3" style={{ height: 160 }}>
           {data.map((d) => (
             <div key={d.name} className="flex-1 flex flex-col justify-end px-1.5">
@@ -274,7 +287,7 @@ function ChartCell() {
         </div>
         <div className="flex gap-3">
           {data.map((d) => (
-            <div key={d.name} className="flex-1 text-center" style={{ fontSize: 10, color: "#999" }}>
+            <div key={d.name} className="flex-1 text-center" style={{ fontSize: 12, color: "#999" }}>
               {d.name}
             </div>
           ))}
@@ -291,29 +304,29 @@ function ControlsCell() {
   const [notifs, setNotifs] = useState(true);
   const [auto, setAuto] = useState(true);
   const [vol, setVol] = useState([72]);
-  const [bold, setBold] = useState(false);
-  const [italic, setItalic] = useState(false);
-  const [under, setUnder] = useState(true);
 
   return (
-    <BentoCell className="col-span-3" delay={280}>
+    <BentoCell className="col-span-3 flex flex-col" delay={280}>
       <CellLabel>Controls</CellLabel>
-      <div className="space-y-4">
-        <div className="flex items-center justify-between">
-          <span className="text-xs" style={{ color: "var(--gray-400)" }}>Dark mode</span>
-          <div className="flex items-center gap-1.5">
-            <Sun className="size-3.5" style={{ color: "var(--gray-300)" }} />
-            <Switch checked={dark} onCheckedChange={setDark} />
-            <Moon className="size-3.5" style={{ color: "var(--gray-300)" }} />
+      <div className="flex-1 flex flex-col justify-center">
+      <div className="flex flex-col gap-6">
+        <div className="space-y-6">
+          <div className="flex items-center justify-between">
+            <span className="text-xs" style={{ color: "var(--gray-400)" }}>Dark mode</span>
+            <div className="flex items-center gap-1.5">
+              <Sun className="size-3.5" style={{ color: "var(--gray-300)" }} />
+              <Switch checked={dark} onCheckedChange={setDark} />
+              <Moon className="size-3.5" style={{ color: "var(--gray-300)" }} />
+            </div>
           </div>
-        </div>
-        <div className="flex items-center justify-between">
-          <span className="text-xs" style={{ color: "var(--gray-400)" }}>Benachrichtigungen</span>
-          <Switch checked={notifs} onCheckedChange={setNotifs} />
-        </div>
-        <div className="flex items-center justify-between">
-          <span className="text-xs" style={{ color: "var(--gray-400)" }}>Auto-Speichern</span>
-          <Switch checked={auto} onCheckedChange={setAuto} />
+          <div className="flex items-center justify-between">
+            <span className="text-xs" style={{ color: "var(--gray-400)" }}>Benachrichtigungen</span>
+            <Switch checked={notifs} onCheckedChange={setNotifs} />
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="text-xs" style={{ color: "var(--gray-400)" }}>Auto-Speichern</span>
+            <Switch checked={auto} onCheckedChange={setAuto} />
+          </div>
         </div>
         <Separator style={{ backgroundColor: "var(--gray-100)" }} />
         <div>
@@ -323,11 +336,7 @@ function ControlsCell() {
           </div>
           <Slider value={vol} onValueChange={setVol} max={100} step={1} />
         </div>
-        <div className="flex items-center gap-1">
-          <Toggle pressed={bold} onPressedChange={setBold} aria-label="Fett" size="sm"><Bold className="size-3.5" /></Toggle>
-          <Toggle pressed={italic} onPressedChange={setItalic} aria-label="Kursiv" size="sm"><Italic className="size-3.5" /></Toggle>
-          <Toggle pressed={under} onPressedChange={setUnder} aria-label="Unterstrichen" size="sm"><Underline className="size-3.5" /></Toggle>
-        </div>
+      </div>
       </div>
     </BentoCell>
   );
@@ -359,20 +368,22 @@ function ProgressCell() {
   }, []);
 
   return (
-    <BentoCell className="col-span-3" delay={200}>
+    <BentoCell className="col-span-3 flex flex-col" delay={200}>
       <CellLabel>Progress</CellLabel>
-      <div className="space-y-5">
-        {PROG_LABELS.map((label, i) => (
-          <div key={label}>
-            <div className="flex justify-between mb-2">
-              <span className="text-xs" style={{ color: "var(--gray-400)" }}>{label}</span>
-              <span className="text-xs tabular-nums" style={{ color: "var(--gray-400)" }}>
-                {Math.round(values[i])}%
-              </span>
+      <div className="flex-1 flex flex-col justify-center">
+        <div className="space-y-6">
+          {PROG_LABELS.map((label, i) => (
+            <div key={label}>
+              <div className="flex justify-between mb-2">
+                <span className="text-xs" style={{ color: "var(--gray-400)" }}>{label}</span>
+                <span className="text-xs tabular-nums" style={{ color: "var(--gray-400)" }}>
+                  {Math.round(values[i])}%
+                </span>
+              </div>
+              <SmoothBar value={values[i]} />
             </div>
-            <SmoothBar value={values[i]} />
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </BentoCell>
   );
@@ -418,9 +429,9 @@ function InputCell() {
   }, []);
 
   return (
-    <BentoCell className="col-span-4" delay={120}>
+    <BentoCell className="flex flex-col" delay={120}>
       <CellLabel>Input</CellLabel>
-      <div className="space-y-3">
+      <div className="flex flex-1 flex-col space-y-3">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-3.5 pointer-events-none" style={{ color: "var(--gray-300)" }} />
           <Input className="pl-8 text-sm" value={typed} readOnly placeholder="Suchen…" />
@@ -443,60 +454,82 @@ function InputCell() {
             <InputGroupAddon align="inline-end">€</InputGroupAddon>
           </InputGroup>
         </div>
-        <Button size="lg" className="mt-3 w-full">Absenden</Button>
+        <Button size="lg" className="mt-auto w-full">Absenden</Button>
       </div>
     </BentoCell>
   );
 }
 
-// ─── Table ───────────────────────────────────────────────────────────────────
+// ─── Tabs & Breadcrumb ───────────────────────────────────────────────────────
 
-function TableCell() {
-  const [hovered, setHovered] = useState<string | null>(null);
-  const ROWS = [
-    { name: "Button", cat: "Grundelemente", version: "2.1", status: "Stabil", bg: "var(--black)", fg: "var(--white)" },
-    { name: "Input", cat: "Formulare", version: "2.0", status: "Stabil", bg: "var(--black)", fg: "var(--white)" },
-    { name: "Calendar", cat: "Datendarstellung", version: "1.4", status: "Beta", bg: "var(--blue-highlight)", fg: "var(--white)" },
-    { name: "Drawer", cat: "Overlays", version: "1.2", status: "Beta", bg: "var(--blue-highlight)", fg: "var(--white)" },
-    { name: "Chart", cat: "Datendarstellung", version: "0.9", status: "Alpha", bg: "var(--gray-100)", fg: "var(--gray-400)" },
+function NavCell() {
+  const [tab, setTab] = useState("alle");
+  const [active, setActive] = useState("breadcrumb");
+  const [page, setPage] = useState(2);
+  const tabItems = [
+    { value: "alle", label: "Alle" },
+    { value: "strategie", label: "Strategie" },
+    { value: "design", label: "Design" },
+    { value: "traktion", label: "Traktion" },
   ];
-
+  const crumbs = [
+    { key: "start", label: "Start" },
+    { key: "komponenten", label: "Komponenten" },
+    { key: "breadcrumb", label: "Breadcrumb" },
+  ];
   return (
-    <BentoCell className="col-span-8" delay={420}>
-      <CellLabel>Table</CellLabel>
-      <table className="w-full text-sm">
-        <thead>
-          <tr style={{ borderBottom: "1px solid var(--gray-100)" }}>
-            {["Komponente", "Kategorie", "Version", "Status"].map((h) => (
-              <th key={h} className="pb-3 pr-6 text-left text-xs font-semibold" style={{ color: "var(--gray-300)" }}>{h}</th>
+    <BentoCell className="col-span-4 flex flex-col min-h-72" delay={720}>
+      <CellLabel>Tabs & Breadcrumb</CellLabel>
+      <div className="flex flex-1 flex-col items-center justify-center gap-12">
+        {/* Tabs — Line */}
+        <Tabs value={tab} onValueChange={setTab}>
+          <TabsList variant="line" className="gap-6">
+            {tabItems.map(({ value, label }) => (
+              <TabsTrigger key={value} value={value}>{label}</TabsTrigger>
             ))}
-          </tr>
-        </thead>
-        <tbody>
-          {ROWS.map((row) => (
-            <tr
-              key={row.name}
-              className="cursor-pointer"
-              style={{
-                borderBottom: "1px solid var(--gray-100)",
-                backgroundColor: hovered === row.name ? "var(--gray-100)" : "transparent",
-                transition: "background-color 0.15s ease",
-              }}
-              onMouseEnter={() => setHovered(row.name)}
-              onMouseLeave={() => setHovered(null)}
-            >
-              <td className="py-3 pr-6 font-medium" style={{ color: "var(--black)" }}>{row.name}</td>
-              <td className="py-3 pr-6" style={{ color: "var(--gray-400)" }}>{row.cat}</td>
-              <td className="py-3 pr-6 font-mono text-xs" style={{ color: "var(--gray-400)" }}>{row.version}</td>
-              <td className="py-3">
-                <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium" style={{ backgroundColor: row.bg, color: row.fg }}>
-                  {row.status}
-                </span>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+          </TabsList>
+        </Tabs>
+        {/* Breadcrumb */}
+        <Breadcrumb>
+          <BreadcrumbList className="gap-3">
+            {crumbs.map((item, idx) => (
+              <Fragment key={item.key}>
+                {idx > 0 && <BreadcrumbSeparator style={{ color: "var(--gray-200)" }} />}
+                <BreadcrumbItem>
+                  {active === item.key ? (
+                    <BreadcrumbPage style={{ color: "var(--black)", fontWeight: 600 }}>{item.label}</BreadcrumbPage>
+                  ) : (
+                    <BreadcrumbLink asChild>
+                      <button
+                        style={{ color: "var(--gray-400)", background: "none", border: "none", padding: 0, cursor: "pointer", font: "inherit" }}
+                        onClick={() => setActive(item.key)}
+                      >
+                        {item.label}
+                      </button>
+                    </BreadcrumbLink>
+                  )}
+                </BreadcrumbItem>
+              </Fragment>
+            ))}
+          </BreadcrumbList>
+        </Breadcrumb>
+        {/* Pagination */}
+        <Pagination>
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious href="#" onClick={(e) => { e.preventDefault(); setPage((p) => Math.max(1, p - 1)); }} text="Zurück" />
+            </PaginationItem>
+            {[1, 2, 3].map((p) => (
+              <PaginationItem key={p}>
+                <PaginationLink href="#" isActive={page === p} onClick={(e) => { e.preventDefault(); setPage(p); }}>{p}</PaginationLink>
+              </PaginationItem>
+            ))}
+            <PaginationItem>
+              <PaginationNext href="#" onClick={(e) => { e.preventDefault(); setPage((p) => Math.min(3, p + 1)); }} text="Weiter" />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
+      </div>
     </BentoCell>
   );
 }
@@ -507,36 +540,39 @@ function BadgesCell() {
   return (
     <BentoCell className="col-span-4" delay={480}>
       <CellLabel>Badge & Avatar</CellLabel>
-      <div className="space-y-4">
+      <div className="mt-4 space-y-3">
         <div className="flex flex-wrap gap-2">
-          <Badge>Default</Badge>
-          <Badge variant="secondary">Secondary</Badge>
-          <Badge variant="outline">Outline</Badge>
-          <Badge variant="ghost">Ghost</Badge>
+          <Badge className="rounded-full px-[15px] py-[13px] text-[13px] font-medium" style={{ backgroundColor: "var(--black)", color: "var(--white)", border: "none" }}>Default</Badge>
+          <Badge className="rounded-full px-[15px] py-[13px] text-[13px] font-medium" style={{ backgroundColor: "var(--sand-medium)", color: "var(--black)", border: "none" }}>Secondary</Badge>
+          <Badge className="rounded-full px-[15px] py-[13px] text-[13px] font-medium" style={{ backgroundColor: "transparent", color: "var(--black)", border: "1px solid var(--gray-100)" }}>Ghost</Badge>
         </div>
         <div className="flex flex-wrap gap-2">
-          <Badge className="rounded-full" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>Stabil</Badge>
-          <Badge className="rounded-full" style={{ backgroundColor: "var(--blue-highlight)", color: "var(--white)" }}>Beta</Badge>
-          <Badge className="rounded-full" style={{ backgroundColor: "var(--red-medium)", color: "var(--white)" }}>Fehler</Badge>
-          <Badge className="rounded-full" style={{ backgroundColor: "var(--gray-100)", color: "var(--gray-400)" }}>Inaktiv</Badge>
+          <Badge className="rounded-full px-[15px] py-[13px] text-[13px] font-medium" style={{ backgroundColor: "var(--blue-dark)", color: "var(--white)", border: "none" }}>Aktiv</Badge>
+          <Badge className="rounded-full px-[15px] py-[13px] text-[13px] font-medium" style={{ backgroundColor: "var(--red-dark)", color: "var(--white)", border: "none" }}>Fehler</Badge>
+          <Badge className="rounded-full px-[15px] py-[13px] text-[13px] font-medium" style={{ backgroundColor: "var(--gray-100)", color: "var(--gray-400)", border: "none" }}>Inaktiv</Badge>
         </div>
-        <Separator style={{ backgroundColor: "var(--gray-100)" }} />
+        <div className="py-3"><Separator style={{ backgroundColor: "var(--gray-100)" }} /></div>
         <div>
           <p className="text-xs mb-3" style={{ color: "var(--gray-300)" }}>Team DAYONE</p>
-          <AvatarGroup>
+          <div className="flex items-center -space-x-2">
             {[
-              { init: "VI", bg: "var(--black)", fg: "var(--white)" },
-              { init: "BD", bg: "var(--sand-medium)", fg: "var(--black)" },
-              { init: "MM", bg: "var(--gray-100)", fg: "var(--gray-400)" },
-              { init: "JK", bg: "var(--red-light)", fg: "var(--white)" },
-            ].map(({ init, bg, fg }) => (
-              <Avatar key={init} size="sm">
-                <AvatarFallback className="text-[10px] font-semibold" style={{ backgroundColor: bg, color: fg }}>
-                  {init}
-                </AvatarFallback>
+              { initials: "VI", bg: "var(--black)", fg: "var(--white)" },
+              { initials: "BD", bg: "var(--sand-medium)", fg: "var(--black)" },
+              { initials: "AK", bg: "var(--blue-light)", fg: "var(--black)" },
+              { initials: "LR", bg: "var(--red-light)", fg: "var(--black)" },
+              { initials: "TM", bg: "var(--sand-dark)", fg: "var(--black)" },
+            ].map(({ initials, bg, fg }) => (
+              <Avatar key={initials} className="size-10 after:hidden ring-2 ring-white">
+                <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: bg, color: fg }}>{initials}</AvatarFallback>
               </Avatar>
             ))}
-          </AvatarGroup>
+            <div
+              className="flex size-10 items-center justify-center rounded-full ring-2 ring-white text-xs font-semibold"
+              style={{ backgroundColor: "transparent", color: "var(--gray-400)", border: "1px solid var(--gray-100)" }}
+            >
+              +4
+            </div>
+          </div>
         </div>
       </div>
     </BentoCell>
@@ -570,8 +606,8 @@ function AccordionCell() {
 // ─── Checklist ───────────────────────────────────────────────────────────────
 
 function ChecklistCell() {
-  const [tab, setTab] = useState("design");
   const [checked, setChecked] = useState([true, true, true, false, false]);
+  const [radio, setRadio] = useState("design");
 
   const toggle = (i: number) => setChecked((prev) => prev.map((v, idx) => (idx === i ? !v : v)));
 
@@ -585,14 +621,15 @@ function ChecklistCell() {
 
   return (
     <BentoCell className="col-span-4" delay={600}>
-      <CellLabel>Tabs & Checkbox</CellLabel>
-      <Tabs value={tab} onValueChange={setTab} className="w-full mb-4">
-        <TabsList variant="text">
-          <TabsTrigger value="design">Design</TabsTrigger>
-          <TabsTrigger value="dev">Entwicklung</TabsTrigger>
-          <TabsTrigger value="docs">Docs</TabsTrigger>
-        </TabsList>
-      </Tabs>
+      <CellLabel>Radio & Checkbox</CellLabel>
+      <RadioGroup value={radio} onValueChange={setRadio} className="flex flex-row gap-8 mb-4">
+        {["Design", "Entwicklung", "Docs"].map((opt) => (
+          <div key={opt} className="flex items-center gap-2">
+            <RadioGroupItem value={opt.toLowerCase()} id={`radio-${opt}`} />
+            <label htmlFor={`radio-${opt}`} className="text-sm cursor-pointer select-none" style={{ color: "var(--black)" }}>{opt}</label>
+          </div>
+        ))}
+      </RadioGroup>
       <div className="space-y-3">
         {ITEMS.map((label, i) => (
           <div key={label} className="flex items-center gap-3 cursor-pointer" onClick={() => toggle(i)}>
@@ -627,59 +664,81 @@ function CardCell() {
   }, []);
 
   return (
-    <BentoCell className="col-span-4" delay={660}>
+    <BentoCell className="col-span-8 min-h-72" delay={660}>
       <CellLabel>Card</CellLabel>
-      <div className="space-y-6">
-        {/* Standard */}
+      <div className="grid grid-cols-[5fr_4fr] items-start gap-4">
+        {/* Left: large card */}
         <div>
           <p className="text-[10px] font-medium mb-2" style={{ color: "var(--gray-300)" }}>Standard</p>
           <Card style={{ borderColor: "var(--gray-100)" }}>
-            <CardHeader className="pb-2">
+            <CardHeader>
               <CardTitle className="text-sm font-semibold" style={{ color: "var(--black)" }}>Projektübersicht</CardTitle>
               <CardDescription style={{ color: "var(--gray-400)", fontSize: "12px" }}>Stand: Juni 2026</CardDescription>
             </CardHeader>
-            <CardContent>
-              <p className="text-xs" style={{ color: "var(--gray-400)" }}>Alle laufenden Projekte im Überblick.</p>
+            <CardContent className="space-y-4">
+              <p className="text-xs" style={{ color: "var(--gray-400)" }}>Alle laufenden Projekte im Überblick. Hier findest du den aktuellen Status der wichtigsten Initiativen.</p>
+              <div className="space-y-2">
+                {[
+                  { label: "Design System", pct: 82 },
+                  { label: "PDC Hub", pct: 64 },
+                  { label: "Dokumentation", pct: 45 },
+                ].map(({ label, pct }) => (
+                  <div key={label}>
+                    <div className="flex justify-between mb-1">
+                      <span className="text-xs" style={{ color: "var(--black)" }}>{label}</span>
+                      <span className="text-xs" style={{ color: "var(--gray-300)" }}>{pct}%</span>
+                    </div>
+                    <div className="h-1 w-full rounded-full overflow-hidden" style={{ backgroundColor: "#F4F2EE" }}>
+                      <div className="h-full rounded-full" style={{ width: `${pct}%`, backgroundColor: "var(--black)" }} />
+                    </div>
+                  </div>
+                ))}
+              </div>
             </CardContent>
           </Card>
         </div>
 
-        {/* Metric */}
-        <div>
-          <p className="text-[10px] font-medium mb-2" style={{ color: "var(--gray-300)" }}>Metric</p>
-          <Card style={{ borderColor: "var(--gray-100)" }}>
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-xs font-medium" style={{ color: "var(--gray-400)" }}>Komponenten</CardTitle>
-              <BarChart3 className="size-4" style={{ color: "var(--gray-400)" }} />
-            </CardHeader>
-            <CardContent>
-              <p className="text-2xl font-semibold tabular-nums" style={{ color: "var(--black)" }}>{count}+</p>
-              <div className="h-1.5 w-full rounded-full overflow-hidden mt-2 mb-1" style={{ backgroundColor: "var(--sand-medium)" }}>
-                <div className="h-full rounded-full" style={{ width: `${progress}%`, backgroundColor: "var(--black)", transition: "width 0.9s cubic-bezier(0.4,0,0.2,1)" }} />
-              </div>
-              <p className="text-xs" style={{ color: "var(--gray-300)" }}>{progress}% fertig</p>
-            </CardContent>
-          </Card>
-        </div>
+        {/* Right: 2 stacked cards */}
+        <div className="flex flex-col gap-4">
+          {/* Metric */}
+          <div>
+            <p className="text-[10px] font-medium mb-2" style={{ color: "var(--gray-300)" }}>Metric</p>
+            <Card style={{ borderColor: "var(--gray-100)" }}>
+              <CardHeader className="flex flex-row items-center justify-between pb-2">
+                <CardTitle className="text-xs font-medium" style={{ color: "var(--gray-400)" }}>Komponenten</CardTitle>
+                <BarChart3 className="size-4" style={{ color: "var(--gray-400)" }} />
+              </CardHeader>
+              <CardContent>
+                <p className="text-2xl font-semibold tabular-nums" style={{ color: "var(--black)" }}>{count}+</p>
+                <div className="h-1.5 w-full rounded-full overflow-hidden mt-2 mb-1" style={{ backgroundColor: "#F4F2EE" }}>
+                  <div className="h-full rounded-full" style={{ width: `${progress}%`, backgroundColor: "var(--black)", transition: "width 0.9s cubic-bezier(0.4,0,0.2,1)" }} />
+                </div>
+                <p className="text-xs" style={{ color: "var(--gray-300)" }}>{progress}% fertig</p>
+              </CardContent>
+            </Card>
+          </div>
 
-        {/* Notification */}
-        <div>
-          <p className="text-[10px] font-medium mb-2" style={{ color: "var(--gray-300)" }}>Notification</p>
-          <div className="space-y-2">
-            <div className="flex items-start gap-3 rounded-xl p-3" style={{ backgroundColor: "var(--black)" }}>
-              <Check className="size-3.5 mt-0.5 shrink-0" style={{ color: "white" }} />
-              <div className="flex-1 min-w-0">
-                <p className="text-xs font-semibold" style={{ color: "white" }}>Build erfolgreich</p>
-                <p className="text-xs" style={{ color: "rgba(255,255,255,0.6)" }}>Vercel deployment abgeschlossen.</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3 rounded-xl p-3" style={{ backgroundColor: "var(--sand-light)" }}>
-              <Sparkles className="size-3.5 mt-0.5 shrink-0" style={{ color: "var(--black)" }} />
-              <div className="flex-1 min-w-0">
-                <p className="text-xs font-semibold" style={{ color: "var(--black)" }}>Neue Komponente</p>
-                <p className="text-xs" style={{ color: "var(--gray-400)" }}>Button wurde aktualisiert.</p>
-              </div>
-            </div>
+          {/* Aktivität */}
+          <div>
+            <p className="text-[10px] font-medium mb-2" style={{ color: "var(--gray-300)" }}>Aktivität</p>
+            <Card style={{ borderColor: "var(--gray-100)" }}>
+              <CardContent className="pt-4 space-y-3">
+                {[
+                  { initials: "VI", bg: "var(--black)", fg: "var(--white)", name: "Vicy", action: "hat kommentiert" },
+                  { initials: "BD", bg: "var(--sand-medium)", fg: "var(--black)", name: "Bean", action: "hat gemerged" },
+                  { initials: "AK", bg: "var(--blue-light)", fg: "var(--black)", name: "Anina", action: "hat erstellt" },
+                ].map(({ initials, bg, fg, name, action }) => (
+                  <div key={initials} className="flex items-center gap-2.5">
+                    <Avatar className="size-6">
+                      <AvatarFallback style={{ backgroundColor: bg, color: fg }} className="text-[10px] font-semibold">{initials}</AvatarFallback>
+                    </Avatar>
+                    <p className="text-xs min-w-0 truncate" style={{ color: "var(--gray-400)" }}>
+                      <span style={{ color: "var(--black)", fontWeight: 600 }}>{name}</span> {action}
+                    </p>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>
@@ -692,13 +751,15 @@ function CardCell() {
 function ShowcaseGrid() {
   return (
     <div className="w-full grid grid-cols-12 gap-4">
-      {/* Row 1: 4 + 4 + 4 */}
-      <InputCell />
-      <CalendarCell />
-      <ChartCell />
+      {/* Row 1: 3.5 + 3 + 5.5 */}
+      <div className="col-span-12 grid items-stretch gap-4" style={{ gridTemplateColumns: "7fr 6fr 11fr" }}>
+        <InputCell />
+        <CalendarCell />
+        <ChartCell />
+      </div>
 
       {/* Row 2: 3 + 3 + 3 + 3 */}
-      <ButtonsCell />
+      <LoadingCell />
       <ProgressCell />
       <ControlsCell />
       <NotificationsCell />
@@ -709,8 +770,8 @@ function ShowcaseGrid() {
       <ChecklistCell />
 
       {/* Row 4: 8 + 4 */}
-      <TableCell />
       <CardCell />
+      <NavCell />
     </div>
   );
 }

@@ -404,9 +404,25 @@ export default function PlaygroundPage() {
           <PlaygroundSection id="misc" title="Misc">
             <div className={`${PLAYGROUND_SHOWCASE} space-y-6`}>
               <Row label="Avatar">
-                <Avatar><AvatarFallback className="font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>VI</AvatarFallback></Avatar>
-                <Avatar><AvatarFallback className="font-semibold" style={{ backgroundColor: "var(--sand-medium)", color: "var(--black)" }}>BD</AvatarFallback></Avatar>
-                <Avatar><AvatarFallback className="font-semibold" style={{ backgroundColor: "var(--gray-100)", color: "var(--gray-300)" }}>MM</AvatarFallback></Avatar>
+                <div className="flex items-center -space-x-2">
+                  {[
+                    { initials: "VI", bg: "var(--black)", fg: "var(--white)" },
+                    { initials: "BD", bg: "var(--sand-medium)", fg: "var(--black)" },
+                    { initials: "AK", bg: "var(--blue-light)", fg: "var(--black)" },
+                    { initials: "LR", bg: "var(--red-light)", fg: "var(--black)" },
+                    { initials: "TM", bg: "var(--sand-dark)", fg: "var(--black)" },
+                  ].map(({ initials, bg, fg }) => (
+                    <Avatar key={initials} className="size-10 after:hidden ring-2 ring-white">
+                      <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: bg, color: fg }}>{initials}</AvatarFallback>
+                    </Avatar>
+                  ))}
+                  <div
+                    className="flex size-10 items-center justify-center rounded-full ring-2 ring-white text-xs font-semibold"
+                    style={{ backgroundColor: "transparent", color: "var(--gray-400)", border: "1px solid var(--gray-100)" }}
+                  >
+                    +4
+                  </div>
+                </div>
               </Row>
               <Row label="Slider">
                 <div className="w-full max-w-sm">

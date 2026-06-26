@@ -43,7 +43,7 @@ export function SiteHeader({ active = "home" }: SiteHeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md">
+    <header className="sticky top-0 z-50 bg-white/60 backdrop-blur-md">
       <div className={DOCS_PAGE_PADDING}>
         <div className="flex h-16 items-center justify-between gap-6">
           <div className={`flex shrink-0 items-center ${DOCS_SIDEBAR_WIDTH} ${DOCS_SIDEBAR_INSET}`}>

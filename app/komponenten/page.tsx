@@ -26,7 +26,7 @@ const DIVIDER = (
 
 export default function KomponentenPage() {
   return (
-    <main className="py-12 lg:py-16">
+    <main className="pt-12 pb-12 lg:pb-16">
       <div className="space-y-40">
         {COMPONENT_REGISTRY.map((category) => (
           <div key={category.id}>

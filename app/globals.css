@@ -74,7 +74,9 @@
   --red-light:          #FF8580;
 
   /* Blue */
+  --blue-dark:          #0E72C4;
   --blue-highlight:     #1487DD;
+  --blue-light:         #D6ECFA;
 
   /* ————————————————————————
      Ebene 2 — Semantische Tokens
@@ -803,15 +805,35 @@
   animation: nav-dropdown-in 0.15s ease-out forwards;
 }
 
-/* Dynamic arc spinner — solid black arc, transparent gap */
+/* Dynamic arc spinner — slow steady rotation with a gently breathing arc */
+@keyframes notif-enter {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.notif-enter {
+  animation: notif-enter 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@property --dayone-arc {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 120deg;
+}
 @keyframes dayone-spin {
   to { transform: rotate(360deg); }
 }
+@keyframes dayone-arc {
+  0%, 100% { --dayone-arc: 70deg; }
+  50%      { --dayone-arc: 290deg; }
+}
 .dayone-spinner {
   border-radius: 50%;
-  border: 2px solid var(--black);
-  border-bottom-color: transparent;
-  animation: dayone-spin 0.65s linear infinite;
+  background: conic-gradient(var(--black) var(--dayone-arc), transparent 0);
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 2px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 2px));
+  animation:
+    dayone-spin 1.7s linear infinite,
+    dayone-arc 2.2s ease-in-out infinite;
 }
 
 /* Inputs — black border on focus, no ring */
