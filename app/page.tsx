@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteStamp } from "@/components/site-stamp";
@@ -675,9 +676,7 @@ export default function HomePage() {
 
       <main className={`flex flex-1 flex-col items-center gap-16 px-8 py-16 ${DOCS_PAGE_PADDING}`}>
         <div className="flex flex-col items-center text-center gap-6 max-w-2xl">
-          <Badge variant="outline" className="rounded-full text-xs" style={{ color: "var(--gray-400)" }}>
-            UI Foundation
-          </Badge>
+          <Image src="/dayone-icon.svg" alt="DAYONE" width={36} height={36} />
           <h1
             className="font-semibold"
             style={{ fontSize: "clamp(2.25rem, 5vw, 3.75rem)", lineHeight: 1.08, color: "var(--black)", letterSpacing: "-0.03em" }}
