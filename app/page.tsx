@@ -682,10 +682,10 @@ export default function HomePage() {
             className="font-semibold"
             style={{ fontSize: "clamp(2.25rem, 5vw, 3.75rem)", lineHeight: 1.08, color: "var(--black)", letterSpacing: "-0.03em" }}
           >
-            DAYONE Design System
+            Design System
           </h1>
           <p className="text-base leading-relaxed whitespace-nowrap" style={{ color: "var(--gray-400)" }}>
-            Das gemeinsame Design-Fundament für alle DAYONE-Projekte.
+            Das gemeinsame Design-Fundament für alle DAYONE-Projekte
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3">
             <Button asChild size="lg">
