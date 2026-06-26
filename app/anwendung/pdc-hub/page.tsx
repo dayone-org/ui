@@ -443,7 +443,7 @@ function TagBadge({ tag }: { tag: Tag }) {
 function PresenterAvatar({ name }: { name: string }) {
   const { bg, fg } = getPresenterColor(name);
   return (
-    <Avatar className="after:hidden ring-2 ring-white">
+    <Avatar className="after:hidden ring-2 ring-background">
       <AvatarFallback
         className="font-semibold"
         style={{ backgroundColor: bg, color: fg }}

@@ -412,12 +412,12 @@ export default function PlaygroundPage() {
                     { initials: "LR", bg: "var(--red-light)", fg: "var(--black)" },
                     { initials: "TM", bg: "var(--sand-dark)", fg: "var(--black)" },
                   ].map(({ initials, bg, fg }) => (
-                    <Avatar key={initials} className="size-10 after:hidden ring-2 ring-white">
+                    <Avatar key={initials} className="size-10 after:hidden ring-2 ring-background">
                       <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: bg, color: fg }}>{initials}</AvatarFallback>
                     </Avatar>
                   ))}
                   <div
-                    className="flex size-10 items-center justify-center rounded-full ring-2 ring-white text-xs font-semibold"
+                    className="flex size-10 items-center justify-center rounded-full ring-2 ring-background text-xs font-semibold"
                     style={{ backgroundColor: "transparent", color: "var(--gray-400)", border: "1px solid var(--gray-100)" }}
                   >
                     +4

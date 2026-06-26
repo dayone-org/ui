@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { DayoneButtonsContent } from "@/components/dayone-buttons";
 import { DayoneTypographyShowcase } from "@/components/dayone-typography-showcase";
 import { PlaygroundVariantHeading } from "@/components/playground-variant-heading";
-import { Bold, Italic, Underline, Search, ChevronRight, ChevronDown, Check, Sparkles, Bell, TrendingUp } from "lucide-react";
+import { Bold, Italic, Underline, Search, ChevronRight, ChevronDown, Check, Sparkles, Bell, TrendingUp, FileText, Settings, Folder, Users } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
@@ -14,7 +14,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Empty, EmptyHeader, EmptyTitle, EmptyDescription } from "@/components/ui/empty";
 import { Kbd } from "@/components/ui/kbd";
 import { Label } from "@/components/ui/label";
-import { Item, ItemGroup, ItemContent, ItemTitle, ItemDescription } from "@/components/ui/item";
+import { Item, ItemGroup, ItemContent, ItemTitle, ItemDescription, ItemMedia, ItemActions, ItemSeparator } from "@/components/ui/item";
 import { ButtonGroup } from "@/components/ui/button-group";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -288,12 +288,12 @@ function ItemDemo() {
     { title: "Max Moldovan", description: "IT" },
   ];
   return (
-    <div className="flex gap-3">
+    <div className="flex gap-8">
       {/* Outline */}
-      <ItemGroup className="w-56">
+      <ItemGroup className="w-[369px] gap-2">
         {people.map(({ title, description }, i) => (
-          <Item key={title} variant="outline" className="gap-3">
-            <Avatar className="size-10 shrink-0 ring-2 ring-white">
+          <Item key={title} variant="outline" className="gap-3 py-[15px]" style={{ borderColor: "var(--gray-100)" }}>
+            <Avatar className="size-9 shrink-0 ring-2 ring-background">
               <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: PALETTE[i].bg, color: PALETTE[i].fg }}>
                 {title.split(" ").map((n) => n[0]).join("")}
               </AvatarFallback>
@@ -305,11 +305,11 @@ function ItemDemo() {
           </Item>
         ))}
       </ItemGroup>
-      {/* Fill sand-light */}
-      <ItemGroup className="w-56">
+      {/* Fill #F4F2EE */}
+      <ItemGroup className="w-[369px] gap-2">
         {people.map(({ title, description }, i) => (
-          <Item key={title} variant="outline" className="gap-3" style={{ backgroundColor: "var(--sand-light)" }}>
-            <Avatar className="size-10 shrink-0 ring-2 ring-white">
+          <Item key={title} className="gap-3 py-[15px] border-transparent" style={{ backgroundColor: "#F4F2EE" }}>
+            <Avatar className="size-9 shrink-0 ring-2" style={{ "--tw-ring-color": "#F4F2EE" } as React.CSSProperties}>
               <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: PALETTE[i].bg, color: PALETTE[i].fg }}>
                 {title.split(" ").map((n) => n[0]).join("")}
               </AvatarFallback>
@@ -1108,20 +1108,72 @@ function TableDemo() {
   );
 }
 
+// Binär-Hintergrund — deterministisch, damit SSR/Client identisch rendern
+const CAROUSEL_BINARY = [
+  "0010110000101110110111010001100001000000",
+  "0100011110101110100101110011101011001010",
+  "1100111100101110100011010000010000011000",
+  "0100100111110111110100001000000110100000",
+  "0111110010011010110100010110110111101000",
+  "1011110100100010000111011111000111100010",
+  "0101100001011101101110100011000010000001",
+  "1101011001010011110011110010111010001101",
+  "0001000110100000101110100101110011101011",
+  "1110101100101001111001011101000110100000",
+  "0100100111110111110100001000000110100011",
+  "0111110010011010110100010110110111101001",
+].join("\n");
+
+const CAROUSEL_SLIDES = [
+  { labels: ["Rapid Revenue Validation"] },
+  { labels: ["Lean-Ops", "Productivity", "Automation"] },
+  { labels: ["Growth Design", "Profitability", "Performance"] },
+];
+
 function CarouselDemo() {
   return (
-    <Carousel className="w-full max-w-xs">
+    <Carousel className="relative w-[440px] max-w-full">
       <CarouselContent>
-        {["Design", "Development", "Strategy"].map((item) => (
-          <CarouselItem key={item}>
-            <div className="flex h-24 items-center justify-center rounded-lg text-sm font-semibold" style={{ backgroundColor: "var(--white)", border: "1px solid var(--gray-200)", color: "var(--black)" }}>
-              {item}
+        {CAROUSEL_SLIDES.map((slide, i) => (
+          <CarouselItem key={i}>
+            <div
+              className="relative aspect-[3/2] w-full overflow-hidden rounded-xl"
+              style={{ background: "linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 60%, #0e0e0e 100%)" }}
+            >
+              {/* Binär-Code-Hintergrund */}
+              <pre
+                className="absolute inset-0 m-0 overflow-hidden p-5 font-mono leading-tight select-none"
+                style={{ fontSize: 13, color: "rgba(255,255,255,0.82)", whiteSpace: "pre-wrap", wordBreak: "break-all" }}
+                aria-hidden
+              >
+                {CAROUSEL_BINARY}
+              </pre>
+              {/* Hervorgehobene Labels */}
+              <div className="absolute inset-0 flex flex-col items-start justify-center gap-2.5 p-10">
+                {slide.labels.map((label) => (
+                  <span
+                    key={label}
+                    className="font-mono text-xl leading-tight"
+                    style={{ backgroundColor: "#fff", color: "#000", padding: "1px 5px", boxDecorationBreak: "clone" }}
+                  >
+                    {label}
+                  </span>
+                ))}
+              </div>
+              {/* Thinking… */}
+              <span className="absolute bottom-5 left-5 font-mono text-sm" style={{ color: "rgba(255,255,255,0.5)" }}>
+                Thinking...
+              </span>
             </div>
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious style={{ color: "var(--black)", borderColor: "var(--gray-200)" }} />
-      <CarouselNext style={{ color: "var(--black)", borderColor: "var(--gray-200)" }} />
+      <CarouselPrevious
+        style={{ color: "var(--black)", borderColor: "var(--gray-200)", left: 0, right: "auto", top: "50%", transform: "translateY(-50%)" }}
+      />
+      <CarouselNext
+        style={{ color: "var(--black)", borderColor: "var(--gray-200)", left: "auto", right: 0, top: "50%", transform: "translateY(-50%)" }}
+      />
     </Carousel>
   );
 }
@@ -1144,25 +1196,81 @@ function CalendarDemo() {
   );
 }
 
-const chartData = [
+// 12 Monate — gleiche Optik wie der Chart auf der Startseite (reines CSS)
+const CHART_MONTHS = [
   { name: "Jan", value: 32 },
   { name: "Feb", value: 58 },
   { name: "Mär", value: 45 },
   { name: "Apr", value: 72 },
   { name: "Mai", value: 61 },
   { name: "Jun", value: 88 },
+  { name: "Jul", value: 75 },
+  { name: "Aug", value: 52 },
+  { name: "Sep", value: 68 },
+  { name: "Okt", value: 80 },
+  { name: "Nov", value: 57 },
+  { name: "Dez", value: 93 },
 ];
+
+function CssBarChart({
+  data,
+  periodLabel,
+  barWidthPx,
+}: {
+  data: { name: string; value: number }[];
+  periodLabel: string;
+  barWidthPx?: number;
+}) {
+  return (
+    <div className="w-full">
+      {/* Header — Platzhalterwerte statt echter Zahlen */}
+      <div className="mb-6 flex items-baseline gap-3">
+        <span className="text-3xl font-bold tabular-nums" style={{ color: "var(--black)" }}>00</span>
+        <span className="flex items-center gap-1 text-xs font-medium" style={{ color: "var(--black)" }}>
+          <TrendingUp className="size-3" />
+          +00%
+        </span>
+        <span className="ml-auto text-xs" style={{ color: "#999" }}>{periodLabel}</span>
+      </div>
+      {/* Balken */}
+      <div className="flex flex-col gap-2">
+        <div className="flex gap-2" style={{ height: 160 }}>
+          {data.map((d) => (
+            <div key={d.name} className="flex flex-1 flex-col justify-end px-1">
+              <div
+                style={{
+                  height: `${d.value}%`,
+                  backgroundColor: "#1a1a1a",
+                  borderRadius: "4px 4px 0 0",
+                  ...(barWidthPx ? { width: barWidthPx, marginInline: "auto" } : {}),
+                }}
+              />
+            </div>
+          ))}
+        </div>
+        <div className="flex gap-2">
+          {data.map((d) => (
+            <div key={d.name} className="flex-1 text-center" style={{ fontSize: 12, color: "#999" }}>
+              {d.name}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function ChartDemo() {
   return (
-    <div className="w-full max-w-xs rounded-lg p-4" style={{ backgroundColor: "var(--white)", border: "1px solid var(--gray-200)" }}>
-      <p className="mb-4 text-sm font-semibold" style={{ color: "var(--black)" }}>Monatliche Aufrufe</p>
-      <ResponsiveContainer width="100%" height={140}>
-        <BarChart data={chartData} barSize={20}>
-          <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 11, fill: "var(--gray-300)" }} />
-          <Bar dataKey="value" fill="var(--black)" radius={[3, 3, 0, 0]} />
-        </BarChart>
-      </ResponsiveContainer>
+    <div className="flex w-[600px] max-w-full flex-col gap-12">
+      <div className="flex flex-col gap-4">
+        <DemoLabel>Kompakt · 2 Quartale</DemoLabel>
+        <CssBarChart data={CHART_MONTHS.slice(0, 6)} periodLabel="Aufrufe Q1 – Q2" barWidthPx={10} />
+      </div>
+      <div className="flex flex-col gap-4">
+        <DemoLabel>Voll · Jan – Dez</DemoLabel>
+        <CssBarChart data={CHART_MONTHS} periodLabel="Aufrufe Jan – Dez" />
+      </div>
     </div>
   );
 }
@@ -1177,12 +1285,12 @@ function AvatarDemo() {
         { initials: "LR", bg: "var(--red-light)", fg: "var(--black)" },
         { initials: "TM", bg: "var(--sand-dark)", fg: "var(--black)" },
       ].map(({ initials, bg, fg }) => (
-        <Avatar key={initials} className="size-10 after:hidden ring-2 ring-white">
+        <Avatar key={initials} className="size-10 after:hidden ring-2 ring-background">
           <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: bg, color: fg }}>{initials}</AvatarFallback>
         </Avatar>
       ))}
       <div
-        className="flex size-10 items-center justify-center rounded-full ring-2 ring-white text-xs font-semibold"
+        className="flex size-10 items-center justify-center rounded-full ring-2 ring-background text-xs font-semibold"
         style={{ backgroundColor: "transparent", color: "var(--gray-400)", border: "1px solid var(--gray-100)" }}
       >
         +4
@@ -1237,66 +1345,159 @@ function CollapsibleDemo() {
 
 // ─── Layout ──────────────────────────────────────────────────────────────────
 
-function CardDemo() {
+// Small category label used across Layout demos
+function DemoLabel({ children }: { children: React.ReactNode }) {
   return (
-    <div className="w-full max-w-sm space-y-4">
+    <p className="text-[11px] font-medium tracking-wide" style={{ color: "var(--gray-300)" }}>
+      {children}
+    </p>
+  );
+}
 
-      {/* Standard card */}
-      <Card className="w-full rounded-xl" style={{ borderColor: "var(--gray-100)" }}>
-        <CardHeader>
-          <CardTitle className="text-base font-semibold" style={{ color: "var(--black)" }}>Projektübersicht</CardTitle>
-          <CardDescription style={{ color: "var(--gray-400)" }}>Stand: Juni 2026</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <p className="text-sm" style={{ color: "var(--gray-400)" }}>Alle laufenden Projekte im Überblick.</p>
-        </CardContent>
-        <CardFooter>
-          <button className="flex items-center gap-1 text-sm font-semibold" style={{ color: "var(--black)" }}>
-            Mehr anzeigen <ChevronRight className="size-3.5" />
-          </button>
-        </CardFooter>
-      </Card>
+const OUTLINE_RING = { "--tw-ring-color": "var(--gray-100)" } as React.CSSProperties;
 
-      {/* Metric card */}
-      <Card className="w-full rounded-xl" style={{ borderColor: "var(--gray-100)" }}>
-        <CardHeader className="flex flex-row items-center justify-between pb-2">
-          <CardTitle className="text-sm font-medium" style={{ color: "var(--gray-400)" }}>Gesamtumsatz</CardTitle>
-          <TrendingUp className="size-4" style={{ color: "var(--gray-400)" }} />
-        </CardHeader>
-        <CardContent>
-          <p className="text-2xl font-semibold" style={{ color: "var(--black)" }}>€ 24.500</p>
-          <p className="text-xs mt-1" style={{ color: "var(--gray-400)" }}>+12% gegenüber Vormonat</p>
-        </CardContent>
-      </Card>
+function InfocardDemo() {
+  return (
+    <div className="flex flex-col gap-10">
+      <div className="flex flex-wrap gap-4">
+        {/* Standard info card */}
+        <Card className="w-72" style={OUTLINE_RING}>
+          <CardHeader>
+            <CardTitle className="text-base font-semibold" style={{ color: "var(--black)" }}>Projektübersicht</CardTitle>
+            <CardDescription style={{ color: "var(--gray-400)" }}>Stand: Juni 2026</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p className="text-sm" style={{ color: "var(--gray-400)" }}>Alle laufenden Projekte im Überblick — reine Darstellung.</p>
+          </CardContent>
+        </Card>
 
-      {/* Notification cards */}
-      <div className="space-y-2">
-        <div className="flex items-start gap-3 rounded-xl p-3" style={{ backgroundColor: "var(--black)" }}>
-          <Check className="size-4 mt-0.5 shrink-0" style={{ color: "white" }} />
-          <div className="flex-1 min-w-0">
-            <p className="text-xs font-semibold" style={{ color: "white" }}>Build erfolgreich</p>
-            <p className="text-xs" style={{ color: "rgba(255,255,255,0.6)" }}>Vercel deployment abgeschlossen.</p>
-          </div>
-          <span className="text-xs shrink-0" style={{ color: "rgba(255,255,255,0.4)" }}>Jetzt</span>
-        </div>
-        <div className="flex items-start gap-3 rounded-xl p-3" style={{ backgroundColor: "#F4F2EE" }}>
-          <Sparkles className="size-4 mt-0.5 shrink-0" style={{ color: "var(--black)" }} />
-          <div className="flex-1 min-w-0">
-            <p className="text-xs font-semibold" style={{ color: "var(--black)" }}>Neue Komponente</p>
-            <p className="text-xs" style={{ color: "var(--gray-400)" }}>Button wurde aktualisiert.</p>
-          </div>
-          <span className="text-xs shrink-0" style={{ color: "var(--gray-400)" }}>Jetzt</span>
-        </div>
-        <div className="flex items-start gap-3 rounded-xl p-3" style={{ backgroundColor: "#F4F2EE" }}>
-          <Bell className="size-4 mt-0.5 shrink-0" style={{ color: "var(--black)" }} />
-          <div className="flex-1 min-w-0">
-            <p className="text-xs font-semibold" style={{ color: "var(--black)" }}>Neue Nachricht</p>
-            <p className="text-xs" style={{ color: "var(--gray-400)" }}>Victoria hat kommentiert.</p>
-          </div>
-          <span className="text-xs shrink-0" style={{ color: "var(--gray-400)" }}>Jetzt</span>
-        </div>
+        {/* Metric card */}
+        <Card className="w-72" style={OUTLINE_RING}>
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium" style={{ color: "var(--gray-400)" }}>Gesamtumsatz</CardTitle>
+            <TrendingUp className="size-4" style={{ color: "var(--gray-400)" }} />
+          </CardHeader>
+          <CardContent>
+            <p className="text-2xl font-semibold tabular-nums" style={{ color: "var(--black)" }}>€ 24.500</p>
+            <p className="text-xs mt-1" style={{ color: "var(--gray-400)" }}>+12% gegenüber Vormonat</p>
+          </CardContent>
+        </Card>
       </div>
 
+      {/* Item — Outline & Filled je einmal */}
+      <div className="flex flex-col gap-3">
+        <DemoLabel>Item · Outline & Filled</DemoLabel>
+        <div className="flex gap-4">
+          <Item variant="outline" className="w-80 gap-3 py-[15px]" style={{ borderColor: "var(--gray-100)" }}>
+            <Avatar className="size-9 shrink-0 ring-2 ring-background">
+              <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>VI</AvatarFallback>
+            </Avatar>
+            <ItemContent className="gap-0.5">
+              <ItemTitle className="font-semibold" style={{ color: "var(--black)" }}>Victoria Itter</ItemTitle>
+              <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>Product Design</ItemDescription>
+            </ItemContent>
+          </Item>
+          <Item className="w-80 gap-3 border-transparent py-[15px]" style={{ backgroundColor: "#F4F2EE" }}>
+            <Avatar className="size-9 shrink-0 ring-2" style={{ "--tw-ring-color": "#F4F2EE" } as React.CSSProperties}>
+              <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>VI</AvatarFallback>
+            </Avatar>
+            <ItemContent className="gap-0.5">
+              <ItemTitle className="font-semibold" style={{ color: "var(--black)" }}>Victoria Itter</ItemTitle>
+              <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>Product Design</ItemDescription>
+            </ItemContent>
+          </Item>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ButtoncardDemo() {
+  return (
+    <div className="flex flex-wrap gap-4">
+      {/* Clickable navigation card */}
+      <Card
+        role="button"
+        tabIndex={0}
+        className="w-80 cursor-pointer transition-all duration-150 hover:scale-[1.02] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] focus-visible:outline-none focus-visible:ring-2"
+        style={OUTLINE_RING}
+      >
+        <CardHeader className="flex flex-row items-center justify-between">
+          <div className="flex flex-col gap-1">
+            <CardTitle className="text-base font-semibold" style={{ color: "var(--black)" }}>Design System</CardTitle>
+            <CardDescription style={{ color: "var(--gray-400)" }}>56 Komponenten · heute aktualisiert</CardDescription>
+          </div>
+          <ChevronRight className="size-5 shrink-0" style={{ color: "var(--gray-400)" }} />
+        </CardHeader>
+      </Card>
+
+      {/* Clickable contact card */}
+      <Card
+        role="button"
+        tabIndex={0}
+        className="w-80 cursor-pointer transition-all duration-150 hover:scale-[1.02] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] focus-visible:outline-none focus-visible:ring-2"
+        style={OUTLINE_RING}
+      >
+        <CardContent className="flex items-center gap-3 py-1">
+          <Avatar className="size-10 shrink-0 ring-2 ring-background">
+            <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>VI</AvatarFallback>
+          </Avatar>
+          <div className="flex flex-1 flex-col gap-0.5">
+            <p className="text-sm font-semibold" style={{ color: "var(--black)" }}>Victoria Itter</p>
+            <p className="text-xs" style={{ color: "var(--gray-400)" }}>Profil öffnen</p>
+          </div>
+          <ChevronRight className="size-5 shrink-0" style={{ color: "var(--gray-400)" }} />
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
+
+function ListDemo() {
+  const PALETTE = [
+    { bg: "var(--black)", fg: "var(--white)" },
+    { bg: "var(--sand-medium)", fg: "var(--black)" },
+    { bg: "var(--blue-light)", fg: "var(--black)" },
+  ];
+  const people = [
+    { title: "Victoria Itter", description: "Product Design" },
+    { title: "Bean Duong", description: "Development" },
+    { title: "Max Moldovan", description: "IT" },
+  ];
+  return (
+    <div className="flex gap-8">
+      {/* Outline */}
+      <ItemGroup className="w-[369px] gap-2">
+        {people.map(({ title, description }, i) => (
+          <Item key={title} variant="outline" className="gap-3 py-[15px]" style={{ borderColor: "var(--gray-100)" }}>
+            <Avatar className="size-9 shrink-0 ring-2 ring-background">
+              <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: PALETTE[i].bg, color: PALETTE[i].fg }}>
+                {title.split(" ").map((n) => n[0]).join("")}
+              </AvatarFallback>
+            </Avatar>
+            <ItemContent className="gap-0.5">
+              <ItemTitle className="font-semibold" style={{ color: "var(--black)" }}>{title}</ItemTitle>
+              <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>{description}</ItemDescription>
+            </ItemContent>
+          </Item>
+        ))}
+      </ItemGroup>
+      {/* Fill #F4F2EE */}
+      <ItemGroup className="w-[369px] gap-2">
+        {people.map(({ title, description }, i) => (
+          <Item key={title} className="gap-3 py-[15px] border-transparent" style={{ backgroundColor: "#F4F2EE" }}>
+            <Avatar className="size-9 shrink-0 ring-2" style={{ "--tw-ring-color": "#F4F2EE" } as React.CSSProperties}>
+              <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: PALETTE[i].bg, color: PALETTE[i].fg }}>
+                {title.split(" ").map((n) => n[0]).join("")}
+              </AvatarFallback>
+            </Avatar>
+            <ItemContent className="gap-0.5">
+              <ItemTitle className="font-semibold" style={{ color: "var(--black)" }}>{title}</ItemTitle>
+              <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>{description}</ItemDescription>
+            </ItemContent>
+          </Item>
+        ))}
+      </ItemGroup>
     </div>
   );
 }
@@ -1402,7 +1603,9 @@ const DEMOS: Record<string, () => React.ReactElement> = {
   avatar: AvatarDemo,
   accordion: AccordionDemo,
   collapsible: CollapsibleDemo,
-  card: CardDemo,
+  infocard: InfocardDemo,
+  buttoncard: ButtoncardDemo,
+  list: ListDemo,
   "aspect-ratio": AspectRatioDemo,
   "scroll-area": ScrollAreaDemo,
   resizable: ResizableDemo,

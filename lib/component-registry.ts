@@ -46,7 +46,6 @@ export const COMPONENT_REGISTRY: ComponentCategory[] = [
       { slug: "button", name: "Button", description: "Primäre und sekundäre Aktionsschaltflächen", playgroundAnchor: "buttons" },
       { slug: "button-group", name: "Button Group", description: "Mehrere Buttons als zusammengehörige Gruppe", playgroundAnchor: "buttons" },
       { slug: "empty", name: "Empty", description: "Leer-Zustand für Listen und Datenbereiche", playgroundAnchor: "feedback" },
-      { slug: "item", name: "Item", description: "Universeller Listen- oder Menüeintrag", playgroundAnchor: "misc" },
       { slug: "loading", name: "Loading", description: "Ladezustände — Skeleton-Platzhalter und Spinner", playgroundAnchor: "feedback" },
       { slug: "separator", name: "Separator", description: "Horizontale Trennlinie zwischen Inhaltsbereichen", playgroundAnchor: "misc" },
     ],
@@ -142,7 +141,9 @@ export const COMPONENT_REGISTRY: ComponentCategory[] = [
     id: "layout",
     label: "Layout",
     components: [
-      { slug: "card", name: "Card", description: "Inhaltskarte mit Header, Body und Footer", playgroundAnchor: "layout" },
+      { slug: "infocard", name: "Infocard", description: "Statische Karten — reine Darstellung, nicht klickbar", playgroundAnchor: "layout", span: 2 },
+      { slug: "buttoncard", name: "Buttoncard", description: "Interaktive Karten — ganze Fläche klickbar", playgroundAnchor: "layout", span: 2 },
+      { slug: "list", name: "List", description: "Listentypen — Items und Cards im Einsatz", playgroundAnchor: "layout", span: 2 },
     ],
   },
 ];

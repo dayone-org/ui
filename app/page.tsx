@@ -562,12 +562,12 @@ function BadgesCell() {
               { initials: "LR", bg: "var(--red-light)", fg: "var(--black)" },
               { initials: "TM", bg: "var(--sand-dark)", fg: "var(--black)" },
             ].map(({ initials, bg, fg }) => (
-              <Avatar key={initials} className="size-10 after:hidden ring-2 ring-white">
+              <Avatar key={initials} className="size-10 after:hidden ring-2 ring-background">
                 <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: bg, color: fg }}>{initials}</AvatarFallback>
               </Avatar>
             ))}
             <div
-              className="flex size-10 items-center justify-center rounded-full ring-2 ring-white text-xs font-semibold"
+              className="flex size-10 items-center justify-center rounded-full ring-2 ring-background text-xs font-semibold"
               style={{ backgroundColor: "transparent", color: "var(--gray-400)", border: "1px solid var(--gray-100)" }}
             >
               +4
@@ -664,82 +664,38 @@ function CardCell() {
   }, []);
 
   return (
-    <BentoCell className="col-span-8 min-h-72" delay={660}>
+    <BentoCell className="col-span-8 flex flex-col" delay={660}>
       <CellLabel>Card</CellLabel>
-      <div className="grid grid-cols-[5fr_4fr] items-start gap-4">
-        {/* Left: large card */}
-        <div>
+      <div className="grid grid-cols-2 items-stretch gap-4">
+        {/* Standard */}
+        <div className="flex flex-col">
           <p className="text-[10px] font-medium mb-2" style={{ color: "var(--gray-300)" }}>Standard</p>
-          <Card style={{ borderColor: "var(--gray-100)" }}>
+          <Card className="h-full justify-center gap-1 py-4" style={{ borderColor: "var(--gray-100)" }}>
             <CardHeader>
-              <CardTitle className="text-sm font-semibold" style={{ color: "var(--black)" }}>Projektübersicht</CardTitle>
-              <CardDescription style={{ color: "var(--gray-400)", fontSize: "12px" }}>Stand: Juni 2026</CardDescription>
+              <CardTitle className="text-sm font-semibold" style={{ color: "var(--black)" }}>Nächstes Meeting</CardTitle>
+              <CardDescription style={{ color: "var(--gray-400)", fontSize: "12px" }}>Heute · 14:00 Uhr · PDC Sync mit dem Design Team</CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <p className="text-xs" style={{ color: "var(--gray-400)" }}>Alle laufenden Projekte im Überblick. Hier findest du den aktuellen Status der wichtigsten Initiativen.</p>
-              <div className="space-y-2">
-                {[
-                  { label: "Design System", pct: 82 },
-                  { label: "PDC Hub", pct: 64 },
-                  { label: "Dokumentation", pct: 45 },
-                ].map(({ label, pct }) => (
-                  <div key={label}>
-                    <div className="flex justify-between mb-1">
-                      <span className="text-xs" style={{ color: "var(--black)" }}>{label}</span>
-                      <span className="text-xs" style={{ color: "var(--gray-300)" }}>{pct}%</span>
-                    </div>
-                    <div className="h-1 w-full rounded-full overflow-hidden" style={{ backgroundColor: "#F4F2EE" }}>
-                      <div className="h-full rounded-full" style={{ width: `${pct}%`, backgroundColor: "var(--black)" }} />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
           </Card>
         </div>
 
-        {/* Right: 2 stacked cards */}
-        <div className="flex flex-col gap-4">
-          {/* Metric */}
-          <div>
-            <p className="text-[10px] font-medium mb-2" style={{ color: "var(--gray-300)" }}>Metric</p>
-            <Card style={{ borderColor: "var(--gray-100)" }}>
-              <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-xs font-medium" style={{ color: "var(--gray-400)" }}>Komponenten</CardTitle>
-                <BarChart3 className="size-4" style={{ color: "var(--gray-400)" }} />
-              </CardHeader>
-              <CardContent>
+        {/* Metric */}
+        <div className="flex flex-col">
+          <p className="text-[10px] font-medium mb-2" style={{ color: "var(--gray-300)" }}>Metric</p>
+          <Card className="h-full justify-center gap-1 py-4" style={{ borderColor: "var(--gray-100)" }}>
+            <CardHeader className="flex flex-row items-center justify-between">
+              <CardTitle className="text-xs font-medium" style={{ color: "var(--gray-400)" }}>Komponenten</CardTitle>
+              <BarChart3 className="size-4" style={{ color: "var(--gray-400)" }} />
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-baseline gap-2">
                 <p className="text-2xl font-semibold tabular-nums" style={{ color: "var(--black)" }}>{count}+</p>
-                <div className="h-1.5 w-full rounded-full overflow-hidden mt-2 mb-1" style={{ backgroundColor: "#F4F2EE" }}>
-                  <div className="h-full rounded-full" style={{ width: `${progress}%`, backgroundColor: "var(--black)", transition: "width 0.9s cubic-bezier(0.4,0,0.2,1)" }} />
-                </div>
-                <p className="text-xs" style={{ color: "var(--gray-300)" }}>{progress}% fertig</p>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Aktivität */}
-          <div>
-            <p className="text-[10px] font-medium mb-2" style={{ color: "var(--gray-300)" }}>Aktivität</p>
-            <Card style={{ borderColor: "var(--gray-100)" }}>
-              <CardContent className="pt-4 space-y-3">
-                {[
-                  { initials: "VI", bg: "var(--black)", fg: "var(--white)", name: "Vicy", action: "hat kommentiert" },
-                  { initials: "BD", bg: "var(--sand-medium)", fg: "var(--black)", name: "Bean", action: "hat gemerged" },
-                  { initials: "AK", bg: "var(--blue-light)", fg: "var(--black)", name: "Anina", action: "hat erstellt" },
-                ].map(({ initials, bg, fg, name, action }) => (
-                  <div key={initials} className="flex items-center gap-2.5">
-                    <Avatar className="size-6">
-                      <AvatarFallback style={{ backgroundColor: bg, color: fg }} className="text-[10px] font-semibold">{initials}</AvatarFallback>
-                    </Avatar>
-                    <p className="text-xs min-w-0 truncate" style={{ color: "var(--gray-400)" }}>
-                      <span style={{ color: "var(--black)", fontWeight: 600 }}>{name}</span> {action}
-                    </p>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
-          </div>
+                <span className="text-xs" style={{ color: "var(--gray-300)" }}>{progress}% fertig</span>
+              </div>
+              <div className="h-1.5 w-full rounded-full overflow-hidden mt-2" style={{ backgroundColor: "#F4F2EE" }}>
+                <div className="h-full rounded-full" style={{ width: `${progress}%`, backgroundColor: "var(--black)", transition: "width 0.9s cubic-bezier(0.4,0,0.2,1)" }} />
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </BentoCell>
