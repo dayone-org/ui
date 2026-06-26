@@ -14,7 +14,7 @@ type SiteHeaderProps = {
   active?: "home" | "playground" | "how-to" | "komponenten" | "anwendung";
 };
 
-const navLinkClass = "text-sm font-normal transition-opacity hover:opacity-70";
+const navLinkClass = "text-sm font-normal hover:opacity-70";
 
 function navLinkStyle(isActive: boolean) {
   return {
