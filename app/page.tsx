@@ -9,6 +9,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarGroup } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
 import { Switch } from "@/components/ui/switch";
 import { Slider } from "@/components/ui/slider";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -68,7 +70,7 @@ function SmoothBar({ value }: { value: number }) {
     return () => clearTimeout(t);
   }, [value]);
   return (
-    <div className="h-1.5 w-full rounded-full overflow-hidden" style={{ backgroundColor: "var(--gray-100)" }}>
+    <div className="h-1.5 w-full rounded-full overflow-hidden" style={{ backgroundColor: "var(--sand-medium)" }}>
       <div
         className="h-full rounded-full"
         style={{ width: `${w}%`, backgroundColor: "var(--black)", transition: "width 1.3s cubic-bezier(0.4,0,0.2,1)" }}
@@ -81,20 +83,19 @@ function SmoothBar({ value }: { value: number }) {
 
 function ButtonsCell() {
   return (
-    <BentoCell className="col-span-4 flex flex-col" delay={0}>
+    <BentoCell className="col-span-3 flex flex-col" delay={0}>
       <CellLabel>Button</CellLabel>
       <div className="flex flex-col justify-center gap-4 flex-1">
         <div className="flex flex-wrap gap-3">
           <Button size="sm">Primary</Button>
           <Button size="sm" variant="outline">Secondary</Button>
-          <Button size="sm" variant="ghost">Ghost</Button>
         </div>
         <div className="flex flex-wrap gap-3">
-          <Button size="default">Primary <ArrowRight className="size-3.5" /></Button>
+          <Button size="default">Primary</Button>
           <Button size="default" variant="outline">Secondary</Button>
         </div>
         <div className="flex flex-wrap gap-3">
-          <Button size="lg">Primary <ArrowRight className="size-4" /></Button>
+          <Button size="lg">Primary</Button>
           <Button size="lg" variant="outline">Secondary</Button>
         </div>
       </div>
@@ -116,7 +117,7 @@ function CalendarCell() {
         locale={de}
         weekStartsOn={1}
         formatters={{ formatWeekdayName: (d) => ["SO","MO","DI","MI","DO","FR","SA"][d.getDay()] }}
-        className="rounded-xl [--cell-size:--spacing(8)] scale-90 origin-top"
+        className="rounded-xl [--cell-size:--spacing(8)] scale-95 origin-top"
         style={{ border: "1px solid var(--gray-100)" }}
       />
     </BentoCell>
@@ -187,7 +188,7 @@ function NotificationsCell() {
           <div
             key={item.id}
             className="flex items-start gap-3 rounded-xl p-3"
-            style={{ backgroundColor: idx === 0 ? "var(--black)" : "var(--gray-100)" }}
+            style={{ backgroundColor: idx === 0 ? "var(--black)" : "var(--sand-light)" }}
           >
             <div className="mt-0.5 shrink-0" style={{ color: idx === 0 ? "var(--white)" : "var(--black)" }}>
               {item.icon}
@@ -318,7 +319,7 @@ function ControlsCell() {
         <div>
           <div className="flex justify-between mb-2">
             <span className="text-xs" style={{ color: "var(--gray-400)" }}>Lautstärke</span>
-            <span className="text-xs font-semibold tabular-nums" style={{ color: "var(--black)" }}>{vol[0]}%</span>
+            <span className="text-xs tabular-nums" style={{ color: "var(--gray-400)" }}>{vol[0]}%</span>
           </div>
           <Slider value={vol} onValueChange={setVol} max={100} step={1} />
         </div>
@@ -365,7 +366,7 @@ function ProgressCell() {
           <div key={label}>
             <div className="flex justify-between mb-2">
               <span className="text-xs" style={{ color: "var(--gray-400)" }}>{label}</span>
-              <span className="text-xs font-semibold tabular-nums" style={{ color: "var(--black)" }}>
+              <span className="text-xs tabular-nums" style={{ color: "var(--gray-400)" }}>
                 {Math.round(values[i])}%
               </span>
             </div>
@@ -417,16 +418,32 @@ function InputCell() {
   }, []);
 
   return (
-    <BentoCell className="col-span-3" delay={120}>
+    <BentoCell className="col-span-4" delay={120}>
       <CellLabel>Input</CellLabel>
-      <div className="space-y-2.5">
+      <div className="space-y-3">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-3.5 pointer-events-none" style={{ color: "var(--gray-300)" }} />
           <Input className="pl-8 text-sm" value={typed} readOnly placeholder="Suchen…" />
         </div>
         <Input className="text-sm" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" />
         <Input className="text-sm" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="E-Mail-Adresse" type="email" />
-        <Button size="sm">Absenden</Button>
+        <div className="flex gap-[10px]">
+          <Select>
+            <SelectTrigger className="text-sm">
+              <SelectValue placeholder="Kategorie" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="design">Design</SelectItem>
+              <SelectItem value="entwicklung">Entwicklung</SelectItem>
+              <SelectItem value="produkt">Produkt</SelectItem>
+            </SelectContent>
+          </Select>
+          <InputGroup>
+            <InputGroupInput type="number" placeholder="0,00" className="[appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none" />
+            <InputGroupAddon align="inline-end">€</InputGroupAddon>
+          </InputGroup>
+        </div>
+        <Button size="lg" className="mt-3 w-full">Absenden</Button>
       </div>
     </BentoCell>
   );
@@ -612,29 +629,60 @@ function CardCell() {
   return (
     <BentoCell className="col-span-4" delay={660}>
       <CellLabel>Card</CellLabel>
-      <Card style={{ borderColor: "var(--gray-100)" }}>
-        <CardHeader className="pb-3">
-          <div className="flex items-center justify-between">
-            <BarChart3 className="size-5" style={{ color: "var(--black)" }} />
-            <Badge variant="outline" className="text-[10px]">+12%</Badge>
+      <div className="space-y-6">
+        {/* Standard */}
+        <div>
+          <p className="text-[10px] font-medium mb-2" style={{ color: "var(--gray-300)" }}>Standard</p>
+          <Card style={{ borderColor: "var(--gray-100)" }}>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm font-semibold" style={{ color: "var(--black)" }}>Projektübersicht</CardTitle>
+              <CardDescription style={{ color: "var(--gray-400)", fontSize: "12px" }}>Stand: Juni 2026</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-xs" style={{ color: "var(--gray-400)" }}>Alle laufenden Projekte im Überblick.</p>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Metric */}
+        <div>
+          <p className="text-[10px] font-medium mb-2" style={{ color: "var(--gray-300)" }}>Metric</p>
+          <Card style={{ borderColor: "var(--gray-100)" }}>
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-xs font-medium" style={{ color: "var(--gray-400)" }}>Komponenten</CardTitle>
+              <BarChart3 className="size-4" style={{ color: "var(--gray-400)" }} />
+            </CardHeader>
+            <CardContent>
+              <p className="text-2xl font-semibold tabular-nums" style={{ color: "var(--black)" }}>{count}+</p>
+              <div className="h-1.5 w-full rounded-full overflow-hidden mt-2 mb-1" style={{ backgroundColor: "var(--sand-medium)" }}>
+                <div className="h-full rounded-full" style={{ width: `${progress}%`, backgroundColor: "var(--black)", transition: "width 0.9s cubic-bezier(0.4,0,0.2,1)" }} />
+              </div>
+              <p className="text-xs" style={{ color: "var(--gray-300)" }}>{progress}% fertig</p>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Notification */}
+        <div>
+          <p className="text-[10px] font-medium mb-2" style={{ color: "var(--gray-300)" }}>Notification</p>
+          <div className="space-y-2">
+            <div className="flex items-start gap-3 rounded-xl p-3" style={{ backgroundColor: "var(--black)" }}>
+              <Check className="size-3.5 mt-0.5 shrink-0" style={{ color: "white" }} />
+              <div className="flex-1 min-w-0">
+                <p className="text-xs font-semibold" style={{ color: "white" }}>Build erfolgreich</p>
+                <p className="text-xs" style={{ color: "rgba(255,255,255,0.6)" }}>Vercel deployment abgeschlossen.</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3 rounded-xl p-3" style={{ backgroundColor: "var(--sand-light)" }}>
+              <Sparkles className="size-3.5 mt-0.5 shrink-0" style={{ color: "var(--black)" }} />
+              <div className="flex-1 min-w-0">
+                <p className="text-xs font-semibold" style={{ color: "var(--black)" }}>Neue Komponente</p>
+                <p className="text-xs" style={{ color: "var(--gray-400)" }}>Button wurde aktualisiert.</p>
+              </div>
+            </div>
           </div>
-          <CardTitle className="text-base font-semibold mt-2 tabular-nums" style={{ color: "var(--black)" }}>
-            {count}+ Komponenten
-          </CardTitle>
-          <CardDescription style={{ color: "var(--gray-400)", fontSize: "12px" }}>
-            Zugänglich, typsicher und anpassbar.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="h-1.5 w-full rounded-full overflow-hidden mb-2" style={{ backgroundColor: "var(--gray-100)" }}>
-            <div
-              className="h-full rounded-full"
-              style={{ width: `${progress}%`, backgroundColor: "var(--black)", transition: "width 0.9s cubic-bezier(0.4,0,0.2,1)" }}
-            />
-          </div>
-          <p className="text-xs" style={{ color: "var(--gray-300)" }}>{progress}% der Kern-Komponenten fertig</p>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </BentoCell>
   );
 }
@@ -645,12 +693,12 @@ function ShowcaseGrid() {
   return (
     <div className="w-full grid grid-cols-12 gap-4">
       {/* Row 1: 4 + 4 + 4 */}
-      <ButtonsCell />
+      <InputCell />
       <CalendarCell />
       <ChartCell />
 
       {/* Row 2: 3 + 3 + 3 + 3 */}
-      <InputCell />
+      <ButtonsCell />
       <ProgressCell />
       <ControlsCell />
       <NotificationsCell />
@@ -678,17 +726,17 @@ export default function HomePage() {
         <div className="flex flex-col items-center text-center gap-6 max-w-2xl">
           <Image src="/dayone-icon.svg" alt="DAYONE" width={36} height={36} />
           <h1
-            className="font-semibold"
+            className="font-semibold mt-4"
             style={{ fontSize: "clamp(2.25rem, 5vw, 3.75rem)", lineHeight: 1.08, color: "var(--black)", letterSpacing: "-0.03em" }}
           >
             Design System
           </h1>
-          <p className="text-base leading-relaxed whitespace-nowrap" style={{ color: "var(--gray-400)" }}>
-            Das gemeinsame Design-Fundament für alle Projekte
+          <p className="text-base leading-relaxed max-w-lg" style={{ color: "var(--gray-400)" }}>
+            Das gemeinsame UI-Fundament für alle DAYONE-Projekte. Komponenten, Tokens und Standards für konsistente digitale Produkte.
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-3">
+          <div className="flex flex-wrap items-center justify-center gap-3 mt-4">
             <Button asChild size="lg">
-              <Link href="/komponenten">Komponenten <ArrowRight /></Link>
+              <Link href="/komponenten">Komponenten</Link>
             </Button>
             <Button asChild size="lg" variant="outline">
               <Link href="/how-to-use">How to use</Link>
@@ -696,7 +744,9 @@ export default function HomePage() {
           </div>
         </div>
 
-        <ShowcaseGrid />
+        <div className="mt-16 w-full">
+          <ShowcaseGrid />
+        </div>
       </main>
 
       <div className={`pointer-events-none absolute bottom-8 ${DOCS_PAGE_PADDING} right-0 left-0 flex justify-end`}>

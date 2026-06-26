@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { DayoneButtonsContent } from "@/components/dayone-buttons";
 import { DayoneTypographyShowcase } from "@/components/dayone-typography-showcase";
 import { PlaygroundVariantHeading } from "@/components/playground-variant-heading";
-import { Bold, Italic, Underline, Search, ChevronRight, ChevronDown } from "lucide-react";
+import { Bold, Italic, Underline, Search, ChevronRight, ChevronDown, Check, Sparkles, Bell, TrendingUp } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
@@ -318,10 +318,7 @@ function TextareaDemo() {
 function SelectDemo() {
   return (
     <Select>
-      <SelectTrigger
-        className="w-52"
-        style={{ borderColor: "#D4CEC7", padding: "0.75rem 1rem", height: "auto" }}
-      >
+      <SelectTrigger className="w-64">
         <SelectValue placeholder="Kategorie wählen" />
       </SelectTrigger>
       <SelectContent position="popper" sideOffset={4}>
@@ -350,7 +347,7 @@ function ComboboxDemo() {
   const [value, setValue] = useState<string | null>(null);
   const items = ["Rechnungen", "Bestellungen", "Projekte", "Kunden", "Berichte"];
   return (
-    <div className="w-56">
+    <div className="w-64">
       <Combobox value={value} onValueChange={setValue}>
         <ComboboxInput placeholder="Suchen..." />
         <ComboboxContent>
@@ -517,14 +514,14 @@ function InputOTPDemo() {
 function InputGroupDemo() {
   return (
     <div className="flex flex-col gap-4 w-full max-w-xs">
-      <InputGroup style={{ borderColor: "#D4CEC7" }}>
+      <InputGroup>
         <InputGroupAddon align="inline-start">
           <Search className="size-4" style={{ color: "var(--gray-400)" }} />
         </InputGroupAddon>
-        <InputGroupInput placeholder="Suchen..." className="py-3 px-2" />
+        <InputGroupInput placeholder="Suchen..." />
       </InputGroup>
-      <InputGroup style={{ borderColor: "#D4CEC7" }}>
-        <InputGroupInput placeholder="Betrag" className="py-3 px-4" />
+      <InputGroup>
+        <InputGroupInput placeholder="Betrag" />
         <InputGroupAddon align="inline-end">
           <span className="text-sm" style={{ color: "var(--gray-400)" }}>€</span>
         </InputGroupAddon>
@@ -949,7 +946,7 @@ function CommandDemo() {
   return (
     <Command
       className="rounded-lg"
-      style={{ border: "1px solid #D3D1CF", maxWidth: "280px", boxShadow: "0 0 24px rgba(0,0,0,0.10)" }}
+      style={{ border: "1px solid var(--gray-100)", maxWidth: "280px", boxShadow: "0 0 24px rgba(0,0,0,0.10)" }}
     >
       <CommandInput placeholder="Suchen..." style={{ color: "#969696" }} />
       <CommandList>
@@ -1020,7 +1017,7 @@ function ProgressDemo() {
         <span>Fortschritt</span>
         <span>{value}%</span>
       </div>
-      <Progress value={value} className="h-2" style={{ backgroundColor: "var(--gray-200)" }} />
+      <Progress value={value} className="h-1.5" style={{ backgroundColor: "var(--sand-medium)" }} />
     </div>
   );
 }
@@ -1200,20 +1197,65 @@ function CollapsibleDemo() {
 
 function CardDemo() {
   return (
-    <Card className="w-full max-w-xs rounded-lg" style={{ borderColor: "var(--gray-200)" }}>
-      <CardHeader>
-        <CardTitle className="text-base font-semibold" style={{ color: "var(--black)" }}>Projektübersicht</CardTitle>
-        <CardDescription className="text-sm" style={{ color: "var(--gray-400)" }}>Stand: Juni 2026</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <p className="text-sm" style={{ color: "var(--gray-500)" }}>Alle laufenden Projekte im Überblick.</p>
-      </CardContent>
-      <CardFooter>
-        <button className="flex items-center gap-1 text-sm font-semibold underline" style={{ color: "var(--black)" }}>
-          Mehr anzeigen <ChevronRight className="size-3.5" />
-        </button>
-      </CardFooter>
-    </Card>
+    <div className="w-full max-w-sm space-y-4">
+
+      {/* Standard card */}
+      <Card className="w-full rounded-xl" style={{ borderColor: "var(--gray-100)" }}>
+        <CardHeader>
+          <CardTitle className="text-base font-semibold" style={{ color: "var(--black)" }}>Projektübersicht</CardTitle>
+          <CardDescription style={{ color: "var(--gray-400)" }}>Stand: Juni 2026</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p className="text-sm" style={{ color: "var(--gray-400)" }}>Alle laufenden Projekte im Überblick.</p>
+        </CardContent>
+        <CardFooter>
+          <button className="flex items-center gap-1 text-sm font-semibold" style={{ color: "var(--black)" }}>
+            Mehr anzeigen <ChevronRight className="size-3.5" />
+          </button>
+        </CardFooter>
+      </Card>
+
+      {/* Metric card */}
+      <Card className="w-full rounded-xl" style={{ borderColor: "var(--gray-100)" }}>
+        <CardHeader className="flex flex-row items-center justify-between pb-2">
+          <CardTitle className="text-sm font-medium" style={{ color: "var(--gray-400)" }}>Gesamtumsatz</CardTitle>
+          <TrendingUp className="size-4" style={{ color: "var(--gray-400)" }} />
+        </CardHeader>
+        <CardContent>
+          <p className="text-2xl font-semibold" style={{ color: "var(--black)" }}>€ 24.500</p>
+          <p className="text-xs mt-1" style={{ color: "var(--gray-400)" }}>+12% gegenüber Vormonat</p>
+        </CardContent>
+      </Card>
+
+      {/* Notification cards */}
+      <div className="space-y-2">
+        <div className="flex items-start gap-3 rounded-xl p-3" style={{ backgroundColor: "var(--black)" }}>
+          <Check className="size-4 mt-0.5 shrink-0" style={{ color: "white" }} />
+          <div className="flex-1 min-w-0">
+            <p className="text-xs font-semibold" style={{ color: "white" }}>Build erfolgreich</p>
+            <p className="text-xs" style={{ color: "rgba(255,255,255,0.6)" }}>Vercel deployment abgeschlossen.</p>
+          </div>
+          <span className="text-xs shrink-0" style={{ color: "rgba(255,255,255,0.4)" }}>Jetzt</span>
+        </div>
+        <div className="flex items-start gap-3 rounded-xl p-3" style={{ backgroundColor: "var(--sand-light)" }}>
+          <Sparkles className="size-4 mt-0.5 shrink-0" style={{ color: "var(--black)" }} />
+          <div className="flex-1 min-w-0">
+            <p className="text-xs font-semibold" style={{ color: "var(--black)" }}>Neue Komponente</p>
+            <p className="text-xs" style={{ color: "var(--gray-400)" }}>Button wurde aktualisiert.</p>
+          </div>
+          <span className="text-xs shrink-0" style={{ color: "var(--gray-400)" }}>Jetzt</span>
+        </div>
+        <div className="flex items-start gap-3 rounded-xl p-3" style={{ backgroundColor: "var(--sand-light)" }}>
+          <Bell className="size-4 mt-0.5 shrink-0" style={{ color: "var(--black)" }} />
+          <div className="flex-1 min-w-0">
+            <p className="text-xs font-semibold" style={{ color: "var(--black)" }}>Neue Nachricht</p>
+            <p className="text-xs" style={{ color: "var(--gray-400)" }}>Victoria hat kommentiert.</p>
+          </div>
+          <span className="text-xs shrink-0" style={{ color: "var(--gray-400)" }}>Jetzt</span>
+        </div>
+      </div>
+
+    </div>
   );
 }
 
