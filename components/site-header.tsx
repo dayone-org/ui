@@ -71,7 +71,7 @@ export function SiteHeader({ active = "home" }: SiteHeaderProps) {
               className={navLinkClass}
               style={navLinkStyle(active === "anwendung")}
             >
-              Beispiel
+              Live Demo
             </Link>
           </nav>
 
@@ -114,7 +114,7 @@ export function SiteHeader({ active = "home" }: SiteHeaderProps) {
             className={navLinkClass}
             style={navLinkStyle(active === "anwendung")}
           >
-            Beispiel
+            Live Demo
           </Link>
         </nav>
       )}
