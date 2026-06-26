@@ -15,6 +15,7 @@ import { Empty, EmptyHeader, EmptyTitle, EmptyDescription } from "@/components/u
 import { Kbd } from "@/components/ui/kbd";
 import { Label } from "@/components/ui/label";
 import { Item, ItemGroup, ItemContent, ItemTitle, ItemDescription, ItemMedia, ItemActions, ItemSeparator } from "@/components/ui/item";
+import { Button } from "@/components/ui/button";
 import { ButtonGroup } from "@/components/ui/button-group";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -44,7 +45,6 @@ import { Drawer, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, D
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator } from "@/components/ui/command";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Progress } from "@/components/ui/progress";
@@ -982,27 +982,6 @@ function HoverCardDemo() {
   );
 }
 
-function CommandDemo() {
-  return (
-    <Command
-      className="rounded-lg"
-      style={{ border: "1px solid var(--gray-100)", maxWidth: "280px", boxShadow: "0 0 24px rgba(0,0,0,0.10)" }}
-    >
-      <CommandInput placeholder="Suchen..." style={{ color: "#969696" }} />
-      <CommandList>
-        <CommandEmpty style={{ color: "var(--gray-400)" }}>Kein Ergebnis</CommandEmpty>
-        <CommandGroup heading="Komponenten">
-          <CommandItem>Button</CommandItem>
-          <CommandSeparator />
-          <CommandItem>Input</CommandItem>
-          <CommandSeparator />
-          <CommandItem>Dialog</CommandItem>
-        </CommandGroup>
-      </CommandList>
-    </Command>
-  );
-}
-
 function TooltipDemo() {
   return (
     <TooltipProvider>
@@ -1037,7 +1016,7 @@ function TooltipDemo() {
 function AlertDemo() {
   return (
     <div className="w-full max-w-sm space-y-3">
-      <Alert className="rounded-md" style={{ borderColor: "var(--gray-200)" }}>
+      <Alert className="rounded-md" style={{ borderColor: "var(--gray-100)" }}>
         <AlertTitle className="font-semibold" style={{ color: "var(--black)" }}>Hinweis</AlertTitle>
         <AlertDescription style={{ color: "var(--gray-400)" }}>Deine Änderungen wurden gespeichert.</AlertDescription>
       </Alert>
@@ -1109,25 +1088,10 @@ function TableDemo() {
 }
 
 // Binär-Hintergrund — deterministisch, damit SSR/Client identisch rendern
-const CAROUSEL_BINARY = [
-  "0010110000101110110111010001100001000000",
-  "0100011110101110100101110011101011001010",
-  "1100111100101110100011010000010000011000",
-  "0100100111110111110100001000000110100000",
-  "0111110010011010110100010110110111101000",
-  "1011110100100010000111011111000111100010",
-  "0101100001011101101110100011000010000001",
-  "1101011001010011110011110010111010001101",
-  "0001000110100000101110100101110011101011",
-  "1110101100101001111001011101000110100000",
-  "0100100111110111110100001000000110100011",
-  "0111110010011010110100010110110111101001",
-].join("\n");
-
 const CAROUSEL_SLIDES = [
-  { labels: ["Rapid Revenue Validation"] },
-  { labels: ["Lean-Ops", "Productivity", "Automation"] },
-  { labels: ["Growth Design", "Profitability", "Performance"] },
+  { label: "Rapid Revenue Validation", bg: "var(--black)", fg: "var(--white)" },
+  { label: "Lean-Ops & Automation", bg: "var(--blue-highlight)", fg: "var(--white)" },
+  { label: "Growth & Performance", bg: "var(--sand-medium)", fg: "var(--black)" },
 ];
 
 function CarouselDemo() {
@@ -1137,42 +1101,23 @@ function CarouselDemo() {
         {CAROUSEL_SLIDES.map((slide, i) => (
           <CarouselItem key={i}>
             <div
-              className="relative aspect-[3/2] w-full overflow-hidden rounded-xl"
-              style={{ background: "linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 60%, #0e0e0e 100%)" }}
+              className="flex aspect-[3/2] w-full items-end overflow-hidden rounded-xl px-14 py-7"
+              style={{ backgroundColor: slide.bg }}
             >
-              {/* Binär-Code-Hintergrund */}
-              <pre
-                className="absolute inset-0 m-0 overflow-hidden p-5 font-mono leading-tight select-none"
-                style={{ fontSize: 13, color: "rgba(255,255,255,0.82)", whiteSpace: "pre-wrap", wordBreak: "break-all" }}
-                aria-hidden
-              >
-                {CAROUSEL_BINARY}
-              </pre>
-              {/* Hervorgehobene Labels */}
-              <div className="absolute inset-0 flex flex-col items-start justify-center gap-2.5 p-10">
-                {slide.labels.map((label) => (
-                  <span
-                    key={label}
-                    className="font-mono text-xl leading-tight"
-                    style={{ backgroundColor: "#fff", color: "#000", padding: "1px 5px", boxDecorationBreak: "clone" }}
-                  >
-                    {label}
-                  </span>
-                ))}
-              </div>
-              {/* Thinking… */}
-              <span className="absolute bottom-5 left-5 font-mono text-sm" style={{ color: "rgba(255,255,255,0.5)" }}>
-                Thinking...
+              <span className="text-2xl font-semibold leading-tight" style={{ color: slide.fg }}>
+                {slide.label}
               </span>
             </div>
           </CarouselItem>
         ))}
       </CarouselContent>
       <CarouselPrevious
-        style={{ color: "var(--black)", borderColor: "var(--gray-200)", left: 0, right: "auto", top: "50%", transform: "translateY(-50%)" }}
+        className="left-3"
+        style={{ color: "var(--black)", borderColor: "var(--gray-200)" }}
       />
       <CarouselNext
-        style={{ color: "var(--black)", borderColor: "var(--gray-200)", left: "auto", right: 0, top: "50%", transform: "translateY(-50%)" }}
+        className="right-3"
+        style={{ color: "var(--black)", borderColor: "var(--gray-200)" }}
       />
     </Carousel>
   );
@@ -1221,40 +1166,52 @@ function CssBarChart({
   periodLabel: string;
   barWidthPx?: number;
 }) {
+  const compact = !!barWidthPx;
+  const barHeight = compact ? 72 : 160;
+  const gap = compact ? 12 : 8;
   return (
     <div className="w-full">
-      {/* Header — Platzhalterwerte statt echter Zahlen */}
-      <div className="mb-6 flex items-baseline gap-3">
-        <span className="text-3xl font-bold tabular-nums" style={{ color: "var(--black)" }}>00</span>
-        <span className="flex items-center gap-1 text-xs font-medium" style={{ color: "var(--black)" }}>
-          <TrendingUp className="size-3" />
-          +00%
-        </span>
-        <span className="ml-auto text-xs" style={{ color: "#999" }}>{periodLabel}</span>
+      {compact ? (
+        <div className="mb-3 flex items-baseline gap-3">
+          <span className="text-xl font-bold tabular-nums" style={{ color: "var(--black)" }}>00</span>
+          <span className="ml-auto text-xs" style={{ color: "#999" }}>{periodLabel}</span>
+        </div>
+      ) : (
+        <div className="mb-6 flex items-baseline gap-3">
+          <span className="text-3xl font-bold tabular-nums" style={{ color: "var(--black)" }}>00</span>
+          <span className="flex items-center gap-1 text-xs font-medium" style={{ color: "var(--black)" }}>
+            <TrendingUp className="size-3" />
+            +00%
+          </span>
+          <span className="ml-auto text-xs" style={{ color: "#999" }}>{periodLabel}</span>
+        </div>
+      )}
+      <div className="flex" style={{ height: barHeight, gap }}>
+        {data.map((d) => (
+          <div
+            key={d.name}
+            className="flex flex-col justify-end"
+            style={compact ? { width: barWidthPx, flexShrink: 0, height: "100%" } : { flex: 1, paddingInline: 4, height: "100%" }}
+          >
+            <div
+              style={{
+                height: `${d.value}%`,
+                backgroundColor: "#1a1a1a",
+                borderRadius: "4px 4px 0 0",
+              }}
+            />
+          </div>
+        ))}
       </div>
-      {/* Balken */}
-      <div className="flex flex-col gap-2">
-        <div className="flex gap-2" style={{ height: 160 }}>
-          {data.map((d) => (
-            <div key={d.name} className="flex flex-1 flex-col justify-end px-1">
-              <div
-                style={{
-                  height: `${d.value}%`,
-                  backgroundColor: "#1a1a1a",
-                  borderRadius: "4px 4px 0 0",
-                  ...(barWidthPx ? { width: barWidthPx, marginInline: "auto" } : {}),
-                }}
-              />
-            </div>
-          ))}
-        </div>
-        <div className="flex gap-2">
-          {data.map((d) => (
-            <div key={d.name} className="flex-1 text-center" style={{ fontSize: 12, color: "#999" }}>
-              {d.name}
-            </div>
-          ))}
-        </div>
+      <div className="flex mt-2" style={{ gap }}>
+        {data.map((d) => (
+          <div
+            key={d.name}
+            style={compact ? { width: barWidthPx, flexShrink: 0, fontSize: 12, textAlign: "center", color: "#999" } : { flex: 1, fontSize: 12, textAlign: "center", color: "#999" }}
+          >
+            {d.name}
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -1265,7 +1222,7 @@ function ChartDemo() {
     <div className="flex w-[600px] max-w-full flex-col gap-12">
       <div className="flex flex-col gap-4">
         <DemoLabel>Kompakt · 2 Quartale</DemoLabel>
-        <CssBarChart data={CHART_MONTHS.slice(0, 6)} periodLabel="Aufrufe Q1 – Q2" barWidthPx={10} />
+        <CssBarChart data={CHART_MONTHS.slice(0, 6)} periodLabel="Aufrufe Q1 – Q2" barWidthPx={18} />
       </div>
       <div className="flex flex-col gap-4">
         <DemoLabel>Voll · Jan – Dez</DemoLabel>
@@ -1361,7 +1318,7 @@ function InfocardDemo() {
     <div className="flex flex-col gap-10">
       <div className="flex flex-wrap gap-4">
         {/* Standard info card */}
-        <Card className="w-72" style={OUTLINE_RING}>
+        <Card className="w-76" style={OUTLINE_RING}>
           <CardHeader>
             <CardTitle className="text-base font-semibold" style={{ color: "var(--black)" }}>Projektübersicht</CardTitle>
             <CardDescription style={{ color: "var(--gray-400)" }}>Stand: Juni 2026</CardDescription>
@@ -1372,7 +1329,7 @@ function InfocardDemo() {
         </Card>
 
         {/* Metric card */}
-        <Card className="w-72" style={OUTLINE_RING}>
+        <Card className="w-76" style={OUTLINE_RING}>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium" style={{ color: "var(--gray-400)" }}>Gesamtumsatz</CardTitle>
             <TrendingUp className="size-4" style={{ color: "var(--gray-400)" }} />
@@ -1384,11 +1341,11 @@ function InfocardDemo() {
         </Card>
       </div>
 
-      {/* Item — Outline & Filled je einmal */}
+      {/* Item — Outline & Filled */}
       <div className="flex flex-col gap-3">
         <DemoLabel>Item · Outline & Filled</DemoLabel>
         <div className="flex gap-4">
-          <Item variant="outline" className="w-80 gap-3 py-[15px]" style={{ borderColor: "var(--gray-100)" }}>
+          <Item variant="outline" className="w-76 gap-3 py-[15px]" style={{ borderColor: "var(--gray-100)" }}>
             <Avatar className="size-9 shrink-0 ring-2 ring-background">
               <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>VI</AvatarFallback>
             </Avatar>
@@ -1397,7 +1354,7 @@ function InfocardDemo() {
               <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>Product Design</ItemDescription>
             </ItemContent>
           </Item>
-          <Item className="w-80 gap-3 border-transparent py-[15px]" style={{ backgroundColor: "#F4F2EE" }}>
+          <Item className="w-76 gap-3 border-transparent bg-[#F4F2EE] py-[15px] transition-colors hover:bg-[#EDE7DD]" style={{ "--tw-ring-color": "#F4F2EE" } as React.CSSProperties}>
             <Avatar className="size-9 shrink-0 ring-2" style={{ "--tw-ring-color": "#F4F2EE" } as React.CSSProperties}>
               <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>VI</AvatarFallback>
             </Avatar>
@@ -1414,90 +1371,148 @@ function InfocardDemo() {
 
 function ButtoncardDemo() {
   return (
-    <div className="flex flex-wrap gap-4">
-      {/* Clickable navigation card */}
-      <Card
-        role="button"
-        tabIndex={0}
-        className="w-80 cursor-pointer transition-all duration-150 hover:scale-[1.02] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] focus-visible:outline-none focus-visible:ring-2"
-        style={OUTLINE_RING}
-      >
-        <CardHeader className="flex flex-row items-center justify-between">
-          <div className="flex flex-col gap-1">
-            <CardTitle className="text-base font-semibold" style={{ color: "var(--black)" }}>Design System</CardTitle>
-            <CardDescription style={{ color: "var(--gray-400)" }}>56 Komponenten · heute aktualisiert</CardDescription>
-          </div>
-          <ChevronRight className="size-5 shrink-0" style={{ color: "var(--gray-400)" }} />
-        </CardHeader>
-      </Card>
+    <div className="flex flex-col gap-10">
+      <div className="flex flex-wrap gap-4">
+        <Card role="button" tabIndex={0}
+          className="w-76 cursor-pointer transition-colors duration-150 hover:bg-[#F4F2EE] focus-visible:outline-none focus-visible:ring-2"
+          style={OUTLINE_RING}>
+          <CardHeader className="flex flex-row items-center justify-between">
+            <div className="flex flex-col gap-1">
+              <CardTitle className="text-base font-semibold" style={{ color: "var(--black)" }}>Projektübersicht</CardTitle>
+              <CardDescription style={{ color: "var(--gray-400)" }}>Stand: Juni 2026</CardDescription>
+            </div>
+            <ChevronRight className="size-5 shrink-0" style={{ color: "var(--gray-400)" }} />
+          </CardHeader>
+          <CardContent>
+            <p className="text-sm" style={{ color: "var(--gray-400)" }}>Alle laufenden Projekte im Überblick — reine Darstellung.</p>
+          </CardContent>
+        </Card>
 
-      {/* Clickable contact card */}
-      <Card
-        role="button"
-        tabIndex={0}
-        className="w-80 cursor-pointer transition-all duration-150 hover:scale-[1.02] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] focus-visible:outline-none focus-visible:ring-2"
-        style={OUTLINE_RING}
-      >
-        <CardContent className="flex items-center gap-3 py-1">
-          <Avatar className="size-10 shrink-0 ring-2 ring-background">
-            <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>VI</AvatarFallback>
-          </Avatar>
-          <div className="flex flex-1 flex-col gap-0.5">
-            <p className="text-sm font-semibold" style={{ color: "var(--black)" }}>Victoria Itter</p>
-            <p className="text-xs" style={{ color: "var(--gray-400)" }}>Profil öffnen</p>
-          </div>
-          <ChevronRight className="size-5 shrink-0" style={{ color: "var(--gray-400)" }} />
-        </CardContent>
-      </Card>
+        <Card role="button" tabIndex={0}
+          className="w-76 cursor-pointer transition-colors duration-150 hover:bg-[#F4F2EE] focus-visible:outline-none focus-visible:ring-2"
+          style={OUTLINE_RING}>
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium" style={{ color: "var(--gray-400)" }}>Gesamtumsatz</CardTitle>
+            <ChevronRight className="size-5 shrink-0" style={{ color: "var(--gray-400)" }} />
+          </CardHeader>
+          <CardContent>
+            <p className="text-2xl font-semibold tabular-nums" style={{ color: "var(--black)" }}>€ 24.500</p>
+            <p className="text-xs mt-1" style={{ color: "var(--gray-400)" }}>+12% gegenüber Vormonat</p>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div className="flex flex-col gap-3">
+        <DemoLabel>Item · Outline & Filled</DemoLabel>
+        <div className="flex gap-4">
+          <Item variant="outline" role="button" tabIndex={0}
+            className="w-76 gap-3 py-[15px] cursor-pointer transition-colors duration-150 hover:bg-[#F4F2EE]"
+            style={{ borderColor: "var(--gray-100)" }}>
+            <Avatar className="size-9 shrink-0 ring-2 ring-background">
+              <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>VI</AvatarFallback>
+            </Avatar>
+            <ItemContent className="gap-0.5">
+              <ItemTitle className="font-semibold" style={{ color: "var(--black)" }}>Victoria Itter</ItemTitle>
+              <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>Product Design</ItemDescription>
+            </ItemContent>
+            <ChevronRight className="size-5 shrink-0 ml-auto" style={{ color: "var(--gray-400)" }} />
+          </Item>
+          <Item role="button" tabIndex={0}
+            className="w-76 gap-3 border-transparent bg-[#F4F2EE] py-[15px] cursor-pointer transition-colors hover:bg-[#EDE7DD]"
+            style={{ "--tw-ring-color": "#F4F2EE" } as React.CSSProperties}>
+            <Avatar className="size-9 shrink-0 ring-2" style={{ "--tw-ring-color": "#F4F2EE" } as React.CSSProperties}>
+              <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>VI</AvatarFallback>
+            </Avatar>
+            <ItemContent className="gap-0.5">
+              <ItemTitle className="font-semibold" style={{ color: "var(--black)" }}>Victoria Itter</ItemTitle>
+              <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>Product Design</ItemDescription>
+            </ItemContent>
+            <ChevronRight className="size-5 shrink-0 ml-auto" style={{ color: "var(--gray-400)" }} />
+          </Item>
+        </div>
+      </div>
     </div>
   );
 }
 
 function ListDemo() {
-  const PALETTE = [
-    { bg: "var(--black)", fg: "var(--white)" },
-    { bg: "var(--sand-medium)", fg: "var(--black)" },
-    { bg: "var(--blue-light)", fg: "var(--black)" },
-  ];
+  const [clickable, setClickable] = useState(false);
   const people = [
-    { title: "Victoria Itter", description: "Product Design" },
-    { title: "Bean Duong", description: "Development" },
-    { title: "Max Moldovan", description: "IT" },
+    { initials: "VI", name: "Victoria Itter", role: "Product Design" },
+    { initials: "JW", name: "Jonas Weber", role: "Engineering" },
+    { initials: "LS", name: "Lena Schmidt", role: "Marketing" },
   ];
   return (
-    <div className="flex gap-8">
-      {/* Outline */}
-      <ItemGroup className="w-[369px] gap-2">
-        {people.map(({ title, description }, i) => (
-          <Item key={title} variant="outline" className="gap-3 py-[15px]" style={{ borderColor: "var(--gray-100)" }}>
-            <Avatar className="size-9 shrink-0 ring-2 ring-background">
-              <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: PALETTE[i].bg, color: PALETTE[i].fg }}>
-                {title.split(" ").map((n) => n[0]).join("")}
-              </AvatarFallback>
-            </Avatar>
-            <ItemContent className="gap-0.5">
-              <ItemTitle className="font-semibold" style={{ color: "var(--black)" }}>{title}</ItemTitle>
-              <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>{description}</ItemDescription>
-            </ItemContent>
-          </Item>
-        ))}
-      </ItemGroup>
-      {/* Fill #F4F2EE */}
-      <ItemGroup className="w-[369px] gap-2">
-        {people.map(({ title, description }, i) => (
-          <Item key={title} className="gap-3 py-[15px] border-transparent" style={{ backgroundColor: "#F4F2EE" }}>
-            <Avatar className="size-9 shrink-0 ring-2" style={{ "--tw-ring-color": "#F4F2EE" } as React.CSSProperties}>
-              <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: PALETTE[i].bg, color: PALETTE[i].fg }}>
-                {title.split(" ").map((n) => n[0]).join("")}
-              </AvatarFallback>
-            </Avatar>
-            <ItemContent className="gap-0.5">
-              <ItemTitle className="font-semibold" style={{ color: "var(--black)" }}>{title}</ItemTitle>
-              <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>{description}</ItemDescription>
-            </ItemContent>
-          </Item>
-        ))}
-      </ItemGroup>
+    <div className="flex flex-col gap-5">
+      {/* Toggle: Infocards ↔ Klickbare Cards */}
+      <label className="flex w-fit cursor-pointer items-center gap-3">
+        <Switch checked={clickable} onCheckedChange={setClickable} />
+        <span className="text-sm font-medium" style={{ color: "var(--black)" }}>
+          {clickable ? "Klickbare Cards" : "Infocards"}
+        </span>
+      </label>
+
+      {/* Zwei Spalten: Outline links, Filled rechts */}
+      <div className="flex gap-4">
+        <div className="flex flex-col gap-3">
+          {people.map(({ initials, name, role }) =>
+            clickable ? (
+              <Item key={name} variant="outline" role="button" tabIndex={0}
+                className="w-76 gap-3 py-[15px] cursor-pointer transition-colors duration-150 hover:bg-[#F4F2EE]"
+                style={{ borderColor: "var(--gray-100)" }}>
+                <Avatar className="size-9 shrink-0 ring-2 ring-background">
+                  <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>{initials}</AvatarFallback>
+                </Avatar>
+                <ItemContent className="gap-0.5">
+                  <ItemTitle className="font-semibold" style={{ color: "var(--black)" }}>{name}</ItemTitle>
+                  <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>{role}</ItemDescription>
+                </ItemContent>
+                <ChevronRight className="size-5 shrink-0 ml-auto" style={{ color: "var(--gray-400)" }} />
+              </Item>
+            ) : (
+              <Item key={name} variant="outline" className="w-76 gap-3 py-[15px]" style={{ borderColor: "var(--gray-100)" }}>
+                <Avatar className="size-9 shrink-0 ring-2 ring-background">
+                  <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>{initials}</AvatarFallback>
+                </Avatar>
+                <ItemContent className="gap-0.5">
+                  <ItemTitle className="font-semibold" style={{ color: "var(--black)" }}>{name}</ItemTitle>
+                  <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>{role}</ItemDescription>
+                </ItemContent>
+              </Item>
+            )
+          )}
+        </div>
+        <div className="flex flex-col gap-3">
+          {people.map(({ initials, name, role }) =>
+            clickable ? (
+              <Item key={name} role="button" tabIndex={0}
+                className="w-76 gap-3 border-transparent bg-[#F4F2EE] py-[15px] cursor-pointer transition-colors hover:bg-[#EDE7DD]"
+                style={{ "--tw-ring-color": "#F4F2EE" } as React.CSSProperties}>
+                <Avatar className="size-9 shrink-0 ring-2" style={{ "--tw-ring-color": "#F4F2EE" } as React.CSSProperties}>
+                  <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>{initials}</AvatarFallback>
+                </Avatar>
+                <ItemContent className="gap-0.5">
+                  <ItemTitle className="font-semibold" style={{ color: "var(--black)" }}>{name}</ItemTitle>
+                  <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>{role}</ItemDescription>
+                </ItemContent>
+                <ChevronRight className="size-5 shrink-0 ml-auto" style={{ color: "var(--gray-400)" }} />
+              </Item>
+            ) : (
+              <Item key={name}
+                className="w-76 gap-3 border-transparent bg-[#F4F2EE] py-[15px] transition-colors hover:bg-[#EDE7DD]"
+                style={{ "--tw-ring-color": "#F4F2EE" } as React.CSSProperties}>
+                <Avatar className="size-9 shrink-0 ring-2" style={{ "--tw-ring-color": "#F4F2EE" } as React.CSSProperties}>
+                  <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>{initials}</AvatarFallback>
+                </Avatar>
+                <ItemContent className="gap-0.5">
+                  <ItemTitle className="font-semibold" style={{ color: "var(--black)" }}>{name}</ItemTitle>
+                  <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>{role}</ItemDescription>
+                </ItemContent>
+              </Item>
+            )
+          )}
+        </div>
+      </div>
     </div>
   );
 }
@@ -1591,7 +1606,6 @@ const DEMOS: Record<string, () => React.ReactElement> = {
   sheet: SheetDemo,
   popover: PopoverDemo,
   "hover-card": HoverCardDemo,
-  command: CommandDemo,
   tooltip: TooltipDemo,
   alert: AlertDemo,
   progress: ProgressDemo,
