@@ -685,7 +685,7 @@ export default function HomePage() {
             Design System
           </h1>
           <p className="text-base leading-relaxed whitespace-nowrap" style={{ color: "var(--gray-400)" }}>
-            Das gemeinsame Design-Fundament für alle DAYONE-Projekte
+            Das gemeinsame Design-Fundament für alle Projekte
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3">
             <Button asChild size="lg">
