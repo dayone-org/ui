@@ -10,13 +10,19 @@ Dieses Repository stellt einen shadcn Registry-Eintrag bereit:
 npx shadcn@latest add dayone-org/dayone-ui/all
 ```
 
+Spezifische Primitives koennen einzeln installiert werden:
+
+```bash
+npx shadcn@latest add dayone-org/dayone-ui/button
+npx shadcn@latest add dayone-org/dayone-ui/input
+```
+
 Der Eintrag `all` installiert:
 
 - alle Komponenten aus `components/ui/`
-- `components/dayone-field.tsx`
 - `lib/utils.ts`
 - `hooks/use-mobile.ts`
-- `app/globals.css` mit DAYONE Tokens
+- `app/globals.css` mit den DAYONE Primitive- und Semantic-Tokens
 - die privaten Roobert-Fontdateien nach `public/fonts/`
 
 Hinweis: Der GitHub-Registry-Shorthand funktioniert laut shadcn nur mit öffentlichen `github.com` Repositories. Für ein privates Repository sollte derselbe `all`-Eintrag über eine authentifizierte shadcn Registry-Namespace-Konfiguration bereitgestellt werden.

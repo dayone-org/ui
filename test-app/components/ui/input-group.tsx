@@ -14,7 +14,7 @@ function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
       data-slot="input-group"
       role="group"
       className={cn(
-        "group/input-group relative flex w-full min-w-0 items-center rounded-lg border border-[var(--gray-100)] transition-colors outline-none focus-within:border-black has-disabled:opacity-50 has-[[data-slot][aria-invalid=true]]:border-destructive has-[>[data-align=block-end]]:flex-col has-[>[data-align=block-start]]:flex-col",
+        "group/input-group relative flex w-full min-w-0 items-center rounded-lg border border-input transition-colors outline-none focus-within:border-ring has-disabled:opacity-50 has-[[data-slot][aria-invalid=true]]:border-destructive has-[>[data-align=block-end]]:flex-col has-[>[data-align=block-start]]:flex-col",
         className
       )}
       {...props}

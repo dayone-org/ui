@@ -6,14 +6,13 @@
     {
       "name": "all",
       "type": "registry:item",
-      "title": "DAYONE UI",
-      "description": "DAYONE component library for internal apps, packaged as a shadcn registry item.",
+      "title": "DAYONE UI Primitives",
+      "description": "Complete DAYONE primitive component surface for internal apps.",
       "dependencies": [
         "@base-ui/react@^1.4.1",
         "class-variance-authority@^0.7.1",
         "clsx@^2.1.1",
         "cmdk@^1.1.1",
-        "date-fns@^4.1.0",
         "embla-carousel-react@^8.6.0",
         "input-otp@^1.4.2",
         "lucide-react@^1.16.0",
@@ -28,7 +27,7 @@
       ],
       "files": [
         {
-          "path": "app/globals.css",
+          "path": "registry/globals.css",
           "type": "registry:file",
           "target": "~/app/globals.css"
         },
@@ -51,11 +50,6 @@
           "path": "hooks/use-mobile.ts",
           "type": "registry:hook",
           "target": "@hooks/use-mobile.ts"
-        },
-        {
-          "path": "components/dayone-field.tsx",
-          "type": "registry:component",
-          "target": "@components/dayone-field.tsx"
         },
         {
           "path": "components/ui/accordion.tsx",
@@ -337,8 +331,2356 @@
           "type": "registry:ui",
           "target": "@ui/tooltip.tsx"
         }
+      ]
+    },
+    {
+      "name": "accordion",
+      "type": "registry:ui",
+      "title": "Accordion",
+      "description": "DAYONE Accordion primitive.",
+      "dependencies": [
+        "clsx@^2.1.1",
+        "lucide-react@^1.16.0",
+        "radix-ui@^1.4.3",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
       ],
-      "docs": "Install into a shadcn-enabled Tailwind v4 app. This item writes DAYONE design tokens to app/globals.css, installs the private Roobert font files into public/fonts, and adds the complete DAYONE UI component set."
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/accordion.tsx",
+          "type": "registry:ui",
+          "target": "@ui/accordion.tsx"
+        }
+      ]
+    },
+    {
+      "name": "alert-dialog",
+      "type": "registry:ui",
+      "title": "Alert Dialog",
+      "description": "DAYONE Alert Dialog primitive.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "clsx@^2.1.1",
+        "radix-ui@^1.4.3",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/alert-dialog.tsx",
+          "type": "registry:ui",
+          "target": "@ui/alert-dialog.tsx"
+        },
+        {
+          "path": "components/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "alert",
+      "type": "registry:ui",
+      "title": "Alert",
+      "description": "DAYONE Alert primitive.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "clsx@^2.1.1",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/alert.tsx",
+          "type": "registry:ui",
+          "target": "@ui/alert.tsx"
+        }
+      ]
+    },
+    {
+      "name": "aspect-ratio",
+      "type": "registry:ui",
+      "title": "Aspect Ratio",
+      "description": "DAYONE Aspect Ratio primitive.",
+      "dependencies": [
+        "radix-ui@^1.4.3",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "components/ui/aspect-ratio.tsx",
+          "type": "registry:ui",
+          "target": "@ui/aspect-ratio.tsx"
+        }
+      ]
+    },
+    {
+      "name": "avatar",
+      "type": "registry:ui",
+      "title": "Avatar",
+      "description": "DAYONE Avatar primitive.",
+      "dependencies": [
+        "clsx@^2.1.1",
+        "radix-ui@^1.4.3",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/avatar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/avatar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "badge",
+      "type": "registry:ui",
+      "title": "Badge",
+      "description": "DAYONE Badge primitive.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "clsx@^2.1.1",
+        "radix-ui@^1.4.3",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/badge.tsx",
+          "type": "registry:ui",
+          "target": "@ui/badge.tsx"
+        }
+      ]
+    },
+    {
+      "name": "breadcrumb",
+      "type": "registry:ui",
+      "title": "Breadcrumb",
+      "description": "DAYONE Breadcrumb primitive.",
+      "dependencies": [
+        "clsx@^2.1.1",
+        "lucide-react@^1.16.0",
+        "radix-ui@^1.4.3",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/breadcrumb.tsx",
+          "type": "registry:ui",
+          "target": "@ui/breadcrumb.tsx"
+        }
+      ]
+    },
+    {
+      "name": "button-group",
+      "type": "registry:ui",
+      "title": "Button Group",
+      "description": "DAYONE Button Group primitive.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "clsx@^2.1.1",
+        "radix-ui@^1.4.3",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/button-group.tsx",
+          "type": "registry:ui",
+          "target": "@ui/button-group.tsx"
+        },
+        {
+          "path": "components/ui/separator.tsx",
+          "type": "registry:ui",
+          "target": "@ui/separator.tsx"
+        }
+      ]
+    },
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "DAYONE Button primitive.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "clsx@^2.1.1",
+        "radix-ui@^1.4.3",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "calendar",
+      "type": "registry:ui",
+      "title": "Calendar",
+      "description": "DAYONE Calendar primitive.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "clsx@^2.1.1",
+        "lucide-react@^1.16.0",
+        "radix-ui@^1.4.3",
+        "react-day-picker@^10.0.0",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/calendar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/calendar.tsx"
+        },
+        {
+          "path": "components/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "card",
+      "type": "registry:ui",
+      "title": "Card",
+      "description": "DAYONE Card primitive.",
+      "dependencies": [
+        "clsx@^2.1.1",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/card.tsx",
+          "type": "registry:ui",
+          "target": "@ui/card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "carousel",
+      "type": "registry:ui",
+      "title": "Carousel",
+      "description": "DAYONE Carousel primitive.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "clsx@^2.1.1",
+        "embla-carousel-react@^8.6.0",
+        "lucide-react@^1.16.0",
+        "radix-ui@^1.4.3",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/carousel.tsx",
+          "type": "registry:ui",
+          "target": "@ui/carousel.tsx"
+        },
+        {
+          "path": "components/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "chart",
+      "type": "registry:ui",
+      "title": "Chart",
+      "description": "DAYONE Chart primitive.",
+      "dependencies": [
+        "clsx@^2.1.1",
+        "recharts@^3.8.0",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/chart.tsx",
+          "type": "registry:ui",
+          "target": "@ui/chart.tsx"
+        }
+      ]
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:ui",
+      "title": "Checkbox",
+      "description": "DAYONE Checkbox primitive.",
+      "dependencies": [
+        "clsx@^2.1.1",
+        "lucide-react@^1.16.0",
+        "radix-ui@^1.4.3",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/checkbox.tsx",
+          "type": "registry:ui",
+          "target": "@ui/checkbox.tsx"
+        }
+      ]
+    },
+    {
+      "name": "collapsible",
+      "type": "registry:ui",
+      "title": "Collapsible",
+      "description": "DAYONE Collapsible primitive.",
+      "dependencies": [
+        "radix-ui@^1.4.3",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "components/ui/collapsible.tsx",
+          "type": "registry:ui",
+          "target": "@ui/collapsible.tsx"
+        }
+      ]
+    },
+    {
+      "name": "combobox",
+      "type": "registry:ui",
+      "title": "Combobox",
+      "description": "DAYONE Combobox primitive.",
+      "dependencies": [
+        "@base-ui/react@^1.4.1",
+        "class-variance-authority@^0.7.1",
+        "clsx@^2.1.1",
+        "lucide-react@^1.16.0",
+        "radix-ui@^1.4.3",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/combobox.tsx",
+          "type": "registry:ui",
+          "target": "@ui/combobox.tsx"
+        },
+        {
+          "path": "components/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/button.tsx"
+        },
+        {
+          "path": "components/ui/input-group.tsx",
+          "type": "registry:ui",
+          "target": "@ui/input-group.tsx"
+        },
+        {
+          "path": "components/ui/input.tsx",
+          "type": "registry:ui",
+          "target": "@ui/input.tsx"
+        },
+        {
+          "path": "components/ui/textarea.tsx",
+          "type": "registry:ui",
+          "target": "@ui/textarea.tsx"
+        }
+      ]
+    },
+    {
+      "name": "command",
+      "type": "registry:ui",
+      "title": "Command",
+      "description": "DAYONE Command primitive.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "clsx@^2.1.1",
+        "cmdk@^1.1.1",
+        "lucide-react@^1.16.0",
+        "radix-ui@^1.4.3",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/command.tsx",
+          "type": "registry:ui",
+          "target": "@ui/command.tsx"
+        },
+        {
+          "path": "components/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/button.tsx"
+        },
+        {
+          "path": "components/ui/dialog.tsx",
+          "type": "registry:ui",
+          "target": "@ui/dialog.tsx"
+        },
+        {
+          "path": "components/ui/input-group.tsx",
+          "type": "registry:ui",
+          "target": "@ui/input-group.tsx"
+        },
+        {
+          "path": "components/ui/input.tsx",
+          "type": "registry:ui",
+          "target": "@ui/input.tsx"
+        },
+        {
+          "path": "components/ui/textarea.tsx",
+          "type": "registry:ui",
+          "target": "@ui/textarea.tsx"
+        }
+      ]
+    },
+    {
+      "name": "context-menu",
+      "type": "registry:ui",
+      "title": "Context Menu",
+      "description": "DAYONE Context Menu primitive.",
+      "dependencies": [
+        "clsx@^2.1.1",
+        "lucide-react@^1.16.0",
+        "radix-ui@^1.4.3",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/context-menu.tsx",
+          "type": "registry:ui",
+          "target": "@ui/context-menu.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dialog",
+      "type": "registry:ui",
+      "title": "Dialog",
+      "description": "DAYONE Dialog primitive.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "clsx@^2.1.1",
+        "lucide-react@^1.16.0",
+        "radix-ui@^1.4.3",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/dialog.tsx",
+          "type": "registry:ui",
+          "target": "@ui/dialog.tsx"
+        },
+        {
+          "path": "components/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "direction",
+      "type": "registry:ui",
+      "title": "Direction",
+      "description": "DAYONE Direction primitive.",
+      "dependencies": [
+        "radix-ui@^1.4.3",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "components/ui/direction.tsx",
+          "type": "registry:ui",
+          "target": "@ui/direction.tsx"
+        }
+      ]
+    },
+    {
+      "name": "drawer",
+      "type": "registry:ui",
+      "title": "Drawer",
+      "description": "DAYONE Drawer primitive.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "clsx@^2.1.1",
+        "lucide-react@^1.16.0",
+        "radix-ui@^1.4.3",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0",
+        "vaul@^1.1.2"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/drawer.tsx",
+          "type": "registry:ui",
+          "target": "@ui/drawer.tsx"
+        },
+        {
+          "path": "components/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dropdown-menu",
+      "type": "registry:ui",
+      "title": "Dropdown Menu",
+      "description": "DAYONE Dropdown Menu primitive.",
+      "dependencies": [
+        "clsx@^2.1.1",
+        "lucide-react@^1.16.0",
+        "radix-ui@^1.4.3",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/dropdown-menu.tsx",
+          "type": "registry:ui",
+          "target": "@ui/dropdown-menu.tsx"
+        }
+      ]
+    },
+    {
+      "name": "empty",
+      "type": "registry:ui",
+      "title": "Empty",
+      "description": "DAYONE Empty primitive.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "clsx@^2.1.1",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/empty.tsx",
+          "type": "registry:ui",
+          "target": "@ui/empty.tsx"
+        }
+      ]
+    },
+    {
+      "name": "field",
+      "type": "registry:ui",
+      "title": "Field",
+      "description": "DAYONE Field primitive.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "clsx@^2.1.1",
+        "radix-ui@^1.4.3",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/field.tsx",
+          "type": "registry:ui",
+          "target": "@ui/field.tsx"
+        },
+        {
+          "path": "components/ui/label.tsx",
+          "type": "registry:ui",
+          "target": "@ui/label.tsx"
+        },
+        {
+          "path": "components/ui/separator.tsx",
+          "type": "registry:ui",
+          "target": "@ui/separator.tsx"
+        }
+      ]
+    },
+    {
+      "name": "hover-card",
+      "type": "registry:ui",
+      "title": "Hover Card",
+      "description": "DAYONE Hover Card primitive.",
+      "dependencies": [
+        "clsx@^2.1.1",
+        "radix-ui@^1.4.3",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/hover-card.tsx",
+          "type": "registry:ui",
+          "target": "@ui/hover-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "input-group",
+      "type": "registry:ui",
+      "title": "Input Group",
+      "description": "DAYONE Input Group primitive.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "clsx@^2.1.1",
+        "radix-ui@^1.4.3",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/input-group.tsx",
+          "type": "registry:ui",
+          "target": "@ui/input-group.tsx"
+        },
+        {
+          "path": "components/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/button.tsx"
+        },
+        {
+          "path": "components/ui/input.tsx",
+          "type": "registry:ui",
+          "target": "@ui/input.tsx"
+        },
+        {
+          "path": "components/ui/textarea.tsx",
+          "type": "registry:ui",
+          "target": "@ui/textarea.tsx"
+        }
+      ]
+    },
+    {
+      "name": "input-otp",
+      "type": "registry:ui",
+      "title": "Input Otp",
+      "description": "DAYONE Input Otp primitive.",
+      "dependencies": [
+        "clsx@^2.1.1",
+        "input-otp@^1.4.2",
+        "lucide-react@^1.16.0",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/input-otp.tsx",
+          "type": "registry:ui",
+          "target": "@ui/input-otp.tsx"
+        }
+      ]
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "DAYONE Input primitive.",
+      "dependencies": [
+        "clsx@^2.1.1",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/input.tsx",
+          "type": "registry:ui",
+          "target": "@ui/input.tsx"
+        }
+      ]
+    },
+    {
+      "name": "item",
+      "type": "registry:ui",
+      "title": "Item",
+      "description": "DAYONE Item primitive.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "clsx@^2.1.1",
+        "radix-ui@^1.4.3",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/item.tsx",
+          "type": "registry:ui",
+          "target": "@ui/item.tsx"
+        },
+        {
+          "path": "components/ui/separator.tsx",
+          "type": "registry:ui",
+          "target": "@ui/separator.tsx"
+        }
+      ]
+    },
+    {
+      "name": "kbd",
+      "type": "registry:ui",
+      "title": "Kbd",
+      "description": "DAYONE Kbd primitive.",
+      "dependencies": [
+        "clsx@^2.1.1",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/kbd.tsx",
+          "type": "registry:ui",
+          "target": "@ui/kbd.tsx"
+        }
+      ]
+    },
+    {
+      "name": "label",
+      "type": "registry:ui",
+      "title": "Label",
+      "description": "DAYONE Label primitive.",
+      "dependencies": [
+        "clsx@^2.1.1",
+        "radix-ui@^1.4.3",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/label.tsx",
+          "type": "registry:ui",
+          "target": "@ui/label.tsx"
+        }
+      ]
+    },
+    {
+      "name": "menubar",
+      "type": "registry:ui",
+      "title": "Menubar",
+      "description": "DAYONE Menubar primitive.",
+      "dependencies": [
+        "clsx@^2.1.1",
+        "lucide-react@^1.16.0",
+        "radix-ui@^1.4.3",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/menubar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/menubar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "native-select",
+      "type": "registry:ui",
+      "title": "Native Select",
+      "description": "DAYONE Native Select primitive.",
+      "dependencies": [
+        "clsx@^2.1.1",
+        "lucide-react@^1.16.0",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/native-select.tsx",
+          "type": "registry:ui",
+          "target": "@ui/native-select.tsx"
+        }
+      ]
+    },
+    {
+      "name": "navigation-menu",
+      "type": "registry:ui",
+      "title": "Navigation Menu",
+      "description": "DAYONE Navigation Menu primitive.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "clsx@^2.1.1",
+        "lucide-react@^1.16.0",
+        "radix-ui@^1.4.3",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/navigation-menu.tsx",
+          "type": "registry:ui",
+          "target": "@ui/navigation-menu.tsx"
+        }
+      ]
+    },
+    {
+      "name": "pagination",
+      "type": "registry:ui",
+      "title": "Pagination",
+      "description": "DAYONE Pagination primitive.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "clsx@^2.1.1",
+        "lucide-react@^1.16.0",
+        "radix-ui@^1.4.3",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/pagination.tsx",
+          "type": "registry:ui",
+          "target": "@ui/pagination.tsx"
+        },
+        {
+          "path": "components/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "popover",
+      "type": "registry:ui",
+      "title": "Popover",
+      "description": "DAYONE Popover primitive.",
+      "dependencies": [
+        "clsx@^2.1.1",
+        "radix-ui@^1.4.3",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/popover.tsx",
+          "type": "registry:ui",
+          "target": "@ui/popover.tsx"
+        }
+      ]
+    },
+    {
+      "name": "progress",
+      "type": "registry:ui",
+      "title": "Progress",
+      "description": "DAYONE Progress primitive.",
+      "dependencies": [
+        "clsx@^2.1.1",
+        "radix-ui@^1.4.3",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/progress.tsx",
+          "type": "registry:ui",
+          "target": "@ui/progress.tsx"
+        }
+      ]
+    },
+    {
+      "name": "radio-group",
+      "type": "registry:ui",
+      "title": "Radio Group",
+      "description": "DAYONE Radio Group primitive.",
+      "dependencies": [
+        "clsx@^2.1.1",
+        "radix-ui@^1.4.3",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/radio-group.tsx",
+          "type": "registry:ui",
+          "target": "@ui/radio-group.tsx"
+        }
+      ]
+    },
+    {
+      "name": "resizable",
+      "type": "registry:ui",
+      "title": "Resizable",
+      "description": "DAYONE Resizable primitive.",
+      "dependencies": [
+        "clsx@^2.1.1",
+        "react-resizable-panels@^4.11.1",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/resizable.tsx",
+          "type": "registry:ui",
+          "target": "@ui/resizable.tsx"
+        }
+      ]
+    },
+    {
+      "name": "scroll-area",
+      "type": "registry:ui",
+      "title": "Scroll Area",
+      "description": "DAYONE Scroll Area primitive.",
+      "dependencies": [
+        "clsx@^2.1.1",
+        "radix-ui@^1.4.3",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/scroll-area.tsx",
+          "type": "registry:ui",
+          "target": "@ui/scroll-area.tsx"
+        }
+      ]
+    },
+    {
+      "name": "search-bar",
+      "type": "registry:ui",
+      "title": "Search Bar",
+      "description": "DAYONE Search Bar primitive.",
+      "dependencies": [
+        "clsx@^2.1.1",
+        "lucide-react@^1.16.0",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/search-bar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/search-bar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "title": "Select",
+      "description": "DAYONE Select primitive.",
+      "dependencies": [
+        "clsx@^2.1.1",
+        "lucide-react@^1.16.0",
+        "radix-ui@^1.4.3",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/select.tsx",
+          "type": "registry:ui",
+          "target": "@ui/select.tsx"
+        }
+      ]
+    },
+    {
+      "name": "separator",
+      "type": "registry:ui",
+      "title": "Separator",
+      "description": "DAYONE Separator primitive.",
+      "dependencies": [
+        "clsx@^2.1.1",
+        "radix-ui@^1.4.3",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/separator.tsx",
+          "type": "registry:ui",
+          "target": "@ui/separator.tsx"
+        }
+      ]
+    },
+    {
+      "name": "sheet",
+      "type": "registry:ui",
+      "title": "Sheet",
+      "description": "DAYONE Sheet primitive.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "clsx@^2.1.1",
+        "lucide-react@^1.16.0",
+        "radix-ui@^1.4.3",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/sheet.tsx",
+          "type": "registry:ui",
+          "target": "@ui/sheet.tsx"
+        },
+        {
+          "path": "components/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "sidebar",
+      "type": "registry:ui",
+      "title": "Sidebar",
+      "description": "DAYONE Sidebar primitive.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "clsx@^2.1.1",
+        "lucide-react@^1.16.0",
+        "radix-ui@^1.4.3",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "hooks/use-mobile.ts",
+          "type": "registry:hook",
+          "target": "@hooks/use-mobile.ts"
+        },
+        {
+          "path": "components/ui/sidebar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/sidebar.tsx"
+        },
+        {
+          "path": "components/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/button.tsx"
+        },
+        {
+          "path": "components/ui/input.tsx",
+          "type": "registry:ui",
+          "target": "@ui/input.tsx"
+        },
+        {
+          "path": "components/ui/separator.tsx",
+          "type": "registry:ui",
+          "target": "@ui/separator.tsx"
+        },
+        {
+          "path": "components/ui/sheet.tsx",
+          "type": "registry:ui",
+          "target": "@ui/sheet.tsx"
+        },
+        {
+          "path": "components/ui/skeleton.tsx",
+          "type": "registry:ui",
+          "target": "@ui/skeleton.tsx"
+        },
+        {
+          "path": "components/ui/tooltip.tsx",
+          "type": "registry:ui",
+          "target": "@ui/tooltip.tsx"
+        }
+      ]
+    },
+    {
+      "name": "skeleton",
+      "type": "registry:ui",
+      "title": "Skeleton",
+      "description": "DAYONE Skeleton primitive.",
+      "dependencies": [
+        "clsx@^2.1.1",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/skeleton.tsx",
+          "type": "registry:ui",
+          "target": "@ui/skeleton.tsx"
+        }
+      ]
+    },
+    {
+      "name": "slider",
+      "type": "registry:ui",
+      "title": "Slider",
+      "description": "DAYONE Slider primitive.",
+      "dependencies": [
+        "clsx@^2.1.1",
+        "radix-ui@^1.4.3",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/slider.tsx",
+          "type": "registry:ui",
+          "target": "@ui/slider.tsx"
+        }
+      ]
+    },
+    {
+      "name": "sonner",
+      "type": "registry:ui",
+      "title": "Sonner",
+      "description": "DAYONE Sonner primitive.",
+      "dependencies": [
+        "lucide-react@^1.16.0",
+        "sonner@^2.0.7",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "components/ui/sonner.tsx",
+          "type": "registry:ui",
+          "target": "@ui/sonner.tsx"
+        }
+      ]
+    },
+    {
+      "name": "spinner",
+      "type": "registry:ui",
+      "title": "Spinner",
+      "description": "DAYONE Spinner primitive.",
+      "dependencies": [
+        "clsx@^2.1.1",
+        "lucide-react@^1.16.0",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/spinner.tsx",
+          "type": "registry:ui",
+          "target": "@ui/spinner.tsx"
+        }
+      ]
+    },
+    {
+      "name": "switch",
+      "type": "registry:ui",
+      "title": "Switch",
+      "description": "DAYONE Switch primitive.",
+      "dependencies": [
+        "clsx@^2.1.1",
+        "radix-ui@^1.4.3",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/switch.tsx",
+          "type": "registry:ui",
+          "target": "@ui/switch.tsx"
+        }
+      ]
+    },
+    {
+      "name": "table",
+      "type": "registry:ui",
+      "title": "Table",
+      "description": "DAYONE Table primitive.",
+      "dependencies": [
+        "clsx@^2.1.1",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/table.tsx",
+          "type": "registry:ui",
+          "target": "@ui/table.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tabs",
+      "type": "registry:ui",
+      "title": "Tabs",
+      "description": "DAYONE Tabs primitive.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "clsx@^2.1.1",
+        "radix-ui@^1.4.3",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/tabs.tsx",
+          "type": "registry:ui",
+          "target": "@ui/tabs.tsx"
+        }
+      ]
+    },
+    {
+      "name": "textarea",
+      "type": "registry:ui",
+      "title": "Textarea",
+      "description": "DAYONE Textarea primitive.",
+      "dependencies": [
+        "clsx@^2.1.1",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/textarea.tsx",
+          "type": "registry:ui",
+          "target": "@ui/textarea.tsx"
+        }
+      ]
+    },
+    {
+      "name": "toggle-group",
+      "type": "registry:ui",
+      "title": "Toggle Group",
+      "description": "DAYONE Toggle Group primitive.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "clsx@^2.1.1",
+        "radix-ui@^1.4.3",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/toggle-group.tsx",
+          "type": "registry:ui",
+          "target": "@ui/toggle-group.tsx"
+        },
+        {
+          "path": "components/ui/toggle.tsx",
+          "type": "registry:ui",
+          "target": "@ui/toggle.tsx"
+        }
+      ]
+    },
+    {
+      "name": "toggle",
+      "type": "registry:ui",
+      "title": "Toggle",
+      "description": "DAYONE Toggle primitive.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "clsx@^2.1.1",
+        "radix-ui@^1.4.3",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/toggle.tsx",
+          "type": "registry:ui",
+          "target": "@ui/toggle.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "title": "Tooltip",
+      "description": "DAYONE Tooltip primitive.",
+      "dependencies": [
+        "clsx@^2.1.1",
+        "radix-ui@^1.4.3",
+        "tailwind-merge@^3.6.0",
+        "tw-animate-css@^1.4.0"
+      ],
+      "files": [
+        {
+          "path": "registry/globals.css",
+          "type": "registry:file",
+          "target": "~/app/globals.css"
+        },
+        {
+          "path": "public/fonts/Roobert-Regular.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-Regular.otf"
+        },
+        {
+          "path": "public/fonts/Roobert-SemiBold.otf",
+          "type": "registry:file",
+          "target": "~/public/fonts/Roobert-SemiBold.otf"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        },
+        {
+          "path": "components/ui/tooltip.tsx",
+          "type": "registry:ui",
+          "target": "@ui/tooltip.tsx"
+        }
+      ]
     }
   ]
 }

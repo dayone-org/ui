@@ -137,9 +137,9 @@ npm run start`}</DocPre>
               <DocCode>dayone-btn</DocCode> …) — siehe Abschnitt Komponenten
             </li>
             <li>
-              <strong>Formulare:</strong>{" "}
-              <DocCode>components/dayone-field.tsx</DocCode> + zugehörige
-              Styles in <DocCode>globals.css</DocCode>
+              <strong>Formulare:</strong> shadcn <DocCode>Field</DocCode>,{" "}
+              <DocCode>Input</DocCode> und <DocCode>Textarea</DocCode> aus{" "}
+              <DocCode>components/ui/</DocCode>
             </li>
             <li>
               <strong>Checkbox, Radio, Switch:</strong> shadcn-Komponenten aus{" "}
@@ -315,16 +315,18 @@ npm run start`}</DocPre>
 
           <DocH3>Formularfelder</DocH3>
           <DocP>
-            Nutze <DocCode>DayoneField</DocCode>, <DocCode>DayoneInput</DocCode>{" "}
-            und <DocCode>DayoneTextarea</DocCode> aus{" "}
-            <DocCode>components/dayone-field.tsx</DocCode>:
+            Nutze <DocCode>Field</DocCode>, <DocCode>FieldLabel</DocCode>,{" "}
+            <DocCode>Input</DocCode> und bei Bedarf{" "}
+            <DocCode>FieldDescription</DocCode>:
           </DocP>
-          <DocPre>{`<DayoneField label="E-Mail" id="email" helper="Wir antworten innerhalb von 24h.">
-  <DayoneInput id="email" type="email" placeholder="name@firma.de" />
-</DayoneField>`}</DocPre>
+          <DocPre>{`<Field>
+  <FieldLabel htmlFor="email">E-Mail</FieldLabel>
+  <Input id="email" type="email" placeholder="name@firma.de" />
+  <FieldDescription>Wir antworten innerhalb von 24h.</FieldDescription>
+</Field>`}</DocPre>
           <DocP>
-            Labels sind 11px, das Feld hat Sand-Hintergrund, abgerundete obere
-            Ecken und eine Unterlinie unten. Bei Fokus: schwarzer Rahmen.
+            Labels, Helper-Text, Fokus- und Fehlerzustände kommen aus den
+            shadcn-Primitives und den DAYONE Semantic-Tokens.
           </DocP>
 
           <DocH3>Auswahl-Elemente (Checkbox, Radio, Switch)</DocH3>
@@ -380,7 +382,7 @@ npm run start`}</DocPre>
           <DocH3>Don&apos;t — typische Fehler</DocH3>
           <DocUl>
             <li>Eigene Button-Styles neben <DocCode>dayone-btn</DocCode></li>
-            <li>Inputs ohne <DocCode>DayoneField</DocCode>-Wrapper (Label fehlt)</li>
+            <li>Inputs ohne <DocCode>FieldLabel</DocCode> oder Beschreibung</li>
             <li>Zufällige Grautöne außerhalb der Token-Palette</li>
             <li>
               shadcn-Komponenten kopieren und Tokens entfernen — dann driftet

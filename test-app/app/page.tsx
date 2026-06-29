@@ -37,7 +37,6 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { DayoneField, DayoneInput } from "@/components/dayone-field";
 
 export default function Home() {
   return (
@@ -70,8 +69,7 @@ export default function Home() {
                 <CardTitle>Component install check</CardTitle>
                 <CardDescription>
                   Button, Card, Field, Input, Select, Combobox, Checkbox,
-                  Switch, Alert, Progress, and DAYONE field wrapper are
-                  rendered together.
+                  Switch, Alert, and Progress are rendered together.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -83,18 +81,6 @@ export default function Home() {
                       Standard shadcn field composition.
                     </FieldDescription>
                   </Field>
-
-                  <DayoneField
-                    id="contact"
-                    label="Primary contact"
-                    helper="Custom DAYONE field wrapper from the registry."
-                  >
-                    <DayoneInput
-                      id="contact"
-                      placeholder="name@dayone.de"
-                      defaultValue="team@dayone.de"
-                    />
-                  </DayoneField>
 
                   <Field>
                     <FieldLabel>App type</FieldLabel>
