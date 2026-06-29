@@ -97,7 +97,7 @@ function ColorsDemo() {
           <PlaygroundVariantHeading className="mb-4">{group.label}</PlaygroundVariantHeading>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 md:grid-cols-7">
             {group.colors.map((color) => (
-              <div key={color.hex} className="overflow-hidden rounded-md" style={{ border: "1px solid var(--border)" }}>
+              <div key={color.hex} className="overflow-hidden rounded-md" style={{ border: "1px solid var(--outline)" }}>
                 <div className="h-16" style={{ backgroundColor: color.hex, boxShadow: color.hex === "#FFFFFF" ? "inset 0 0 0 1px var(--gray-100)" : undefined }} />
                 <div className="space-y-0.5 px-2.5 py-2.5">
                   <p className="text-xs font-semibold" style={{ color: "var(--black)" }}>{color.name}</p>
@@ -135,7 +135,7 @@ function ButtonGroupDemo() {
           style={{
             backgroundColor: active === item.key ? "var(--black)" : "var(--white)",
             color: active === item.key ? "var(--white)" : "var(--black)",
-            borderColor: active === item.key ? "var(--black)" : "var(--border)",
+            borderColor: active === item.key ? "var(--black)" : "var(--outline)",
             /* min-width matches longest label so all cells are equal */
             minWidth: "5.5rem",
           }}
@@ -151,7 +151,7 @@ function BadgeDemo() {
   const tags = [
     { bg: "var(--black)", color: "var(--white)", border: "none", label: "Default" },
     { bg: "var(--sand-medium)", color: "var(--black)", border: "none", label: "Secondary" },
-    { bg: "transparent", color: "var(--black)", border: "1px solid var(--border)", label: "Ghost" },
+    { bg: "transparent", color: "var(--black)", border: "1px solid var(--outline)", label: "Ghost" },
     { bg: "var(--blue-dark)", color: "var(--white)", border: "none", label: "Aktiv" },
     { bg: "var(--red-dark)", color: "var(--white)", border: "none", label: "Fehler" },
     { bg: "var(--gray-100)", color: "var(--gray-400)", border: "none", label: "Inaktiv" },
@@ -220,7 +220,7 @@ function LoadingDemo() {
 
 function EmptyDemo() {
   return (
-    <Empty style={{ border: "1px dashed var(--border)", maxWidth: "280px" }}>
+    <Empty style={{ border: "1px dashed var(--outline)", maxWidth: "280px" }}>
       <EmptyHeader>
         <EmptyTitle style={{ color: "var(--black)", fontSize: "var(--text-body-md)", fontWeight: 600 }}>
           Keine Einträge
@@ -266,7 +266,7 @@ function LabelDemo() {
         type="email"
         placeholder="name@dayone.de"
         className="max-w-xs"
-        style={{ borderColor: "var(--border)" }}
+        style={{ borderColor: "var(--outline)" }}
       />
     </div>
   );
@@ -289,7 +289,7 @@ function ItemDemo() {
       {/* Outline */}
       <ItemGroup className="w-[369px] gap-2">
         {people.map(({ title, description }, i) => (
-          <Item key={title} variant="outline" className="gap-3 py-[15px]" style={{ borderColor: "var(--border)" }}>
+          <Item key={title} variant="outline" className="gap-3 py-[15px]" style={{ borderColor: "var(--outline)" }}>
             <Avatar className="size-9 shrink-0 ring-2 ring-background">
               <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: PALETTE[i].bg, color: PALETTE[i].fg }}>
                 {title.split(" ").map((n) => n[0]).join("")}
@@ -639,7 +639,7 @@ function BreadcrumbDemo() {
       <BreadcrumbList>
         {items.map((item, idx) => (
           <React.Fragment key={item.key}>
-            {idx > 0 && <BreadcrumbSeparator style={{ color: "var(--border)" }} />}
+            {idx > 0 && <BreadcrumbSeparator style={{ color: "var(--outline)" }} />}
             <BreadcrumbItem>
               {active === item.key ? (
                 <BreadcrumbPage style={{ color: "var(--black)", fontWeight: 600 }}>{item.label}</BreadcrumbPage>
@@ -738,7 +738,7 @@ function NavigationMenuDemo() {
 
 function MenubarDemo() {
   return (
-    <Menubar style={{ borderColor: "var(--border)" }}>
+    <Menubar style={{ borderColor: "var(--outline)" }}>
       <MenubarMenu>
         <MenubarTrigger style={{ color: "var(--black)" }}>Datei</MenubarTrigger>
         <MenubarContent>
@@ -790,7 +790,7 @@ function ContextMenuDemo() {
       <ContextMenuTrigger asChild>
         <div
           className="flex h-24 w-48 items-center justify-center rounded-lg text-sm"
-          style={{ border: "2px dashed var(--border)", color: "var(--gray-400)" }}
+          style={{ border: "2px dashed var(--outline)", color: "var(--gray-400)" }}
         >
           Rechtsklick hier
         </div>
@@ -808,9 +808,9 @@ function SidebarDemo() {
   return (
     <div
       className="flex h-40 w-full max-w-sm overflow-hidden rounded-lg"
-      style={{ border: "1px solid var(--border)" }}
+      style={{ border: "1px solid var(--outline)" }}
     >
-      <div className="w-44 shrink-0 space-y-1 p-3" style={{ backgroundColor: "var(--gray-100)", borderRight: "1px solid var(--border)" }}>
+      <div className="w-44 shrink-0 space-y-1 p-3" style={{ backgroundColor: "var(--gray-100)", borderRight: "1px solid var(--outline)" }}>
         {[{ label: "Dashboard", active: false }, { label: "Komponenten", active: true }, { label: "Einstellungen", active: false }].map(({ label, active }) => (
           <div
             key={label}
@@ -852,7 +852,7 @@ function DialogDemo() {
           </DialogHeader>
           <DialogFooter>
             <DialogClose asChild>
-              <button className="rounded-md px-4 py-2 text-sm" style={{ color: "var(--black)", border: "1px solid var(--border)" }}>Abbrechen</button>
+              <button className="rounded-md px-4 py-2 text-sm" style={{ color: "var(--black)", border: "1px solid var(--outline)" }}>Abbrechen</button>
             </DialogClose>
             <DialogClose asChild>
               <button className="rounded-md px-4 py-2 text-sm font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>Speichern</button>
@@ -880,7 +880,7 @@ function AlertDialogDemo() {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel style={{ color: "var(--black)", border: "1px solid var(--border)", backgroundColor: "transparent" }}>Abbrechen</AlertDialogCancel>
+          <AlertDialogCancel style={{ color: "var(--black)", border: "1px solid var(--outline)", backgroundColor: "transparent" }}>Abbrechen</AlertDialogCancel>
           <AlertDialogAction style={{ backgroundColor: "var(--red-medium)", color: "var(--white)", border: "none" }}>Löschen</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
@@ -921,7 +921,7 @@ function SheetDemo() {
           Sheet öffnen
         </button>
       </SheetTrigger>
-      <SheetContent side="right" showCloseButton={true} style={{ backgroundColor: "var(--white)", borderColor: "var(--border)" }}>
+      <SheetContent side="right" showCloseButton={true} style={{ backgroundColor: "var(--white)", borderColor: "var(--outline)" }}>
         <SheetHeader className="px-4 pb-4">
           <SheetTitle style={{ color: "var(--black)" }}>Einstellungen</SheetTitle>
           <SheetDescription style={{ color: "var(--gray-400)" }}>
@@ -931,7 +931,7 @@ function SheetDemo() {
         <div className="flex-1" />
         <SheetFooter className="flex-row justify-end gap-2">
           <SheetClose asChild>
-            <button className="rounded-md px-4 py-2 text-sm" style={{ color: "var(--black)", border: "1px solid var(--border)" }}>Abbrechen</button>
+            <button className="rounded-md px-4 py-2 text-sm" style={{ color: "var(--black)", border: "1px solid var(--outline)" }}>Abbrechen</button>
           </SheetClose>
           <button className="rounded-md px-4 py-2 text-sm font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>Speichern</button>
         </SheetFooter>
@@ -944,11 +944,11 @@ function PopoverDemo() {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <button className="rounded-md px-4 py-2 text-sm font-semibold" style={{ border: "1px solid var(--border)", color: "var(--black)" }}>
+        <button className="rounded-md px-4 py-2 text-sm font-semibold" style={{ border: "1px solid var(--outline)", color: "var(--black)" }}>
           Info anzeigen
         </button>
       </PopoverTrigger>
-      <PopoverContent className="w-64" style={{ backgroundColor: "var(--white)", borderColor: "var(--border)" }}>
+      <PopoverContent className="w-64" style={{ backgroundColor: "var(--white)", borderColor: "var(--outline)" }}>
         <p className="text-sm font-semibold" style={{ color: "var(--black)" }}>DAYONE UI</p>
         <p className="mt-1 text-sm" style={{ color: "var(--gray-400)" }}>Designsystem für interne Anwendungen. Gebaut auf shadcn/ui.</p>
       </PopoverContent>
@@ -964,7 +964,7 @@ function HoverCardDemo() {
           @victoria.itter
         </button>
       </HoverCardTrigger>
-      <HoverCardContent style={{ backgroundColor: "var(--white)", borderColor: "var(--border)" }}>
+      <HoverCardContent style={{ backgroundColor: "var(--white)", borderColor: "var(--outline)" }}>
         <div className="flex items-center gap-3">
           <Avatar className="size-10">
             <AvatarFallback style={{ backgroundColor: "var(--black)", color: "var(--white)", fontSize: "12px" }}>VI</AvatarFallback>
@@ -995,7 +995,7 @@ function TooltipDemo() {
         </Tooltip>
         <Tooltip>
           <TooltipTrigger asChild>
-            <button className="rounded-md px-4 py-2 text-sm" style={{ border: "1px solid var(--border)", color: "var(--black)" }}>
+            <button className="rounded-md px-4 py-2 text-sm" style={{ border: "1px solid var(--outline)", color: "var(--black)" }}>
               Und hier
             </button>
           </TooltipTrigger>
@@ -1013,7 +1013,7 @@ function TooltipDemo() {
 function AlertDemo() {
   return (
     <div className="w-full max-w-sm space-y-3">
-      <Alert className="rounded-md" style={{ borderColor: "var(--border)" }}>
+      <Alert className="rounded-md" style={{ borderColor: "var(--outline)" }}>
         <AlertTitle className="font-semibold" style={{ color: "var(--black)" }}>Hinweis</AlertTitle>
         <AlertDescription style={{ color: "var(--gray-400)" }}>Deine Änderungen wurden gespeichert.</AlertDescription>
       </Alert>
@@ -1110,11 +1110,11 @@ function CarouselDemo() {
       </CarouselContent>
       <CarouselPrevious
         className="left-[-38px]"
-        style={{ color: "var(--black)", borderColor: "var(--border)" }}
+        style={{ color: "var(--black)", borderColor: "var(--outline)" }}
       />
       <CarouselNext
         className="right-[-38px]"
-        style={{ color: "var(--black)", borderColor: "var(--border)" }}
+        style={{ color: "var(--black)", borderColor: "var(--outline)" }}
       />
     </Carousel>
   );
@@ -1133,7 +1133,7 @@ function CalendarDemo() {
         formatters={{ formatWeekdayName: (d) => ["SO", "MO", "DI", "MI", "DO", "FR", "SA"][d.getDay()] }}
         className="rounded-xl w-full [--cell-size:--spacing(7)]"
         classNames={{ week: "mt-1 flex w-full" }}
-        style={{ border: "1px solid var(--border)" }}
+        style={{ border: "1px solid var(--outline)" }}
       />
     </div>
   );
@@ -1246,7 +1246,7 @@ function AvatarDemo() {
       ))}
       <div
         className="flex size-10 items-center justify-center rounded-full ring-2 ring-background text-xs font-semibold"
-        style={{ backgroundColor: "transparent", color: "var(--gray-400)", border: "1px solid var(--border)" }}
+        style={{ backgroundColor: "transparent", color: "var(--gray-400)", border: "1px solid var(--outline)" }}
       >
         +4
       </div>
@@ -1309,7 +1309,7 @@ function DemoLabel({ children }: { children: React.ReactNode }) {
   );
 }
 
-const OUTLINE_RING = { "--tw-ring-color": "var(--border)" } as React.CSSProperties;
+const OUTLINE_RING = { "--tw-ring-color": "var(--outline)" } as React.CSSProperties;
 
 function InfocardDemo() {
   return (
@@ -1343,7 +1343,7 @@ function InfocardDemo() {
       <div className="flex flex-col gap-3">
         <DemoLabel>Item · Outline & Filled</DemoLabel>
         <div className="flex gap-4">
-          <Item variant="outline" className="w-76 gap-3 py-[15px]" style={{ borderColor: "var(--border)" }}>
+          <Item variant="outline" className="w-76 gap-3 py-[15px]" style={{ borderColor: "var(--outline)" }}>
             <Avatar className="size-9 shrink-0 ring-2 ring-background">
               <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>VI</AvatarFallback>
             </Avatar>
@@ -1405,7 +1405,7 @@ function ButtoncardDemo() {
         <div className="flex gap-4">
           <Item variant="outline" role="button" tabIndex={0}
             className="w-76 gap-3 py-[15px] cursor-pointer transition-colors duration-150 hover:bg-[#F4F2EE]"
-            style={{ borderColor: "var(--border)" }}>
+            style={{ borderColor: "var(--outline)" }}>
             <Avatar className="size-9 shrink-0 ring-2 ring-background">
               <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>VI</AvatarFallback>
             </Avatar>
@@ -1457,7 +1457,7 @@ function ListDemo() {
             clickable ? (
               <Item key={name} variant="outline" role="button" tabIndex={0}
                 className="w-76 gap-3 py-[15px] cursor-pointer transition-colors duration-150 hover:bg-[#F4F2EE]"
-                style={{ borderColor: "var(--border)" }}>
+                style={{ borderColor: "var(--outline)" }}>
                 <Avatar className="size-9 shrink-0 ring-2 ring-background">
                   <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>{initials}</AvatarFallback>
                 </Avatar>
@@ -1468,7 +1468,7 @@ function ListDemo() {
                 <ChevronRight className="size-5 shrink-0 ml-auto" style={{ color: "var(--gray-400)" }} />
               </Item>
             ) : (
-              <Item key={name} variant="outline" className="w-76 gap-3 py-[15px]" style={{ borderColor: "var(--border)" }}>
+              <Item key={name} variant="outline" className="w-76 gap-3 py-[15px]" style={{ borderColor: "var(--outline)" }}>
                 <Avatar className="size-9 shrink-0 ring-2 ring-background">
                   <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>{initials}</AvatarFallback>
                 </Avatar>
@@ -1529,7 +1529,7 @@ function AspectRatioDemo() {
 
 function ScrollAreaDemo() {
   return (
-    <ScrollArea className="h-36 w-48 rounded-lg" style={{ border: "1px solid var(--border)" }}>
+    <ScrollArea className="h-36 w-48 rounded-lg" style={{ border: "1px solid var(--outline)" }}>
       <div className="p-4 space-y-3">
         {Array.from({ length: 12 }, (_, i) => (
           <p key={i} className="text-sm" style={{ color: "var(--gray-500)" }}>
@@ -1543,7 +1543,7 @@ function ScrollAreaDemo() {
 
 function ResizableDemo() {
   return (
-    <ResizablePanelGroup className="w-full max-w-xs rounded-lg" style={{ border: "1px solid var(--border)", height: "100px" }}>
+    <ResizablePanelGroup className="w-full max-w-xs rounded-lg" style={{ border: "1px solid var(--outline)", height: "100px" }}>
       <ResizablePanel defaultSize={50}>
         <div className="flex h-full items-center justify-center text-sm" style={{ color: "var(--gray-400)" }}>
           Links
