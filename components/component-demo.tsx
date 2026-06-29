@@ -135,7 +135,7 @@ function ButtonGroupDemo() {
           style={{
             backgroundColor: active === item.key ? "var(--black)" : "var(--white)",
             color: active === item.key ? "var(--white)" : "var(--black)",
-            borderColor: active === item.key ? "var(--black)" : "var(--gray-200)",
+            borderColor: active === item.key ? "var(--black)" : "var(--border)",
             /* min-width matches longest label so all cells are equal */
             minWidth: "5.5rem",
           }}
@@ -220,7 +220,7 @@ function LoadingDemo() {
 
 function EmptyDemo() {
   return (
-    <Empty style={{ border: "1px dashed var(--gray-200)", maxWidth: "280px" }}>
+    <Empty style={{ border: "1px dashed var(--border)", maxWidth: "280px" }}>
       <EmptyHeader>
         <EmptyTitle style={{ color: "var(--black)", fontSize: "var(--text-body-md)", fontWeight: 600 }}>
           Keine Einträge
@@ -266,7 +266,7 @@ function LabelDemo() {
         type="email"
         placeholder="name@dayone.de"
         className="max-w-xs"
-        style={{ borderColor: "var(--gray-200)" }}
+        style={{ borderColor: "var(--border)" }}
       />
     </div>
   );
@@ -639,7 +639,7 @@ function BreadcrumbDemo() {
       <BreadcrumbList>
         {items.map((item, idx) => (
           <React.Fragment key={item.key}>
-            {idx > 0 && <BreadcrumbSeparator style={{ color: "var(--gray-200)" }} />}
+            {idx > 0 && <BreadcrumbSeparator style={{ color: "var(--border)" }} />}
             <BreadcrumbItem>
               {active === item.key ? (
                 <BreadcrumbPage style={{ color: "var(--black)", fontWeight: 600 }}>{item.label}</BreadcrumbPage>
@@ -738,7 +738,7 @@ function NavigationMenuDemo() {
 
 function MenubarDemo() {
   return (
-    <Menubar style={{ borderColor: "var(--gray-200)" }}>
+    <Menubar style={{ borderColor: "var(--border)" }}>
       <MenubarMenu>
         <MenubarTrigger style={{ color: "var(--black)" }}>Datei</MenubarTrigger>
         <MenubarContent>
@@ -790,7 +790,7 @@ function ContextMenuDemo() {
       <ContextMenuTrigger asChild>
         <div
           className="flex h-24 w-48 items-center justify-center rounded-lg text-sm"
-          style={{ border: "2px dashed var(--gray-200)", color: "var(--gray-400)" }}
+          style={{ border: "2px dashed var(--border)", color: "var(--gray-400)" }}
         >
           Rechtsklick hier
         </div>
@@ -808,9 +808,9 @@ function SidebarDemo() {
   return (
     <div
       className="flex h-40 w-full max-w-sm overflow-hidden rounded-lg"
-      style={{ border: "1px solid var(--gray-200)" }}
+      style={{ border: "1px solid var(--border)" }}
     >
-      <div className="w-44 shrink-0 space-y-1 p-3" style={{ backgroundColor: "var(--gray-100)", borderRight: "1px solid var(--gray-200)" }}>
+      <div className="w-44 shrink-0 space-y-1 p-3" style={{ backgroundColor: "var(--gray-100)", borderRight: "1px solid var(--border)" }}>
         {[{ label: "Dashboard", active: false }, { label: "Komponenten", active: true }, { label: "Einstellungen", active: false }].map(({ label, active }) => (
           <div
             key={label}
@@ -852,7 +852,7 @@ function DialogDemo() {
           </DialogHeader>
           <DialogFooter>
             <DialogClose asChild>
-              <button className="rounded-md px-4 py-2 text-sm" style={{ color: "var(--black)", border: "1px solid var(--gray-200)" }}>Abbrechen</button>
+              <button className="rounded-md px-4 py-2 text-sm" style={{ color: "var(--black)", border: "1px solid var(--border)" }}>Abbrechen</button>
             </DialogClose>
             <DialogClose asChild>
               <button className="rounded-md px-4 py-2 text-sm font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>Speichern</button>
@@ -880,7 +880,7 @@ function AlertDialogDemo() {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel style={{ color: "var(--black)", border: "1px solid var(--gray-200)", backgroundColor: "transparent" }}>Abbrechen</AlertDialogCancel>
+          <AlertDialogCancel style={{ color: "var(--black)", border: "1px solid var(--border)", backgroundColor: "transparent" }}>Abbrechen</AlertDialogCancel>
           <AlertDialogAction style={{ backgroundColor: "var(--red-medium)", color: "var(--white)", border: "none" }}>Löschen</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
@@ -921,7 +921,7 @@ function SheetDemo() {
           Sheet öffnen
         </button>
       </SheetTrigger>
-      <SheetContent side="right" showCloseButton={true} style={{ backgroundColor: "var(--white)", borderColor: "var(--gray-200)" }}>
+      <SheetContent side="right" showCloseButton={true} style={{ backgroundColor: "var(--white)", borderColor: "var(--border)" }}>
         <SheetHeader className="px-4 pb-4">
           <SheetTitle style={{ color: "var(--black)" }}>Einstellungen</SheetTitle>
           <SheetDescription style={{ color: "var(--gray-400)" }}>
@@ -931,7 +931,7 @@ function SheetDemo() {
         <div className="flex-1" />
         <SheetFooter className="flex-row justify-end gap-2">
           <SheetClose asChild>
-            <button className="rounded-md px-4 py-2 text-sm" style={{ color: "var(--black)", border: "1px solid var(--gray-200)" }}>Abbrechen</button>
+            <button className="rounded-md px-4 py-2 text-sm" style={{ color: "var(--black)", border: "1px solid var(--border)" }}>Abbrechen</button>
           </SheetClose>
           <button className="rounded-md px-4 py-2 text-sm font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>Speichern</button>
         </SheetFooter>
@@ -944,11 +944,11 @@ function PopoverDemo() {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <button className="rounded-md px-4 py-2 text-sm font-semibold" style={{ border: "1px solid var(--gray-200)", color: "var(--black)" }}>
+        <button className="rounded-md px-4 py-2 text-sm font-semibold" style={{ border: "1px solid var(--border)", color: "var(--black)" }}>
           Info anzeigen
         </button>
       </PopoverTrigger>
-      <PopoverContent className="w-64" style={{ backgroundColor: "var(--white)", borderColor: "var(--gray-200)" }}>
+      <PopoverContent className="w-64" style={{ backgroundColor: "var(--white)", borderColor: "var(--border)" }}>
         <p className="text-sm font-semibold" style={{ color: "var(--black)" }}>DAYONE UI</p>
         <p className="mt-1 text-sm" style={{ color: "var(--gray-400)" }}>Designsystem für interne Anwendungen. Gebaut auf shadcn/ui.</p>
       </PopoverContent>
@@ -964,7 +964,7 @@ function HoverCardDemo() {
           @victoria.itter
         </button>
       </HoverCardTrigger>
-      <HoverCardContent style={{ backgroundColor: "var(--white)", borderColor: "var(--gray-200)" }}>
+      <HoverCardContent style={{ backgroundColor: "var(--white)", borderColor: "var(--border)" }}>
         <div className="flex items-center gap-3">
           <Avatar className="size-10">
             <AvatarFallback style={{ backgroundColor: "var(--black)", color: "var(--white)", fontSize: "12px" }}>VI</AvatarFallback>
@@ -995,7 +995,7 @@ function TooltipDemo() {
         </Tooltip>
         <Tooltip>
           <TooltipTrigger asChild>
-            <button className="rounded-md px-4 py-2 text-sm" style={{ border: "1px solid var(--gray-200)", color: "var(--black)" }}>
+            <button className="rounded-md px-4 py-2 text-sm" style={{ border: "1px solid var(--border)", color: "var(--black)" }}>
               Und hier
             </button>
           </TooltipTrigger>
@@ -1110,11 +1110,11 @@ function CarouselDemo() {
       </CarouselContent>
       <CarouselPrevious
         className="left-[-38px]"
-        style={{ color: "var(--black)", borderColor: "var(--gray-200)" }}
+        style={{ color: "var(--black)", borderColor: "var(--border)" }}
       />
       <CarouselNext
         className="right-[-38px]"
-        style={{ color: "var(--black)", borderColor: "var(--gray-200)" }}
+        style={{ color: "var(--black)", borderColor: "var(--border)" }}
       />
     </Carousel>
   );
@@ -1529,7 +1529,7 @@ function AspectRatioDemo() {
 
 function ScrollAreaDemo() {
   return (
-    <ScrollArea className="h-36 w-48 rounded-lg" style={{ border: "1px solid var(--gray-200)" }}>
+    <ScrollArea className="h-36 w-48 rounded-lg" style={{ border: "1px solid var(--border)" }}>
       <div className="p-4 space-y-3">
         {Array.from({ length: 12 }, (_, i) => (
           <p key={i} className="text-sm" style={{ color: "var(--gray-500)" }}>
@@ -1543,7 +1543,7 @@ function ScrollAreaDemo() {
 
 function ResizableDemo() {
   return (
-    <ResizablePanelGroup className="w-full max-w-xs rounded-lg" style={{ border: "1px solid var(--gray-200)", height: "100px" }}>
+    <ResizablePanelGroup className="w-full max-w-xs rounded-lg" style={{ border: "1px solid var(--border)", height: "100px" }}>
       <ResizablePanel defaultSize={50}>
         <div className="flex h-full items-center justify-center text-sm" style={{ color: "var(--gray-400)" }}>
           Links
