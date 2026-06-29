@@ -6,7 +6,7 @@ export function DocsDivider({ className }: { className?: string }) {
       role="separator"
       aria-hidden
       className={cn("h-px w-full", className)}
-      style={{ backgroundColor: "var(--gray-100)" }}
+      style={{ backgroundColor: "var(--border)" }}
     />
   );
 }

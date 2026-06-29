@@ -18,7 +18,7 @@ const navLinkClass = "text-sm font-normal hover:opacity-70";
 
 function navLinkStyle(isActive: boolean) {
   return {
-    color: isActive ? "var(--black)" : "var(--gray-400)",
+    color: isActive ? "var(--foreground)" : "var(--gray-400)",
     fontWeight: isActive ? 600 : 400,
   } as const;
 }
@@ -78,7 +78,7 @@ export function SiteHeader({ active = "home" }: SiteHeaderProps) {
           <button
             type="button"
             className="sm:hidden"
-            style={{ color: "var(--black)" }}
+            style={{ color: "var(--foreground)" }}
             onClick={() => setMobileOpen((o) => !o)}
             aria-label={mobileOpen ? "Menü schließen" : "Menü öffnen"}
           >
@@ -90,7 +90,7 @@ export function SiteHeader({ active = "home" }: SiteHeaderProps) {
       {mobileOpen && (
         <nav
           className={`flex flex-col gap-4 border-t py-6 sm:hidden ${DOCS_PAGE_PADDING}`}
-          style={{ borderColor: "var(--gray-100)" }}
+          style={{ borderColor: "var(--border)" }}
         >
           <Link
             href="/komponenten"

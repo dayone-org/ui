@@ -4,7 +4,7 @@ export function SiteFooter() {
   return (
     <footer
       className="mt-auto px-8 py-8"
-      style={{ backgroundColor: "var(--black)" }}
+      style={{ backgroundColor: "var(--primary)" }}
     >
       <div className="mx-auto flex max-w-5xl flex-col items-center gap-4 text-center sm:flex-row sm:justify-between sm:text-left">
         <p className="text-sm" style={{ color: "var(--sand-dark)" }}>

@@ -89,7 +89,7 @@ function SearchBox({
     <div className="px-3 pb-6">
       <div
         className="flex items-center gap-2 pb-1.5"
-        style={{ borderBottom: "1px solid var(--gray-100)" }}
+        style={{ borderBottom: "1px solid var(--border)" }}
       >
         <Search className="size-3 shrink-0" style={{ color: "var(--gray-400)" }} />
         <input
@@ -98,7 +98,7 @@ function SearchBox({
           onChange={(e) => onChange(e.target.value)}
           onKeyDown={(e) => e.key === "Escape" && onChange("")}
           className="flex-1 bg-transparent text-xs outline-none"
-          style={{ color: "var(--black)" }}
+          style={{ color: "var(--foreground)" }}
         />
       </div>
     </div>
@@ -174,7 +174,7 @@ function SidebarNav({ activeSlug, search, onNavigate }: NavProps) {
                     onClick={() => handleClick(component.slug)}
                     className="block w-full rounded-md px-3 py-1.5 text-left text-sm transition-colors"
                     style={{
-                      color: isActive ? "var(--black)" : "var(--gray-400)",
+                      color: isActive ? "var(--foreground)" : "var(--gray-400)",
                       fontWeight: isActive ? 600 : 400,
                       backgroundColor: isActive ? "#F4F2EE" : "transparent",
                       border: "none",
@@ -236,7 +236,7 @@ export function KomponentenSidebarMobile() {
   return (
     <div
       className={`sticky top-16 z-40 flex items-center gap-3 border-b py-3 lg:hidden ${DOCS_PAGE_PADDING}`}
-      style={{ backgroundColor: "var(--white)", borderColor: "var(--gray-100)" }}
+      style={{ backgroundColor: "var(--background)", borderColor: "var(--border)" }}
     >
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
@@ -247,7 +247,7 @@ export function KomponentenSidebarMobile() {
         </SheetTrigger>
         <SheetContent side="left" className="w-72">
           <SheetHeader>
-            <SheetTitle style={{ color: "var(--black)" }}>Alle Komponenten</SheetTitle>
+            <SheetTitle style={{ color: "var(--foreground)" }}>Alle Komponenten</SheetTitle>
           </SheetHeader>
           <div className="mt-4">
             <SearchBox value={search} onChange={setSearch} />

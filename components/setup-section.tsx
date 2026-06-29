@@ -21,14 +21,14 @@ export function SetupSection({
             fontSize: "var(--text-display-xl)",
             lineHeight: "var(--leading-display)",
             letterSpacing: "var(--tracking-display)",
-            color: "var(--black)",
+            color: "var(--foreground)",
           }}
         >
           {title}
         </h2>
         <div
           className="flex-1"
-          style={{ height: "1px", backgroundColor: "var(--gray-100)" }}
+          style={{ height: "1px", backgroundColor: "var(--border)" }}
         />
       </div>
       <div>{children}</div>

@@ -19,7 +19,7 @@ function ControlLabel({
     <label
       htmlFor={htmlFor}
       className="text-sm font-normal leading-[1.5] select-none"
-      style={{ color: disabled ? "var(--gray-300)" : "var(--black)" }}
+      style={{ color: disabled ? "var(--gray-300)" : "var(--foreground)" }}
     >
       {children}
     </label>

@@ -58,7 +58,7 @@ function NavLinks({
               }}
               className="block w-full rounded-md px-3 py-1.5 text-left text-sm transition-colors"
               style={{
-                color: isActive ? "var(--black)" : "var(--gray-400)",
+                color: isActive ? "var(--foreground)" : "var(--gray-400)",
                 backgroundColor: isActive ? "#F4F2EE" : "transparent",
                 fontWeight: isActive ? 600 : 400,
                 border: "none",
@@ -128,8 +128,8 @@ export function DocsSidebarMobile({
     <div
       className={`sticky top-16 z-40 flex items-center gap-3 border-b py-3 lg:hidden ${DOCS_PAGE_PADDING}`}
       style={{
-        backgroundColor: "var(--white)",
-        borderColor: "var(--gray-100)",
+        backgroundColor: "var(--background)",
+        borderColor: "var(--border)",
       }}
     >
       <Sheet open={open} onOpenChange={setOpen}>
@@ -141,7 +141,7 @@ export function DocsSidebarMobile({
         </SheetTrigger>
         <SheetContent side="left" className="w-72">
           <SheetHeader>
-            <SheetTitle style={{ color: "var(--black)" }}>Navigation</SheetTitle>
+            <SheetTitle style={{ color: "var(--foreground)" }}>Navigation</SheetTitle>
           </SheetHeader>
           <nav className="mt-6">
             <NavLinks

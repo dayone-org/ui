@@ -133,7 +133,7 @@ Lass Logik, Datenverhalten und bestehende Abläufe unverändert.`}</DocPre>
                 style={{
                   fontSize: "var(--text-display-sm)",
                   lineHeight: "var(--leading-display)",
-                  color: "var(--black)",
+                  color: "var(--foreground)",
                 }}
               >
                 Version 1

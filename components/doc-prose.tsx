@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 const bodyStyle = {
   fontSize: "var(--text-body-md)",
   lineHeight: "var(--leading-body)",
-  color: "var(--black)",
+  color: "var(--foreground)",
 } as const;
 
 const mutedStyle = {
@@ -39,7 +39,7 @@ export function DocH3({ children }: { children: ReactNode }) {
       style={{
         fontSize: "var(--text-display-sm)",
         lineHeight: "var(--leading-display)",
-        color: "var(--black)",
+        color: "var(--foreground)",
       }}
     >
       {children}
@@ -74,8 +74,8 @@ export function DocCode({ children }: { children: ReactNode }) {
     <code
       className="rounded px-1.5 py-0.5 font-mono text-[0.9em]"
       style={{
-        backgroundColor: "var(--gray-100)",
-        color: "var(--black)",
+        backgroundColor: "var(--accent)",
+        color: "var(--foreground)",
       }}
     >
       {children}
@@ -88,9 +88,9 @@ export function DocPre({ children }: { children: ReactNode }) {
     <pre
       className="max-w-2xl overflow-x-auto rounded-md p-4 font-mono text-sm leading-relaxed"
       style={{
-        backgroundColor: "var(--sand-light)",
-        color: "var(--black)",
-        border: "1px solid var(--gray-100)",
+        backgroundColor: "var(--secondary)",
+        color: "var(--foreground)",
+        border: "1px solid var(--border)",
       }}
     >
       {children}
@@ -109,7 +109,7 @@ export function DocLink({
     <a
       href={href}
       className="underline underline-offset-2 transition-opacity hover:opacity-70"
-      style={{ color: "var(--black)" }}
+      style={{ color: "var(--foreground)" }}
     >
       {children}
     </a>
@@ -121,11 +121,11 @@ export function DocCallout({ children }: { children: ReactNode }) {
     <div
       className="max-w-2xl rounded-md border-l-4 px-4 py-3"
       style={{
-        borderColor: "var(--black)",
-        backgroundColor: "var(--sand-light)",
+        borderColor: "var(--primary)",
+        backgroundColor: "var(--secondary)",
         fontSize: "var(--text-body-sm)",
         lineHeight: "var(--leading-body)",
-        color: "var(--black)",
+        color: "var(--foreground)",
       }}
     >
       {children}

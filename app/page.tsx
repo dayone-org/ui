@@ -47,7 +47,7 @@ function BentoCell({
     <div
       className={`rounded-2xl p-5 overflow-hidden animate-in fade-in slide-in-from-bottom-3 ${className}`}
       style={{
-        border: "1px solid var(--gray-100)",
+        border: "1px solid var(--border)",
         animationDuration: "0.5s",
         animationDelay: `${delay}ms`,
         animationFillMode: "both",
@@ -76,10 +76,10 @@ function SmoothBar({ value }: { value: number }) {
     return () => clearTimeout(t);
   }, [value]);
   return (
-    <div className="h-1.5 w-full rounded-full overflow-hidden" style={{ backgroundColor: "#F4F2EE" }}>
+    <div className="h-1.5 w-full rounded-full overflow-hidden" style={{ backgroundColor: "var(--secondary)" }}>
       <div
         className="h-full rounded-full"
-        style={{ width: `${w}%`, backgroundColor: "var(--black)", transition: "width 1.3s cubic-bezier(0.4,0,0.2,1)" }}
+        style={{ width: `${w}%`, backgroundColor: "var(--primary)", transition: "width 1.3s cubic-bezier(0.4,0,0.2,1)" }}
       />
     </div>
   );
@@ -129,7 +129,7 @@ function CalendarCell() {
           formatters={{ formatWeekdayName: (d) => ["SO","MO","DI","MI","DO","FR","SA"][d.getDay()] }}
           className="rounded-xl w-full [--cell-size:--spacing(7)]"
           classNames={{ week: "mt-1 flex w-full" }}
-          style={{ border: "1px solid var(--gray-100)" }}
+          style={{ border: "1px solid var(--border)" }}
         />
       </div>
       </div>
@@ -195,15 +195,15 @@ function NotificationsCell() {
               key={item.id}
               className={`flex items-start gap-3 rounded-xl p-3 ${item.id === newestId ? "notif-enter" : ""}`}
               style={{
-                backgroundColor: idx === 0 ? "var(--black)" : "#F4F2EE",
+                backgroundColor: idx === 0 ? "var(--primary)" : "var(--secondary)",
                 transition: "background-color 0.5s ease, color 0.5s ease",
               }}
             >
-              <div className="mt-0.5 shrink-0" style={{ color: idx === 0 ? "var(--white)" : "var(--black)", transition: "color 0.5s ease" }}>
+              <div className="mt-0.5 shrink-0" style={{ color: idx === 0 ? "var(--primary-foreground)" : "var(--foreground)", transition: "color 0.5s ease" }}>
                 {item.icon}
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-xs font-semibold" style={{ color: idx === 0 ? "var(--white)" : "var(--black)", transition: "color 0.5s ease" }}>
+                <p className="text-xs font-semibold" style={{ color: idx === 0 ? "var(--primary-foreground)" : "var(--foreground)", transition: "color 0.5s ease" }}>
                   {item.title}
                 </p>
                 <p className="text-xs truncate" style={{ color: idx === 0 ? "rgba(255,255,255,0.6)" : "var(--gray-400)", transition: "color 0.5s ease" }}>
@@ -256,12 +256,12 @@ function ChartCell() {
     <BentoCell className="flex flex-col" delay={160}>
       <CellLabel>Chart</CellLabel>
       <div className="flex items-baseline gap-3 mb-6">
-        <span className="text-3xl font-bold tabular-nums" style={{ color: "var(--black)" }}>
+        <span className="text-3xl font-bold tabular-nums" style={{ color: "var(--foreground)" }}>
           {total.toLocaleString("de")}
         </span>
         <span
           className="flex items-center gap-1 text-xs font-medium"
-          style={{ color: trend >= 0 ? "var(--black)" : "#e63946", transition: "color 0.5s ease" }}
+          style={{ color: trend >= 0 ? "var(--foreground)" : "var(--destructive)", transition: "color 0.5s ease" }}
         >
           <TrendingUp className="size-3" />
           {trend >= 0 ? "+" : ""}{trend}%
@@ -327,7 +327,7 @@ function ControlsCell() {
             <Switch checked={auto} onCheckedChange={setAuto} />
           </div>
         </div>
-        <Separator style={{ backgroundColor: "var(--gray-100)" }} />
+        <Separator style={{ backgroundColor: "var(--border)" }} />
         <div>
           <div className="flex justify-between mb-2">
             <span className="text-xs" style={{ color: "var(--gray-400)" }}>Lautstärke</span>
@@ -496,7 +496,7 @@ function NavCell() {
                 {idx > 0 && <BreadcrumbSeparator style={{ color: "var(--gray-200)" }} />}
                 <BreadcrumbItem>
                   {active === item.key ? (
-                    <BreadcrumbPage style={{ color: "var(--black)", fontWeight: 600 }}>{item.label}</BreadcrumbPage>
+                    <BreadcrumbPage style={{ color: "var(--foreground)", fontWeight: 600 }}>{item.label}</BreadcrumbPage>
                   ) : (
                     <BreadcrumbLink asChild>
                       <button
@@ -541,25 +541,25 @@ function BadgesCell() {
       <CellLabel>Badge & Avatar</CellLabel>
       <div className="mt-4 space-y-3">
         <div className="flex flex-wrap gap-2">
-          <Badge className="rounded-full px-[15px] py-[13px] text-[13px] font-medium" style={{ backgroundColor: "var(--black)", color: "var(--white)", border: "none" }}>Default</Badge>
-          <Badge className="rounded-full px-[15px] py-[13px] text-[13px] font-medium" style={{ backgroundColor: "var(--sand-medium)", color: "var(--black)", border: "none" }}>Secondary</Badge>
-          <Badge className="rounded-full px-[15px] py-[13px] text-[13px] font-medium" style={{ backgroundColor: "transparent", color: "var(--black)", border: "1px solid var(--gray-100)" }}>Ghost</Badge>
+          <Badge className="rounded-full px-[15px] py-[13px] text-[13px] font-medium" style={{ backgroundColor: "var(--primary)", color: "var(--primary-foreground)", border: "none" }}>Default</Badge>
+          <Badge className="rounded-full px-[15px] py-[13px] text-[13px] font-medium" style={{ backgroundColor: "var(--muted)", color: "var(--foreground)", border: "none" }}>Secondary</Badge>
+          <Badge className="rounded-full px-[15px] py-[13px] text-[13px] font-medium" style={{ backgroundColor: "transparent", color: "var(--foreground)", border: "1px solid var(--border)" }}>Ghost</Badge>
         </div>
         <div className="flex flex-wrap gap-2">
           <Badge className="rounded-full px-[15px] py-[13px] text-[13px] font-medium" style={{ backgroundColor: "var(--blue-dark)", color: "var(--white)", border: "none" }}>Aktiv</Badge>
           <Badge className="rounded-full px-[15px] py-[13px] text-[13px] font-medium" style={{ backgroundColor: "var(--red-dark)", color: "var(--white)", border: "none" }}>Fehler</Badge>
-          <Badge className="rounded-full px-[15px] py-[13px] text-[13px] font-medium" style={{ backgroundColor: "var(--gray-100)", color: "var(--gray-400)", border: "none" }}>Inaktiv</Badge>
+          <Badge className="rounded-full px-[15px] py-[13px] text-[13px] font-medium" style={{ backgroundColor: "var(--accent)", color: "var(--muted-foreground)", border: "none" }}>Inaktiv</Badge>
         </div>
-        <div className="py-3"><Separator style={{ backgroundColor: "var(--gray-100)" }} /></div>
+        <div className="py-3"><Separator style={{ backgroundColor: "var(--border)" }} /></div>
         <div>
           <p className="text-xs mb-3" style={{ color: "var(--gray-300)" }}>Team DAYONE</p>
           <div className="flex items-center -space-x-2">
             {[
-              { initials: "VI", bg: "var(--black)", fg: "var(--white)" },
-              { initials: "BD", bg: "var(--sand-medium)", fg: "var(--black)" },
-              { initials: "AK", bg: "var(--blue-light)", fg: "var(--black)" },
-              { initials: "LR", bg: "var(--red-light)", fg: "var(--black)" },
-              { initials: "TM", bg: "var(--sand-dark)", fg: "var(--black)" },
+              { initials: "VI", bg: "var(--primary)", fg: "var(--primary-foreground)" },
+              { initials: "BD", bg: "var(--muted)", fg: "var(--foreground)" },
+              { initials: "AK", bg: "var(--blue-light)", fg: "var(--foreground)" },
+              { initials: "LR", bg: "var(--red-light)", fg: "var(--foreground)" },
+              { initials: "TM", bg: "var(--sand-dark)", fg: "var(--foreground)" },
             ].map(({ initials, bg, fg }) => (
               <Avatar key={initials} className="size-10 after:hidden ring-2 ring-background">
                 <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: bg, color: fg }}>{initials}</AvatarFallback>
@@ -567,7 +567,7 @@ function BadgesCell() {
             ))}
             <div
               className="flex size-10 items-center justify-center rounded-full ring-2 ring-background text-xs font-semibold"
-              style={{ backgroundColor: "transparent", color: "var(--gray-400)", border: "1px solid var(--gray-100)" }}
+              style={{ backgroundColor: "transparent", color: "var(--gray-400)", border: "1px solid var(--border)" }}
             >
               +4
             </div>
@@ -590,8 +590,8 @@ function AccordionCell() {
           { id: "2", q: "Welche Technologien?", a: "Next.js, Tailwind CSS v4, Radix UI und Recharts." },
           { id: "3", q: "Ist es Open Source?", a: "Ja – der Code ist öffentlich zugänglich und erweiterbar." },
         ].map(({ id, q, a }) => (
-          <AccordionItem key={id} value={id} style={{ borderColor: "var(--gray-100)" }}>
-            <AccordionTrigger className="text-sm font-medium hover:no-underline" style={{ color: "var(--black)" }}>
+          <AccordionItem key={id} value={id} style={{ borderColor: "var(--divider)" }}>
+            <AccordionTrigger className="text-sm font-medium hover:no-underline" style={{ color: "var(--foreground)" }}>
               {q}
             </AccordionTrigger>
             <AccordionContent className="text-sm" style={{ color: "var(--gray-400)" }}>{a}</AccordionContent>
@@ -625,7 +625,7 @@ function ChecklistCell() {
         {["Design", "Entwicklung", "Docs"].map((opt) => (
           <div key={opt} className="flex items-center gap-2">
             <RadioGroupItem value={opt.toLowerCase()} id={`radio-${opt}`} />
-            <label htmlFor={`radio-${opt}`} className="text-sm cursor-pointer select-none" style={{ color: "var(--black)" }}>{opt}</label>
+            <label htmlFor={`radio-${opt}`} className="text-sm cursor-pointer select-none" style={{ color: "var(--foreground)" }}>{opt}</label>
           </div>
         ))}
       </RadioGroup>
@@ -635,7 +635,7 @@ function ChecklistCell() {
             <Checkbox checked={checked[i]} onCheckedChange={() => toggle(i)} />
             <label
               className={`text-sm cursor-pointer select-none ${checked[i] ? "line-through" : ""}`}
-              style={{ color: checked[i] ? "var(--gray-300)" : "var(--black)" }}
+              style={{ color: checked[i] ? "var(--gray-300)" : "var(--foreground)" }}
             >
               {label}
             </label>
@@ -669,9 +669,9 @@ function CardCell() {
         {/* Standard */}
         <div className="flex flex-col">
           <p className="text-[10px] font-medium mb-2" style={{ color: "var(--gray-300)" }}>Standard</p>
-          <Card className="h-full justify-center gap-1 py-4" style={{ borderColor: "var(--gray-100)" }}>
+          <Card className="h-full justify-center gap-1 py-4" style={{ borderColor: "var(--border)" }}>
             <CardHeader>
-              <CardTitle className="text-sm font-semibold" style={{ color: "var(--black)" }}>Nächstes Meeting</CardTitle>
+              <CardTitle className="text-sm font-semibold" style={{ color: "var(--foreground)" }}>Nächstes Meeting</CardTitle>
               <CardDescription style={{ color: "var(--gray-400)", fontSize: "12px" }}>Heute · 14:00 Uhr · PDC Sync mit dem Design Team</CardDescription>
             </CardHeader>
           </Card>
@@ -680,18 +680,18 @@ function CardCell() {
         {/* Metric */}
         <div className="flex flex-col">
           <p className="text-[10px] font-medium mb-2" style={{ color: "var(--gray-300)" }}>Metric</p>
-          <Card className="h-full justify-center gap-1 py-4" style={{ borderColor: "var(--gray-100)" }}>
+          <Card className="h-full justify-center gap-1 py-4" style={{ borderColor: "var(--border)" }}>
             <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle className="text-xs font-medium" style={{ color: "var(--gray-400)" }}>Komponenten</CardTitle>
               <BarChart3 className="size-4" style={{ color: "var(--gray-400)" }} />
             </CardHeader>
             <CardContent>
               <div className="flex items-baseline gap-2">
-                <p className="text-2xl font-semibold tabular-nums" style={{ color: "var(--black)" }}>{count}+</p>
+                <p className="text-2xl font-semibold tabular-nums" style={{ color: "var(--foreground)" }}>{count}+</p>
                 <span className="text-xs" style={{ color: "var(--gray-300)" }}>{progress}% fertig</span>
               </div>
-              <div className="h-1.5 w-full rounded-full overflow-hidden mt-2" style={{ backgroundColor: "#F4F2EE" }}>
-                <div className="h-full rounded-full" style={{ width: `${progress}%`, backgroundColor: "var(--black)", transition: "width 0.9s cubic-bezier(0.4,0,0.2,1)" }} />
+              <div className="h-1.5 w-full rounded-full overflow-hidden mt-2" style={{ backgroundColor: "var(--secondary)" }}>
+                <div className="h-full rounded-full" style={{ width: `${progress}%`, backgroundColor: "var(--primary)", transition: "width 0.9s cubic-bezier(0.4,0,0.2,1)" }} />
               </div>
             </CardContent>
           </Card>
@@ -743,7 +743,7 @@ export default function HomePage() {
           <Image src="/dayone-icon.svg" alt="DAYONE" width={36} height={36} />
           <h1
             className="font-semibold mt-4"
-            style={{ fontSize: "clamp(2.25rem, 5vw, 3.75rem)", lineHeight: 1.08, color: "var(--black)", letterSpacing: "-0.03em" }}
+            style={{ fontSize: "clamp(2.25rem, 5vw, 3.75rem)", lineHeight: 1.08, color: "var(--foreground)", letterSpacing: "-0.03em" }}
           >
             Design System
           </h1>

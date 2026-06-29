@@ -16,7 +16,7 @@ function TypographySample({ token }: { token: TypographyToken }) {
           letterSpacing:
             token.trackingPx > 0 ? `var(${token.trackingVar})` : "var(--tracking-display)",
           fontWeight: token.fontWeight,
-          color: "var(--black)",
+          color: "var(--foreground)",
         }}
       >
         {token.sample}

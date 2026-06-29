@@ -98,7 +98,7 @@ function ColorsDemo() {
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 md:grid-cols-7">
             {group.colors.map((color) => (
               <div key={color.hex} className="overflow-hidden rounded-md" style={{ border: "1px solid var(--border)" }}>
-                <div className="h-16" style={{ backgroundColor: color.hex, boxShadow: color.hex === "#FFFFFF" ? "inset 0 0 0 1px var(--gray-100)" : undefined }} />
+                <div className="h-16" style={{ backgroundColor: color.hex, boxShadow: color.hex === "#FFFFFF" ? "inset 0 0 0 1px var(--border)" : undefined }} />
                 <div className="space-y-0.5 px-2.5 py-2.5">
                   <p className="text-xs font-semibold" style={{ color: "var(--foreground)" }}>{color.name}</p>
                   <p className="text-[10px]" style={{ color: "var(--gray-400)" }}>{color.hex}</p>
