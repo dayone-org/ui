@@ -36,13 +36,13 @@ npm run dev
 
 - **Landing:** [http://localhost:3000](http://localhost:3000)
 - **Playground:** [http://localhost:3000/playground](http://localhost:3000/playground)
-- **How to use:** [http://localhost:3000/how-to-use](http://localhost:3000/how-to-use)
+- **Setup:** [http://localhost:3000/setup](http://localhost:3000/setup)
 
 ## Live
 
 - **Production:** https://dayone-ui.vercel.app
 - **Playground:** https://dayone-ui.vercel.app/playground
-- **How to use:** https://dayone-ui.vercel.app/how-to-use
+- **Setup:** https://dayone-ui.vercel.app/setup
 
 ## Deploy (Vercel)
 

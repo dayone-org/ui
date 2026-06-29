@@ -9,7 +9,7 @@ import type { DocsSection } from "@/lib/docs-section";
 import { DOCS_MAIN_COLUMN, DOCS_PAGE_PADDING } from "@/lib/docs-layout";
 
 type DocsShellProps = {
-  headerActive: "playground" | "how-to" | "komponenten";
+  headerActive: "playground" | "setup" | "komponenten";
   sections: readonly DocsSection[];
   children: ReactNode;
 };

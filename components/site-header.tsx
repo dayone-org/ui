@@ -11,7 +11,7 @@ import {
 } from "@/lib/docs-layout";
 
 type SiteHeaderProps = {
-  active?: "home" | "playground" | "how-to" | "komponenten" | "anwendung";
+  active?: "home" | "playground" | "setup" | "komponenten" | "anwendung";
 };
 
 const navLinkClass = "text-sm font-normal hover:opacity-70";
@@ -60,18 +60,18 @@ export function SiteHeader({ active = "home" }: SiteHeaderProps) {
               Komponenten
             </Link>
             <Link
-              href="/how-to-use"
+              href="/setup"
               className={navLinkClass}
-              style={navLinkStyle(active === "how-to")}
+              style={navLinkStyle(active === "setup")}
             >
-              How to use
+              Setup
             </Link>
             <Link
               href="/anwendung/pdc-hub"
               className={navLinkClass}
               style={navLinkStyle(active === "anwendung")}
             >
-              Live Demo
+              Anwendung
             </Link>
           </nav>
 
@@ -101,12 +101,12 @@ export function SiteHeader({ active = "home" }: SiteHeaderProps) {
             Komponenten
           </Link>
           <Link
-            href="/how-to-use"
+            href="/setup"
             onClick={() => setMobileOpen(false)}
             className={navLinkClass}
-            style={navLinkStyle(active === "how-to")}
+            style={navLinkStyle(active === "setup")}
           >
-            How to use
+            Setup
           </Link>
           <Link
             href="/anwendung/pdc-hub"
@@ -114,7 +114,7 @@ export function SiteHeader({ active = "home" }: SiteHeaderProps) {
             className={navLinkClass}
             style={navLinkStyle(active === "anwendung")}
           >
-            Live Demo
+            Anwendung
           </Link>
         </nav>
       )}

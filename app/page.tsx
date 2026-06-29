@@ -755,7 +755,7 @@ export default function HomePage() {
               <Link href="/komponenten">Komponenten</Link>
             </Button>
             <Button asChild size="lg" variant="outline">
-              <Link href="/how-to-use">How to use</Link>
+              <Link href="/setup">Setup</Link>
             </Button>
           </div>
         </div>

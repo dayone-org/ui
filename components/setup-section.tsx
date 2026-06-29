@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-export function HowToSection({
+export function SetupSection({
   id,
   title,
   children,
@@ -26,7 +26,10 @@ export function HowToSection({
         >
           {title}
         </h2>
-        <div className="flex-1" style={{ height: "1px", backgroundColor: "var(--gray-100)" }} />
+        <div
+          className="flex-1"
+          style={{ height: "1px", backgroundColor: "var(--gray-100)" }}
+        />
       </div>
       <div>{children}</div>
     </section>

@@ -1,9 +1,5 @@
-import { HowToGuide } from "@/components/how-to-guide";
+import { redirect } from "next/navigation";
 
 export default function HowToUsePage() {
-  return (
-    <main className="pt-12 pb-12 lg:pb-16">
-      <HowToGuide />
-    </main>
-  );
+  redirect("/setup");
 }

@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Menu } from "lucide-react";
 import {
@@ -18,6 +17,24 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
+function scrollToSection(id: string) {
+  const el = document.getElementById(id);
+  if (!el) return;
+
+  const rect = el.getBoundingClientRect();
+  const elementTop = rect.top + window.scrollY;
+  const elementHeight = rect.height;
+  const viewportHeight = window.innerHeight;
+
+  const targetScroll =
+    elementHeight >= viewportHeight
+      ? elementTop - 80
+      : elementTop - (viewportHeight - elementHeight) / 2;
+
+  window.scrollTo({ top: Math.max(0, targetScroll), behavior: "smooth" });
+  window.history.replaceState(null, "", `#${id}`);
+}
+
 function NavLinks({
   sections,
   activeId,
@@ -33,18 +50,23 @@ function NavLinks({
         const isActive = activeId === section.id;
         return (
           <li key={section.id}>
-            <Link
-              href={`#${section.id}`}
-              onClick={onNavigate}
-              className="block rounded-md px-3 py-1.5 text-sm transition-colors"
+            <button
+              type="button"
+              onClick={() => {
+                scrollToSection(section.id);
+                onNavigate?.();
+              }}
+              className="block w-full rounded-md px-3 py-1.5 text-left text-sm transition-colors"
               style={{
                 color: isActive ? "var(--black)" : "var(--gray-400)",
                 backgroundColor: isActive ? "#F4F2EE" : "transparent",
                 fontWeight: isActive ? 600 : 400,
+                border: "none",
+                cursor: "pointer",
               }}
             >
               {section.label}
-            </Link>
+            </button>
           </li>
         );
       })}
@@ -63,21 +85,32 @@ function useActiveSection(sections: readonly DocsSection[]) {
 
     if (elements.length === 0) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-        const id = visible[0]?.target.id;
-        if (id && ids.includes(id)) {
-          setActiveId(id);
-        }
-      },
-      { rootMargin: "-20% 0px -60% 0px", threshold: [0, 0.25, 0.5, 1] }
-    );
+    function updateActiveSection() {
+      const maxScroll =
+        document.documentElement.scrollHeight - window.innerHeight;
 
-    elements.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+      if (window.scrollY >= maxScroll - 120) {
+        setActiveId(ids[ids.length - 1] ?? "");
+        return;
+      }
+
+      const activationLine = window.innerHeight * 0.35;
+      const active =
+        elements
+          .filter((el) => el.getBoundingClientRect().top <= activationLine)
+          .at(-1)?.id ?? ids[0] ?? "";
+
+      setActiveId(active);
+    }
+
+    updateActiveSection();
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+    window.addEventListener("resize", updateActiveSection);
+
+    return () => {
+      window.removeEventListener("scroll", updateActiveSection);
+      window.removeEventListener("resize", updateActiveSection);
+    };
   }, [sections]);
 
   return activeId;
