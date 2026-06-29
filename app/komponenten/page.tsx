@@ -8,20 +8,20 @@ function CategoryHeading({ children }: { children: React.ReactNode }) {
         className="shrink-0 font-semibold"
         style={{
           fontSize: "var(--text-display-xl)",
-          color: "var(--black)",
+          color: "var(--foreground)",
           letterSpacing: "var(--tracking-display)",
           lineHeight: "var(--leading-display)",
         }}
       >
         {children}
       </h2>
-      <div className="flex-1" style={{ height: "1px", backgroundColor: "var(--gray-100)" }} />
+      <div className="flex-1" style={{ height: "1px", backgroundColor: "var(--border)" }} />
     </div>
   );
 }
 
 const DIVIDER = (
-  <div style={{ height: "1px", backgroundColor: "var(--gray-100)" }} />
+  <div style={{ height: "1px", backgroundColor: "var(--border)" }} />
 );
 
 export default function KomponentenPage() {
@@ -44,7 +44,7 @@ export default function KomponentenPage() {
                     className="mb-1.5 font-semibold"
                     style={{
                       fontSize: "var(--text-body-lg)",
-                      color: "var(--black)",
+                      color: "var(--foreground)",
                     }}
                   >
                     {component.name}

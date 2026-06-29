@@ -239,17 +239,17 @@ function KbdDemo() {
       <div className="flex items-center gap-2 text-sm" style={{ color: "var(--gray-500)" }}>
         Befehlspalette öffnen
         <span className="flex items-center gap-1">
-          <Kbd style={{ backgroundColor: "var(--gray-200)", color: "var(--foreground)" }}>⌘</Kbd>
-          <Kbd style={{ backgroundColor: "var(--gray-200)", color: "var(--foreground)" }}>K</Kbd>
+          <Kbd style={{ backgroundColor: "var(--accent)", color: "var(--foreground)" }}>⌘</Kbd>
+          <Kbd style={{ backgroundColor: "var(--accent)", color: "var(--foreground)" }}>K</Kbd>
         </span>
       </div>
       <div className="flex items-center gap-2 text-sm" style={{ color: "var(--gray-500)" }}>
         Bestätigen
-        <Kbd style={{ backgroundColor: "var(--gray-200)", color: "var(--foreground)" }}>Enter</Kbd>
+        <Kbd style={{ backgroundColor: "var(--accent)", color: "var(--foreground)" }}>Enter</Kbd>
       </div>
       <div className="flex items-center gap-2 text-sm" style={{ color: "var(--gray-500)" }}>
         Abbrechen
-        <Kbd style={{ backgroundColor: "var(--gray-200)", color: "var(--foreground)" }}>Esc</Kbd>
+        <Kbd style={{ backgroundColor: "var(--accent)", color: "var(--foreground)" }}>Esc</Kbd>
       </div>
     </div>
   );
@@ -305,8 +305,8 @@ function ItemDemo() {
       {/* Fill #F4F2EE */}
       <ItemGroup className="w-[369px] gap-2">
         {people.map(({ title, description }, i) => (
-          <Item key={title} className="gap-3 py-[15px] border-transparent" style={{ backgroundColor: "#F4F2EE" }}>
-            <Avatar className="size-9 shrink-0 ring-2" style={{ "--tw-ring-color": "#F4F2EE" } as React.CSSProperties}>
+          <Item key={title} className="gap-3 py-[15px] border-transparent" style={{ backgroundColor: "var(--secondary)" }}>
+            <Avatar className="size-9 shrink-0 ring-2" style={{ "--tw-ring-color": "var(--secondary)" } as React.CSSProperties}>
               <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: PALETTE[i].bg, color: PALETTE[i].fg }}>
                 {title.split(" ").map((n) => n[0]).join("")}
               </AvatarFallback>
@@ -1352,8 +1352,8 @@ function InfocardDemo() {
               <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>Product Design</ItemDescription>
             </ItemContent>
           </Item>
-          <Item className="w-76 gap-3 border-transparent bg-[#F4F2EE] py-[15px]" style={{ "--tw-ring-color": "#F4F2EE" } as React.CSSProperties}>
-            <Avatar className="size-9 shrink-0 ring-2" style={{ "--tw-ring-color": "#F4F2EE" } as React.CSSProperties}>
+          <Item className="w-76 gap-3 border-transparent bg-[var(--secondary)] py-[15px]" style={{ "--tw-ring-color": "var(--secondary)" } as React.CSSProperties}>
+            <Avatar className="size-9 shrink-0 ring-2" style={{ "--tw-ring-color": "var(--secondary)" } as React.CSSProperties}>
               <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--primary)", color: "var(--primary-foreground)" }}>VI</AvatarFallback>
             </Avatar>
             <ItemContent className="gap-0.5">
@@ -1372,7 +1372,7 @@ function ButtoncardDemo() {
     <div className="flex flex-col gap-10">
       <div className="flex flex-wrap gap-4">
         <Card role="button" tabIndex={0}
-          className="w-76 cursor-pointer transition-colors duration-150 hover:bg-[#F4F2EE] focus-visible:outline-none focus-visible:ring-2"
+          className="w-76 cursor-pointer transition-colors duration-150 hover:bg-[var(--secondary)] focus-visible:outline-none focus-visible:ring-2"
           style={OUTLINE_RING}>
           <CardHeader className="flex flex-row items-center justify-between">
             <div className="flex flex-col gap-1">
@@ -1387,7 +1387,7 @@ function ButtoncardDemo() {
         </Card>
 
         <Card role="button" tabIndex={0}
-          className="w-76 cursor-pointer transition-colors duration-150 hover:bg-[#F4F2EE] focus-visible:outline-none focus-visible:ring-2"
+          className="w-76 cursor-pointer transition-colors duration-150 hover:bg-[var(--secondary)] focus-visible:outline-none focus-visible:ring-2"
           style={OUTLINE_RING}>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium" style={{ color: "var(--gray-400)" }}>Gesamtumsatz</CardTitle>
@@ -1404,7 +1404,7 @@ function ButtoncardDemo() {
         <DemoLabel>Item · Outline & Filled</DemoLabel>
         <div className="flex gap-4">
           <Item variant="outline" role="button" tabIndex={0}
-            className="w-76 gap-3 py-[15px] cursor-pointer transition-colors duration-150 hover:bg-[#F4F2EE]"
+            className="w-76 gap-3 py-[15px] cursor-pointer transition-colors duration-150 hover:bg-[var(--secondary)]"
             style={{ borderColor: "var(--border)" }}>
             <Avatar className="size-9 shrink-0 ring-2 ring-background">
               <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--primary)", color: "var(--primary-foreground)" }}>VI</AvatarFallback>
@@ -1416,9 +1416,9 @@ function ButtoncardDemo() {
             <ChevronRight className="size-5 shrink-0 ml-auto" style={{ color: "var(--gray-400)" }} />
           </Item>
           <Item role="button" tabIndex={0}
-            className="w-76 gap-3 border-transparent bg-[#F4F2EE] py-[15px] cursor-pointer transition-colors hover:bg-[#EDE7DD]"
-            style={{ "--tw-ring-color": "#F4F2EE" } as React.CSSProperties}>
-            <Avatar className="size-9 shrink-0 ring-2" style={{ "--tw-ring-color": "#F4F2EE" } as React.CSSProperties}>
+            className="w-76 gap-3 border-transparent bg-[var(--secondary)] py-[15px] cursor-pointer transition-colors hover:bg-[var(--muted)]"
+            style={{ "--tw-ring-color": "var(--secondary)" } as React.CSSProperties}>
+            <Avatar className="size-9 shrink-0 ring-2" style={{ "--tw-ring-color": "var(--secondary)" } as React.CSSProperties}>
               <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--primary)", color: "var(--primary-foreground)" }}>VI</AvatarFallback>
             </Avatar>
             <ItemContent className="gap-0.5">
@@ -1456,7 +1456,7 @@ function ListDemo() {
           {people.map(({ initials, name, role }) =>
             clickable ? (
               <Item key={name} variant="outline" role="button" tabIndex={0}
-                className="w-76 gap-3 py-[15px] cursor-pointer transition-colors duration-150 hover:bg-[#F4F2EE]"
+                className="w-76 gap-3 py-[15px] cursor-pointer transition-colors duration-150 hover:bg-[var(--secondary)]"
                 style={{ borderColor: "var(--border)" }}>
                 <Avatar className="size-9 shrink-0 ring-2 ring-background">
                   <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--primary)", color: "var(--primary-foreground)" }}>{initials}</AvatarFallback>
@@ -1484,9 +1484,9 @@ function ListDemo() {
           {people.map(({ initials, name, role }) =>
             clickable ? (
               <Item key={name} role="button" tabIndex={0}
-                className="w-76 gap-3 border-transparent bg-[#F4F2EE] py-[15px] cursor-pointer transition-colors hover:bg-[#EDE7DD]"
-                style={{ "--tw-ring-color": "#F4F2EE" } as React.CSSProperties}>
-                <Avatar className="size-9 shrink-0 ring-2" style={{ "--tw-ring-color": "#F4F2EE" } as React.CSSProperties}>
+                className="w-76 gap-3 border-transparent bg-[var(--secondary)] py-[15px] cursor-pointer transition-colors hover:bg-[var(--muted)]"
+                style={{ "--tw-ring-color": "var(--secondary)" } as React.CSSProperties}>
+                <Avatar className="size-9 shrink-0 ring-2" style={{ "--tw-ring-color": "var(--secondary)" } as React.CSSProperties}>
                   <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--primary)", color: "var(--primary-foreground)" }}>{initials}</AvatarFallback>
                 </Avatar>
                 <ItemContent className="gap-0.5">
@@ -1497,9 +1497,9 @@ function ListDemo() {
               </Item>
             ) : (
               <Item key={name}
-                className="w-76 gap-3 border-transparent bg-[#F4F2EE] py-[15px] transition-colors hover:bg-[#EDE7DD]"
-                style={{ "--tw-ring-color": "#F4F2EE" } as React.CSSProperties}>
-                <Avatar className="size-9 shrink-0 ring-2" style={{ "--tw-ring-color": "#F4F2EE" } as React.CSSProperties}>
+                className="w-76 gap-3 border-transparent bg-[var(--secondary)] py-[15px] transition-colors hover:bg-[var(--muted)]"
+                style={{ "--tw-ring-color": "var(--secondary)" } as React.CSSProperties}>
+                <Avatar className="size-9 shrink-0 ring-2" style={{ "--tw-ring-color": "var(--secondary)" } as React.CSSProperties}>
                   <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--primary)", color: "var(--primary-foreground)" }}>{initials}</AvatarFallback>
                 </Avatar>
                 <ItemContent className="gap-0.5">
@@ -1518,7 +1518,7 @@ function ListDemo() {
 function AspectRatioDemo() {
   return (
     <div className="w-full max-w-xs">
-      <AspectRatio ratio={16 / 9} className="overflow-hidden rounded-lg" style={{ backgroundColor: "var(--gray-200)" }}>
+      <AspectRatio ratio={16 / 9} className="overflow-hidden rounded-lg" style={{ backgroundColor: "var(--accent)" }}>
         <div className="flex h-full w-full items-center justify-center text-sm" style={{ color: "var(--gray-400)" }}>
           16 / 9
         </div>
@@ -1549,7 +1549,7 @@ function ResizableDemo() {
           Links
         </div>
       </ResizablePanel>
-      <ResizableHandle style={{ backgroundColor: "var(--gray-200)" }} />
+      <ResizableHandle style={{ backgroundColor: "var(--accent)" }} />
       <ResizablePanel defaultSize={50}>
         <div className="flex h-full items-center justify-center text-sm" style={{ color: "var(--gray-400)" }}>
           Rechts

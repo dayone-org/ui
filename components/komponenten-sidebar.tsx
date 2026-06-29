@@ -176,7 +176,7 @@ function SidebarNav({ activeSlug, search, onNavigate }: NavProps) {
                     style={{
                       color: isActive ? "var(--foreground)" : "var(--gray-400)",
                       fontWeight: isActive ? 600 : 400,
-                      backgroundColor: isActive ? "#F4F2EE" : "transparent",
+                      backgroundColor: isActive ? "var(--secondary)" : "transparent",
                       border: "none",
                       cursor: "pointer",
                     }}

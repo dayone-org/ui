@@ -470,7 +470,7 @@ function StatCard({
     >
       <div
         className="flex size-9 shrink-0 items-center justify-center rounded-lg"
-        style={{ backgroundColor: "var(--gray-50, #F7F7F7)", color: "var(--gray-400)" }}
+        style={{ backgroundColor: "var(--accent)", color: "var(--gray-400)" }}
       >
         {icon}
       </div>

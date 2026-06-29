@@ -31,7 +31,7 @@ export default async function ComponentPage({
           fontSize: "var(--text-display-3xl)",
           lineHeight: "var(--leading-display)",
           letterSpacing: "var(--tracking-display)",
-          color: "var(--black)",
+          color: "var(--foreground)",
         }}
       >
         {component.name}

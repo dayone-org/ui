@@ -493,7 +493,7 @@ function NavCell() {
           <BreadcrumbList className="gap-3">
             {crumbs.map((item, idx) => (
               <Fragment key={item.key}>
-                {idx > 0 && <BreadcrumbSeparator style={{ color: "var(--gray-200)" }} />}
+                {idx > 0 && <BreadcrumbSeparator style={{ color: "var(--muted-foreground)" }} />}
                 <BreadcrumbItem>
                   {active === item.key ? (
                     <BreadcrumbPage style={{ color: "var(--foreground)", fontWeight: 600 }}>{item.label}</BreadcrumbPage>
