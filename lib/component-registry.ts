@@ -35,6 +35,7 @@ export const COMPONENT_REGISTRY: ComponentCategory[] = [
     components: [
       { slug: "colors", name: "Colors", description: "DAYONE Farbpalette und Design-Tokens", playgroundAnchor: "colors" },
       { slug: "typography", name: "Typography", description: "Typografische Skalierung und Schriftstile", playgroundAnchor: "typography" },
+      { slug: "logo", name: "Logo", description: "Markensymbol, Wortmarke und Kombinationsvarianten", playgroundAnchor: "misc" },
     ],
   },
   {
@@ -102,8 +103,6 @@ export const COMPONENT_REGISTRY: ComponentCategory[] = [
       // Pair: both positioned floating content
       { slug: "popover", name: "Popover", description: "Positioniertes Overlay für zusätzliche Inhalte", playgroundAnchor: "overlays" },
       { slug: "hover-card", name: "Hover Card", description: "Vorschaukarte die bei Hover erscheint", playgroundAnchor: "overlays" },
-      // Full-width: command palette is wide
-      { slug: "command", name: "Command", description: "Befehlspalette mit Suchfunktion", playgroundAnchor: "overlays", span: 2 },
       // Single: small utility
       { slug: "tooltip", name: "Tooltip", description: "Kurzinfo-Blase bei Hover über ein Element", playgroundAnchor: "overlays" },
     ],

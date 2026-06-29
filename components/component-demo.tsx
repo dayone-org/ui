@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { DayoneButtonsContent } from "@/components/dayone-buttons";
 import { DayoneTypographyShowcase } from "@/components/dayone-typography-showcase";
 import { PlaygroundVariantHeading } from "@/components/playground-variant-heading";
@@ -96,7 +97,7 @@ function ColorsDemo() {
           <PlaygroundVariantHeading className="mb-4">{group.label}</PlaygroundVariantHeading>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 md:grid-cols-7">
             {group.colors.map((color) => (
-              <div key={color.hex} className="overflow-hidden rounded-md" style={{ border: "1px solid var(--gray-100)" }}>
+              <div key={color.hex} className="overflow-hidden rounded-md" style={{ border: "1px solid var(--border)" }}>
                 <div className="h-16" style={{ backgroundColor: color.hex, boxShadow: color.hex === "#FFFFFF" ? "inset 0 0 0 1px var(--gray-100)" : undefined }} />
                 <div className="space-y-0.5 px-2.5 py-2.5">
                   <p className="text-xs font-semibold" style={{ color: "var(--black)" }}>{color.name}</p>
@@ -150,7 +151,7 @@ function BadgeDemo() {
   const tags = [
     { bg: "var(--black)", color: "var(--white)", border: "none", label: "Default" },
     { bg: "var(--sand-medium)", color: "var(--black)", border: "none", label: "Secondary" },
-    { bg: "transparent", color: "var(--black)", border: "1px solid var(--gray-100)", label: "Ghost" },
+    { bg: "transparent", color: "var(--black)", border: "1px solid var(--border)", label: "Ghost" },
     { bg: "var(--blue-dark)", color: "var(--white)", border: "none", label: "Aktiv" },
     { bg: "var(--red-dark)", color: "var(--white)", border: "none", label: "Fehler" },
     { bg: "var(--gray-100)", color: "var(--gray-400)", border: "none", label: "Inaktiv" },
@@ -288,7 +289,7 @@ function ItemDemo() {
       {/* Outline */}
       <ItemGroup className="w-[369px] gap-2">
         {people.map(({ title, description }, i) => (
-          <Item key={title} variant="outline" className="gap-3 py-[15px]" style={{ borderColor: "var(--gray-100)" }}>
+          <Item key={title} variant="outline" className="gap-3 py-[15px]" style={{ borderColor: "var(--border)" }}>
             <Avatar className="size-9 shrink-0 ring-2 ring-background">
               <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: PALETTE[i].bg, color: PALETTE[i].fg }}>
                 {title.split(" ").map((n) => n[0]).join("")}
@@ -1012,7 +1013,7 @@ function TooltipDemo() {
 function AlertDemo() {
   return (
     <div className="w-full max-w-sm space-y-3">
-      <Alert className="rounded-md" style={{ borderColor: "var(--gray-100)" }}>
+      <Alert className="rounded-md" style={{ borderColor: "var(--border)" }}>
         <AlertTitle className="font-semibold" style={{ color: "var(--black)" }}>Hinweis</AlertTitle>
         <AlertDescription style={{ color: "var(--gray-400)" }}>Deine Änderungen wurden gespeichert.</AlertDescription>
       </Alert>
@@ -1060,7 +1061,7 @@ function TableDemo() {
   return (
     <Table>
       <TableHeader>
-        <TableRow style={{ borderColor: "var(--gray-100)" }}>
+        <TableRow style={{ borderColor: "var(--divider)" }}>
           <TableHead className="font-semibold" style={{ color: "var(--black)" }}>Name</TableHead>
           <TableHead className="font-semibold" style={{ color: "var(--black)" }}>Rolle</TableHead>
           <TableHead className="font-semibold" style={{ color: "var(--black)" }}>Status</TableHead>
@@ -1068,7 +1069,7 @@ function TableDemo() {
       </TableHeader>
       <TableBody>
         {rows.map((row) => (
-          <TableRow key={row.name} style={{ borderColor: "var(--gray-100)" }}>
+          <TableRow key={row.name} style={{ borderColor: "var(--divider)" }}>
             <TableCell className="font-medium" style={{ color: "var(--black)" }}>{row.name}</TableCell>
             <TableCell style={{ color: "var(--gray-400)" }}>{row.role}</TableCell>
             <TableCell>
@@ -1097,7 +1098,7 @@ function CarouselDemo() {
         {CAROUSEL_SLIDES.map((slide, i) => (
           <CarouselItem key={i}>
             <div
-              className="flex aspect-[3/2] w-full items-end overflow-hidden rounded-xl px-14 py-7"
+              className="flex aspect-[3/2] w-full items-end overflow-hidden rounded-xl p-6"
               style={{ backgroundColor: slide.bg }}
             >
               <span className="text-2xl font-semibold leading-tight" style={{ color: slide.fg }}>
@@ -1108,11 +1109,11 @@ function CarouselDemo() {
         ))}
       </CarouselContent>
       <CarouselPrevious
-        className="left-3"
+        className="left-[-38px]"
         style={{ color: "var(--black)", borderColor: "var(--gray-200)" }}
       />
       <CarouselNext
-        className="right-3"
+        className="right-[-38px]"
         style={{ color: "var(--black)", borderColor: "var(--gray-200)" }}
       />
     </Carousel>
@@ -1120,20 +1121,21 @@ function CarouselDemo() {
 }
 
 function CalendarDemo() {
-  const [date, setDate] = useState<Date | undefined>(new Date());
+  const [date, setDate] = useState<Date | undefined>(new Date(2026, 5, 18));
   return (
-    <Calendar
-      mode="single"
-      selected={date}
-      onSelect={setDate}
-      locale={de}
-      weekStartsOn={1}
-      formatters={{
-        formatWeekdayName: (day) => ["SO", "MO", "DI", "MI", "DO", "FR", "SA"][day.getDay()],
-      }}
-      className="rounded-lg [--cell-size:--spacing(8)]"
-      style={{ border: "1px solid var(--gray-200)", backgroundColor: "var(--white)" }}
-    />
+    <div style={{ width: "268px" }}>
+      <Calendar
+        mode="single"
+        selected={date}
+        onSelect={setDate}
+        locale={de}
+        weekStartsOn={1}
+        formatters={{ formatWeekdayName: (d) => ["SO", "MO", "DI", "MI", "DO", "FR", "SA"][d.getDay()] }}
+        className="rounded-xl w-full [--cell-size:--spacing(7)]"
+        classNames={{ week: "mt-1 flex w-full" }}
+        style={{ border: "1px solid var(--border)" }}
+      />
+    </div>
   );
 }
 
@@ -1244,7 +1246,7 @@ function AvatarDemo() {
       ))}
       <div
         className="flex size-10 items-center justify-center rounded-full ring-2 ring-background text-xs font-semibold"
-        style={{ backgroundColor: "transparent", color: "var(--gray-400)", border: "1px solid var(--gray-100)" }}
+        style={{ backgroundColor: "transparent", color: "var(--gray-400)", border: "1px solid var(--border)" }}
       >
         +4
       </div>
@@ -1255,7 +1257,7 @@ function AvatarDemo() {
 function AccordionDemo() {
   return (
     <Accordion type="single" collapsible className="w-full max-w-xs">
-      <AccordionItem value="1" style={{ borderColor: "var(--gray-100)" }}>
+      <AccordionItem value="1" style={{ borderColor: "var(--divider)" }}>
         <AccordionTrigger className="font-semibold hover:no-underline" style={{ color: "var(--black)" }}>
           Was ist DAYONE UI?
         </AccordionTrigger>
@@ -1263,7 +1265,7 @@ function AccordionDemo() {
           Eine Komponenten-Bibliothek für interne DAYONE Anwendungen.
         </AccordionContent>
       </AccordionItem>
-      <AccordionItem value="2" style={{ borderColor: "var(--gray-100)" }}>
+      <AccordionItem value="2" style={{ borderColor: "var(--divider)" }}>
         <AccordionTrigger className="font-semibold hover:no-underline" style={{ color: "var(--black)" }}>
           Wie installiere ich es?
         </AccordionTrigger>
@@ -1307,7 +1309,7 @@ function DemoLabel({ children }: { children: React.ReactNode }) {
   );
 }
 
-const OUTLINE_RING = { "--tw-ring-color": "var(--gray-100)" } as React.CSSProperties;
+const OUTLINE_RING = { "--tw-ring-color": "var(--border)" } as React.CSSProperties;
 
 function InfocardDemo() {
   return (
@@ -1341,7 +1343,7 @@ function InfocardDemo() {
       <div className="flex flex-col gap-3">
         <DemoLabel>Item · Outline & Filled</DemoLabel>
         <div className="flex gap-4">
-          <Item variant="outline" className="w-76 gap-3 py-[15px]" style={{ borderColor: "var(--gray-100)" }}>
+          <Item variant="outline" className="w-76 gap-3 py-[15px]" style={{ borderColor: "var(--border)" }}>
             <Avatar className="size-9 shrink-0 ring-2 ring-background">
               <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>VI</AvatarFallback>
             </Avatar>
@@ -1350,7 +1352,7 @@ function InfocardDemo() {
               <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>Product Design</ItemDescription>
             </ItemContent>
           </Item>
-          <Item className="w-76 gap-3 border-transparent bg-[#F4F2EE] py-[15px] transition-colors hover:bg-[#EDE7DD]" style={{ "--tw-ring-color": "#F4F2EE" } as React.CSSProperties}>
+          <Item className="w-76 gap-3 border-transparent bg-[#F4F2EE] py-[15px]" style={{ "--tw-ring-color": "#F4F2EE" } as React.CSSProperties}>
             <Avatar className="size-9 shrink-0 ring-2" style={{ "--tw-ring-color": "#F4F2EE" } as React.CSSProperties}>
               <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>VI</AvatarFallback>
             </Avatar>
@@ -1403,7 +1405,7 @@ function ButtoncardDemo() {
         <div className="flex gap-4">
           <Item variant="outline" role="button" tabIndex={0}
             className="w-76 gap-3 py-[15px] cursor-pointer transition-colors duration-150 hover:bg-[#F4F2EE]"
-            style={{ borderColor: "var(--gray-100)" }}>
+            style={{ borderColor: "var(--border)" }}>
             <Avatar className="size-9 shrink-0 ring-2 ring-background">
               <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>VI</AvatarFallback>
             </Avatar>
@@ -1455,7 +1457,7 @@ function ListDemo() {
             clickable ? (
               <Item key={name} variant="outline" role="button" tabIndex={0}
                 className="w-76 gap-3 py-[15px] cursor-pointer transition-colors duration-150 hover:bg-[#F4F2EE]"
-                style={{ borderColor: "var(--gray-100)" }}>
+                style={{ borderColor: "var(--border)" }}>
                 <Avatar className="size-9 shrink-0 ring-2 ring-background">
                   <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>{initials}</AvatarFallback>
                 </Avatar>
@@ -1466,7 +1468,7 @@ function ListDemo() {
                 <ChevronRight className="size-5 shrink-0 ml-auto" style={{ color: "var(--gray-400)" }} />
               </Item>
             ) : (
-              <Item key={name} variant="outline" className="w-76 gap-3 py-[15px]" style={{ borderColor: "var(--gray-100)" }}>
+              <Item key={name} variant="outline" className="w-76 gap-3 py-[15px]" style={{ borderColor: "var(--border)" }}>
                 <Avatar className="size-9 shrink-0 ring-2 ring-background">
                   <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>{initials}</AvatarFallback>
                 </Avatar>
@@ -1557,10 +1559,52 @@ function ResizableDemo() {
   );
 }
 
+// ─── Logo ────────────────────────────────────────────────────────────────────
+
+function LogoDemo() {
+  return (
+    <div className="space-y-10">
+      <div>
+        <PlaygroundVariantHeading>Kreis</PlaygroundVariantHeading>
+        <div className="flex items-end gap-16">
+          <Image src="/dayone-icon.svg" width={36} height={36} alt="DAYONE" />
+          <Image src="/dayone-icon.svg" width={30} height={30} alt="DAYONE" />
+          <Image src="/dayone-icon.svg" width={24} height={24} alt="DAYONE" />
+        </div>
+      </div>
+      <div>
+        <PlaygroundVariantHeading>Wortmarke</PlaygroundVariantHeading>
+        <div className="flex items-end gap-16">
+          <Image src="/dayone-wordmark.svg" width={98} height={19} alt="DAYONE" />
+          <Image src="/dayone-wordmark.svg" width={82} height={16} alt="DAYONE" />
+          <Image src="/dayone-wordmark.svg" width={66} height={13} alt="DAYONE" />
+        </div>
+      </div>
+      <div>
+        <PlaygroundVariantHeading>Horizontal</PlaygroundVariantHeading>
+        <div className="flex items-end gap-16">
+          <Image src="/dayone-logo.svg" width={184} height={33} alt="DAYONE" />
+          <Image src="/dayone-logo.svg" width={154} height={28} alt="DAYONE" />
+          <Image src="/dayone-logo.svg" width={123} height={22} alt="DAYONE" />
+        </div>
+      </div>
+      <div>
+        <PlaygroundVariantHeading>Vertikal</PlaygroundVariantHeading>
+        <div className="flex items-end gap-16">
+          <Image src="/dayone-logo-vertical.svg" width={87} height={67} alt="DAYONE" />
+          <Image src="/dayone-logo-vertical.svg" width={73} height={56} alt="DAYONE" />
+          <Image src="/dayone-logo-vertical.svg" width={58} height={45} alt="DAYONE" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ─── Registry ───────────────────────────────────────────────────────────────
 
 const DEMOS: Record<string, () => React.ReactElement> = {
   typography: TypographyDemo,
+  logo: LogoDemo,
   button: ButtonDemo,
   "button-group": ButtonGroupDemo,
   badge: BadgeDemo,

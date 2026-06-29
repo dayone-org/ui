@@ -118,6 +118,7 @@
   --destructive:                var(--red-medium);
   --destructive-foreground:     var(--white);
   --border:                     var(--gray-200);
+  --divider:                    var(--gray-100);
   --input:                      var(--gray-200);
   --ring:                       var(--black);
   --overlay:                    rgb(0 0 0 / 0.10);
@@ -224,6 +225,7 @@
   --accent-foreground:          var(--sand-light);
   --destructive:                var(--red-medium);
   --border:                     var(--gray-500);
+  --divider:                    #333333;
   --input:                      #404040;
   --ring:                       var(--gray-400);
   --overlay:                    rgb(0 0 0 / 0.45);
