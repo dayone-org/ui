@@ -117,7 +117,7 @@
   --accent-foreground:          var(--black);
   --destructive:                var(--red-medium);
   --destructive-foreground:     var(--white);
-  --border:                     var(--gray-200);
+  --border:                     var(--gray-100);
   --divider:                    var(--gray-100);
   --input:                      var(--gray-200);
   --ring:                       var(--black);
