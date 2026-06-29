@@ -184,8 +184,8 @@ const allFilePaths = uiFiles.map((file) => `components/ui/${file}`);
 
 const registry = {
   $schema: "https://ui.shadcn.com/schema/registry.json",
-  name: "dayone-ui",
-  homepage: "https://github.com/dayone-org/dayone-ui",
+  name: "ui",
+  homepage: "https://github.com/dayone-org/ui",
   items: [
     {
       name: "all",

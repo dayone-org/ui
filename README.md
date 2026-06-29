@@ -7,14 +7,14 @@ Interne Komponentenbibliothek für DAYONE Tools — shadcn/ui-Komponenten mit DA
 Dieses Repository stellt einen shadcn Registry-Eintrag bereit:
 
 ```bash
-npx shadcn@latest add dayone-org/dayone-ui/all
+npx shadcn@latest add dayone-org/ui/all
 ```
 
 Spezifische Primitives koennen einzeln installiert werden:
 
 ```bash
-npx shadcn@latest add dayone-org/dayone-ui/button
-npx shadcn@latest add dayone-org/dayone-ui/input
+npx shadcn@latest add dayone-org/ui/button
+npx shadcn@latest add dayone-org/ui/input
 ```
 
 Der Eintrag `all` installiert:
