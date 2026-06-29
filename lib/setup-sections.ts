@@ -4,6 +4,7 @@ export const SETUP_SECTIONS = [
   { id: "intro", label: "Setup" },
   { id: "installation", label: "Installation" },
   { id: "skill", label: "Skill" },
+  { id: "feedback", label: "Feedback" },
   { id: "changelog", label: "Changelog" },
 ] as const satisfies readonly DocsSection[];
 

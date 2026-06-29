@@ -31,20 +31,20 @@ export function SetupGuide() {
 
       <SetupSection id="installation" title="Installation">
         <DocStack>
-          <DocH3>Wenn du selbst im Code arbeitest</DocH3>
+          <DocH3>Bestehende Anwendung</DocH3>
           <DocP>
-            Starte mit shadcn und installiere danach DAYONE UI. Wenn shadcn in
-            deinem Projekt schon eingerichtet ist, überspringe den ersten Befehl.
+            Installiere DAYONE UI in einer bestehenden Anwendung. Wenn shadcn
+            noch nicht eingerichtet ist, initialisiere es zuerst mit den DAYONE
+            Vorgaben Radix und Nova:
           </DocP>
-          <DocPre>{`# Nur ausführen, wenn shadcn noch nicht eingerichtet ist
-npx shadcn@latest init
+          <DocPre>{`npx shadcn@latest init --base radix --preset nova
 
 npx shadcn@latest add dayone-org/ui/all`}</DocPre>
 
           <DocH3>Einzelne Komponenten</DocH3>
           <DocP>
-            Für kleinere Anpassungen kannst du auch nur einzelne Bausteine
-            installieren:
+            Einzelne Komponenten installierst du erst, nachdem shadcn im Projekt
+            eingerichtet ist:
           </DocP>
           <DocPre>{`npx shadcn@latest add dayone-org/ui/button
 npx shadcn@latest add dayone-org/ui/input
@@ -58,8 +58,8 @@ npx shadcn@latest add dayone-org/ui/dialog`}</DocPre>
           </DocP>
           <DocPre>{`Baue eine interne DAYONE Anwendung in diesem Projekt.
 
-Falls shadcn noch nicht eingerichtet ist, führe zuerst aus:
-npx shadcn@latest init
+Falls shadcn noch nicht eingerichtet ist:
+npx shadcn@latest init --base radix --preset nova
 
 Installiere danach DAYONE UI:
 npx shadcn@latest add dayone-org/ui/all
@@ -69,7 +69,11 @@ Nutze die vorhandenen DAYONE Komponenten und Styles.`}</DocPre>
           <DocH3>Bestehende Anwendung angleichen</DocH3>
           <DocPre>{`Passe diese Anwendung an DAYONE UI an.
 
-Nutze die installierten DAYONE Komponenten und Styles.
+Falls DAYONE UI noch nicht installiert ist:
+npx shadcn@latest init --base radix --preset nova
+npx shadcn@latest add dayone-org/ui/all
+
+Nutze danach die installierten DAYONE Komponenten und Styles.
 Ersetze eigene Farben und Sonder-Buttons, wo es sinnvoll ist.
 Lass Logik, Datenverhalten und bestehende Abläufe unverändert.`}</DocPre>
         </DocStack>
@@ -97,6 +101,25 @@ Lass Logik, Datenverhalten und bestehende Abläufe unverändert.`}</DocPre>
           <DocP>
             Sobald der Skill existiert, bekommt dieser Abschnitt den direkten
             Installations- oder Ladehinweis.
+          </DocP>
+        </DocStack>
+      </SetupSection>
+
+      <SetupSection id="feedback" title="Feedback">
+        <DocStack>
+          <DocLead>
+            Wenn etwas fehlt, nicht funktioniert oder in einer Anwendung anders
+            aussieht als erwartet, erstelle ein GitHub Issue.
+          </DocLead>
+          <DocP>
+            Beschreibe kurz, was du bauen wolltest, was passiert ist und welche
+            Komponente oder Anwendung betroffen ist. Screenshots helfen, wenn es
+            um visuelle Details geht.
+          </DocP>
+          <DocP>
+            <DocLink href="https://github.com/dayone-org/ui/issues/new">
+              Neues Issue erstellen
+            </DocLink>
           </DocP>
         </DocStack>
       </SetupSection>
