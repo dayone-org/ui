@@ -949,7 +949,7 @@ function PopoverDemo() {
       </PopoverTrigger>
       <PopoverContent className="w-64" style={{ backgroundColor: "var(--white)", borderColor: "var(--gray-200)" }}>
         <p className="text-sm font-semibold" style={{ color: "var(--black)" }}>DAYONE UI</p>
-        <p className="mt-1 text-sm" style={{ color: "var(--gray-400)" }}>Designsystem für interne Tools. Gebaut auf shadcn/ui.</p>
+        <p className="mt-1 text-sm" style={{ color: "var(--gray-400)" }}>Designsystem für interne Anwendungen. Gebaut auf shadcn/ui.</p>
       </PopoverContent>
     </Popover>
   );
@@ -1260,7 +1260,7 @@ function AccordionDemo() {
           Was ist DAYONE UI?
         </AccordionTrigger>
         <AccordionContent style={{ color: "var(--gray-400)" }}>
-          Eine Komponenten-Bibliothek für interne DAYONE Tools.
+          Eine Komponenten-Bibliothek für interne DAYONE Anwendungen.
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="2" style={{ borderColor: "var(--gray-100)" }}>

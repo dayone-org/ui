@@ -15,8 +15,8 @@ export function SetupGuide() {
       <SetupSection id="intro" title="Setup">
         <DocStack>
           <DocLead>
-            DAYONE UI hilft Product Designer:innen und Buildern, interne Tools
-            schneller im DAYONE Look umzusetzen.
+            DAYONE UI hilft Product Designer:innen und Buildern, interne
+            Anwendungen schneller im DAYONE Look umzusetzen.
           </DocLead>
           <DocP>
             Statt Farben, Buttons und Formulare jedes Mal neu zu bauen, kannst
@@ -24,7 +24,7 @@ export function SetupGuide() {
             <DocLink href="/komponenten">Komponenten</DocLink> zeigen, was
             verfügbar ist. Die{" "}
             <DocLink href="/anwendung/pdc-hub">Anwendung</DocLink> zeigt, wie
-            sich daraus ein typisches internes Tool zusammensetzt.
+            sich daraus eine typische interne Anwendung zusammensetzt.
           </DocP>
         </DocStack>
       </SetupSection>
@@ -54,9 +54,9 @@ npx shadcn@latest add dayone-org/ui/dialog`}</DocPre>
           <DocP>
             Du kannst die Installation auch direkt in deinen Prompt aufnehmen.
             Das ist meist der einfachste Weg, wenn Codex, Cursor oder ein
-            anderer Agent das Tool für dich anlegt.
+            anderer Agent die Anwendung für dich anlegt.
           </DocP>
-          <DocPre>{`Baue ein internes DAYONE Tool in diesem Projekt.
+          <DocPre>{`Baue eine interne DAYONE Anwendung in diesem Projekt.
 
 Falls shadcn noch nicht eingerichtet ist, führe zuerst aus:
 npx shadcn@latest init
@@ -66,12 +66,12 @@ npx shadcn@latest add dayone-org/ui/all
 
 Nutze die vorhandenen DAYONE Komponenten und Styles.`}</DocPre>
 
-          <DocH3>Bestehendes Tool angleichen</DocH3>
-          <DocPre>{`Passe dieses Tool an DAYONE UI an.
+          <DocH3>Bestehende Anwendung angleichen</DocH3>
+          <DocPre>{`Passe diese Anwendung an DAYONE UI an.
 
 Nutze die installierten DAYONE Komponenten und Styles.
 Ersetze eigene Farben und Sonder-Buttons, wo es sinnvoll ist.
-Lass Produktlogik, Datenverhalten und bestehende Abläufe unverändert.`}</DocPre>
+Lass Logik, Datenverhalten und bestehende Abläufe unverändert.`}</DocPre>
         </DocStack>
       </SetupSection>
 
@@ -82,8 +82,8 @@ Lass Produktlogik, Datenverhalten und bestehende Abläufe unverändert.`}</DocPr
             können.
           </DocLead>
           <DocP>
-            Der Skill soll Agenten knapp erklären, wie DAYONE Tools gebaut
-            werden: installieren, vorhandene Bausteine nutzen, nicht frei
+            Der Skill soll Agenten knapp erklären, wie DAYONE Anwendungen
+            gebaut werden: installieren, vorhandene Bausteine nutzen, nicht frei
             stylen und am Ende gegen Komponenten und Anwendung prüfen.
           </DocP>
           <DocH3>Vorgeschlagener Umfang</DocH3>
@@ -128,7 +128,7 @@ Lass Produktlogik, Datenverhalten und bestehende Abläufe unverändert.`}</DocPr
             </div>
             <DocP>
               Erste Setup-Seite mit Installation für CLI und Agenten, Skill-TODO
-              und Einstieg für interne DAYONE Tools.
+              und Einstieg für interne DAYONE Anwendungen.
             </DocP>
           </div>
         </DocStack>

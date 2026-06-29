@@ -1,6 +1,6 @@
 # DAYONE UI
 
-Interne Komponentenbibliothek für DAYONE Tools — shadcn/ui-Komponenten mit DAYONE Design Tokens, Typografie (Roobert) und visueller Playground-Referenz.
+Interne Komponentenbibliothek für DAYONE Anwendungen — shadcn/ui-Komponenten mit DAYONE Design Tokens, Typografie (Roobert) und visueller Playground-Referenz.
 
 ## Installation via shadcn
 
