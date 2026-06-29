@@ -48,7 +48,6 @@ export function DayoneTypographyShowcase() {
       {BODY_TYPOGRAPHY.map((token) => (
         <TypographySample key={token.label} token={token} />
       ))}
-      <DocsDivider />
     </div>
   );
 }
