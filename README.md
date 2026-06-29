@@ -1,6 +1,25 @@
-# DAYONE UI Foundation
+# DAYONE UI
 
-Interne UI-Grundlage für DAYONE Tools — shadcn/ui-Komponenten mit DAYONE Design Tokens, Typografie (Roobert) und visueller Playground-Referenz.
+Interne Komponentenbibliothek für DAYONE Tools — shadcn/ui-Komponenten mit DAYONE Design Tokens, Typografie (Roobert) und visueller Playground-Referenz.
+
+## Installation via shadcn
+
+Dieses Repository stellt einen shadcn Registry-Eintrag bereit:
+
+```bash
+npx shadcn@latest add dayone-org/dayone-ui/all
+```
+
+Der Eintrag `all` installiert:
+
+- alle Komponenten aus `components/ui/`
+- `components/dayone-field.tsx`
+- `lib/utils.ts`
+- `hooks/use-mobile.ts`
+- `app/globals.css` mit DAYONE Tokens
+- die privaten Roobert-Fontdateien nach `public/fonts/`
+
+Hinweis: Der GitHub-Registry-Shorthand funktioniert laut shadcn nur mit öffentlichen `github.com` Repositories. Für ein privates Repository sollte derselbe `all`-Eintrag über eine authentifizierte shadcn Registry-Namespace-Konfiguration bereitgestellt werden.
 
 ## Lokal starten
 

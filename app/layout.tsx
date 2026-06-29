@@ -17,14 +17,14 @@ const roobert = localFont({
       style: "normal",
     },
   ],
-  variable: "--font-sans",
+  variable: "--font-roobert",
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://dayone-ui.vercel.app"),
-  title: "DAYONE UI Foundation",
+  title: "DAYONE UI",
   description:
-    "Interne UI-Grundlage und Designsystem-Referenz für DAYONE Tools",
+    "Interne Komponentenbibliothek und Designsystem-Referenz für DAYONE Tools",
   icons: {
     icon: [{ url: "/dayone-icon.svg", type: "image/svg+xml" }],
     apple: [{ url: "/dayone-icon.svg", type: "image/svg+xml" }],
