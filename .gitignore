@@ -39,17 +39,3 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
-# local shadcn registry install sandbox
-/test-app/node_modules
-/test-app/.next
-/test-app/.registry
-/test-app/out
-/test-app/.vercel
-
-# capacity planning registry install sandbox
-/test-app-kapazitaeten/node_modules
-/test-app-kapazitaeten/.next
-/test-app-kapazitaeten/.registry
-/test-app-kapazitaeten/out
-/test-app-kapazitaeten/.vercel
