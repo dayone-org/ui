@@ -119,7 +119,7 @@
   --destructive-foreground:     var(--white);
   --border:                     var(--gray-100);
   --divider:                    var(--gray-100);
-  --input:                      var(--gray-200);
+  --input:                       var(--gray-100);
   --ring:                       var(--black);
   --overlay:                    rgb(0 0 0 / 0.10);
   --chart-1:                    var(--black);
