@@ -97,10 +97,10 @@ function ColorsDemo() {
           <PlaygroundVariantHeading className="mb-4">{group.label}</PlaygroundVariantHeading>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 md:grid-cols-7">
             {group.colors.map((color) => (
-              <div key={color.hex} className="overflow-hidden rounded-md" style={{ border: "1px solid var(--outline)" }}>
+              <div key={color.hex} className="overflow-hidden rounded-md" style={{ border: "1px solid var(--border)" }}>
                 <div className="h-16" style={{ backgroundColor: color.hex, boxShadow: color.hex === "#FFFFFF" ? "inset 0 0 0 1px var(--gray-100)" : undefined }} />
                 <div className="space-y-0.5 px-2.5 py-2.5">
-                  <p className="text-xs font-semibold" style={{ color: "var(--black)" }}>{color.name}</p>
+                  <p className="text-xs font-semibold" style={{ color: "var(--foreground)" }}>{color.name}</p>
                   <p className="text-[10px]" style={{ color: "var(--gray-400)" }}>{color.hex}</p>
                   <p className="font-mono text-[10px]" style={{ color: "var(--gray-300)" }}>{color.token}</p>
                 </div>
@@ -133,9 +133,9 @@ function ButtonGroupDemo() {
           /* flex-1 inside a fixed container makes all buttons equal width */
           className="flex-1 rounded-md border px-6 py-3 text-sm font-medium transition-colors"
           style={{
-            backgroundColor: active === item.key ? "var(--black)" : "var(--white)",
-            color: active === item.key ? "var(--white)" : "var(--black)",
-            borderColor: active === item.key ? "var(--black)" : "var(--outline)",
+            backgroundColor: active === item.key ? "var(--primary)" : "var(--background)",
+            color: active === item.key ? "var(--primary-foreground)" : "var(--foreground)",
+            borderColor: active === item.key ? "var(--primary)" : "var(--border)",
             /* min-width matches longest label so all cells are equal */
             minWidth: "5.5rem",
           }}
@@ -149,12 +149,12 @@ function ButtonGroupDemo() {
 
 function BadgeDemo() {
   const tags = [
-    { bg: "var(--black)", color: "var(--white)", border: "none", label: "Default" },
-    { bg: "var(--sand-medium)", color: "var(--black)", border: "none", label: "Secondary" },
-    { bg: "transparent", color: "var(--black)", border: "1px solid var(--outline)", label: "Ghost" },
+    { bg: "var(--primary)", color: "var(--primary-foreground)", border: "none", label: "Default" },
+    { bg: "var(--muted)", color: "var(--foreground)", border: "none", label: "Secondary" },
+    { bg: "transparent", color: "var(--foreground)", border: "1px solid var(--border)", label: "Ghost" },
     { bg: "var(--blue-dark)", color: "var(--white)", border: "none", label: "Aktiv" },
     { bg: "var(--red-dark)", color: "var(--white)", border: "none", label: "Fehler" },
-    { bg: "var(--gray-100)", color: "var(--gray-400)", border: "none", label: "Inaktiv" },
+    { bg: "var(--accent)", color: "var(--muted-foreground)", border: "none", label: "Inaktiv" },
   ];
   return (
     <div className="flex flex-wrap gap-2">
@@ -174,9 +174,9 @@ function BadgeDemo() {
 function SeparatorDemo() {
   return (
     <div className="w-full max-w-xs space-y-4">
-      <p className="text-sm" style={{ color: "var(--black)" }}>Abschnitt A</p>
-      <Separator style={{ backgroundColor: "var(--gray-100)", height: "1px", display: "block" }} />
-      <p className="text-sm" style={{ color: "var(--black)" }}>Abschnitt B</p>
+      <p className="text-sm" style={{ color: "var(--foreground)" }}>Abschnitt A</p>
+      <Separator style={{ backgroundColor: "var(--border)", height: "1px", display: "block" }} />
+      <p className="text-sm" style={{ color: "var(--foreground)" }}>Abschnitt B</p>
     </div>
   );
 }
@@ -220,9 +220,9 @@ function LoadingDemo() {
 
 function EmptyDemo() {
   return (
-    <Empty style={{ border: "1px dashed var(--outline)", maxWidth: "280px" }}>
+    <Empty style={{ border: "1px dashed var(--border)", maxWidth: "280px" }}>
       <EmptyHeader>
-        <EmptyTitle style={{ color: "var(--black)", fontSize: "var(--text-body-md)", fontWeight: 600 }}>
+        <EmptyTitle style={{ color: "var(--foreground)", fontSize: "var(--text-body-md)", fontWeight: 600 }}>
           Keine Einträge
         </EmptyTitle>
         <EmptyDescription style={{ color: "var(--gray-400)", fontSize: "var(--text-body-sm)" }}>
@@ -239,17 +239,17 @@ function KbdDemo() {
       <div className="flex items-center gap-2 text-sm" style={{ color: "var(--gray-500)" }}>
         Befehlspalette öffnen
         <span className="flex items-center gap-1">
-          <Kbd style={{ backgroundColor: "var(--gray-200)", color: "var(--black)" }}>⌘</Kbd>
-          <Kbd style={{ backgroundColor: "var(--gray-200)", color: "var(--black)" }}>K</Kbd>
+          <Kbd style={{ backgroundColor: "var(--gray-200)", color: "var(--foreground)" }}>⌘</Kbd>
+          <Kbd style={{ backgroundColor: "var(--gray-200)", color: "var(--foreground)" }}>K</Kbd>
         </span>
       </div>
       <div className="flex items-center gap-2 text-sm" style={{ color: "var(--gray-500)" }}>
         Bestätigen
-        <Kbd style={{ backgroundColor: "var(--gray-200)", color: "var(--black)" }}>Enter</Kbd>
+        <Kbd style={{ backgroundColor: "var(--gray-200)", color: "var(--foreground)" }}>Enter</Kbd>
       </div>
       <div className="flex items-center gap-2 text-sm" style={{ color: "var(--gray-500)" }}>
         Abbrechen
-        <Kbd style={{ backgroundColor: "var(--gray-200)", color: "var(--black)" }}>Esc</Kbd>
+        <Kbd style={{ backgroundColor: "var(--gray-200)", color: "var(--foreground)" }}>Esc</Kbd>
       </div>
     </div>
   );
@@ -258,7 +258,7 @@ function KbdDemo() {
 function LabelDemo() {
   return (
     <div className="flex flex-col gap-1.5">
-      <Label htmlFor="demo-label" style={{ color: "var(--black)", fontSize: "var(--text-body-sm)" }}>
+      <Label htmlFor="demo-label" style={{ color: "var(--foreground)", fontSize: "var(--text-body-sm)" }}>
         E-Mail-Adresse
       </Label>
       <Input
@@ -266,7 +266,7 @@ function LabelDemo() {
         type="email"
         placeholder="name@dayone.de"
         className="max-w-xs"
-        style={{ borderColor: "var(--outline)" }}
+        style={{ borderColor: "var(--border)" }}
       />
     </div>
   );
@@ -275,9 +275,9 @@ function LabelDemo() {
 
 function ItemDemo() {
   const PALETTE = [
-    { bg: "var(--black)", fg: "var(--white)" },
-    { bg: "var(--sand-medium)", fg: "var(--black)" },
-    { bg: "var(--blue-light)", fg: "var(--black)" },
+    { bg: "var(--primary)", fg: "var(--primary-foreground)" },
+    { bg: "var(--muted)", fg: "var(--foreground)" },
+    { bg: "var(--blue-light)", fg: "var(--foreground)" },
   ];
   const people = [
     { title: "Victoria Itter", description: "Product Design" },
@@ -289,14 +289,14 @@ function ItemDemo() {
       {/* Outline */}
       <ItemGroup className="w-[369px] gap-2">
         {people.map(({ title, description }, i) => (
-          <Item key={title} variant="outline" className="gap-3 py-[15px]" style={{ borderColor: "var(--outline)" }}>
+          <Item key={title} variant="outline" className="gap-3 py-[15px]" style={{ borderColor: "var(--border)" }}>
             <Avatar className="size-9 shrink-0 ring-2 ring-background">
               <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: PALETTE[i].bg, color: PALETTE[i].fg }}>
                 {title.split(" ").map((n) => n[0]).join("")}
               </AvatarFallback>
             </Avatar>
             <ItemContent className="gap-0.5">
-              <ItemTitle className="font-semibold" style={{ color: "var(--black)" }}>{title}</ItemTitle>
+              <ItemTitle className="font-semibold" style={{ color: "var(--foreground)" }}>{title}</ItemTitle>
               <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>{description}</ItemDescription>
             </ItemContent>
           </Item>
@@ -312,7 +312,7 @@ function ItemDemo() {
               </AvatarFallback>
             </Avatar>
             <ItemContent className="gap-0.5">
-              <ItemTitle className="font-semibold" style={{ color: "var(--black)" }}>{title}</ItemTitle>
+              <ItemTitle className="font-semibold" style={{ color: "var(--foreground)" }}>{title}</ItemTitle>
               <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>{description}</ItemDescription>
             </ItemContent>
           </Item>
@@ -402,7 +402,7 @@ function CtrlOption({ id, label, disabled, children }: { id: string; label: stri
   return (
     <div className="flex items-center gap-3">
       {children}
-      <label htmlFor={id} className="text-sm font-normal leading-[1.5] select-none cursor-pointer" style={{ color: disabled ? "var(--gray-300)" : "var(--black)" }}>{label}</label>
+      <label htmlFor={id} className="text-sm font-normal leading-[1.5] select-none cursor-pointer" style={{ color: disabled ? "var(--gray-300)" : "var(--foreground)" }}>{label}</label>
     </div>
   );
 }
@@ -517,7 +517,7 @@ function SliderDemo() {
       <Slider value={value} onValueChange={setValue} max={100} step={1} />
       <div className="flex justify-between text-xs" style={{ color: "var(--gray-400)" }}>
         <span>0</span>
-        <span className="font-semibold" style={{ color: "var(--black)" }}>{value[0]}%</span>
+        <span className="font-semibold" style={{ color: "var(--foreground)" }}>{value[0]}%</span>
         <span>100</span>
       </div>
     </div>
@@ -639,10 +639,10 @@ function BreadcrumbDemo() {
       <BreadcrumbList>
         {items.map((item, idx) => (
           <React.Fragment key={item.key}>
-            {idx > 0 && <BreadcrumbSeparator style={{ color: "var(--outline)" }} />}
+            {idx > 0 && <BreadcrumbSeparator style={{ color: "var(--border)" }} />}
             <BreadcrumbItem>
               {active === item.key ? (
-                <BreadcrumbPage style={{ color: "var(--black)", fontWeight: 600 }}>{item.label}</BreadcrumbPage>
+                <BreadcrumbPage style={{ color: "var(--foreground)", fontWeight: 600 }}>{item.label}</BreadcrumbPage>
               ) : (
                 <BreadcrumbLink asChild>
                   <button
@@ -709,7 +709,7 @@ function NavigationMenuDemo() {
           <NavigationMenuItem key={menu.label}>
             <NavigationMenuTrigger
               className="text-sm font-medium"
-              style={{ color: "var(--black)", backgroundColor: "transparent" }}
+              style={{ color: "var(--foreground)", backgroundColor: "transparent" }}
             >
               {menu.label}
             </NavigationMenuTrigger>
@@ -720,8 +720,8 @@ function NavigationMenuDemo() {
                     <NavigationMenuLink
                       href="#"
                       onClick={(e) => e.preventDefault()}
-                      className="block rounded-md px-3 py-1.5 text-sm transition-colors hover:bg-[var(--gray-100)]"
-                      style={{ color: "var(--black)" }}
+                      className="block rounded-md px-3 py-1.5 text-sm transition-colors hover:bg-[var(--accent)]"
+                      style={{ color: "var(--foreground)" }}
                     >
                       {item}
                     </NavigationMenuLink>
@@ -738,9 +738,9 @@ function NavigationMenuDemo() {
 
 function MenubarDemo() {
   return (
-    <Menubar style={{ borderColor: "var(--outline)" }}>
+    <Menubar style={{ borderColor: "var(--border)" }}>
       <MenubarMenu>
-        <MenubarTrigger style={{ color: "var(--black)" }}>Datei</MenubarTrigger>
+        <MenubarTrigger style={{ color: "var(--foreground)" }}>Datei</MenubarTrigger>
         <MenubarContent>
           <MenubarItem>Neu</MenubarItem>
           <MenubarItem>Öffnen</MenubarItem>
@@ -748,14 +748,14 @@ function MenubarDemo() {
         </MenubarContent>
       </MenubarMenu>
       <MenubarMenu>
-        <MenubarTrigger style={{ color: "var(--black)" }}>Bearbeiten</MenubarTrigger>
+        <MenubarTrigger style={{ color: "var(--foreground)" }}>Bearbeiten</MenubarTrigger>
         <MenubarContent>
           <MenubarItem>Rückgängig</MenubarItem>
           <MenubarItem>Wiederholen</MenubarItem>
         </MenubarContent>
       </MenubarMenu>
       <MenubarMenu>
-        <MenubarTrigger style={{ color: "var(--black)" }}>Ansicht</MenubarTrigger>
+        <MenubarTrigger style={{ color: "var(--foreground)" }}>Ansicht</MenubarTrigger>
         <MenubarContent>
           <MenubarItem>Vollbild</MenubarItem>
         </MenubarContent>
@@ -770,7 +770,7 @@ function DropdownMenuDemo() {
       <DropdownMenuTrigger asChild>
         <button
           className="flex w-48 items-center justify-between rounded-md px-4 py-2 text-sm font-semibold"
-          style={{ backgroundColor: "var(--black)", color: "var(--white)" }}
+          style={{ backgroundColor: "var(--primary)", color: "var(--primary-foreground)" }}
         >
           Aktionen <ChevronDown className="size-4" />
         </button>
@@ -790,7 +790,7 @@ function ContextMenuDemo() {
       <ContextMenuTrigger asChild>
         <div
           className="flex h-24 w-48 items-center justify-center rounded-lg text-sm"
-          style={{ border: "2px dashed var(--outline)", color: "var(--gray-400)" }}
+          style={{ border: "2px dashed var(--border)", color: "var(--gray-400)" }}
         >
           Rechtsklick hier
         </div>
@@ -808,16 +808,16 @@ function SidebarDemo() {
   return (
     <div
       className="flex h-40 w-full max-w-sm overflow-hidden rounded-lg"
-      style={{ border: "1px solid var(--outline)" }}
+      style={{ border: "1px solid var(--border)" }}
     >
-      <div className="w-44 shrink-0 space-y-1 p-3" style={{ backgroundColor: "var(--gray-100)", borderRight: "1px solid var(--outline)" }}>
+      <div className="w-44 shrink-0 space-y-1 p-3" style={{ backgroundColor: "var(--accent)", borderRight: "1px solid var(--border)" }}>
         {[{ label: "Dashboard", active: false }, { label: "Komponenten", active: true }, { label: "Einstellungen", active: false }].map(({ label, active }) => (
           <div
             key={label}
             className="rounded-md px-3 py-1.5 text-sm"
             style={{
-              backgroundColor: active ? "var(--black)" : "transparent",
-              color: active ? "var(--white)" : "var(--gray-400)",
+              backgroundColor: active ? "var(--primary)" : "transparent",
+              color: active ? "var(--primary-foreground)" : "var(--gray-400)",
               fontWeight: active ? 600 : 400,
             }}
           >
@@ -839,23 +839,23 @@ function DialogDemo() {
     <div className="flex flex-wrap gap-3">
       <Dialog>
         <DialogTrigger asChild>
-          <button className="rounded-md px-4 py-2 text-sm font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>
+          <button className="rounded-md px-4 py-2 text-sm font-semibold" style={{ backgroundColor: "var(--primary)", color: "var(--primary-foreground)" }}>
             Dialog öffnen
           </button>
         </DialogTrigger>
-        <DialogContent style={{ backgroundColor: "var(--white)" }}>
+        <DialogContent style={{ backgroundColor: "var(--popover)" }}>
           <DialogHeader>
-            <DialogTitle style={{ color: "var(--black)" }}>Änderungen speichern?</DialogTitle>
+            <DialogTitle style={{ color: "var(--foreground)" }}>Änderungen speichern?</DialogTitle>
             <DialogDescription style={{ color: "var(--gray-400)" }}>
               Deine Änderungen werden dauerhaft gespeichert.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <DialogClose asChild>
-              <button className="rounded-md px-4 py-2 text-sm" style={{ color: "var(--black)", border: "1px solid var(--outline)" }}>Abbrechen</button>
+              <button className="rounded-md px-4 py-2 text-sm" style={{ color: "var(--foreground)", border: "1px solid var(--border)" }}>Abbrechen</button>
             </DialogClose>
             <DialogClose asChild>
-              <button className="rounded-md px-4 py-2 text-sm font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>Speichern</button>
+              <button className="rounded-md px-4 py-2 text-sm font-semibold" style={{ backgroundColor: "var(--primary)", color: "var(--primary-foreground)" }}>Speichern</button>
             </DialogClose>
           </DialogFooter>
         </DialogContent>
@@ -868,20 +868,20 @@ function AlertDialogDemo() {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <button className="rounded-md px-4 py-2 text-sm font-semibold" style={{ backgroundColor: "var(--red-medium)", color: "var(--white)" }}>
+        <button className="rounded-md px-4 py-2 text-sm font-semibold" style={{ backgroundColor: "var(--destructive)", color: "var(--destructive-foreground)" }}>
           Löschen
         </button>
       </AlertDialogTrigger>
-      <AlertDialogContent style={{ backgroundColor: "var(--white)" }}>
+      <AlertDialogContent style={{ backgroundColor: "var(--popover)" }}>
         <AlertDialogHeader>
-          <AlertDialogTitle style={{ color: "var(--black)" }}>Wirklich löschen?</AlertDialogTitle>
+          <AlertDialogTitle style={{ color: "var(--foreground)" }}>Wirklich löschen?</AlertDialogTitle>
           <AlertDialogDescription style={{ color: "var(--gray-400)" }}>
             Diese Aktion kann nicht rückgängig gemacht werden.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel style={{ color: "var(--black)", border: "1px solid var(--outline)", backgroundColor: "transparent" }}>Abbrechen</AlertDialogCancel>
-          <AlertDialogAction style={{ backgroundColor: "var(--red-medium)", color: "var(--white)", border: "none" }}>Löschen</AlertDialogAction>
+          <AlertDialogCancel style={{ color: "var(--foreground)", border: "1px solid var(--border)", backgroundColor: "transparent" }}>Abbrechen</AlertDialogCancel>
+          <AlertDialogAction style={{ backgroundColor: "var(--destructive)", color: "var(--destructive-foreground)", border: "none" }}>Löschen</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
@@ -892,19 +892,19 @@ function DrawerDemo() {
   return (
     <Drawer>
       <DrawerTrigger asChild>
-        <button className="rounded-md px-4 py-2 text-sm font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>
+        <button className="rounded-md px-4 py-2 text-sm font-semibold" style={{ backgroundColor: "var(--primary)", color: "var(--primary-foreground)" }}>
           Drawer öffnen
         </button>
       </DrawerTrigger>
-      <DrawerContent style={{ backgroundColor: "var(--white)" }}>
+      <DrawerContent style={{ backgroundColor: "var(--popover)" }}>
         <DrawerHeader>
-          <DrawerTitle style={{ color: "var(--black)" }}>Details</DrawerTitle>
+          <DrawerTitle style={{ color: "var(--foreground)" }}>Details</DrawerTitle>
           <DrawerDescription style={{ color: "var(--gray-400)" }}>
             Zusätzliche Informationen und Aktionen.
           </DrawerDescription>
         </DrawerHeader>
         <DrawerFooter className="items-center">
-          <button className="rounded-md px-4 py-2.5 text-sm font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>
+          <button className="rounded-md px-4 py-2.5 text-sm font-semibold" style={{ backgroundColor: "var(--primary)", color: "var(--primary-foreground)" }}>
             Übernehmen
           </button>
         </DrawerFooter>
@@ -917,13 +917,13 @@ function SheetDemo() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <button className="rounded-md px-4 py-2 text-sm font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>
+        <button className="rounded-md px-4 py-2 text-sm font-semibold" style={{ backgroundColor: "var(--primary)", color: "var(--primary-foreground)" }}>
           Sheet öffnen
         </button>
       </SheetTrigger>
-      <SheetContent side="right" showCloseButton={true} style={{ backgroundColor: "var(--white)", borderColor: "var(--outline)" }}>
+      <SheetContent side="right" showCloseButton={true} style={{ backgroundColor: "var(--popover)", borderColor: "var(--border)" }}>
         <SheetHeader className="px-4 pb-4">
-          <SheetTitle style={{ color: "var(--black)" }}>Einstellungen</SheetTitle>
+          <SheetTitle style={{ color: "var(--foreground)" }}>Einstellungen</SheetTitle>
           <SheetDescription style={{ color: "var(--gray-400)" }}>
             Passe deine Einstellungen hier an.
           </SheetDescription>
@@ -931,9 +931,9 @@ function SheetDemo() {
         <div className="flex-1" />
         <SheetFooter className="flex-row justify-end gap-2">
           <SheetClose asChild>
-            <button className="rounded-md px-4 py-2 text-sm" style={{ color: "var(--black)", border: "1px solid var(--outline)" }}>Abbrechen</button>
+            <button className="rounded-md px-4 py-2 text-sm" style={{ color: "var(--foreground)", border: "1px solid var(--border)" }}>Abbrechen</button>
           </SheetClose>
-          <button className="rounded-md px-4 py-2 text-sm font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>Speichern</button>
+          <button className="rounded-md px-4 py-2 text-sm font-semibold" style={{ backgroundColor: "var(--primary)", color: "var(--primary-foreground)" }}>Speichern</button>
         </SheetFooter>
       </SheetContent>
     </Sheet>
@@ -944,12 +944,12 @@ function PopoverDemo() {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <button className="rounded-md px-4 py-2 text-sm font-semibold" style={{ border: "1px solid var(--outline)", color: "var(--black)" }}>
+        <button className="rounded-md px-4 py-2 text-sm font-semibold" style={{ border: "1px solid var(--border)", color: "var(--foreground)" }}>
           Info anzeigen
         </button>
       </PopoverTrigger>
-      <PopoverContent className="w-64" style={{ backgroundColor: "var(--white)", borderColor: "var(--outline)" }}>
-        <p className="text-sm font-semibold" style={{ color: "var(--black)" }}>DAYONE UI</p>
+      <PopoverContent className="w-64" style={{ backgroundColor: "var(--popover)", borderColor: "var(--border)" }}>
+        <p className="text-sm font-semibold" style={{ color: "var(--foreground)" }}>DAYONE UI</p>
         <p className="mt-1 text-sm" style={{ color: "var(--gray-400)" }}>Designsystem für interne Anwendungen. Gebaut auf shadcn/ui.</p>
       </PopoverContent>
     </Popover>
@@ -960,17 +960,17 @@ function HoverCardDemo() {
   return (
     <HoverCard openDelay={0} closeDelay={150}>
       <HoverCardTrigger asChild>
-        <button className="text-sm font-semibold underline underline-offset-4" style={{ color: "var(--black)" }}>
+        <button className="text-sm font-semibold underline underline-offset-4" style={{ color: "var(--foreground)" }}>
           @victoria.itter
         </button>
       </HoverCardTrigger>
-      <HoverCardContent style={{ backgroundColor: "var(--white)", borderColor: "var(--outline)" }}>
+      <HoverCardContent style={{ backgroundColor: "var(--popover)", borderColor: "var(--border)" }}>
         <div className="flex items-center gap-3">
           <Avatar className="size-10">
-            <AvatarFallback style={{ backgroundColor: "var(--black)", color: "var(--white)", fontSize: "12px" }}>VI</AvatarFallback>
+            <AvatarFallback style={{ backgroundColor: "var(--primary)", color: "var(--primary-foreground)", fontSize: "12px" }}>VI</AvatarFallback>
           </Avatar>
           <div>
-            <p className="text-sm font-semibold" style={{ color: "var(--black)" }}>Victoria Itter</p>
+            <p className="text-sm font-semibold" style={{ color: "var(--foreground)" }}>Victoria Itter</p>
             <p className="text-xs" style={{ color: "var(--gray-400)" }}>Product Design · DAYONE</p>
           </div>
         </div>
@@ -985,21 +985,21 @@ function TooltipDemo() {
       <div className="flex gap-4">
         <Tooltip>
           <TooltipTrigger asChild>
-            <button className="rounded-md px-4 py-2 text-sm font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>
+            <button className="rounded-md px-4 py-2 text-sm font-semibold" style={{ backgroundColor: "var(--primary)", color: "var(--primary-foreground)" }}>
               Hover
             </button>
           </TooltipTrigger>
-          <TooltipContent style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>
+          <TooltipContent style={{ backgroundColor: "var(--primary)", color: "var(--primary-foreground)" }}>
             Das ist ein Tooltip
           </TooltipContent>
         </Tooltip>
         <Tooltip>
           <TooltipTrigger asChild>
-            <button className="rounded-md px-4 py-2 text-sm" style={{ border: "1px solid var(--outline)", color: "var(--black)" }}>
+            <button className="rounded-md px-4 py-2 text-sm" style={{ border: "1px solid var(--border)", color: "var(--foreground)" }}>
               Und hier
             </button>
           </TooltipTrigger>
-          <TooltipContent style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>
+          <TooltipContent style={{ backgroundColor: "var(--primary)", color: "var(--primary-foreground)" }}>
             Noch ein Tooltip
           </TooltipContent>
         </Tooltip>
@@ -1013,8 +1013,8 @@ function TooltipDemo() {
 function AlertDemo() {
   return (
     <div className="w-full max-w-sm space-y-3">
-      <Alert className="rounded-md" style={{ borderColor: "var(--outline)" }}>
-        <AlertTitle className="font-semibold" style={{ color: "var(--black)" }}>Hinweis</AlertTitle>
+      <Alert className="rounded-md" style={{ borderColor: "var(--border)" }}>
+        <AlertTitle className="font-semibold" style={{ color: "var(--foreground)" }}>Hinweis</AlertTitle>
         <AlertDescription style={{ color: "var(--gray-400)" }}>Deine Änderungen wurden gespeichert.</AlertDescription>
       </Alert>
       <Alert className="rounded-md" style={{ borderColor: "var(--red-medium)", backgroundColor: "#FFF5F5" }}>
@@ -1033,7 +1033,7 @@ function ProgressDemo() {
         <span>Fortschritt</span>
         <span>{value}%</span>
       </div>
-      <Progress value={value} className="h-1.5" style={{ backgroundColor: "var(--sand-medium)" }} />
+      <Progress value={value} className="h-1.5" style={{ backgroundColor: "var(--muted)" }} />
     </div>
   );
 }
@@ -1043,7 +1043,7 @@ function SonnerDemo() {
     <button
       onClick={() => toast("Änderungen gespeichert", { description: "Dein Profil wurde erfolgreich aktualisiert." })}
       className="rounded-md px-4 py-2 text-sm font-semibold"
-      style={{ backgroundColor: "var(--black)", color: "var(--white)" }}
+      style={{ backgroundColor: "var(--primary)", color: "var(--primary-foreground)" }}
     >
       Toast anzeigen
     </button>
@@ -1062,18 +1062,18 @@ function TableDemo() {
     <Table>
       <TableHeader>
         <TableRow style={{ borderColor: "var(--divider)" }}>
-          <TableHead className="font-semibold" style={{ color: "var(--black)" }}>Name</TableHead>
-          <TableHead className="font-semibold" style={{ color: "var(--black)" }}>Rolle</TableHead>
-          <TableHead className="font-semibold" style={{ color: "var(--black)" }}>Status</TableHead>
+          <TableHead className="font-semibold" style={{ color: "var(--foreground)" }}>Name</TableHead>
+          <TableHead className="font-semibold" style={{ color: "var(--foreground)" }}>Rolle</TableHead>
+          <TableHead className="font-semibold" style={{ color: "var(--foreground)" }}>Status</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {rows.map((row) => (
           <TableRow key={row.name} style={{ borderColor: "var(--divider)" }}>
-            <TableCell className="font-medium" style={{ color: "var(--black)" }}>{row.name}</TableCell>
+            <TableCell className="font-medium" style={{ color: "var(--foreground)" }}>{row.name}</TableCell>
             <TableCell style={{ color: "var(--gray-400)" }}>{row.role}</TableCell>
             <TableCell>
-              <Badge className="rounded-full text-xs" style={{ backgroundColor: row.status === "Aktiv" ? "var(--black)" : "var(--gray-100)", color: row.status === "Aktiv" ? "var(--white)" : "var(--gray-300)" }}>
+              <Badge className="rounded-full text-xs" style={{ backgroundColor: row.status === "Aktiv" ? "var(--primary)" : "var(--accent)", color: row.status === "Aktiv" ? "var(--primary-foreground)" : "var(--muted-foreground)" }}>
                 {row.status}
               </Badge>
             </TableCell>
@@ -1086,9 +1086,9 @@ function TableDemo() {
 
 // Binär-Hintergrund — deterministisch, damit SSR/Client identisch rendern
 const CAROUSEL_SLIDES = [
-  { label: "Rapid Revenue Validation", bg: "var(--black)", fg: "var(--white)" },
+  { label: "Rapid Revenue Validation", bg: "var(--primary)", fg: "var(--primary-foreground)" },
   { label: "Lean-Ops & Automation", bg: "var(--blue-highlight)", fg: "var(--white)" },
-  { label: "Growth & Performance", bg: "var(--sand-medium)", fg: "var(--black)" },
+  { label: "Growth & Performance", bg: "var(--muted)", fg: "var(--foreground)" },
 ];
 
 function CarouselDemo() {
@@ -1110,11 +1110,11 @@ function CarouselDemo() {
       </CarouselContent>
       <CarouselPrevious
         className="left-[-38px]"
-        style={{ color: "var(--black)", borderColor: "var(--outline)" }}
+        style={{ color: "var(--foreground)", borderColor: "var(--border)" }}
       />
       <CarouselNext
         className="right-[-38px]"
-        style={{ color: "var(--black)", borderColor: "var(--outline)" }}
+        style={{ color: "var(--foreground)", borderColor: "var(--border)" }}
       />
     </Carousel>
   );
@@ -1133,7 +1133,7 @@ function CalendarDemo() {
         formatters={{ formatWeekdayName: (d) => ["SO", "MO", "DI", "MI", "DO", "FR", "SA"][d.getDay()] }}
         className="rounded-xl w-full [--cell-size:--spacing(7)]"
         classNames={{ week: "mt-1 flex w-full" }}
-        style={{ border: "1px solid var(--outline)" }}
+        style={{ border: "1px solid var(--border)" }}
       />
     </div>
   );
@@ -1171,13 +1171,13 @@ function CssBarChart({
     <div className="w-full">
       {compact ? (
         <div className="mb-3 flex items-baseline gap-3">
-          <span className="text-xl font-bold tabular-nums" style={{ color: "var(--black)" }}>00</span>
+          <span className="text-xl font-bold tabular-nums" style={{ color: "var(--foreground)" }}>00</span>
           <span className="ml-auto text-xs" style={{ color: "#999" }}>{periodLabel}</span>
         </div>
       ) : (
         <div className="mb-6 flex items-baseline gap-3">
-          <span className="text-3xl font-bold tabular-nums" style={{ color: "var(--black)" }}>00</span>
-          <span className="flex items-center gap-1 text-xs font-medium" style={{ color: "var(--black)" }}>
+          <span className="text-3xl font-bold tabular-nums" style={{ color: "var(--foreground)" }}>00</span>
+          <span className="flex items-center gap-1 text-xs font-medium" style={{ color: "var(--foreground)" }}>
             <TrendingUp className="size-3" />
             +00%
           </span>
@@ -1234,11 +1234,11 @@ function AvatarDemo() {
   return (
     <div className="flex items-center -space-x-2">
       {[
-        { initials: "VI", bg: "var(--black)", fg: "var(--white)" },
-        { initials: "BD", bg: "var(--sand-medium)", fg: "var(--black)" },
-        { initials: "AK", bg: "var(--blue-light)", fg: "var(--black)" },
-        { initials: "LR", bg: "var(--red-light)", fg: "var(--black)" },
-        { initials: "TM", bg: "var(--sand-dark)", fg: "var(--black)" },
+        { initials: "VI", bg: "var(--primary)", fg: "var(--primary-foreground)" },
+        { initials: "BD", bg: "var(--muted)", fg: "var(--foreground)" },
+        { initials: "AK", bg: "var(--blue-light)", fg: "var(--foreground)" },
+        { initials: "LR", bg: "var(--red-light)", fg: "var(--foreground)" },
+        { initials: "TM", bg: "var(--sand-dark)", fg: "var(--foreground)" },
       ].map(({ initials, bg, fg }) => (
         <Avatar key={initials} className="size-10 after:hidden ring-2 ring-background">
           <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: bg, color: fg }}>{initials}</AvatarFallback>
@@ -1246,7 +1246,7 @@ function AvatarDemo() {
       ))}
       <div
         className="flex size-10 items-center justify-center rounded-full ring-2 ring-background text-xs font-semibold"
-        style={{ backgroundColor: "transparent", color: "var(--gray-400)", border: "1px solid var(--outline)" }}
+        style={{ backgroundColor: "transparent", color: "var(--gray-400)", border: "1px solid var(--border)" }}
       >
         +4
       </div>
@@ -1258,7 +1258,7 @@ function AccordionDemo() {
   return (
     <Accordion type="single" collapsible className="w-full max-w-xs">
       <AccordionItem value="1" style={{ borderColor: "var(--divider)" }}>
-        <AccordionTrigger className="font-semibold hover:no-underline" style={{ color: "var(--black)" }}>
+        <AccordionTrigger className="font-semibold hover:no-underline" style={{ color: "var(--foreground)" }}>
           Was ist DAYONE UI?
         </AccordionTrigger>
         <AccordionContent style={{ color: "var(--gray-400)" }}>
@@ -1266,7 +1266,7 @@ function AccordionDemo() {
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="2" style={{ borderColor: "var(--divider)" }}>
-        <AccordionTrigger className="font-semibold hover:no-underline" style={{ color: "var(--black)" }}>
+        <AccordionTrigger className="font-semibold hover:no-underline" style={{ color: "var(--foreground)" }}>
           Wie installiere ich es?
         </AccordionTrigger>
         <AccordionContent style={{ color: "var(--gray-400)" }}>
@@ -1282,7 +1282,7 @@ function CollapsibleDemo() {
   return (
     <Collapsible open={open} onOpenChange={setOpen} className="w-full max-w-xs">
       <div className="flex items-center justify-between">
-        <p className="text-sm font-semibold" style={{ color: "var(--black)" }}>Erweiterte Optionen</p>
+        <p className="text-sm font-semibold" style={{ color: "var(--foreground)" }}>Erweiterte Optionen</p>
         <CollapsibleTrigger asChild>
           <button className="rounded p-1" style={{ color: "var(--gray-400)" }}>
             <ChevronDown className={`size-4 transition-transform ${open ? "rotate-180" : ""}`} />
@@ -1309,7 +1309,7 @@ function DemoLabel({ children }: { children: React.ReactNode }) {
   );
 }
 
-const OUTLINE_RING = { "--tw-ring-color": "var(--outline)" } as React.CSSProperties;
+const OUTLINE_RING = { "--tw-ring-color": "var(--border)" } as React.CSSProperties;
 
 function InfocardDemo() {
   return (
@@ -1318,7 +1318,7 @@ function InfocardDemo() {
         {/* Standard info card */}
         <Card className="w-76" style={OUTLINE_RING}>
           <CardHeader>
-            <CardTitle className="text-base font-semibold" style={{ color: "var(--black)" }}>Projektübersicht</CardTitle>
+            <CardTitle className="text-base font-semibold" style={{ color: "var(--foreground)" }}>Projektübersicht</CardTitle>
             <CardDescription style={{ color: "var(--gray-400)" }}>Stand: Juni 2026</CardDescription>
           </CardHeader>
           <CardContent>
@@ -1333,7 +1333,7 @@ function InfocardDemo() {
             <TrendingUp className="size-4" style={{ color: "var(--gray-400)" }} />
           </CardHeader>
           <CardContent>
-            <p className="text-2xl font-semibold tabular-nums" style={{ color: "var(--black)" }}>€ 24.500</p>
+            <p className="text-2xl font-semibold tabular-nums" style={{ color: "var(--foreground)" }}>€ 24.500</p>
             <p className="text-xs mt-1" style={{ color: "var(--gray-400)" }}>+12% gegenüber Vormonat</p>
           </CardContent>
         </Card>
@@ -1343,21 +1343,21 @@ function InfocardDemo() {
       <div className="flex flex-col gap-3">
         <DemoLabel>Item · Outline & Filled</DemoLabel>
         <div className="flex gap-4">
-          <Item variant="outline" className="w-76 gap-3 py-[15px]" style={{ borderColor: "var(--outline)" }}>
+          <Item variant="outline" className="w-76 gap-3 py-[15px]" style={{ borderColor: "var(--border)" }}>
             <Avatar className="size-9 shrink-0 ring-2 ring-background">
-              <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>VI</AvatarFallback>
+              <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--primary)", color: "var(--primary-foreground)" }}>VI</AvatarFallback>
             </Avatar>
             <ItemContent className="gap-0.5">
-              <ItemTitle className="font-semibold" style={{ color: "var(--black)" }}>Victoria Itter</ItemTitle>
+              <ItemTitle className="font-semibold" style={{ color: "var(--foreground)" }}>Victoria Itter</ItemTitle>
               <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>Product Design</ItemDescription>
             </ItemContent>
           </Item>
           <Item className="w-76 gap-3 border-transparent bg-[#F4F2EE] py-[15px]" style={{ "--tw-ring-color": "#F4F2EE" } as React.CSSProperties}>
             <Avatar className="size-9 shrink-0 ring-2" style={{ "--tw-ring-color": "#F4F2EE" } as React.CSSProperties}>
-              <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>VI</AvatarFallback>
+              <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--primary)", color: "var(--primary-foreground)" }}>VI</AvatarFallback>
             </Avatar>
             <ItemContent className="gap-0.5">
-              <ItemTitle className="font-semibold" style={{ color: "var(--black)" }}>Victoria Itter</ItemTitle>
+              <ItemTitle className="font-semibold" style={{ color: "var(--foreground)" }}>Victoria Itter</ItemTitle>
               <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>Product Design</ItemDescription>
             </ItemContent>
           </Item>
@@ -1376,7 +1376,7 @@ function ButtoncardDemo() {
           style={OUTLINE_RING}>
           <CardHeader className="flex flex-row items-center justify-between">
             <div className="flex flex-col gap-1">
-              <CardTitle className="text-base font-semibold" style={{ color: "var(--black)" }}>Projektübersicht</CardTitle>
+              <CardTitle className="text-base font-semibold" style={{ color: "var(--foreground)" }}>Projektübersicht</CardTitle>
               <CardDescription style={{ color: "var(--gray-400)" }}>Stand: Juni 2026</CardDescription>
             </div>
             <ChevronRight className="size-5 shrink-0" style={{ color: "var(--gray-400)" }} />
@@ -1394,7 +1394,7 @@ function ButtoncardDemo() {
             <ChevronRight className="size-5 shrink-0" style={{ color: "var(--gray-400)" }} />
           </CardHeader>
           <CardContent>
-            <p className="text-2xl font-semibold tabular-nums" style={{ color: "var(--black)" }}>€ 24.500</p>
+            <p className="text-2xl font-semibold tabular-nums" style={{ color: "var(--foreground)" }}>€ 24.500</p>
             <p className="text-xs mt-1" style={{ color: "var(--gray-400)" }}>+12% gegenüber Vormonat</p>
           </CardContent>
         </Card>
@@ -1405,12 +1405,12 @@ function ButtoncardDemo() {
         <div className="flex gap-4">
           <Item variant="outline" role="button" tabIndex={0}
             className="w-76 gap-3 py-[15px] cursor-pointer transition-colors duration-150 hover:bg-[#F4F2EE]"
-            style={{ borderColor: "var(--outline)" }}>
+            style={{ borderColor: "var(--border)" }}>
             <Avatar className="size-9 shrink-0 ring-2 ring-background">
-              <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>VI</AvatarFallback>
+              <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--primary)", color: "var(--primary-foreground)" }}>VI</AvatarFallback>
             </Avatar>
             <ItemContent className="gap-0.5">
-              <ItemTitle className="font-semibold" style={{ color: "var(--black)" }}>Victoria Itter</ItemTitle>
+              <ItemTitle className="font-semibold" style={{ color: "var(--foreground)" }}>Victoria Itter</ItemTitle>
               <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>Product Design</ItemDescription>
             </ItemContent>
             <ChevronRight className="size-5 shrink-0 ml-auto" style={{ color: "var(--gray-400)" }} />
@@ -1419,10 +1419,10 @@ function ButtoncardDemo() {
             className="w-76 gap-3 border-transparent bg-[#F4F2EE] py-[15px] cursor-pointer transition-colors hover:bg-[#EDE7DD]"
             style={{ "--tw-ring-color": "#F4F2EE" } as React.CSSProperties}>
             <Avatar className="size-9 shrink-0 ring-2" style={{ "--tw-ring-color": "#F4F2EE" } as React.CSSProperties}>
-              <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>VI</AvatarFallback>
+              <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--primary)", color: "var(--primary-foreground)" }}>VI</AvatarFallback>
             </Avatar>
             <ItemContent className="gap-0.5">
-              <ItemTitle className="font-semibold" style={{ color: "var(--black)" }}>Victoria Itter</ItemTitle>
+              <ItemTitle className="font-semibold" style={{ color: "var(--foreground)" }}>Victoria Itter</ItemTitle>
               <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>Product Design</ItemDescription>
             </ItemContent>
             <ChevronRight className="size-5 shrink-0 ml-auto" style={{ color: "var(--gray-400)" }} />
@@ -1445,7 +1445,7 @@ function ListDemo() {
       {/* Toggle: Infocards ↔ Klickbare Cards */}
       <label className="flex w-fit cursor-pointer items-center gap-3">
         <Switch checked={clickable} onCheckedChange={setClickable} />
-        <span className="text-sm font-medium" style={{ color: "var(--black)" }}>
+        <span className="text-sm font-medium" style={{ color: "var(--foreground)" }}>
           {clickable ? "Klickbare Cards" : "Infocards"}
         </span>
       </label>
@@ -1457,23 +1457,23 @@ function ListDemo() {
             clickable ? (
               <Item key={name} variant="outline" role="button" tabIndex={0}
                 className="w-76 gap-3 py-[15px] cursor-pointer transition-colors duration-150 hover:bg-[#F4F2EE]"
-                style={{ borderColor: "var(--outline)" }}>
+                style={{ borderColor: "var(--border)" }}>
                 <Avatar className="size-9 shrink-0 ring-2 ring-background">
-                  <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>{initials}</AvatarFallback>
+                  <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--primary)", color: "var(--primary-foreground)" }}>{initials}</AvatarFallback>
                 </Avatar>
                 <ItemContent className="gap-0.5">
-                  <ItemTitle className="font-semibold" style={{ color: "var(--black)" }}>{name}</ItemTitle>
+                  <ItemTitle className="font-semibold" style={{ color: "var(--foreground)" }}>{name}</ItemTitle>
                   <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>{role}</ItemDescription>
                 </ItemContent>
                 <ChevronRight className="size-5 shrink-0 ml-auto" style={{ color: "var(--gray-400)" }} />
               </Item>
             ) : (
-              <Item key={name} variant="outline" className="w-76 gap-3 py-[15px]" style={{ borderColor: "var(--outline)" }}>
+              <Item key={name} variant="outline" className="w-76 gap-3 py-[15px]" style={{ borderColor: "var(--border)" }}>
                 <Avatar className="size-9 shrink-0 ring-2 ring-background">
-                  <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>{initials}</AvatarFallback>
+                  <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--primary)", color: "var(--primary-foreground)" }}>{initials}</AvatarFallback>
                 </Avatar>
                 <ItemContent className="gap-0.5">
-                  <ItemTitle className="font-semibold" style={{ color: "var(--black)" }}>{name}</ItemTitle>
+                  <ItemTitle className="font-semibold" style={{ color: "var(--foreground)" }}>{name}</ItemTitle>
                   <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>{role}</ItemDescription>
                 </ItemContent>
               </Item>
@@ -1487,10 +1487,10 @@ function ListDemo() {
                 className="w-76 gap-3 border-transparent bg-[#F4F2EE] py-[15px] cursor-pointer transition-colors hover:bg-[#EDE7DD]"
                 style={{ "--tw-ring-color": "#F4F2EE" } as React.CSSProperties}>
                 <Avatar className="size-9 shrink-0 ring-2" style={{ "--tw-ring-color": "#F4F2EE" } as React.CSSProperties}>
-                  <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>{initials}</AvatarFallback>
+                  <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--primary)", color: "var(--primary-foreground)" }}>{initials}</AvatarFallback>
                 </Avatar>
                 <ItemContent className="gap-0.5">
-                  <ItemTitle className="font-semibold" style={{ color: "var(--black)" }}>{name}</ItemTitle>
+                  <ItemTitle className="font-semibold" style={{ color: "var(--foreground)" }}>{name}</ItemTitle>
                   <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>{role}</ItemDescription>
                 </ItemContent>
                 <ChevronRight className="size-5 shrink-0 ml-auto" style={{ color: "var(--gray-400)" }} />
@@ -1500,10 +1500,10 @@ function ListDemo() {
                 className="w-76 gap-3 border-transparent bg-[#F4F2EE] py-[15px] transition-colors hover:bg-[#EDE7DD]"
                 style={{ "--tw-ring-color": "#F4F2EE" } as React.CSSProperties}>
                 <Avatar className="size-9 shrink-0 ring-2" style={{ "--tw-ring-color": "#F4F2EE" } as React.CSSProperties}>
-                  <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--black)", color: "var(--white)" }}>{initials}</AvatarFallback>
+                  <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--primary)", color: "var(--primary-foreground)" }}>{initials}</AvatarFallback>
                 </Avatar>
                 <ItemContent className="gap-0.5">
-                  <ItemTitle className="font-semibold" style={{ color: "var(--black)" }}>{name}</ItemTitle>
+                  <ItemTitle className="font-semibold" style={{ color: "var(--foreground)" }}>{name}</ItemTitle>
                   <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>{role}</ItemDescription>
                 </ItemContent>
               </Item>
@@ -1529,7 +1529,7 @@ function AspectRatioDemo() {
 
 function ScrollAreaDemo() {
   return (
-    <ScrollArea className="h-36 w-48 rounded-lg" style={{ border: "1px solid var(--outline)" }}>
+    <ScrollArea className="h-36 w-48 rounded-lg" style={{ border: "1px solid var(--border)" }}>
       <div className="p-4 space-y-3">
         {Array.from({ length: 12 }, (_, i) => (
           <p key={i} className="text-sm" style={{ color: "var(--gray-500)" }}>
@@ -1543,7 +1543,7 @@ function ScrollAreaDemo() {
 
 function ResizableDemo() {
   return (
-    <ResizablePanelGroup className="w-full max-w-xs rounded-lg" style={{ border: "1px solid var(--outline)", height: "100px" }}>
+    <ResizablePanelGroup className="w-full max-w-xs rounded-lg" style={{ border: "1px solid var(--border)", height: "100px" }}>
       <ResizablePanel defaultSize={50}>
         <div className="flex h-full items-center justify-center text-sm" style={{ color: "var(--gray-400)" }}>
           Links
