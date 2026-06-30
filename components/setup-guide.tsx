@@ -82,15 +82,17 @@ Lass Logik, Datenverhalten und bestehende Abläufe unverändert.`}</DocPre>
       <SetupSection id="skill" title="Skill">
         <DocStack>
           <DocLead>
-            TODO: Einen DAYONE UI Skill schreiben, den Agenten automatisch laden
-            können.
+            Der DAYONE UI Skill erklärt Coding-Agenten (Claude Code, Cursor,
+            Codex …) knapp, wie DAYONE Anwendungen gebaut werden: installieren,
+            vorhandene Bausteine nutzen, nicht frei stylen und am Ende gegen
+            Komponenten und Anwendung prüfen.
           </DocLead>
           <DocP>
-            Der Skill soll Agenten knapp erklären, wie DAYONE Anwendungen
-            gebaut werden: installieren, vorhandene Bausteine nutzen, nicht frei
-            stylen und am Ende gegen Komponenten und Anwendung prüfen.
+            So baut ein Agent dein internes Tool von sich aus im DAYONE-Look –
+            ohne dass du die Regeln in jeden Prompt schreiben musst.
           </DocP>
-          <DocH3>Vorgeschlagener Umfang</DocH3>
+
+          <DocH3>Was er abdeckt</DocH3>
           <DocUl>
             <li>Wann DAYONE UI genutzt werden soll</li>
             <li>Installation für neue und bestehende Projekte</li>
@@ -98,9 +100,20 @@ Lass Logik, Datenverhalten und bestehende Abläufe unverändert.`}</DocPre>
             <li>Regeln für Farben, Typografie, Abstände und Controls</li>
             <li>Kurze Checkliste vor der Übergabe</li>
           </DocUl>
+
+          <DocH3>Laden</DocH3>
           <DocP>
-            Sobald der Skill existiert, bekommt dieser Abschnitt den direkten
-            Installations- oder Ladehinweis.
+            In diesem Repository liegt der Skill bereits unter{" "}
+            <code>.claude/skills/dayone-ui/</code> und wird von Claude Code
+            automatisch geladen. Für ein anderes Projekt kopierst du diesen
+            Ordner in dessen <code>.claude/skills/</code>:
+          </DocP>
+          <DocPre>{`# im Zielprojekt
+mkdir -p .claude/skills
+cp -r <pfad-zu>/dayone-ui .claude/skills/dayone-ui`}</DocPre>
+          <DocP>
+            Danach greift der Skill automatisch, sobald du dort eine interne
+            Anwendung im DAYONE-Look baust.
           </DocP>
         </DocStack>
       </SetupSection>
