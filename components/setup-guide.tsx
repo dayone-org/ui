@@ -103,17 +103,16 @@ Lass Logik, Datenverhalten und bestehende Abläufe unverändert.`}</DocPre>
 
           <DocH3>Laden</DocH3>
           <DocP>
-            In diesem Repository liegt der Skill bereits unter{" "}
-            <code>.claude/skills/dayone-ui/</code> und wird von Claude Code
-            automatisch geladen. Für ein anderes Projekt kopierst du diesen
-            Ordner in dessen <code>.claude/skills/</code>:
+            Den Skill einmal global installieren – dann ist er in{" "}
+            <strong>allen</strong> deinen Projekten aktiv, nicht nur in diesem
+            Repository. Füge dazu den DAYONE-UI-Kanal in Claude Code hinzu und
+            installiere den Skill:
           </DocP>
-          <DocPre>{`# im Zielprojekt
-mkdir -p .claude/skills
-cp -r <pfad-zu>/dayone-ui .claude/skills/dayone-ui`}</DocPre>
+          <DocPre>{`/plugin marketplace add dayone-org/ui
+/plugin install dayone-ui`}</DocPre>
           <DocP>
-            Danach greift der Skill automatisch, sobald du dort eine interne
-            Anwendung im DAYONE-Look baust.
+            Das war es. Claude Code erkennt ab jetzt automatisch, wenn du eine
+            interne DAYONE Anwendung baust – kein weiterer Prompt nötig.
           </DocP>
         </DocStack>
       </SetupSection>

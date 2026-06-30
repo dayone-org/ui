@@ -1,0 +1,11 @@
+{
+  "name": "DAYONE UI",
+  "version": "1",
+  "plugins": [
+    {
+      "name": "dayone-ui",
+      "description": "DAYONE UI Skill – lehrt Coding-Agenten, interne DAYONE Anwendungen im richtigen Look zu bauen: Installation via shadcn-Registry, vorhandene Bausteine nutzen, semantische Tokens statt freier Farben, und Prüf-Checkliste vor der Übergabe.",
+      "skill": ".claude/skills/dayone-ui"
+    }
+  ]
+}
