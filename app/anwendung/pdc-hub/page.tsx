@@ -424,20 +424,17 @@ function getInitials(name: string) {
 }
 
 function TagBadge({ tag }: { tag: Tag }) {
-  const styles: Record<Tag, React.CSSProperties> = {
-    "KI & Tools":  { backgroundColor: "transparent", color: "var(--foreground)", border: "1px solid var(--border)" },
-    "Design Praxis": { backgroundColor: "var(--muted)", color: "var(--foreground)", border: "none" },
-    "Austausch":   { backgroundColor: "var(--accent)", color: "var(--muted-foreground)", border: "none" },
-    "Workshop":    { backgroundColor: "var(--primary)", color: "var(--primary-foreground)", border: "none" },
-  };
-  return (
-    <Badge
-      className="rounded-full px-[10px] py-[5px] text-[11px] font-medium"
-      style={styles[tag]}
-    >
-      {tag}
-    </Badge>
-  );
+  if (tag === "Workshop") {
+    return <Badge variant="default" className="rounded-full px-[10px] py-[5px] text-[11px] font-medium">{tag}</Badge>;
+  }
+  if (tag === "KI & Tools") {
+    return (
+      <Badge className="rounded-full px-[10px] py-[5px] text-[11px] font-medium" style={{ backgroundColor: "var(--sand-dark)", color: "var(--white)", border: "none" }}>
+        {tag}
+      </Badge>
+    );
+  }
+  return <Badge variant="secondary" className="rounded-full px-[10px] py-[5px] text-[11px] font-medium">{tag}</Badge>;
 }
 
 function PresenterAvatar({ name }: { name: string }) {
@@ -466,11 +463,11 @@ function StatCard({
   return (
     <div
       className="flex items-center gap-3 rounded-xl px-5 py-4"
-      style={{ border: "1px solid var(--border)" }}
+      style={{ backgroundColor: "var(--secondary)" }}
     >
       <div
-        className="flex size-9 shrink-0 items-center justify-center rounded-lg"
-        style={{ backgroundColor: "var(--accent)", color: "var(--gray-400)" }}
+        className="flex size-9 shrink-0 items-center justify-center"
+        style={{ color: "var(--black)" }}
       >
         {icon}
       </div>
@@ -562,20 +559,20 @@ function SessionsTab({ onSuggest }: { onSuggest: () => void }) {
       <div className="rounded-xl overflow-hidden" style={{ border: "1px solid var(--border)" }}>
         <Table>
           <TableHeader>
-            <TableRow style={{ borderColor: "var(--divider)" }}>
-              <TableHead className="pl-5 text-xs uppercase tracking-wider" style={{ color: "var(--gray-400)" }}>
+            <TableRow className="hover:bg-transparent pointer-events-none" style={{ borderColor: "var(--divider)" }}>
+              <TableHead className="pl-5 text-xs " style={{ color: "var(--gray-400)" }}>
                 Datum
               </TableHead>
-              <TableHead className="text-xs uppercase tracking-wider" style={{ color: "var(--gray-400)" }}>
+              <TableHead className="text-xs " style={{ color: "var(--gray-400)" }}>
                 Thema
               </TableHead>
-              <TableHead className="text-xs uppercase tracking-wider" style={{ color: "var(--gray-400)" }}>
+              <TableHead className="text-xs " style={{ color: "var(--gray-400)" }}>
                 Presenter
               </TableHead>
-              <TableHead className="text-xs uppercase tracking-wider text-center" style={{ color: "var(--gray-400)" }}>
+              <TableHead className="text-xs  text-center" style={{ color: "var(--gray-400)" }}>
                 Teiln.
               </TableHead>
-              <TableHead className="text-xs uppercase tracking-wider" style={{ color: "var(--gray-400)" }}>
+              <TableHead className="text-xs " style={{ color: "var(--gray-400)" }}>
                 Tags
               </TableHead>
               <TableHead className="w-10" />
@@ -663,7 +660,7 @@ function SessionsTab({ onSuggest }: { onSuggest: () => void }) {
                           <MoreHorizontal className="size-3.5" />
                         </Button>
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end">
+                      <DropdownMenuContent align="end" className="min-w-44">
                         <DropdownMenuItem onClick={() => setSelectedSession(session)}>
                           Details ansehen
                         </DropdownMenuItem>
@@ -839,16 +836,16 @@ function BacklogTab({ onSuggest }: { onSuggest: () => void }) {
             <TableHeader>
               <TableRow style={{ borderColor: "var(--divider)" }}>
                 <TableHead className="pl-5 w-8" />
-                <TableHead className="text-xs uppercase tracking-wider" style={{ color: "var(--gray-400)" }}>
+                <TableHead className="text-xs " style={{ color: "var(--gray-400)" }}>
                   Thema
                 </TableHead>
-                <TableHead className="text-xs uppercase tracking-wider" style={{ color: "var(--gray-400)" }}>
+                <TableHead className="text-xs " style={{ color: "var(--gray-400)" }}>
                   Details
                 </TableHead>
-                <TableHead className="text-xs uppercase tracking-wider" style={{ color: "var(--gray-400)" }}>
+                <TableHead className="text-xs " style={{ color: "var(--gray-400)" }}>
                   Person
                 </TableHead>
-                <TableHead className="text-xs uppercase tracking-wider" style={{ color: "var(--gray-400)" }}>
+                <TableHead className="text-xs " style={{ color: "var(--gray-400)" }}>
                   Zeit
                 </TableHead>
               </TableRow>
@@ -1177,7 +1174,7 @@ export default function PDCHubPage() {
     <main className="min-h-screen pb-24" style={{ backgroundColor: "var(--background)" }}>
       <div className="mx-auto max-w-6xl px-8 lg:px-16">
         {/* Page header */}
-        <div className="pt-14 pb-10">
+        <div className="pt-14 pb-16">
           <div className="flex items-start justify-between gap-6">
             <div>
               <div className="flex items-center gap-3 mb-2">
@@ -1200,17 +1197,17 @@ export default function PDCHubPage() {
           {/* Stats */}
           <div className="mt-8 grid grid-cols-3 gap-3">
             <StatCard
-              icon={<CalendarDays className="size-4" />}
+              icon={<CalendarDays className="size-5" />}
               label="Sessions gesamt"
               value={`${SESSIONS.length}`}
             />
             <StatCard
-              icon={<Users className="size-4" />}
+              icon={<Users className="size-5" />}
               label="Ø Teilnehmende"
               value={`${AVG_PARTICIPANTS} Personen`}
             />
             <StatCard
-              icon={<Lightbulb className="size-4" />}
+              icon={<Lightbulb className="size-5" />}
               label="Backlog Themen"
               value={`${BACKLOG_OPEN.length} offen`}
             />
@@ -1219,7 +1216,7 @@ export default function PDCHubPage() {
 
         {/* Tabs */}
         <Tabs defaultValue="sessions" className="flex-col">
-          <TabsList variant="text" className="mb-8">
+          <TabsList variant="line" className="mb-8 gap-6">
             <TabsTrigger value="sessions">Sessions</TabsTrigger>
             <TabsTrigger value="backlog">Themen-Backlog</TabsTrigger>
             <TabsTrigger value="ressourcen">Ressourcen</TabsTrigger>

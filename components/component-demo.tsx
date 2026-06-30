@@ -5,7 +5,7 @@ import Image from "next/image";
 import { DayoneButtonsContent } from "@/components/dayone-buttons";
 import { DayoneTypographyShowcase } from "@/components/dayone-typography-showcase";
 import { PlaygroundVariantHeading } from "@/components/playground-variant-heading";
-import { Bold, Italic, Underline, Search, ChevronRight, ChevronDown, TrendingUp } from "lucide-react";
+import { Bold, Italic, Underline, Search, ChevronRight, ChevronDown, TrendingUp, CalendarDays, Users, FileText, ExternalLink, Clock, Phone } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
@@ -1339,6 +1339,39 @@ function InfocardDemo() {
         </Card>
       </div>
 
+      {/* Stat Card — Outline & Filled */}
+      <div className="flex flex-col gap-3">
+        <DemoLabel>Stat Card · Outline & Filled</DemoLabel>
+        <div className="flex gap-4">
+          {/* Outline */}
+          <div
+            className="flex items-center gap-3 rounded-xl px-5 py-4 w-60"
+            style={{ border: "1px solid var(--border)" }}
+          >
+            <div className="flex shrink-0 items-center justify-center" style={{ color: "var(--black)" }}>
+              <CalendarDays className="size-5" />
+            </div>
+            <div>
+              <p className="text-xs" style={{ color: "var(--gray-400)" }}>Sessions gesamt</p>
+              <p className="text-sm font-semibold" style={{ color: "var(--foreground)" }}>10</p>
+            </div>
+          </div>
+          {/* Filled */}
+          <div
+            className="flex items-center gap-3 rounded-xl px-5 py-4 w-60"
+            style={{ backgroundColor: "var(--secondary)" }}
+          >
+            <div className="flex shrink-0 items-center justify-center" style={{ color: "var(--black)" }}>
+              <Users className="size-5" />
+            </div>
+            <div>
+              <p className="text-xs" style={{ color: "var(--gray-400)" }}>Ø Teilnehmende</p>
+              <p className="text-sm font-semibold" style={{ color: "var(--foreground)" }}>9 Personen</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Item — Outline & Filled */}
       <div className="flex flex-col gap-3">
         <DemoLabel>Item · Outline & Filled</DemoLabel>
@@ -1435,14 +1468,15 @@ function ButtoncardDemo() {
 
 function ListDemo() {
   const [clickable, setClickable] = useState(false);
-  const people = [
-    { initials: "VI", name: "Victoria Itter", role: "Product Design" },
-    { initials: "JW", name: "Jonas Weber", role: "Engineering" },
-    { initials: "LS", name: "Lena Schmidt", role: "Marketing" },
-  ];
+
+  const outlineBase = "w-76 gap-3 py-[15px]";
+  const outlineClickable = `${outlineBase} cursor-pointer transition-colors duration-150 hover:bg-[var(--secondary)]`;
+  const filledBase = "w-76 gap-3 border-transparent bg-[var(--secondary)] py-[15px]";
+  const filledClickable = `${filledBase} cursor-pointer transition-colors hover:bg-[var(--muted)]`;
+  const filledRing = { "--tw-ring-color": "var(--secondary)" } as React.CSSProperties;
+
   return (
     <div className="flex flex-col gap-5">
-      {/* Toggle: Infocards ↔ Klickbare Cards */}
       <label className="flex w-fit cursor-pointer items-center gap-3">
         <Switch checked={clickable} onCheckedChange={setClickable} />
         <span className="text-sm font-medium" style={{ color: "var(--foreground)" }}>
@@ -1450,65 +1484,90 @@ function ListDemo() {
         </span>
       </label>
 
-      {/* Zwei Spalten: Outline links, Filled rechts */}
       <div className="flex gap-4">
+        {/* Outline column */}
         <div className="flex flex-col gap-3">
-          {people.map(({ initials, name, role }) =>
-            clickable ? (
-              <Item key={name} variant="outline" role="button" tabIndex={0}
-                className="w-76 gap-3 py-[15px] cursor-pointer transition-colors duration-150 hover:bg-[var(--secondary)]"
-                style={{ borderColor: "var(--border)" }}>
-                <Avatar className="size-9 shrink-0 ring-2 ring-background">
-                  <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--primary)", color: "var(--primary-foreground)" }}>{initials}</AvatarFallback>
-                </Avatar>
-                <ItemContent className="gap-0.5">
-                  <ItemTitle className="font-semibold" style={{ color: "var(--foreground)" }}>{name}</ItemTitle>
-                  <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>{role}</ItemDescription>
-                </ItemContent>
-                <ChevronRight className="size-5 shrink-0 ml-auto" style={{ color: "var(--gray-400)" }} />
-              </Item>
-            ) : (
-              <Item key={name} variant="outline" className="w-76 gap-3 py-[15px]" style={{ borderColor: "var(--border)" }}>
-                <Avatar className="size-9 shrink-0 ring-2 ring-background">
-                  <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--primary)", color: "var(--primary-foreground)" }}>{initials}</AvatarFallback>
-                </Avatar>
-                <ItemContent className="gap-0.5">
-                  <ItemTitle className="font-semibold" style={{ color: "var(--foreground)" }}>{name}</ItemTitle>
-                  <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>{role}</ItemDescription>
-                </ItemContent>
-              </Item>
-            )
-          )}
+          {/* Row 1: Person / Avatar */}
+          <Item variant="outline" {...(clickable ? { role: "button", tabIndex: 0 } : {})}
+            className={clickable ? outlineClickable : outlineBase}
+            style={{ borderColor: "var(--border)" }}>
+            <Avatar className="size-9 shrink-0 ring-2 ring-background">
+              <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--primary)", color: "var(--primary-foreground)" }}>VI</AvatarFallback>
+            </Avatar>
+            <ItemContent className="gap-0.5">
+              <ItemTitle className="font-semibold" style={{ color: "var(--foreground)" }}>Victoria Itter</ItemTitle>
+              <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>Product Design</ItemDescription>
+            </ItemContent>
+            {clickable && <ChevronRight className="size-4 shrink-0 ml-auto" style={{ color: "var(--gray-400)" }} />}
+          </Item>
+
+          {/* Row 2: Document / FileText + ExternalLink */}
+          <Item variant="outline" {...(clickable ? { role: "button", tabIndex: 0 } : {})}
+            className={clickable ? outlineClickable : outlineBase}
+            style={{ borderColor: "var(--border)" }}>
+            <FileText className="size-5 shrink-0" style={{ color: "var(--black)" }} />
+            <ItemContent className="gap-0.5">
+              <ItemTitle className="font-semibold" style={{ color: "var(--foreground)" }}>Projektbriefing.pdf</ItemTitle>
+              <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>Zuletzt bearbeitet</ItemDescription>
+            </ItemContent>
+            {clickable && <ExternalLink className="size-4 shrink-0 ml-auto" style={{ color: "var(--gray-400)" }} />}
+          </Item>
+
+          {/* Row 3: No left icon / Phone */}
+          <Item variant="outline" {...(clickable ? { role: "button", tabIndex: 0 } : {})}
+            className={clickable ? outlineClickable : outlineBase}
+            style={{ borderColor: "var(--border)" }}>
+            <ItemContent className="gap-0.5">
+              <ItemTitle className="font-semibold" style={{ color: "var(--foreground)" }}>Max Moldovan</ItemTitle>
+              <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>+49 152 123 4567</ItemDescription>
+            </ItemContent>
+            {clickable && <Phone className="size-4 shrink-0 ml-auto" style={{ color: "var(--gray-400)" }} />}
+          </Item>
         </div>
+
+        {/* Filled column */}
         <div className="flex flex-col gap-3">
-          {people.map(({ initials, name, role }) =>
-            clickable ? (
-              <Item key={name} role="button" tabIndex={0}
-                className="w-76 gap-3 border-transparent bg-[var(--secondary)] py-[15px] cursor-pointer transition-colors hover:bg-[var(--muted)]"
-                style={{ "--tw-ring-color": "var(--secondary)" } as React.CSSProperties}>
-                <Avatar className="size-9 shrink-0 ring-2" style={{ "--tw-ring-color": "var(--secondary)" } as React.CSSProperties}>
-                  <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--primary)", color: "var(--primary-foreground)" }}>{initials}</AvatarFallback>
-                </Avatar>
-                <ItemContent className="gap-0.5">
-                  <ItemTitle className="font-semibold" style={{ color: "var(--foreground)" }}>{name}</ItemTitle>
-                  <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>{role}</ItemDescription>
-                </ItemContent>
-                <ChevronRight className="size-5 shrink-0 ml-auto" style={{ color: "var(--gray-400)" }} />
-              </Item>
-            ) : (
-              <Item key={name}
-                className="w-76 gap-3 border-transparent bg-[var(--secondary)] py-[15px] transition-colors hover:bg-[var(--muted)]"
-                style={{ "--tw-ring-color": "var(--secondary)" } as React.CSSProperties}>
-                <Avatar className="size-9 shrink-0 ring-2" style={{ "--tw-ring-color": "var(--secondary)" } as React.CSSProperties}>
-                  <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--primary)", color: "var(--primary-foreground)" }}>{initials}</AvatarFallback>
-                </Avatar>
-                <ItemContent className="gap-0.5">
-                  <ItemTitle className="font-semibold" style={{ color: "var(--foreground)" }}>{name}</ItemTitle>
-                  <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>{role}</ItemDescription>
-                </ItemContent>
-              </Item>
-            )
-          )}
+          {/* Row 1: Person / Avatar */}
+          <Item {...(clickable ? { role: "button", tabIndex: 0 } : {})}
+            className={clickable ? filledClickable : filledBase}
+            style={filledRing}>
+            <Avatar className="size-9 shrink-0 ring-2" style={filledRing}>
+              <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: "var(--primary)", color: "var(--primary-foreground)" }}>VI</AvatarFallback>
+            </Avatar>
+            <ItemContent className="gap-0.5">
+              <ItemTitle className="font-semibold" style={{ color: "var(--foreground)" }}>Victoria Itter</ItemTitle>
+              <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>Product Design</ItemDescription>
+            </ItemContent>
+            {clickable && <ChevronRight className="size-4 shrink-0 ml-auto" style={{ color: "var(--gray-400)" }} />}
+          </Item>
+
+          {/* Row 2: Document / FileText + ExternalLink */}
+          <Item {...(clickable ? { role: "button", tabIndex: 0 } : {})}
+            className={clickable ? filledClickable : filledBase}
+            style={filledRing}>
+            <div className="flex size-9 shrink-0 items-center justify-center rounded-lg" style={{ backgroundColor: "var(--muted)" }}>
+              <FileText className="size-4" style={{ color: "var(--black)" }} />
+            </div>
+            <ItemContent className="gap-0.5">
+              <ItemTitle className="font-semibold" style={{ color: "var(--foreground)" }}>Projektbriefing.pdf</ItemTitle>
+              <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>Zuletzt bearbeitet</ItemDescription>
+            </ItemContent>
+            {clickable && <ExternalLink className="size-4 shrink-0 ml-auto" style={{ color: "var(--gray-400)" }} />}
+          </Item>
+
+          {/* Row 3: Task / Clock + ArrowRight */}
+          <Item {...(clickable ? { role: "button", tabIndex: 0 } : {})}
+            className={clickable ? filledClickable : filledBase}
+            style={filledRing}>
+            <div className="flex size-9 shrink-0 items-center justify-center rounded-lg" style={{ backgroundColor: "var(--muted)" }}>
+              <Clock className="size-4" style={{ color: "var(--black)" }} />
+            </div>
+            <ItemContent className="gap-0.5">
+              <ItemTitle className="font-semibold" style={{ color: "var(--foreground)" }}>Design Review</ItemTitle>
+              <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>Ausstehend</ItemDescription>
+            </ItemContent>
+            {clickable && <ArrowRight className="size-4 shrink-0 ml-auto" style={{ color: "var(--gray-400)" }} />}
+          </Item>
         </div>
       </div>
     </div>
