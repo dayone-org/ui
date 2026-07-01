@@ -5,7 +5,7 @@ import Image from "next/image";
 import { DayoneButtonsContent } from "@/components/dayone-buttons";
 import { DayoneTypographyShowcase } from "@/components/dayone-typography-showcase";
 import { PlaygroundVariantHeading } from "@/components/playground-variant-heading";
-import { Bold, Italic, Underline, Search, ChevronRight, ChevronDown, TrendingUp, CalendarDays, Users, FileText, ExternalLink, Clock, Phone } from "lucide-react";
+import { Bold, Italic, Underline, Search, ChevronRight, ChevronDown, TrendingUp, CalendarDays, Users, FileText, ExternalLink, Phone } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
@@ -1545,9 +1545,7 @@ function ListDemo() {
           <Item {...(clickable ? { role: "button", tabIndex: 0 } : {})}
             className={clickable ? filledClickable : filledBase}
             style={filledRing}>
-            <div className="flex size-9 shrink-0 items-center justify-center rounded-lg" style={{ backgroundColor: "var(--muted)" }}>
-              <FileText className="size-4" style={{ color: "var(--black)" }} />
-            </div>
+            <FileText className="size-5 shrink-0" style={{ color: "var(--black)" }} />
             <ItemContent className="gap-0.5">
               <ItemTitle className="font-semibold" style={{ color: "var(--foreground)" }}>Projektbriefing.pdf</ItemTitle>
               <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>Zuletzt bearbeitet</ItemDescription>
@@ -1555,18 +1553,15 @@ function ListDemo() {
             {clickable && <ExternalLink className="size-4 shrink-0 ml-auto" style={{ color: "var(--gray-400)" }} />}
           </Item>
 
-          {/* Row 3: Task / Clock + ArrowRight */}
+          {/* Row 3: No left icon / Phone */}
           <Item {...(clickable ? { role: "button", tabIndex: 0 } : {})}
             className={clickable ? filledClickable : filledBase}
             style={filledRing}>
-            <div className="flex size-9 shrink-0 items-center justify-center rounded-lg" style={{ backgroundColor: "var(--muted)" }}>
-              <Clock className="size-4" style={{ color: "var(--black)" }} />
-            </div>
             <ItemContent className="gap-0.5">
-              <ItemTitle className="font-semibold" style={{ color: "var(--foreground)" }}>Design Review</ItemTitle>
-              <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>Ausstehend</ItemDescription>
+              <ItemTitle className="font-semibold" style={{ color: "var(--foreground)" }}>Max Moldovan</ItemTitle>
+              <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>+49 152 123 4567</ItemDescription>
             </ItemContent>
-            {clickable && <ArrowRight className="size-4 shrink-0 ml-auto" style={{ color: "var(--gray-400)" }} />}
+            {clickable && <Phone className="size-4 shrink-0 ml-auto" style={{ color: "var(--gray-400)" }} />}
           </Item>
         </div>
       </div>

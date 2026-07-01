@@ -834,18 +834,18 @@ function BacklogTab({ onSuggest }: { onSuggest: () => void }) {
         <div className="rounded-xl overflow-hidden" style={{ border: "1px solid var(--border)" }}>
           <Table>
             <TableHeader>
-              <TableRow style={{ borderColor: "var(--divider)" }}>
+              <TableRow className="hover:bg-transparent pointer-events-none" style={{ borderColor: "var(--divider)" }}>
                 <TableHead className="pl-5 w-8" />
-                <TableHead className="text-xs " style={{ color: "var(--gray-400)" }}>
+                <TableHead className="text-xs" style={{ color: "var(--gray-400)" }}>
                   Thema
                 </TableHead>
-                <TableHead className="text-xs " style={{ color: "var(--gray-400)" }}>
+                <TableHead className="text-xs" style={{ color: "var(--gray-400)" }}>
                   Details
                 </TableHead>
-                <TableHead className="text-xs " style={{ color: "var(--gray-400)" }}>
+                <TableHead className="text-xs" style={{ color: "var(--gray-400)" }}>
                   Person
                 </TableHead>
-                <TableHead className="text-xs " style={{ color: "var(--gray-400)" }}>
+                <TableHead className="text-xs" style={{ color: "var(--gray-400)" }}>
                   Zeit
                 </TableHead>
               </TableRow>
