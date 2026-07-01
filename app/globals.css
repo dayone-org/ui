@@ -45,6 +45,9 @@
   --color-input: var(--input);
   --color-border: var(--border);
   --color-destructive: var(--destructive);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-info: var(--info);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
   --color-muted-foreground: var(--muted-foreground);
@@ -85,15 +88,30 @@
   --sand-medium:        #EDE7DD;
   --sand-light:         #F7F3EB;
 
-  /* Red */
-  --red-dark:           #CC443D;
-  --red-medium:         #FF544C;
-  --red-light:          #FF8580;
+  /* Coral (design palette) */
+  --coral-dark:         #CC443D;
+  --coral-medium:       #FF544C;
+  --coral-light:        #FF8580;
 
   /* Blue */
   --blue-dark:          #0E72C4;
   --blue-highlight:     #1487DD;
   --blue-light:         #D6ECFA;
+
+  /* Green (Feedback) */
+  --green-dark:         #2A6E46;
+  --green-medium:       #3D9E65;
+  --green-light:        #E4F5EC;
+
+  /* Orange (Feedback) */
+  --orange-dark:        #A36A10;
+  --orange-medium:      #E08C1A;
+  --orange-light:       #FEF3E2;
+
+  /* Red (Feedback) */
+  --red-dark:           #900018;
+  --red-medium:         #D6001C;
+  --red-light:          #FFE5EA;
 
   /* ————————————————————————
      Ebene 2 — Semantische Tokens
@@ -117,6 +135,12 @@
   --accent-foreground:          var(--black);
   --destructive:                var(--red-medium);
   --destructive-foreground:     var(--white);
+  --success:                    var(--green-medium);
+  --success-foreground:         var(--white);
+  --warning:                    var(--orange-medium);
+  --warning-foreground:         var(--foreground);
+  --info:                       var(--blue-highlight);
+  --info-foreground:            var(--white);
   --border:                     var(--gray-100);
   --divider:                    var(--gray-100);
   --input:                      var(--border);
@@ -126,7 +150,7 @@
   --chart-2:                    var(--sand-dark);
   --chart-3:                    var(--sand-medium);
   --chart-4:                    var(--blue-highlight);
-  --chart-5:                    var(--red-medium);
+  --chart-5:                    var(--coral-medium);
   --sidebar:                    var(--sand-light);
   --sidebar-foreground:         var(--black);
   --sidebar-primary:            var(--black);
@@ -233,7 +257,7 @@
   --chart-2:                    var(--gray-300);
   --chart-3:                    #555555;
   --chart-4:                    var(--blue-highlight);
-  --chart-5:                    var(--red-medium);
+  --chart-5:                    var(--coral-medium);
   --sidebar:                    #222222;
   --sidebar-foreground:         var(--sand-light);
   --sidebar-primary:            var(--blue-highlight);

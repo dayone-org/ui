@@ -77,10 +77,10 @@ const COLOR_GROUPS = [
     { name: "$SandLight", token: "--sand-light", hex: "#F7F3EB" },
     { name: "$SandLight (Test)", token: "--sand-light", hex: "#F4F2EE" },
   ]},
-  { label: "Red", colors: [
-    { name: "$RedDark", token: "--red-dark", hex: "#CC443D" },
-    { name: "$RedMedium", token: "--red-medium", hex: "#FF544C" },
-    { name: "$RedLight", token: "--red-light", hex: "#FF8580" },
+  { label: "Coral", colors: [
+    { name: "$CoralDark", token: "--coral-dark", hex: "#CC443D" },
+    { name: "$CoralMedium", token: "--coral-medium", hex: "#FF544C" },
+    { name: "$CoralLight", token: "--coral-light", hex: "#FF8580" },
   ]},
   { label: "Blue", colors: [
     { name: "$BlueDark", token: "--blue-dark", hex: "#0E72C4" },
@@ -89,9 +89,28 @@ const COLOR_GROUPS = [
   ]},
 ];
 
+const FEEDBACK_PRIMITIVE_GROUPS = [
+  { label: "Green", semanticLabel: "Success", colors: [
+    { name: "$GreenDark", token: "--green-dark", hex: "#2A6E46" },
+    { name: "$GreenMedium", token: "--green-medium", hex: "#3D9E65" },
+    { name: "$GreenLight", token: "--green-light", hex: "#E4F5EC" },
+  ]},
+  { label: "Orange", semanticLabel: "Warning", colors: [
+    { name: "$OrangeDark", token: "--orange-dark", hex: "#A36A10" },
+    { name: "$OrangeMedium", token: "--orange-medium", hex: "#E08C1A" },
+    { name: "$OrangeLight", token: "--orange-light", hex: "#FEF3E2" },
+  ]},
+  { label: "Red", semanticLabel: "Error", colors: [
+    { name: "$RedDark", token: "--red-dark", hex: "#900018" },
+    { name: "$RedMedium", token: "--red-medium", hex: "#D6001C" },
+    { name: "$RedLight", token: "--red-light", hex: "#FFE5EA" },
+  ]},
+];
+
 function ColorsDemo() {
   return (
     <div className="space-y-8">
+      <PlaygroundVariantHeading>Primitive Colors</PlaygroundVariantHeading>
       {COLOR_GROUPS.map((group) => (
         <div key={group.label}>
           <PlaygroundVariantHeading className="mb-4">{group.label}</PlaygroundVariantHeading>
@@ -99,6 +118,30 @@ function ColorsDemo() {
             {group.colors.map((color) => (
               <div key={color.hex} className="overflow-hidden rounded-md" style={{ border: "1px solid var(--border)" }}>
                 <div className="h-16" style={{ backgroundColor: color.hex, boxShadow: color.hex === "#FFFFFF" ? "inset 0 0 0 1px var(--border)" : undefined }} />
+                <div className="space-y-0.5 px-2.5 py-2.5">
+                  <p className="text-xs font-semibold" style={{ color: "var(--foreground)" }}>{color.name}</p>
+                  <p className="text-[10px]" style={{ color: "var(--gray-400)" }}>{color.hex}</p>
+                  <p className="font-mono text-[10px]" style={{ color: "var(--gray-300)" }}>{color.token}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+
+      <div className="pt-4" style={{ borderTop: "1px solid var(--border)" }}>
+        <PlaygroundVariantHeading>Feedback Colors</PlaygroundVariantHeading>
+      </div>
+      {FEEDBACK_PRIMITIVE_GROUPS.map((group) => (
+        <div key={group.label}>
+          <div className="flex items-baseline gap-2 mb-4">
+            <PlaygroundVariantHeading className="mb-0">{group.label}</PlaygroundVariantHeading>
+            <span className="text-xs" style={{ color: "var(--gray-300)" }}>— {group.semanticLabel}</span>
+          </div>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 md:grid-cols-7">
+            {group.colors.map((color) => (
+              <div key={color.hex} className="overflow-hidden rounded-md" style={{ border: "1px solid var(--border)" }}>
+                <div className="h-16" style={{ backgroundColor: color.hex }} />
                 <div className="space-y-0.5 px-2.5 py-2.5">
                   <p className="text-xs font-semibold" style={{ color: "var(--foreground)" }}>{color.name}</p>
                   <p className="text-[10px]" style={{ color: "var(--gray-400)" }}>{color.hex}</p>

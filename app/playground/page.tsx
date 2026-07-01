@@ -45,6 +45,8 @@ export default function PlaygroundPage() {
 
           <PlaygroundSection id="colors" title="Colors">
             <div className={PLAYGROUND_SHOWCASE}>
+              <PlaygroundVariantHeading>Primitive Colors</PlaygroundVariantHeading>
+              <DocsDivider />
               <div>
                 <PlaygroundVariantHeading className="mb-5">Grays</PlaygroundVariantHeading>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -90,12 +92,12 @@ export default function PlaygroundPage() {
               </div>
               <DocsDivider />
               <div>
-                <PlaygroundVariantHeading className="mb-5">Red</PlaygroundVariantHeading>
+                <PlaygroundVariantHeading className="mb-5">Coral</PlaygroundVariantHeading>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {[
-                    { name: "$RedDark", token: "--red-dark", hex: "#CC443D" },
-                    { name: "$RedMedium", token: "--red-medium", hex: "#FF544C" },
-                    { name: "$RedLight", token: "--red-light", hex: "#FF8580" },
+                    { name: "$CoralDark", token: "--coral-dark", hex: "#CC443D" },
+                    { name: "$CoralMedium", token: "--coral-medium", hex: "#FF544C" },
+                    { name: "$CoralLight", token: "--coral-light", hex: "#FF8580" },
                   ].map((color) => (
                     <div key={color.token} className="rounded-md overflow-hidden" style={{ border: "1px solid var(--border)" }}>
                       <div style={{ backgroundColor: color.hex }} className="h-20" />
@@ -112,7 +114,11 @@ export default function PlaygroundPage() {
               <div>
                 <PlaygroundVariantHeading className="mb-5">Blue</PlaygroundVariantHeading>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  {[{ name: "Blue Highlight", token: "--blue-highlight", hex: "#1487DD" }].map((color) => (
+                  {[
+                    { name: "$BlueDark", token: "--blue-dark", hex: "#0E72C4" },
+                    { name: "$BlueHighlight", token: "--blue-highlight", hex: "#1487DD" },
+                    { name: "$BlueLight", token: "--blue-light", hex: "#D6ECFA" },
+                  ].map((color) => (
                     <div key={color.token} className="rounded-md overflow-hidden" style={{ border: "1px solid var(--border)" }}>
                       <div style={{ backgroundColor: color.hex }} className="h-20" />
                       <div className="px-3 py-3 space-y-1">
@@ -125,6 +131,45 @@ export default function PlaygroundPage() {
                 </div>
               </div>
               <DocsDivider />
+              <PlaygroundVariantHeading>Feedback Colors</PlaygroundVariantHeading>
+              <DocsDivider />
+              {[
+                { label: "Green", semantic: "Success", colors: [
+                  { name: "$GreenDark", token: "--green-dark", hex: "#2A6E46" },
+                  { name: "$GreenMedium", token: "--green-medium", hex: "#3D9E65" },
+                  { name: "$GreenLight", token: "--green-light", hex: "#E4F5EC" },
+                ]},
+                { label: "Orange", semantic: "Warning", colors: [
+                  { name: "$OrangeDark", token: "--orange-dark", hex: "#A36A10" },
+                  { name: "$OrangeMedium", token: "--orange-medium", hex: "#E08C1A" },
+                  { name: "$OrangeLight", token: "--orange-light", hex: "#FEF3E2" },
+                ]},
+                { label: "Red", semantic: "Error", colors: [
+                  { name: "$RedDark", token: "--red-dark", hex: "#900018" },
+                  { name: "$RedMedium", token: "--red-medium", hex: "#D6001C" },
+                  { name: "$RedLight", token: "--red-light", hex: "#FFE5EA" },
+                ]},
+              ].map((group) => (
+                <div key={group.label}>
+                  <div className="flex items-baseline gap-2 mb-5">
+                    <PlaygroundVariantHeading className="mb-0">{group.label}</PlaygroundVariantHeading>
+                    <span className="text-xs" style={{ color: "var(--gray-300)" }}>— {group.semantic}</span>
+                  </div>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {group.colors.map((color) => (
+                      <div key={color.token} className="rounded-md overflow-hidden" style={{ border: "1px solid var(--border)" }}>
+                        <div style={{ backgroundColor: color.hex }} className="h-20" />
+                        <div className="px-3 py-3 space-y-1">
+                          <p className="text-sm font-semibold" style={{ color: "var(--foreground)" }}>{color.name}</p>
+                          <p className="text-xs" style={{ color: "var(--gray-400)" }}>{color.hex}</p>
+                          <p className="text-[11px] font-mono" style={{ color: "var(--gray-300)" }}>{color.token}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <DocsDivider />
+                </div>
+              ))}
             </div>
           </PlaygroundSection>
 
