@@ -1263,7 +1263,7 @@ function ChartDemo() {
     <div className="flex w-[600px] max-w-full flex-col gap-12">
       <div className="flex flex-col gap-4">
         <DemoLabel>Kompakt · 2 Quartale</DemoLabel>
-        <CssBarChart data={CHART_MONTHS.slice(0, 6)} periodLabel="Aufrufe Q1 – Q2" barWidthPx={18} />
+        <CssBarChart data={CHART_MONTHS.slice(0, 6)} barWidthPx={18} />
       </div>
       <div className="flex flex-col gap-4">
         <DemoLabel>Voll · Jan – Dez</DemoLabel>

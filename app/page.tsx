@@ -548,7 +548,7 @@ function BadgesCell() {
         <div className="flex flex-wrap gap-2">
           <Badge className="rounded-full px-[15px] py-[13px] text-[13px] font-medium" style={{ backgroundColor: "var(--blue-highlight)", color: "var(--white)", border: "none" }}>Aktiv</Badge>
           <Badge className="rounded-full px-[15px] py-[13px] text-[13px] font-medium" style={{ backgroundColor: "var(--red-medium)", color: "var(--white)", border: "none" }}>Fehler</Badge>
-          <Badge className="rounded-full px-[15px] py-[13px] text-[13px] font-medium" style={{ backgroundColor: "var(--accent)", color: "var(--muted-foreground)", border: "none" }}>Inaktiv</Badge>
+          <Badge className="rounded-full px-[15px] py-[13px] text-[13px] font-medium" style={{ backgroundColor: "var(--gray-200)", color: "var(--gray-500)", border: "none" }}>Inaktiv</Badge>
         </div>
         <div className="py-3"><Separator style={{ backgroundColor: "var(--border)" }} /></div>
         <div>
