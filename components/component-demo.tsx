@@ -197,7 +197,7 @@ function BadgeDemo() {
     { bg: "transparent", color: "var(--foreground)", border: "1px solid var(--border)", label: "Ghost" },
     { bg: "var(--blue-highlight)", color: "var(--white)", border: "none", label: "Aktiv" },
     { bg: "var(--red-medium)", color: "var(--white)", border: "none", label: "Fehler" },
-    { bg: "var(--gray-200)", color: "var(--gray-500)", border: "none", label: "Inaktiv" },
+    { bg: "var(--disabled)", color: "var(--disabled-foreground)", border: "none", label: "Inaktiv" },
   ];
   return (
     <div className="flex flex-wrap gap-2">
@@ -1204,7 +1204,7 @@ function CssBarChart({
   barWidthPx,
 }: {
   data: { name: string; value: number }[];
-  periodLabel: string;
+  periodLabel?: string;
   barWidthPx?: number;
 }) {
   const compact = !!barWidthPx;
