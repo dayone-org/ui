@@ -195,9 +195,9 @@ function BadgeDemo() {
     { bg: "var(--primary)", color: "var(--primary-foreground)", border: "none", label: "Default" },
     { bg: "var(--muted)", color: "var(--foreground)", border: "none", label: "Secondary" },
     { bg: "transparent", color: "var(--foreground)", border: "1px solid var(--border)", label: "Ghost" },
-    { bg: "var(--blue-dark)", color: "var(--white)", border: "none", label: "Aktiv" },
-    { bg: "var(--red-dark)", color: "var(--white)", border: "none", label: "Fehler" },
-    { bg: "var(--accent)", color: "var(--muted-foreground)", border: "none", label: "Inaktiv" },
+    { bg: "var(--blue-highlight)", color: "var(--white)", border: "none", label: "Aktiv" },
+    { bg: "var(--red-medium)", color: "var(--white)", border: "none", label: "Fehler" },
+    { bg: "var(--gray-200)", color: "var(--gray-500)", border: "none", label: "Inaktiv" },
   ];
   return (
     <div className="flex flex-wrap gap-2">
