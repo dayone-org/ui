@@ -50,6 +50,8 @@ import { toast } from "sonner";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Calendar } from "@/components/ui/calendar";
+import { DatePicker, DateRangePicker } from "@/components/ui/date-picker";
+import type { DateRange } from "react-day-picker";
 import { de } from "date-fns/locale";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -1182,6 +1184,32 @@ function CalendarDemo() {
   );
 }
 
+function DatePickerDemo() {
+  const [date, setDate] = useState<Date | undefined>();
+  const [preselected, setPreselected] = useState<Date | undefined>(new Date(2026, 5, 18));
+  const [range, setRange] = useState<DateRange | undefined>({
+    from: new Date(2026, 5, 5),
+    to: new Date(2026, 5, 18),
+  });
+  return (
+    <div className="flex w-full max-w-xs flex-col gap-8">
+      <div className="flex flex-col gap-3">
+        <DemoLabel>Einzeldatum</DemoLabel>
+        <DatePicker date={date} onDateChange={setDate} />
+        <DatePicker date={preselected} onDateChange={setPreselected} />
+      </div>
+      <div className="flex flex-col gap-3">
+        <DemoLabel>Zeitraum</DemoLabel>
+        <DateRangePicker range={range} onRangeChange={setRange} />
+      </div>
+      <div className="flex flex-col gap-3">
+        <DemoLabel>Deaktiviert</DemoLabel>
+        <DatePicker disabled />
+      </div>
+    </div>
+  );
+}
+
 // 12 Monate — gleiche Optik wie der Chart auf der Startseite (reines CSS)
 const CHART_MONTHS = [
   { name: "Jan", value: 32 },
@@ -1750,6 +1778,7 @@ const DEMOS: Record<string, () => React.ReactElement> = {
   table: TableDemo,
   carousel: CarouselDemo,
   calendar: CalendarDemo,
+  "date-picker": DatePickerDemo,
   chart: ChartDemo,
   avatar: AvatarDemo,
   accordion: AccordionDemo,

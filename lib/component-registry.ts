@@ -63,6 +63,7 @@ export const COMPONENT_REGISTRY: ComponentCategory[] = [
       { slug: "select", name: "Select", description: "Auswahlmenü mit Such- und Scroll-Funktion", playgroundAnchor: "inputs-forms" },
       // Pair: both enhanced input combos
       { slug: "combobox", name: "Combobox", description: "Kombination aus Eingabe und Dropdown-Suche", playgroundAnchor: "inputs-forms" },
+      { slug: "date-picker", name: "Date Picker", description: "Datumsauswahl über Eingabefeld mit Kalender-Popover", playgroundAnchor: "inputs-forms" },
       { slug: "input-group", name: "Input Group", description: "Eingabefeld mit Prefix oder Suffix", playgroundAnchor: "inputs-forms" },
       { slug: "search-bar", name: "Search Bar", description: "Minimales Suchfeld mit Unterstrich — für Sidebar, Filter und Tabellen", playgroundAnchor: "inputs-forms" },
       // Full-width: multi-state showcase needs width
