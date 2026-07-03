@@ -141,8 +141,8 @@
   --warning-foreground:         var(--foreground);
   --info:                       var(--blue-highlight);
   --info-foreground:            var(--white);
-  --disabled:                   var(--gray-200);
-  --disabled-foreground:        var(--gray-500);
+  --disabled:                   var(--gray-100);
+  --disabled-foreground:        var(--gray-400);
   --border:                     var(--gray-100);
   --divider:                    var(--gray-100);
   --input:                      var(--border);

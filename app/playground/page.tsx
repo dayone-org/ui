@@ -402,7 +402,7 @@ export default function PlaygroundPage() {
                       <TableCell className="font-medium" style={{ color: "var(--foreground)" }}>{row.name}</TableCell>
                       <TableCell style={{ color: "var(--gray-400)" }}>{row.role}</TableCell>
                       <TableCell>
-                        <Badge className="rounded-full text-xs" style={{ backgroundColor: row.status === "Aktiv" ? "var(--primary)" : "var(--accent)", color: row.status === "Aktiv" ? "var(--primary-foreground)" : "var(--muted-foreground)" }}>
+                        <Badge className="rounded-full text-xs" style={{ backgroundColor: row.status === "Aktiv" ? "var(--primary)" : "var(--disabled)", color: row.status === "Aktiv" ? "var(--primary-foreground)" : "var(--disabled-foreground)" }}>
                           {row.status}
                         </Badge>
                       </TableCell>

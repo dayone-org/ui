@@ -51,6 +51,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Calendar } from "@/components/ui/calendar";
 import { DatePicker, DateRangePicker } from "@/components/ui/date-picker";
+import { DataTable, DataTableSortButton, type ColumnDef } from "@/components/ui/data-table";
 import type { DateRange } from "react-day-picker";
 import { de } from "date-fns/locale";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -1118,7 +1119,7 @@ function TableDemo() {
             <TableCell className="font-medium" style={{ color: "var(--foreground)" }}>{row.name}</TableCell>
             <TableCell style={{ color: "var(--gray-400)" }}>{row.role}</TableCell>
             <TableCell>
-              <Badge className="rounded-full text-xs" style={{ backgroundColor: row.status === "Aktiv" ? "var(--primary)" : "var(--accent)", color: row.status === "Aktiv" ? "var(--primary-foreground)" : "var(--muted-foreground)" }}>
+              <Badge className="rounded-full text-xs" style={{ backgroundColor: row.status === "Aktiv" ? "var(--primary)" : "var(--disabled)", color: row.status === "Aktiv" ? "var(--primary-foreground)" : "var(--disabled-foreground)" }}>
                 {row.status}
               </Badge>
             </TableCell>
@@ -1126,6 +1127,80 @@ function TableDemo() {
         ))}
       </TableBody>
     </Table>
+  );
+}
+
+type DataTablePerson = { id: string; name: string; role: string; status: "Aktiv" | "Inaktiv" };
+
+const DATA_TABLE_PEOPLE: DataTablePerson[] = [
+  { id: "1", name: "Victoria Itter", role: "UI Design", status: "Aktiv" },
+  { id: "2", name: "Max Moldovan", role: "Product Manager", status: "Aktiv" },
+  { id: "3", name: "Nico Wohlgemuth", role: "Managing Partner", status: "Aktiv" },
+  { id: "4", name: "Helena Rott", role: "UX", status: "Inaktiv" },
+  { id: "5", name: "Silviana Anutescu", role: "Lead Product Manager", status: "Aktiv" },
+  { id: "6", name: "Philip Avakian", role: "UX Designer", status: "Inaktiv" },
+  { id: "7", name: "Jule Grunert", role: "UI Design", status: "Aktiv" },
+];
+
+const DATA_TABLE_COLUMNS: ColumnDef<DataTablePerson>[] = [
+  {
+    id: "select",
+    header: ({ table }) => (
+      <Checkbox
+        checked={table.getIsAllPageRowsSelected()}
+        onCheckedChange={(v) => table.toggleAllPageRowsSelected(!!v)}
+        aria-label="Alle auswählen"
+      />
+    ),
+    cell: ({ row }) => (
+      <Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={(v) => row.toggleSelected(!!v)}
+        aria-label="Zeile auswählen"
+      />
+    ),
+  },
+  {
+    accessorKey: "name",
+    header: ({ column }) => <DataTableSortButton column={column}>Name</DataTableSortButton>,
+    cell: ({ row }) => <span className="font-medium text-foreground">{row.original.name}</span>,
+  },
+  {
+    accessorKey: "role",
+    header: ({ column }) => <DataTableSortButton column={column}>Rolle</DataTableSortButton>,
+    cell: ({ row }) => <span className="text-muted-foreground">{row.original.role}</span>,
+  },
+  {
+    accessorKey: "status",
+    header: "Status",
+    cell: ({ row }) => {
+      const active = row.original.status === "Aktiv";
+      return (
+        <Badge
+          className="rounded-full text-xs"
+          style={{
+            backgroundColor: active ? "var(--primary)" : "var(--disabled)",
+            color: active ? "var(--primary-foreground)" : "var(--disabled-foreground)",
+          }}
+        >
+          {row.original.status}
+        </Badge>
+      );
+    },
+  },
+];
+
+function DataTableDemo() {
+  return (
+    <div className="w-full max-w-2xl">
+      <DataTable
+        columns={DATA_TABLE_COLUMNS}
+        data={DATA_TABLE_PEOPLE}
+        searchKey="name"
+        searchPlaceholder="Nach Name suchen..."
+        pageSize={5}
+      />
+    </div>
   );
 }
 
@@ -1776,6 +1851,7 @@ const DEMOS: Record<string, () => React.ReactElement> = {
   progress: ProgressDemo,
   sonner: SonnerDemo,
   table: TableDemo,
+  "data-table": DataTableDemo,
   carousel: CarouselDemo,
   calendar: CalendarDemo,
   "date-picker": DatePickerDemo,

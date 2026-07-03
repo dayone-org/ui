@@ -125,6 +125,7 @@ export const COMPONENT_REGISTRY: ComponentCategory[] = [
     components: [
       // Full-width: wide data structures
       { slug: "table", name: "Table", description: "Tabellarische Darstellung strukturierter Daten", playgroundAnchor: "data-display", span: 2 },
+      { slug: "data-table", name: "Data Table", description: "Sortierbare, filterbare Tabelle mit Zeilenauswahl und Pagination", playgroundAnchor: "data-display", span: 2 },
       // Pair: both data visualizations
       { slug: "chart", name: "Chart", description: "Datenvisualisierung mit verschiedenen Charttypen", playgroundAnchor: "data-display" },
       { slug: "calendar", name: "Calendar", description: "Datumsauswahl im Monatsraster", playgroundAnchor: "data-display" },
