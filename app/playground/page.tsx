@@ -371,11 +371,11 @@ export default function PlaygroundPage() {
               </Row>
               <Alert className="rounded-md" style={{ borderColor: "var(--border)" }}>
                 <AlertTitle className="font-semibold" style={{ color: "var(--foreground)" }}>Hinweis</AlertTitle>
-                <AlertDescription style={{ color: "var(--gray-400)" }}>Eine neutrale Benachrichtigung.</AlertDescription>
+                <AlertDescription style={{ color: "var(--muted-foreground)" }}>Eine neutrale Benachrichtigung.</AlertDescription>
               </Alert>
-              <Alert className="rounded-md" style={{ borderColor: "var(--red-medium)", backgroundColor: "#FFF5F5" }}>
-                <AlertTitle className="font-semibold" style={{ color: "var(--red-medium)" }}>Fehler</AlertTitle>
-                <AlertDescription style={{ color: "var(--gray-500)" }}>Etwas ist schiefgelaufen.</AlertDescription>
+              <Alert className="rounded-md" style={{ borderColor: "var(--destructive)", backgroundColor: "color-mix(in srgb, var(--destructive) 10%, var(--background))" }}>
+                <AlertTitle className="font-semibold" style={{ color: "var(--destructive)" }}>Fehler</AlertTitle>
+                <AlertDescription style={{ color: "var(--muted-foreground)" }}>Etwas ist schiefgelaufen.</AlertDescription>
               </Alert>
               <Progress value={60} className="h-2" style={{ backgroundColor: "var(--accent)" }} />
               <DocsDivider />
@@ -418,12 +418,12 @@ export default function PlaygroundPage() {
             <div className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {["Design", "Development", "Strategy"].map((title) => (
-                  <Card key={title} className="rounded-lg bg-white" style={{ borderColor: "var(--border)" }}>
+                  <Card key={title} className="rounded-lg bg-card" style={{ borderColor: "var(--border)" }}>
                     <CardHeader>
                       <CardTitle className="text-lg font-semibold" style={{ color: "var(--foreground)" }}>{title}</CardTitle>
-                      <CardDescription className="text-sm" style={{ color: "var(--gray-400)" }}>Beschreibung des Bereichs.</CardDescription>
+                      <CardDescription className="text-sm" style={{ color: "var(--muted-foreground)" }}>Beschreibung des Bereichs.</CardDescription>
                     </CardHeader>
-                    <CardContent><p className="text-sm" style={{ color: "var(--gray-500)" }}>Inhalte zu {title}.</p></CardContent>
+                    <CardContent><p className="text-sm" style={{ color: "var(--muted-foreground)" }}>Inhalte zu {title}.</p></CardContent>
                     <CardFooter>
                       <button className="underline flex items-center gap-1 font-semibold text-sm" style={{ color: "var(--foreground)" }}>Mehr erfahren <span>&#8594;</span></button>
                     </CardFooter>
@@ -453,9 +453,9 @@ export default function PlaygroundPage() {
                   {[
                     { initials: "VI", bg: "var(--primary)", fg: "var(--primary-foreground)" },
                     { initials: "BD", bg: "var(--muted)", fg: "var(--foreground)" },
-                    { initials: "AK", bg: "var(--blue-light)", fg: "var(--foreground)" },
-                    { initials: "LR", bg: "var(--red-light)", fg: "var(--foreground)" },
-                    { initials: "TM", bg: "var(--sand-dark)", fg: "var(--foreground)" },
+                    { initials: "AK", bg: "var(--blue-light)", fg: "var(--black)" },
+                    { initials: "LR", bg: "var(--red-light)", fg: "var(--black)" },
+                    { initials: "TM", bg: "var(--sand-dark)", fg: "var(--black)" },
                   ].map(({ initials, bg, fg }) => (
                     <Avatar key={initials} className="size-10 after:hidden ring-2 ring-background">
                       <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: bg, color: fg }}>{initials}</AvatarFallback>

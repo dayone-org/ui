@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { NavigationTopScroller } from "@/components/navigation-top-scroller";
 import { Toaster } from "@/components/ui/sonner";
+import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 
 const roobert = localFont({
@@ -37,14 +38,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="de" className={`${roobert.variable} h-full antialiased`}>
+    <html
+      lang="de"
+      className={`${roobert.variable} h-full antialiased`}
+      suppressHydrationWarning
+    >
       <head>
         <script dangerouslySetInnerHTML={{ __html: "if('scrollRestoration'in history)history.scrollRestoration='manual'" }} />
       </head>
       <body className="min-h-full flex flex-col">
-        <NavigationTopScroller />
-        {children}
-        <Toaster />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem={false}
+          disableTransitionOnChange
+        >
+          <NavigationTopScroller />
+          {children}
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );

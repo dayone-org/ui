@@ -6,7 +6,7 @@ import { DOCS_PAGE_PADDING, DOCS_MAIN_COLUMN } from "@/lib/docs-layout";
 
 export function KomponentenShell({ children }: { children: ReactNode }) {
   return (
-    <div className="relative flex min-h-screen flex-col bg-white">
+    <div className="relative flex min-h-screen flex-col bg-background">
       <SiteHeader active="komponenten" />
       <KomponentenSidebarMobile />
       <div className={`flex flex-1 ${DOCS_PAGE_PADDING}`}>

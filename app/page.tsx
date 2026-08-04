@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { ThemeImage } from "@/components/theme-image";
 import { useState, useEffect, useRef, Fragment } from "react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteStamp } from "@/components/site-stamp";
@@ -89,7 +90,7 @@ function SmoothBar({ value }: { value: number }) {
 
 function LoadingCell() {
   // Skeleton-Farbe wie in den Komponenten: Mix aus --gray-100 und --sand-medium
-  const skeletonColor = "#E8E3DB";
+  const skeletonColor = "var(--muted)";
   return (
     <BentoCell className="col-span-3 flex flex-col min-h-72" delay={0}>
       <CellLabel>Skeleton & Spinner</CellLabel>
@@ -206,11 +207,11 @@ function NotificationsCell() {
                 <p className="text-xs font-semibold" style={{ color: idx === 0 ? "var(--primary-foreground)" : "var(--foreground)", transition: "color 0.5s ease" }}>
                   {item.title}
                 </p>
-                <p className="text-xs truncate" style={{ color: idx === 0 ? "rgba(255,255,255,0.6)" : "var(--gray-400)", transition: "color 0.5s ease" }}>
+                <p className="text-xs truncate" style={{ color: idx === 0 ? "color-mix(in srgb, var(--primary-foreground) 60%, transparent)" : "var(--muted-foreground)", transition: "color 0.5s ease" }}>
                   {item.desc}
                 </p>
               </div>
-              <span className="text-[10px] shrink-0 pt-0.5" style={{ color: idx === 0 ? "rgba(255,255,255,0.45)" : "var(--gray-300)", transition: "color 0.5s ease" }}>
+              <span className="text-[10px] shrink-0 pt-0.5" style={{ color: idx === 0 ? "color-mix(in srgb, var(--primary-foreground) 45%, transparent)" : "var(--muted-foreground)", transition: "color 0.5s ease" }}>
                 {item.time}
               </span>
             </div>
@@ -266,7 +267,7 @@ function ChartCell() {
           <TrendingUp className="size-3" />
           {trend >= 0 ? "+" : ""}{trend}%
         </span>
-        <span className="text-xs ml-auto" style={{ color: "#999" }}>Aufrufe Jan – Aug 2026</span>
+        <span className="text-xs ml-auto" style={{ color: "var(--muted-foreground)" }}>Aufrufe Jan – Aug 2026</span>
       </div>
       {/* Pure-CSS bar chart — columns stretch to 160px so height-% resolves correctly */}
       <div className="mt-auto flex flex-col gap-2">
@@ -276,7 +277,7 @@ function ChartCell() {
               <div
                 style={{
                   height: `${d.value}%`,
-                  backgroundColor: "#1a1a1a",
+                  backgroundColor: "var(--chart-1)",
                   borderRadius: "4px 4px 0 0",
                   transition: "height 1s cubic-bezier(0.4,0,0.2,1)",
                 }}
@@ -286,7 +287,7 @@ function ChartCell() {
         </div>
         <div className="flex gap-3">
           {data.map((d) => (
-            <div key={d.name} className="flex-1 text-center" style={{ fontSize: 12, color: "#999" }}>
+            <div key={d.name} className="flex-1 text-center" style={{ fontSize: 12, color: "var(--muted-foreground)" }}>
               {d.name}
             </div>
           ))}
@@ -557,9 +558,9 @@ function BadgesCell() {
             {[
               { initials: "VI", bg: "var(--primary)", fg: "var(--primary-foreground)" },
               { initials: "BD", bg: "var(--muted)", fg: "var(--foreground)" },
-              { initials: "AK", bg: "var(--blue-light)", fg: "var(--foreground)" },
-              { initials: "LR", bg: "var(--red-light)", fg: "var(--foreground)" },
-              { initials: "TM", bg: "var(--sand-dark)", fg: "var(--foreground)" },
+              { initials: "AK", bg: "var(--blue-light)", fg: "var(--black)" },
+              { initials: "LR", bg: "var(--red-light)", fg: "var(--black)" },
+              { initials: "TM", bg: "var(--sand-dark)", fg: "var(--black)" },
             ].map(({ initials, bg, fg }) => (
               <Avatar key={initials} className="size-10 after:hidden ring-2 ring-background">
                 <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: bg, color: fg }}>{initials}</AvatarFallback>
@@ -735,12 +736,12 @@ function ShowcaseGrid() {
 
 export default function HomePage() {
   return (
-    <div className="relative flex min-h-screen flex-col bg-white">
+    <div className="relative flex min-h-screen flex-col bg-background">
       <SiteHeader active="home" />
 
       <main className={`flex flex-1 flex-col items-center gap-16 px-8 py-16 ${DOCS_PAGE_PADDING}`}>
         <div className="flex flex-col items-center text-center gap-6 max-w-2xl">
-          <Image src="/dayone-icon.svg" alt="DAYONE" width={36} height={36} />
+          <ThemeImage srcLight="/dayone-icon.svg" srcDark="/dayone-icon-light.svg" alt="DAYONE" width={36} height={36} />
           <h1
             className="font-semibold mt-4"
             style={{ fontSize: "clamp(2.25rem, 5vw, 3.75rem)", lineHeight: 1.08, color: "var(--foreground)", letterSpacing: "-0.03em" }}

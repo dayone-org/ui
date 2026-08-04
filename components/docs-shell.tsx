@@ -16,7 +16,7 @@ type DocsShellProps = {
 
 export function DocsShell({ headerActive, sections, children }: DocsShellProps) {
   return (
-    <div className="relative flex min-h-screen flex-col bg-white">
+    <div className="relative flex min-h-screen flex-col bg-background">
       <SiteHeader active={headerActive} />
       <DocsSidebarMobile sections={sections} />
       <div className={`flex flex-1 ${DOCS_PAGE_PADDING}`}>

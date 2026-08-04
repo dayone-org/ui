@@ -2,9 +2,13 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import { ThemeImage } from "@/components/theme-image";
 import { DayoneButtonsContent } from "@/components/dayone-buttons";
 import { DayoneTypographyShowcase } from "@/components/dayone-typography-showcase";
 import { PlaygroundVariantHeading } from "@/components/playground-variant-heading";
+import { DayoneIcon } from "@/components/dayone-icon";
+import { ICON_LIBRARY } from "@/lib/icon-library";
+import { Button } from "@/components/ui/button";
 import { Bold, Italic, Underline, Search, ChevronRight, ChevronDown, TrendingUp, CalendarDays, Users, FileText, ExternalLink, Phone } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
@@ -19,7 +23,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { NativeSelect } from "@/components/ui/native-select";
-import { Combobox, ComboboxInput, ComboboxContent, ComboboxList, ComboboxItem } from "@/components/ui/combobox";
+import { Combobox, ComboboxInput, ComboboxContent, ComboboxList, ComboboxItem, ComboboxChips, ComboboxChip, ComboboxChipsInput, ComboboxEmpty, useComboboxAnchor } from "@/components/ui/combobox";
 import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Toggle } from "@/components/ui/toggle";
@@ -229,7 +233,7 @@ function SeparatorDemo() {
 
 function SkeletonDemo() {
   // Mix between --gray-100 (#F1F1F1) and --sand-medium (#EDE7DD)
-  const skeletonColor = "#E8E3DB";
+  const skeletonColor = "var(--muted)";
   return (
     <div className="w-full max-w-xs space-y-3">
       <Skeleton className="h-5 w-3/4 rounded-md" style={{ backgroundColor: skeletonColor }} />
@@ -323,7 +327,7 @@ function ItemDemo() {
   const PALETTE = [
     { bg: "var(--primary)", fg: "var(--primary-foreground)" },
     { bg: "var(--muted)", fg: "var(--foreground)" },
-    { bg: "var(--blue-light)", fg: "var(--foreground)" },
+    { bg: "var(--blue-light)", fg: "var(--black)" },
   ];
   const people = [
     { title: "Victoria Itter", description: "Product Design" },
@@ -429,6 +433,32 @@ function ComboboxDemo() {
             {items.map((item) => (
               <ComboboxItem key={item} value={item}>{item}</ComboboxItem>
             ))}
+          </ComboboxList>
+        </ComboboxContent>
+      </Combobox>
+    </div>
+  );
+}
+
+function MultiSelectDemo() {
+  const anchor = useComboboxAnchor();
+  const [values, setValues] = useState<string[]>(["UI Design", "UX"]);
+  const items = ["UI Design", "UX", "Product Management", "Development", "Strategic Design", "People & Culture"];
+  return (
+    <div className="w-full max-w-xs">
+      <Combobox multiple items={items} value={values} onValueChange={setValues}>
+        <ComboboxChips ref={anchor}>
+          {values.map((v) => (
+            <ComboboxChip key={v}>{v}</ComboboxChip>
+          ))}
+          <ComboboxChipsInput placeholder={values.length ? "" : "Bereiche wählen"} />
+        </ComboboxChips>
+        <ComboboxContent anchor={anchor}>
+          <ComboboxEmpty>Keine Ergebnisse.</ComboboxEmpty>
+          <ComboboxList>
+            {(item: string) => (
+              <ComboboxItem key={item} value={item}>{item}</ComboboxItem>
+            )}
           </ComboboxList>
         </ComboboxContent>
       </Combobox>
@@ -1061,11 +1091,11 @@ function AlertDemo() {
     <div className="w-full max-w-sm space-y-3">
       <Alert className="rounded-md" style={{ borderColor: "var(--border)" }}>
         <AlertTitle className="font-semibold" style={{ color: "var(--foreground)" }}>Hinweis</AlertTitle>
-        <AlertDescription style={{ color: "var(--gray-400)" }}>Deine Änderungen wurden gespeichert.</AlertDescription>
+        <AlertDescription style={{ color: "var(--muted-foreground)" }}>Deine Änderungen wurden gespeichert.</AlertDescription>
       </Alert>
-      <Alert className="rounded-md" style={{ borderColor: "var(--red-medium)", backgroundColor: "#FFF5F5" }}>
-        <AlertTitle className="font-semibold" style={{ color: "var(--red-medium)" }}>Fehler</AlertTitle>
-        <AlertDescription style={{ color: "var(--gray-500)" }}>Etwas ist schiefgelaufen. Versuche es erneut.</AlertDescription>
+      <Alert className="rounded-md" style={{ borderColor: "var(--destructive)", backgroundColor: "color-mix(in srgb, var(--destructive) 10%, var(--background))" }}>
+        <AlertTitle className="font-semibold" style={{ color: "var(--destructive)" }}>Fehler</AlertTitle>
+        <AlertDescription style={{ color: "var(--muted-foreground)" }}>Etwas ist schiefgelaufen. Versuche es erneut.</AlertDescription>
       </Alert>
     </div>
   );
@@ -1318,7 +1348,7 @@ function CssBarChart({
       {compact ? (
         <div className="mb-3 flex items-baseline gap-3">
           <span className="text-xl font-bold tabular-nums" style={{ color: "var(--foreground)" }}>00</span>
-          <span className="ml-auto text-xs" style={{ color: "#999" }}>{periodLabel}</span>
+          <span className="ml-auto text-xs" style={{ color: "var(--muted-foreground)" }}>{periodLabel}</span>
         </div>
       ) : (
         <div className="mb-6 flex items-baseline gap-3">
@@ -1327,7 +1357,7 @@ function CssBarChart({
             <TrendingUp className="size-3" />
             +00%
           </span>
-          <span className="ml-auto text-xs" style={{ color: "#999" }}>{periodLabel}</span>
+          <span className="ml-auto text-xs" style={{ color: "var(--muted-foreground)" }}>{periodLabel}</span>
         </div>
       )}
       <div className="flex" style={{ height: barHeight, gap }}>
@@ -1340,7 +1370,7 @@ function CssBarChart({
             <div
               style={{
                 height: `${d.value}%`,
-                backgroundColor: "#1a1a1a",
+                backgroundColor: "var(--chart-1)",
                 borderRadius: "4px 4px 0 0",
               }}
             />
@@ -1351,7 +1381,7 @@ function CssBarChart({
         {data.map((d) => (
           <div
             key={d.name}
-            style={compact ? { width: barWidthPx, flexShrink: 0, fontSize: 12, textAlign: "center", color: "#999" } : { flex: 1, fontSize: 12, textAlign: "center", color: "#999" }}
+            style={compact ? { width: barWidthPx, flexShrink: 0, fontSize: 12, textAlign: "center", color: "var(--muted-foreground)" } : { flex: 1, fontSize: 12, textAlign: "center", color: "var(--muted-foreground)" }}
           >
             {d.name}
           </div>
@@ -1382,9 +1412,9 @@ function AvatarDemo() {
       {[
         { initials: "VI", bg: "var(--primary)", fg: "var(--primary-foreground)" },
         { initials: "BD", bg: "var(--muted)", fg: "var(--foreground)" },
-        { initials: "AK", bg: "var(--blue-light)", fg: "var(--foreground)" },
-        { initials: "LR", bg: "var(--red-light)", fg: "var(--foreground)" },
-        { initials: "TM", bg: "var(--sand-dark)", fg: "var(--foreground)" },
+        { initials: "AK", bg: "var(--blue-light)", fg: "var(--black)" },
+        { initials: "LR", bg: "var(--red-light)", fg: "var(--black)" },
+        { initials: "TM", bg: "var(--sand-dark)", fg: "var(--black)" },
       ].map(({ initials, bg, fg }) => (
         <Avatar key={initials} className="size-10 after:hidden ring-2 ring-background">
           <AvatarFallback className="text-xs font-semibold" style={{ backgroundColor: bg, color: fg }}>{initials}</AvatarFallback>
@@ -1767,35 +1797,74 @@ function LogoDemo() {
       <div>
         <PlaygroundVariantHeading>Kreis</PlaygroundVariantHeading>
         <div className="flex items-end gap-16">
-          <Image src="/dayone-icon.svg" width={36} height={36} alt="DAYONE" />
-          <Image src="/dayone-icon.svg" width={30} height={30} alt="DAYONE" />
-          <Image src="/dayone-icon.svg" width={24} height={24} alt="DAYONE" />
+          <ThemeImage srcLight="/dayone-icon.svg" srcDark="/dayone-icon-light.svg" width={36} height={36} alt="DAYONE" />
+          <ThemeImage srcLight="/dayone-icon.svg" srcDark="/dayone-icon-light.svg" width={30} height={30} alt="DAYONE" />
+          <ThemeImage srcLight="/dayone-icon.svg" srcDark="/dayone-icon-light.svg" width={24} height={24} alt="DAYONE" />
         </div>
       </div>
       <div>
         <PlaygroundVariantHeading>Wortmarke</PlaygroundVariantHeading>
         <div className="flex items-end gap-16">
-          <Image src="/dayone-wordmark.svg" width={98} height={19} alt="DAYONE" />
-          <Image src="/dayone-wordmark.svg" width={82} height={16} alt="DAYONE" />
-          <Image src="/dayone-wordmark.svg" width={66} height={13} alt="DAYONE" />
+          <ThemeImage srcLight="/dayone-wordmark.svg" srcDark="/dayone-wordmark-light.svg" width={98} height={19} alt="DAYONE" />
+          <ThemeImage srcLight="/dayone-wordmark.svg" srcDark="/dayone-wordmark-light.svg" width={82} height={16} alt="DAYONE" />
+          <ThemeImage srcLight="/dayone-wordmark.svg" srcDark="/dayone-wordmark-light.svg" width={66} height={13} alt="DAYONE" />
         </div>
       </div>
       <div>
         <PlaygroundVariantHeading>Horizontal</PlaygroundVariantHeading>
         <div className="flex items-end gap-16">
-          <Image src="/dayone-logo.svg" width={184} height={33} alt="DAYONE" />
-          <Image src="/dayone-logo.svg" width={154} height={28} alt="DAYONE" />
-          <Image src="/dayone-logo.svg" width={123} height={22} alt="DAYONE" />
+          <ThemeImage srcLight="/dayone-logo.svg" srcDark="/dayone-logo-light.svg" width={184} height={33} alt="DAYONE" />
+          <ThemeImage srcLight="/dayone-logo.svg" srcDark="/dayone-logo-light.svg" width={154} height={28} alt="DAYONE" />
+          <ThemeImage srcLight="/dayone-logo.svg" srcDark="/dayone-logo-light.svg" width={123} height={22} alt="DAYONE" />
         </div>
       </div>
       <div>
         <PlaygroundVariantHeading>Vertikal</PlaygroundVariantHeading>
         <div className="flex items-end gap-16">
-          <Image src="/dayone-logo-vertical.svg" width={87} height={67} alt="DAYONE" />
-          <Image src="/dayone-logo-vertical.svg" width={73} height={56} alt="DAYONE" />
-          <Image src="/dayone-logo-vertical.svg" width={58} height={45} alt="DAYONE" />
+          <ThemeImage srcLight="/dayone-logo-vertical.svg" srcDark="/dayone-logo-vertical-light.svg" width={87} height={67} alt="DAYONE" />
+          <ThemeImage srcLight="/dayone-logo-vertical.svg" srcDark="/dayone-logo-vertical-light.svg" width={73} height={56} alt="DAYONE" />
+          <ThemeImage srcLight="/dayone-logo-vertical.svg" srcDark="/dayone-logo-vertical-light.svg" width={58} height={45} alt="DAYONE" />
         </div>
       </div>
+    </div>
+  );
+}
+
+const ICONS_PER_ROW_DESKTOP = 8;
+const ICONS_INITIAL_ROWS = 5;
+const ICONS_INITIAL_COUNT = ICONS_PER_ROW_DESKTOP * ICONS_INITIAL_ROWS;
+
+function IconsDemo() {
+  const [expanded, setExpanded] = useState(false);
+  const visibleIcons = expanded ? ICON_LIBRARY : ICON_LIBRARY.slice(0, ICONS_INITIAL_COUNT);
+  const hasMore = ICON_LIBRARY.length > ICONS_INITIAL_COUNT;
+
+  return (
+    <div className="space-y-6">
+      <div className="grid grid-cols-4 gap-3 sm:grid-cols-6 md:grid-cols-8">
+        {visibleIcons.map((icon) => (
+          <div
+            key={icon.slug}
+            title={icon.name}
+            className="flex flex-col items-center justify-center gap-2 rounded-md p-3 text-center"
+            style={{ border: "1px solid var(--border)" }}
+          >
+            <DayoneIcon slug={icon.slug} size={24} />
+            <p className="w-full truncate text-[10px]" style={{ color: "var(--muted-foreground)" }}>
+              {icon.name}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      {hasMore && (
+        <div className="flex justify-center">
+          <Button variant="outline" size="sm" onClick={() => setExpanded((v) => !v)}>
+            {expanded ? "Weniger anzeigen" : `Mehr anzeigen (${ICON_LIBRARY.length - ICONS_INITIAL_COUNT})`}
+            <ChevronDown className={`size-4 transition-transform ${expanded ? "rotate-180" : ""}`} />
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
@@ -1805,6 +1874,7 @@ function LogoDemo() {
 const DEMOS: Record<string, () => React.ReactElement> = {
   typography: TypographyDemo,
   logo: LogoDemo,
+  icons: IconsDemo,
   button: ButtonDemo,
   "button-group": ButtonGroupDemo,
   badge: BadgeDemo,
@@ -1822,6 +1892,7 @@ const DEMOS: Record<string, () => React.ReactElement> = {
   select: SelectDemo,
   "native-select": NativeSelectDemo,
   combobox: ComboboxDemo,
+  "multi-select": MultiSelectDemo,
   checkbox: CheckboxDemo,
   "radio-group": RadioGroupDemo,
   toggle: ToggleDemo,

@@ -1009,7 +1009,7 @@ function RessourcenTab() {
               <AccordionContent className="pb-4">
                 <ul className="space-y-2">
                   {section.items.map((tip, j) => (
-                    <li key={j} className="flex items-start gap-2.5 text-sm" style={{ color: "var(--gray-500, #4A4A4A)" }}>
+                    <li key={j} className="flex items-start gap-2.5 text-sm" style={{ color: "var(--muted-foreground)" }}>
                       <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-current opacity-40" />
                       {tip}
                     </li>

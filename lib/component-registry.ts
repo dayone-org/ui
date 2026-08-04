@@ -36,6 +36,7 @@ export const COMPONENT_REGISTRY: ComponentCategory[] = [
       { slug: "colors", name: "Colors", description: "DAYONE Farbpalette und Design-Tokens", playgroundAnchor: "colors" },
       { slug: "typography", name: "Typography", description: "Typografische Skalierung und Schriftstile", playgroundAnchor: "typography" },
       { slug: "logo", name: "Logo", description: "Markensymbol, Wortmarke und Kombinationsvarianten", playgroundAnchor: "misc" },
+      { slug: "icons", name: "Icons", description: "Icon-Bibliothek für Produkt- und Marketing-Oberflächen", playgroundAnchor: "misc", span: 2 },
     ],
   },
   {
@@ -64,6 +65,7 @@ export const COMPONENT_REGISTRY: ComponentCategory[] = [
       // Pair: both enhanced input combos
       { slug: "combobox", name: "Combobox", description: "Kombination aus Eingabe und Dropdown-Suche", playgroundAnchor: "inputs-forms" },
       { slug: "date-picker", name: "Date Picker", description: "Datumsauswahl über Eingabefeld mit Kalender-Popover", playgroundAnchor: "inputs-forms" },
+      { slug: "multi-select", name: "Multi-Select", description: "Mehrfachauswahl mit Chips und Suche", playgroundAnchor: "inputs-forms" },
       { slug: "input-group", name: "Input Group", description: "Eingabefeld mit Prefix oder Suffix", playgroundAnchor: "inputs-forms" },
       { slug: "search-bar", name: "Search Bar", description: "Minimales Suchfeld mit Unterstrich — für Sidebar, Filter und Tabellen", playgroundAnchor: "inputs-forms" },
       // Full-width: multi-state showcase needs width
