@@ -1875,10 +1875,6 @@ function IconsDemo() {
           </Button>
         </div>
       )}
-
-      <p className="text-xs" style={{ color: "var(--muted-foreground)" }}>
-        Für Lösch-Aktionen wird standardmäßig trash-heart verwendet (animiert bei Hover). trash und trashcan bleiben als statische Alternativen verfügbar.
-      </p>
     </div>
   );
 }
