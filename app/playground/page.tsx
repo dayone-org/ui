@@ -27,7 +27,7 @@ import { PLAYGROUND_SHOWCASE } from "@/lib/playground-layout";
 function Row({ label, children }: { label?: string; children: React.ReactNode }) {
   return (
     <div className="mb-6">
-      {label && <p className="text-xs mb-3 uppercase tracking-wider" style={{ color: "var(--gray-300)" }}>{label}</p>}
+      {label && <p className="text-xs mb-3 uppercase tracking-wider" style={{ color: "var(--muted-foreground)" }}>{label}</p>}
       <div className="flex flex-wrap items-center gap-4">{children}</div>
     </div>
   );
@@ -63,8 +63,8 @@ export default function PlaygroundPage() {
                       <div style={{ backgroundColor: color.hex }} className="h-20" />
                       <div className="px-3 py-3 space-y-1">
                         <p className="text-sm font-semibold" style={{ color: "var(--foreground)" }}>{color.name}</p>
-                        <p className="text-xs" style={{ color: "var(--gray-400)" }}>{color.hex}</p>
-                        <p className="text-[11px] font-mono" style={{ color: "var(--gray-300)" }}>{color.token}</p>
+                        <p className="text-xs" style={{ color: "var(--muted-foreground)" }}>{color.hex}</p>
+                        <p className="text-[11px] font-mono" style={{ color: "var(--muted-foreground)" }}>{color.token}</p>
                       </div>
                     </div>
                   ))}
@@ -83,8 +83,8 @@ export default function PlaygroundPage() {
                       <div style={{ backgroundColor: color.hex }} className="h-20" />
                       <div className="px-3 py-3 space-y-1">
                         <p className="text-sm font-semibold" style={{ color: "var(--foreground)" }}>{color.name}</p>
-                        <p className="text-xs" style={{ color: "var(--gray-400)" }}>{color.hex}</p>
-                        <p className="text-[11px] font-mono" style={{ color: "var(--gray-300)" }}>{color.token}</p>
+                        <p className="text-xs" style={{ color: "var(--muted-foreground)" }}>{color.hex}</p>
+                        <p className="text-[11px] font-mono" style={{ color: "var(--muted-foreground)" }}>{color.token}</p>
                       </div>
                     </div>
                   ))}
@@ -103,8 +103,8 @@ export default function PlaygroundPage() {
                       <div style={{ backgroundColor: color.hex }} className="h-20" />
                       <div className="px-3 py-3 space-y-1">
                         <p className="text-sm font-semibold" style={{ color: "var(--foreground)" }}>{color.name}</p>
-                        <p className="text-xs" style={{ color: "var(--gray-400)" }}>{color.hex}</p>
-                        <p className="text-[11px] font-mono" style={{ color: "var(--gray-300)" }}>{color.token}</p>
+                        <p className="text-xs" style={{ color: "var(--muted-foreground)" }}>{color.hex}</p>
+                        <p className="text-[11px] font-mono" style={{ color: "var(--muted-foreground)" }}>{color.token}</p>
                       </div>
                     </div>
                   ))}
@@ -123,8 +123,8 @@ export default function PlaygroundPage() {
                       <div style={{ backgroundColor: color.hex }} className="h-20" />
                       <div className="px-3 py-3 space-y-1">
                         <p className="text-sm font-semibold" style={{ color: "var(--foreground)" }}>{color.name}</p>
-                        <p className="text-xs" style={{ color: "var(--gray-400)" }}>{color.hex}</p>
-                        <p className="text-[11px] font-mono" style={{ color: "var(--gray-300)" }}>{color.token}</p>
+                        <p className="text-xs" style={{ color: "var(--muted-foreground)" }}>{color.hex}</p>
+                        <p className="text-[11px] font-mono" style={{ color: "var(--muted-foreground)" }}>{color.token}</p>
                       </div>
                     </div>
                   ))}
@@ -153,7 +153,7 @@ export default function PlaygroundPage() {
                 <div key={group.label}>
                   <div className="flex items-baseline gap-2 mb-5">
                     <PlaygroundVariantHeading className="mb-0">{group.label}</PlaygroundVariantHeading>
-                    <span className="text-xs" style={{ color: "var(--gray-300)" }}>— {group.semantic}</span>
+                    <span className="text-xs" style={{ color: "var(--muted-foreground)" }}>— {group.semantic}</span>
                   </div>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     {group.colors.map((color) => (
@@ -161,8 +161,8 @@ export default function PlaygroundPage() {
                         <div style={{ backgroundColor: color.hex }} className="h-20" />
                         <div className="px-3 py-3 space-y-1">
                           <p className="text-sm font-semibold" style={{ color: "var(--foreground)" }}>{color.name}</p>
-                          <p className="text-xs" style={{ color: "var(--gray-400)" }}>{color.hex}</p>
-                          <p className="text-[11px] font-mono" style={{ color: "var(--gray-300)" }}>{color.token}</p>
+                          <p className="text-xs" style={{ color: "var(--muted-foreground)" }}>{color.hex}</p>
+                          <p className="text-[11px] font-mono" style={{ color: "var(--muted-foreground)" }}>{color.token}</p>
                         </div>
                       </div>
                     ))}
@@ -238,7 +238,7 @@ export default function PlaygroundPage() {
                     <DialogContent style={{ backgroundColor: "var(--popover)", borderColor: "var(--border)" }}>
                       <DialogHeader>
                         <DialogTitle style={{ color: "var(--foreground)" }}>Titel des Dialogs</DialogTitle>
-                        <DialogDescription style={{ color: "var(--gray-400)" }}>
+                        <DialogDescription style={{ color: "var(--muted-foreground)" }}>
                           Hier steht eine kurze Beschreibung was dieser Dialog tut oder welche Aktion bestätigt werden soll.
                         </DialogDescription>
                       </DialogHeader>
@@ -270,7 +270,7 @@ export default function PlaygroundPage() {
                     <DialogContent style={{ backgroundColor: "var(--popover)", borderColor: "var(--border)" }}>
                       <DialogHeader>
                         <DialogTitle style={{ color: "var(--foreground)" }}>Wirklich löschen?</DialogTitle>
-                        <DialogDescription style={{ color: "var(--gray-400)" }}>
+                        <DialogDescription style={{ color: "var(--muted-foreground)" }}>
                           Diese Aktion kann nicht rückgängig gemacht werden. Der Eintrag wird permanent gelöscht.
                         </DialogDescription>
                       </DialogHeader>
@@ -334,7 +334,7 @@ export default function PlaygroundPage() {
                       <SheetContent side={side} style={{ backgroundColor: "var(--popover)", borderColor: "var(--border)" }}>
                         <SheetHeader>
                           <SheetTitle style={{ color: "var(--foreground)" }}>Sheet Titel</SheetTitle>
-                          <SheetDescription style={{ color: "var(--gray-400)" }}>
+                          <SheetDescription style={{ color: "var(--muted-foreground)" }}>
                             Sheets eignen sich gut für Einstellungen oder zusätzliche Informationen.
                           </SheetDescription>
                         </SheetHeader>
@@ -400,7 +400,7 @@ export default function PlaygroundPage() {
                   ].map((row) => (
                     <TableRow key={row.name} style={{ borderColor: "var(--divider)" }}>
                       <TableCell className="font-medium" style={{ color: "var(--foreground)" }}>{row.name}</TableCell>
-                      <TableCell style={{ color: "var(--gray-400)" }}>{row.role}</TableCell>
+                      <TableCell style={{ color: "var(--muted-foreground)" }}>{row.role}</TableCell>
                       <TableCell>
                         <Badge className="rounded-full text-xs" style={{ backgroundColor: row.status === "Aktiv" ? "var(--primary)" : "var(--disabled)", color: row.status === "Aktiv" ? "var(--primary-foreground)" : "var(--disabled-foreground)" }}>
                           {row.status}
@@ -434,11 +434,11 @@ export default function PlaygroundPage() {
                 <Accordion type="single" collapsible>
                   <AccordionItem value="item-1" style={{ borderColor: "var(--divider)" }}>
                     <AccordionTrigger className="font-semibold hover:no-underline" style={{ color: "var(--foreground)" }}>Was ist shadcn/ui?</AccordionTrigger>
-                    <AccordionContent style={{ color: "var(--gray-400)" }}>Eine Sammlung von Copy-Paste-Komponenten basierend auf Tailwind CSS.</AccordionContent>
+                    <AccordionContent style={{ color: "var(--muted-foreground)" }}>Eine Sammlung von Copy-Paste-Komponenten basierend auf Tailwind CSS.</AccordionContent>
                   </AccordionItem>
                   <AccordionItem value="item-2" style={{ borderColor: "var(--divider)" }}>
                     <AccordionTrigger className="font-semibold hover:no-underline" style={{ color: "var(--foreground)" }}>Warum DAYONE Tokens?</AccordionTrigger>
-                    <AccordionContent style={{ color: "var(--gray-400)" }}>Damit alle internen Tools sofort on-brand aussehen.</AccordionContent>
+                    <AccordionContent style={{ color: "var(--muted-foreground)" }}>Damit alle internen Tools sofort on-brand aussehen.</AccordionContent>
                   </AccordionItem>
                 </Accordion>
                 <DocsDivider />
@@ -463,7 +463,7 @@ export default function PlaygroundPage() {
                   ))}
                   <div
                     className="flex size-10 items-center justify-center rounded-full ring-2 ring-background text-xs font-semibold"
-                    style={{ backgroundColor: "transparent", color: "var(--gray-400)", border: "1px solid var(--border)" }}
+                    style={{ backgroundColor: "transparent", color: "var(--muted-foreground)", border: "1px solid var(--border)" }}
                   >
                     +4
                   </div>
@@ -472,7 +472,7 @@ export default function PlaygroundPage() {
               <Row label="Slider">
                 <div className="w-full max-w-sm">
                   <Slider value={sliderValue} onValueChange={setSliderValue} max={100} step={1} className="w-full" />
-                  <p className="text-sm mt-2" style={{ color: "var(--gray-300)" }}>{sliderValue[0]}%</p>
+                  <p className="text-sm mt-2" style={{ color: "var(--muted-foreground)" }}>{sliderValue[0]}%</p>
                 </div>
               </Row>
               <Row label="Divider">

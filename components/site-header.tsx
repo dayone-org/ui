@@ -20,7 +20,7 @@ const navLinkClass = "text-sm font-normal hover:opacity-70";
 
 function navLinkStyle(isActive: boolean) {
   return {
-    color: isActive ? "var(--foreground)" : "var(--gray-400)",
+    color: isActive ? "var(--foreground)" : "var(--muted-foreground)",
     fontWeight: isActive ? 600 : 400,
   } as const;
 }

@@ -152,7 +152,7 @@ export function DocsSidebarMobile({
           </nav>
         </SheetContent>
       </Sheet>
-      <p className="truncate text-sm" style={{ color: "var(--gray-400)" }}>
+      <p className="truncate text-sm" style={{ color: "var(--muted-foreground)" }}>
         {sections.find((s) => s.id === activeId)?.label}
       </p>
     </div>

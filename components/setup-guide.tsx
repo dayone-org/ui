@@ -155,7 +155,7 @@ Lass Logik, Datenverhalten und bestehende Abläufe unverändert.`}</DocPre>
                 style={{
                   fontSize: "var(--text-body-sm)",
                   lineHeight: "var(--leading-body)",
-                  color: "var(--gray-400)",
+                  color: "var(--muted-foreground)",
                 }}
               >
                 2026-06-29

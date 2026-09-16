@@ -62,7 +62,7 @@ function BentoCell({
 
 function CellLabel({ children }: { children: React.ReactNode }) {
   return (
-    <p className="text-xs font-medium mb-6" style={{ color: "var(--gray-300)" }}>
+    <p className="text-xs font-medium mb-6" style={{ color: "var(--muted-foreground)" }}>
       {children}
     </p>
   );
@@ -183,9 +183,9 @@ function NotificationsCell() {
   return (
     <BentoCell className="col-span-3 flex flex-col" delay={360}>
       <div className="flex items-center gap-2 mb-5">
-        <p className="text-xs font-medium" style={{ color: "var(--gray-300)" }}>Notification</p>
+        <p className="text-xs font-medium" style={{ color: "var(--muted-foreground)" }}>Notification</p>
         <div className="relative ml-auto">
-          <Bell className="size-4" style={{ color: "var(--gray-400)" }} />
+          <Bell className="size-4" style={{ color: "var(--muted-foreground)" }} />
           <span className="absolute -top-1 -right-1 size-2 rounded-full animate-pulse" style={{ backgroundColor: "var(--red-medium)" }} />
         </div>
       </div>
@@ -312,27 +312,27 @@ function ControlsCell() {
       <div className="flex flex-col gap-6">
         <div className="space-y-6">
           <div className="flex items-center justify-between">
-            <span className="text-xs" style={{ color: "var(--gray-400)" }}>Dark mode</span>
+            <span className="text-xs" style={{ color: "var(--muted-foreground)" }}>Dark mode</span>
             <div className="flex items-center gap-1.5">
-              <Sun className="size-3.5" style={{ color: "var(--gray-300)" }} />
+              <Sun className="size-3.5" style={{ color: "var(--muted-foreground)" }} />
               <Switch checked={dark} onCheckedChange={setDark} />
-              <Moon className="size-3.5" style={{ color: "var(--gray-300)" }} />
+              <Moon className="size-3.5" style={{ color: "var(--muted-foreground)" }} />
             </div>
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-xs" style={{ color: "var(--gray-400)" }}>Benachrichtigungen</span>
+            <span className="text-xs" style={{ color: "var(--muted-foreground)" }}>Benachrichtigungen</span>
             <Switch checked={notifs} onCheckedChange={setNotifs} />
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-xs" style={{ color: "var(--gray-400)" }}>Auto-Speichern</span>
+            <span className="text-xs" style={{ color: "var(--muted-foreground)" }}>Auto-Speichern</span>
             <Switch checked={auto} onCheckedChange={setAuto} />
           </div>
         </div>
         <Separator style={{ backgroundColor: "var(--border)" }} />
         <div>
           <div className="flex justify-between mb-2">
-            <span className="text-xs" style={{ color: "var(--gray-400)" }}>Lautstärke</span>
-            <span className="text-xs tabular-nums" style={{ color: "var(--gray-400)" }}>{vol[0]}%</span>
+            <span className="text-xs" style={{ color: "var(--muted-foreground)" }}>Lautstärke</span>
+            <span className="text-xs tabular-nums" style={{ color: "var(--muted-foreground)" }}>{vol[0]}%</span>
           </div>
           <Slider value={vol} onValueChange={setVol} max={100} step={1} />
         </div>
@@ -375,8 +375,8 @@ function ProgressCell() {
           {PROG_LABELS.map((label, i) => (
             <div key={label}>
               <div className="flex justify-between mb-2">
-                <span className="text-xs" style={{ color: "var(--gray-400)" }}>{label}</span>
-                <span className="text-xs tabular-nums" style={{ color: "var(--gray-400)" }}>
+                <span className="text-xs" style={{ color: "var(--muted-foreground)" }}>{label}</span>
+                <span className="text-xs tabular-nums" style={{ color: "var(--muted-foreground)" }}>
                   {Math.round(values[i])}%
                 </span>
               </div>
@@ -433,7 +433,7 @@ function InputCell() {
       <CellLabel>Input</CellLabel>
       <div className="flex flex-1 flex-col space-y-3">
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-3.5 pointer-events-none" style={{ color: "var(--gray-300)" }} />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-3.5 pointer-events-none" style={{ color: "var(--muted-foreground)" }} />
           <Input className="pl-8 text-sm" value={typed} readOnly placeholder="Suchen…" />
         </div>
         <Input className="text-sm" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" />
@@ -501,7 +501,7 @@ function NavCell() {
                   ) : (
                     <BreadcrumbLink asChild>
                       <button
-                        style={{ color: "var(--gray-400)", background: "none", border: "none", padding: 0, cursor: "pointer", font: "inherit" }}
+                        style={{ color: "var(--muted-foreground)", background: "none", border: "none", padding: 0, cursor: "pointer", font: "inherit" }}
                         onClick={() => setActive(item.key)}
                       >
                         {item.label}
@@ -553,7 +553,7 @@ function BadgesCell() {
         </div>
         <div className="py-3"><Separator style={{ backgroundColor: "var(--border)" }} /></div>
         <div>
-          <p className="text-xs mb-3" style={{ color: "var(--gray-300)" }}>Team DAYONE</p>
+          <p className="text-xs mb-3" style={{ color: "var(--muted-foreground)" }}>Team DAYONE</p>
           <div className="flex items-center -space-x-2">
             {[
               { initials: "VI", bg: "var(--primary)", fg: "var(--primary-foreground)" },
@@ -568,7 +568,7 @@ function BadgesCell() {
             ))}
             <div
               className="flex size-10 items-center justify-center rounded-full ring-2 ring-background text-xs font-semibold"
-              style={{ backgroundColor: "transparent", color: "var(--gray-400)", border: "1px solid var(--border)" }}
+              style={{ backgroundColor: "transparent", color: "var(--muted-foreground)", border: "1px solid var(--border)" }}
             >
               +4
             </div>
@@ -595,7 +595,7 @@ function AccordionCell() {
             <AccordionTrigger className="text-sm font-medium hover:no-underline" style={{ color: "var(--foreground)" }}>
               {q}
             </AccordionTrigger>
-            <AccordionContent className="text-sm" style={{ color: "var(--gray-400)" }}>{a}</AccordionContent>
+            <AccordionContent className="text-sm" style={{ color: "var(--muted-foreground)" }}>{a}</AccordionContent>
           </AccordionItem>
         ))}
       </Accordion>
@@ -669,27 +669,27 @@ function CardCell() {
       <div className="grid grid-cols-2 items-stretch gap-4">
         {/* Standard */}
         <div className="flex flex-col">
-          <p className="text-[10px] font-medium mb-2" style={{ color: "var(--gray-300)" }}>Standard</p>
+          <p className="text-[10px] font-medium mb-2" style={{ color: "var(--muted-foreground)" }}>Standard</p>
           <Card className="h-full justify-center gap-1 py-4" style={{ borderColor: "var(--border)" }}>
             <CardHeader>
               <CardTitle className="text-sm font-semibold" style={{ color: "var(--foreground)" }}>Nächstes Meeting</CardTitle>
-              <CardDescription style={{ color: "var(--gray-400)", fontSize: "12px" }}>Heute · 14:00 Uhr · PDC Sync mit dem Design Team</CardDescription>
+              <CardDescription style={{ color: "var(--muted-foreground)", fontSize: "12px" }}>Heute · 14:00 Uhr · PDC Sync mit dem Design Team</CardDescription>
             </CardHeader>
           </Card>
         </div>
 
         {/* Metric */}
         <div className="flex flex-col">
-          <p className="text-[10px] font-medium mb-2" style={{ color: "var(--gray-300)" }}>Metric</p>
+          <p className="text-[10px] font-medium mb-2" style={{ color: "var(--muted-foreground)" }}>Metric</p>
           <Card className="h-full justify-center gap-1 py-4" style={{ borderColor: "var(--border)" }}>
             <CardHeader className="flex flex-row items-center justify-between">
-              <CardTitle className="text-xs font-medium" style={{ color: "var(--gray-400)" }}>Komponenten</CardTitle>
-              <BarChart3 className="size-4" style={{ color: "var(--gray-400)" }} />
+              <CardTitle className="text-xs font-medium" style={{ color: "var(--muted-foreground)" }}>Komponenten</CardTitle>
+              <BarChart3 className="size-4" style={{ color: "var(--muted-foreground)" }} />
             </CardHeader>
             <CardContent>
               <div className="flex items-baseline gap-2">
                 <p className="text-2xl font-semibold tabular-nums" style={{ color: "var(--foreground)" }}>{count}+</p>
-                <span className="text-xs" style={{ color: "var(--gray-300)" }}>{progress}% fertig</span>
+                <span className="text-xs" style={{ color: "var(--muted-foreground)" }}>{progress}% fertig</span>
               </div>
               <div className="h-1.5 w-full rounded-full overflow-hidden mt-2" style={{ backgroundColor: "var(--secondary)" }}>
                 <div className="h-full rounded-full" style={{ width: `${progress}%`, backgroundColor: "var(--primary)", transition: "width 0.9s cubic-bezier(0.4,0,0.2,1)" }} />
@@ -748,7 +748,7 @@ export default function HomePage() {
           >
             Design System
           </h1>
-          <p className="text-base leading-relaxed max-w-lg" style={{ color: "var(--gray-400)" }}>
+          <p className="text-base leading-relaxed max-w-lg" style={{ color: "var(--muted-foreground)" }}>
             Das gemeinsame UI-Fundament für alle DAYONE-Projekte. Komponenten, Tokens und Standards für konsistente digitale Produkte.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3 mt-4">

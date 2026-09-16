@@ -37,7 +37,7 @@ function ControlRow({
     <div className="flex items-center gap-6">
       <span
         className="w-28 shrink-0 text-sm"
-        style={{ color: "var(--gray-300)" }}
+        style={{ color: "var(--muted-foreground)" }}
       >
         {label}
       </span>

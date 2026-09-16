@@ -23,7 +23,7 @@ function StateRow({
     <div className="flex items-start gap-6">
       <span
         className="w-24 shrink-0 pt-6 text-sm"
-        style={{ color: "var(--gray-400)" }}
+        style={{ color: "var(--muted-foreground)" }}
       >
         {label}
       </span>

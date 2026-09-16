@@ -472,7 +472,7 @@ function StatCard({
         {icon}
       </div>
       <div>
-        <p className="text-xs" style={{ color: "var(--gray-400)" }}>
+        <p className="text-xs" style={{ color: "var(--muted-foreground)" }}>
           {label}
         </p>
         <p className="text-sm font-semibold" style={{ color: "var(--foreground)" }}>
@@ -520,7 +520,7 @@ function SessionsTab({ onSuggest }: { onSuggest: () => void }) {
         <div className="relative flex-1 max-w-xs">
           <Search
             className="absolute left-3 top-1/2 -translate-y-1/2 size-3.5"
-            style={{ color: "var(--gray-400)" }}
+            style={{ color: "var(--muted-foreground)" }}
           />
           <Input
             placeholder="Thema oder Person suchen…"
@@ -560,19 +560,19 @@ function SessionsTab({ onSuggest }: { onSuggest: () => void }) {
         <Table>
           <TableHeader>
             <TableRow className="hover:bg-transparent pointer-events-none" style={{ borderColor: "var(--divider)" }}>
-              <TableHead className="pl-5 text-xs " style={{ color: "var(--gray-400)" }}>
+              <TableHead className="pl-5 text-xs " style={{ color: "var(--muted-foreground)" }}>
                 Datum
               </TableHead>
-              <TableHead className="text-xs " style={{ color: "var(--gray-400)" }}>
+              <TableHead className="text-xs " style={{ color: "var(--muted-foreground)" }}>
                 Thema
               </TableHead>
-              <TableHead className="text-xs " style={{ color: "var(--gray-400)" }}>
+              <TableHead className="text-xs " style={{ color: "var(--muted-foreground)" }}>
                 Presenter
               </TableHead>
-              <TableHead className="text-xs  text-center" style={{ color: "var(--gray-400)" }}>
+              <TableHead className="text-xs  text-center" style={{ color: "var(--muted-foreground)" }}>
                 Teiln.
               </TableHead>
-              <TableHead className="text-xs " style={{ color: "var(--gray-400)" }}>
+              <TableHead className="text-xs " style={{ color: "var(--muted-foreground)" }}>
                 Tags
               </TableHead>
               <TableHead className="w-10" />
@@ -581,7 +581,7 @@ function SessionsTab({ onSuggest }: { onSuggest: () => void }) {
           <TableBody>
             {paginated.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={6} className="py-16 text-center text-sm" style={{ color: "var(--gray-400)" }}>
+                <TableCell colSpan={6} className="py-16 text-center text-sm" style={{ color: "var(--muted-foreground)" }}>
                   Keine Sessions gefunden
                 </TableCell>
               </TableRow>
@@ -593,7 +593,7 @@ function SessionsTab({ onSuggest }: { onSuggest: () => void }) {
                   style={{ borderColor: "var(--divider)" }}
                   onClick={() => setSelectedSession(session)}
                 >
-                  <TableCell className="pl-5 py-4 text-sm tabular-nums" style={{ color: "var(--gray-400)" }}>
+                  <TableCell className="pl-5 py-4 text-sm tabular-nums" style={{ color: "var(--muted-foreground)" }}>
                     {session.date}
                   </TableCell>
                   <TableCell className="py-4 max-w-xs">
@@ -618,7 +618,7 @@ function SessionsTab({ onSuggest }: { onSuggest: () => void }) {
                                   <p className="text-sm font-semibold" style={{ color: "var(--foreground)" }}>
                                     {p}
                                   </p>
-                                  <p className="text-xs" style={{ color: "var(--gray-400)" }}>
+                                  <p className="text-xs" style={{ color: "var(--muted-foreground)" }}>
                                     {SESSIONS.filter((s) =>
                                       s.presenters.includes(p)
                                     ).length}{" "}
@@ -630,7 +630,7 @@ function SessionsTab({ onSuggest }: { onSuggest: () => void }) {
                           </HoverCard>
                         ))}
                       </AvatarGroup>
-                      <span className="text-xs" style={{ color: "var(--gray-400)" }}>
+                      <span className="text-xs" style={{ color: "var(--muted-foreground)" }}>
                         {session.presenters.length > 1
                           ? session.presenters[0] + ` +${session.presenters.length - 1}`
                           : session.presenters[0]}
@@ -734,7 +734,7 @@ function SessionsTab({ onSuggest }: { onSuggest: () => void }) {
           <div className="mx-auto w-full max-w-lg overflow-y-auto">
             <DrawerHeader className="px-6 pt-8 pb-4">
               <div className="flex items-center gap-2 mb-3">
-                <span className="text-xs font-medium tabular-nums" style={{ color: "var(--gray-400)" }}>
+                <span className="text-xs font-medium tabular-nums" style={{ color: "var(--muted-foreground)" }}>
                   {selectedSession?.date}
                 </span>
                 {selectedSession?.tags.map((tag) => (
@@ -749,7 +749,7 @@ function SessionsTab({ onSuggest }: { onSuggest: () => void }) {
             <div className="px-6 pb-2 space-y-5">
               <div className="flex flex-wrap gap-4">
                 <div>
-                  <p className="text-xs mb-1.5" style={{ color: "var(--gray-400)" }}>Presenter</p>
+                  <p className="text-xs mb-1.5" style={{ color: "var(--muted-foreground)" }}>Presenter</p>
                   <div className="flex items-center gap-2">
                     <AvatarGroup>
                       {selectedSession?.presenters.map((p) => (
@@ -763,9 +763,9 @@ function SessionsTab({ onSuggest }: { onSuggest: () => void }) {
                 </div>
                 {selectedSession?.participants != null && (
                   <div>
-                    <p className="text-xs mb-1.5" style={{ color: "var(--gray-400)" }}>Teilnehmende</p>
+                    <p className="text-xs mb-1.5" style={{ color: "var(--muted-foreground)" }}>Teilnehmende</p>
                     <div className="flex items-center gap-1.5">
-                      <Users className="size-3.5" style={{ color: "var(--gray-400)" }} />
+                      <Users className="size-3.5" style={{ color: "var(--muted-foreground)" }} />
                       <span className="text-sm font-semibold" style={{ color: "var(--foreground)" }}>
                         {selectedSession.participants}
                       </span>
@@ -784,7 +784,7 @@ function SessionsTab({ onSuggest }: { onSuggest: () => void }) {
                 >
                   <Video className="size-4" />
                   Aufzeichnung ansehen
-                  <ExternalLink className="size-3 ml-auto" style={{ color: "var(--gray-400)" }} />
+                  <ExternalLink className="size-3 ml-auto" style={{ color: "var(--muted-foreground)" }} />
                 </a>
               )}
             </div>
@@ -824,7 +824,7 @@ function BacklogTab({ onSuggest }: { onSuggest: () => void }) {
             <h3 className="text-sm font-semibold" style={{ color: "var(--foreground)" }}>
               Offene Themen
             </h3>
-            <p className="text-xs mt-0.5" style={{ color: "var(--gray-400)" }}>
+            <p className="text-xs mt-0.5" style={{ color: "var(--muted-foreground)" }}>
               Jedes Thema sollte in max. 10 Min. mit der Gruppe besprochen werden können
             </p>
           </div>
@@ -836,16 +836,16 @@ function BacklogTab({ onSuggest }: { onSuggest: () => void }) {
             <TableHeader>
               <TableRow className="hover:bg-transparent pointer-events-none" style={{ borderColor: "var(--divider)" }}>
                 <TableHead className="pl-5 w-8" />
-                <TableHead className="text-xs" style={{ color: "var(--gray-400)" }}>
+                <TableHead className="text-xs" style={{ color: "var(--muted-foreground)" }}>
                   Thema
                 </TableHead>
-                <TableHead className="text-xs" style={{ color: "var(--gray-400)" }}>
+                <TableHead className="text-xs" style={{ color: "var(--muted-foreground)" }}>
                   Details
                 </TableHead>
-                <TableHead className="text-xs" style={{ color: "var(--gray-400)" }}>
+                <TableHead className="text-xs" style={{ color: "var(--muted-foreground)" }}>
                   Person
                 </TableHead>
-                <TableHead className="text-xs" style={{ color: "var(--gray-400)" }}>
+                <TableHead className="text-xs" style={{ color: "var(--muted-foreground)" }}>
                   Zeit
                 </TableHead>
               </TableRow>
@@ -872,7 +872,7 @@ function BacklogTab({ onSuggest }: { onSuggest: () => void }) {
                     </span>
                   </TableCell>
                   <TableCell className="py-4 max-w-xs">
-                    <span className="text-xs" style={{ color: "var(--gray-400)" }}>
+                    <span className="text-xs" style={{ color: "var(--muted-foreground)" }}>
                       {item.detail || "–"}
                     </span>
                   </TableCell>
@@ -880,7 +880,7 @@ function BacklogTab({ onSuggest }: { onSuggest: () => void }) {
                     {item.person ? (
                       <div className="flex items-center gap-1.5">
                         <PresenterAvatar name={item.person} />
-                        <span className="text-xs" style={{ color: "var(--gray-400)" }}>
+                        <span className="text-xs" style={{ color: "var(--muted-foreground)" }}>
                           {item.person}
                         </span>
                       </div>
@@ -889,7 +889,7 @@ function BacklogTab({ onSuggest }: { onSuggest: () => void }) {
                     )}
                   </TableCell>
                   <TableCell className="py-4">
-                    <span className="text-xs" style={{ color: "var(--gray-400)" }}>
+                    <span className="text-xs" style={{ color: "var(--muted-foreground)" }}>
                       {item.duration || "–"}
                     </span>
                   </TableCell>
@@ -923,12 +923,12 @@ function BacklogTab({ onSuggest }: { onSuggest: () => void }) {
                     </span>
                   </TableCell>
                   <TableCell className="py-3 max-w-xs">
-                    <span className="text-xs" style={{ color: "var(--gray-400)" }}>
+                    <span className="text-xs" style={{ color: "var(--muted-foreground)" }}>
                       {item.detail || "–"}
                     </span>
                   </TableCell>
                   <TableCell className="py-3">
-                    <span className="text-xs" style={{ color: "var(--gray-400)" }}>
+                    <span className="text-xs" style={{ color: "var(--muted-foreground)" }}>
                       {item.duration || "–"}
                     </span>
                   </TableCell>
@@ -950,7 +950,7 @@ function RessourcenTab() {
       {/* OKRs */}
       <div>
         <div className="flex items-center gap-2 mb-5">
-          <BookOpen className="size-4" style={{ color: "var(--gray-400)" }} />
+          <BookOpen className="size-4" style={{ color: "var(--muted-foreground)" }} />
           <h3 className="text-sm font-semibold" style={{ color: "var(--foreground)" }}>
             OKRs 2026
           </h3>
@@ -959,7 +959,7 @@ function RessourcenTab() {
           {OKRS.map((okr, i) => (
             <div key={i}>
               <p className="text-sm mb-4" style={{ color: "var(--foreground)" }}>
-                <span className="font-semibold" style={{ color: "var(--gray-400)" }}>
+                <span className="font-semibold" style={{ color: "var(--muted-foreground)" }}>
                   Objective {i + 1}:{" "}
                 </span>
                 {okr.objective}
@@ -968,7 +968,7 @@ function RessourcenTab() {
                 {okr.krs.map((kr, j) => (
                   <div key={j}>
                     <div className="flex items-center justify-between mb-1.5">
-                      <span className="text-xs" style={{ color: "var(--gray-400)" }}>
+                      <span className="text-xs" style={{ color: "var(--muted-foreground)" }}>
                         {kr.label}
                       </span>
                       <span className="text-xs font-semibold tabular-nums" style={{ color: "var(--foreground)" }}>
@@ -987,12 +987,12 @@ function RessourcenTab() {
       {/* AI Tips */}
       <div>
         <div className="flex items-center gap-2 mb-5">
-          <Lightbulb className="size-4" style={{ color: "var(--gray-400)" }} />
+          <Lightbulb className="size-4" style={{ color: "var(--muted-foreground)" }} />
           <div>
             <h3 className="text-sm font-semibold" style={{ color: "var(--foreground)" }}>
               AI Tipps & Tricks
             </h3>
-            <p className="text-xs" style={{ color: "var(--gray-400)" }}>
+            <p className="text-xs" style={{ color: "var(--muted-foreground)" }}>
               Gesammelt aus der PDC vom 20. August 2025
             </p>
           </div>
@@ -1041,9 +1041,9 @@ function RessourcenTab() {
             >
               <div>
                 <p className="text-sm font-medium">{survey.label}</p>
-                <p className="text-xs" style={{ color: "var(--gray-400)" }}>{survey.sub}</p>
+                <p className="text-xs" style={{ color: "var(--muted-foreground)" }}>{survey.sub}</p>
               </div>
-              <ExternalLink className="size-3.5 shrink-0" style={{ color: "var(--gray-400)" }} />
+              <ExternalLink className="size-3.5 shrink-0" style={{ color: "var(--muted-foreground)" }} />
             </a>
           ))}
         </div>
@@ -1086,14 +1086,14 @@ function SuggestDrawer({
             <DrawerTitle className="text-xl font-semibold" style={{ color: "var(--foreground)" }}>
               Thema vorschlagen
             </DrawerTitle>
-            <DrawerDescription className="text-sm mt-1" style={{ color: "var(--gray-400)" }}>
+            <DrawerDescription className="text-sm mt-1" style={{ color: "var(--muted-foreground)" }}>
               Dein Thema wird im Backlog gespeichert und beim nächsten PDC-Termin berücksichtigt.
             </DrawerDescription>
           </DrawerHeader>
 
           <div className="flex-1 overflow-y-auto px-6 py-2 space-y-5">
             <div className="space-y-1.5">
-              <label className="text-xs font-medium" style={{ color: "var(--gray-400)" }}>
+              <label className="text-xs font-medium" style={{ color: "var(--muted-foreground)" }}>
                 Thema / Titel *
               </label>
               <Input
@@ -1104,7 +1104,7 @@ function SuggestDrawer({
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-xs font-medium" style={{ color: "var(--gray-400)" }}>
+              <label className="text-xs font-medium" style={{ color: "var(--muted-foreground)" }}>
                 Vortragsart / Details
               </label>
               <Textarea
@@ -1117,7 +1117,7 @@ function SuggestDrawer({
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-xs font-medium" style={{ color: "var(--gray-400)" }}>
+              <label className="text-xs font-medium" style={{ color: "var(--muted-foreground)" }}>
                 Zeitbedarf
               </label>
               <Select value={duration} onValueChange={setDuration}>
@@ -1134,7 +1134,7 @@ function SuggestDrawer({
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-xs font-medium" style={{ color: "var(--gray-400)" }}>
+              <label className="text-xs font-medium" style={{ color: "var(--muted-foreground)" }}>
                 Dein Name
               </label>
               <Input
@@ -1188,7 +1188,7 @@ export default function PDCHubPage() {
                   intern
                 </Badge>
               </div>
-              <p className="text-sm" style={{ color: "var(--gray-400)" }}>
+              <p className="text-sm" style={{ color: "var(--muted-foreground)" }}>
                 Product Design Community · alle 3 Wochen · DAYONE
               </p>
             </div>

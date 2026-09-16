@@ -91,7 +91,7 @@ function SearchBox({
         className="flex items-center gap-2 pb-1.5"
         style={{ borderBottom: "1px solid var(--border)" }}
       >
-        <Search className="size-3 shrink-0" style={{ color: "var(--gray-400)" }} />
+        <Search className="size-3 shrink-0" style={{ color: "var(--muted-foreground)" }} />
         <input
           type="text"
           value={value}
@@ -159,7 +159,7 @@ function SidebarNav({ activeSlug, search, onNavigate }: NavProps) {
         <li key={category.id}>
           <p
             className="mb-1 px-3 text-xs font-medium"
-            style={{ color: "var(--gray-300)" }}
+            style={{ color: "var(--muted-foreground)" }}
           >
             {category.label}
           </p>
@@ -267,7 +267,7 @@ export function KomponentenSidebarMobile() {
         </SheetContent>
       </Sheet>
       {activeComp && (
-        <p className="truncate text-sm" style={{ color: "var(--gray-400)" }}>
+        <p className="truncate text-sm" style={{ color: "var(--muted-foreground)" }}>
           {activeComp.name}
         </p>
       )}

@@ -14,7 +14,7 @@ export function SiteFooter() {
           <Link
             href="/playground"
             className="transition-opacity hover:opacity-70"
-            style={{ color: "var(--gray-300)" }}
+            style={{ color: "var(--muted-foreground)" }}
           >
             Komponenten
           </Link>
@@ -23,7 +23,7 @@ export function SiteFooter() {
             target="_blank"
             rel="noopener noreferrer"
             className="transition-opacity hover:opacity-70"
-            style={{ color: "var(--gray-300)" }}
+            style={{ color: "var(--muted-foreground)" }}
           >
             dayone.de
           </a>

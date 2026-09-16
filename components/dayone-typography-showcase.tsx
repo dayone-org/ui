@@ -23,13 +23,13 @@ function TypographySample({ token }: { token: TypographyToken }) {
       </p>
       <p
         className="text-sm font-normal"
-        style={{ color: "var(--gray-400)" }}
+        style={{ color: "var(--muted-foreground)" }}
       >
         {formatTypographySpec(token)}
       </p>
       <p
         className="font-mono text-[11px]"
-        style={{ color: "var(--gray-300)" }}
+        style={{ color: "var(--muted-foreground)" }}
       >
         {token.fontSizeVar} · {token.lineHeightVar} · {token.trackingVar} ·{" "}
         {token.weightLabel}

@@ -54,7 +54,7 @@ export default function KomponentenPage() {
                     style={{
                       fontSize: "var(--text-body-sm)",
                       lineHeight: "var(--leading-body)",
-                      color: "var(--gray-400)",
+                      color: "var(--muted-foreground)",
                     }}
                   >
                     {component.description}

@@ -20,7 +20,7 @@ export default async function ComponentPage({
     <main className="py-12 lg:py-16">
       <p
         className="mb-2 text-xs font-semibold uppercase tracking-widest"
-        style={{ color: "var(--gray-300)" }}
+        style={{ color: "var(--muted-foreground)" }}
       >
         {component.categoryLabel}
       </p>
@@ -42,7 +42,7 @@ export default async function ComponentPage({
         style={{
           fontSize: "var(--text-body-md)",
           lineHeight: "var(--leading-body)",
-          color: "var(--gray-400)",
+          color: "var(--muted-foreground)",
         }}
       >
         {component.description}

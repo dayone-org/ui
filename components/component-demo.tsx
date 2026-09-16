@@ -8,6 +8,7 @@ import { DayoneTypographyShowcase } from "@/components/dayone-typography-showcas
 import { PlaygroundVariantHeading } from "@/components/playground-variant-heading";
 import { DayoneIcon } from "@/components/dayone-icon";
 import { ICON_LIBRARY } from "@/lib/icon-library";
+import TrashHeartIcon from "@/components/ui/trash-heart-icon";
 import { Button } from "@/components/ui/button";
 import { Bold, Italic, Underline, Search, ChevronRight, ChevronDown, TrendingUp, CalendarDays, Users, FileText, ExternalLink, Phone } from "lucide-react";
 
@@ -127,8 +128,8 @@ function ColorsDemo() {
                 <div className="h-16" style={{ backgroundColor: color.hex, boxShadow: color.hex === "#FFFFFF" ? "inset 0 0 0 1px var(--border)" : undefined }} />
                 <div className="space-y-0.5 px-2.5 py-2.5">
                   <p className="text-xs font-semibold" style={{ color: "var(--foreground)" }}>{color.name}</p>
-                  <p className="text-[10px]" style={{ color: "var(--gray-400)" }}>{color.hex}</p>
-                  <p className="font-mono text-[10px]" style={{ color: "var(--gray-300)" }}>{color.token}</p>
+                  <p className="text-[10px]" style={{ color: "var(--muted-foreground)" }}>{color.hex}</p>
+                  <p className="font-mono text-[10px]" style={{ color: "var(--muted-foreground)" }}>{color.token}</p>
                 </div>
               </div>
             ))}
@@ -143,7 +144,7 @@ function ColorsDemo() {
         <div key={group.label}>
           <div className="flex items-baseline gap-2 mb-4">
             <PlaygroundVariantHeading className="mb-0">{group.label}</PlaygroundVariantHeading>
-            <span className="text-xs" style={{ color: "var(--gray-300)" }}>— {group.semanticLabel}</span>
+            <span className="text-xs" style={{ color: "var(--muted-foreground)" }}>— {group.semanticLabel}</span>
           </div>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 md:grid-cols-7">
             {group.colors.map((color) => (
@@ -151,8 +152,8 @@ function ColorsDemo() {
                 <div className="h-16" style={{ backgroundColor: color.hex }} />
                 <div className="space-y-0.5 px-2.5 py-2.5">
                   <p className="text-xs font-semibold" style={{ color: "var(--foreground)" }}>{color.name}</p>
-                  <p className="text-[10px]" style={{ color: "var(--gray-400)" }}>{color.hex}</p>
-                  <p className="font-mono text-[10px]" style={{ color: "var(--gray-300)" }}>{color.token}</p>
+                  <p className="text-[10px]" style={{ color: "var(--muted-foreground)" }}>{color.hex}</p>
+                  <p className="font-mono text-[10px]" style={{ color: "var(--muted-foreground)" }}>{color.token}</p>
                 </div>
               </div>
             ))}
@@ -275,7 +276,7 @@ function EmptyDemo() {
         <EmptyTitle style={{ color: "var(--foreground)", fontSize: "var(--text-body-md)", fontWeight: 600 }}>
           Keine Einträge
         </EmptyTitle>
-        <EmptyDescription style={{ color: "var(--gray-400)", fontSize: "var(--text-body-sm)" }}>
+        <EmptyDescription style={{ color: "var(--muted-foreground)", fontSize: "var(--text-body-sm)" }}>
           Erstelle deinen ersten Eintrag, um hier loszulegen.
         </EmptyDescription>
       </EmptyHeader>
@@ -347,7 +348,7 @@ function ItemDemo() {
             </Avatar>
             <ItemContent className="gap-0.5">
               <ItemTitle className="font-semibold" style={{ color: "var(--foreground)" }}>{title}</ItemTitle>
-              <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>{description}</ItemDescription>
+              <ItemDescription className="text-xs" style={{ color: "var(--muted-foreground)" }}>{description}</ItemDescription>
             </ItemContent>
           </Item>
         ))}
@@ -363,7 +364,7 @@ function ItemDemo() {
             </Avatar>
             <ItemContent className="gap-0.5">
               <ItemTitle className="font-semibold" style={{ color: "var(--foreground)" }}>{title}</ItemTitle>
-              <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>{description}</ItemDescription>
+              <ItemDescription className="text-xs" style={{ color: "var(--muted-foreground)" }}>{description}</ItemDescription>
             </ItemContent>
           </Item>
         ))}
@@ -469,7 +470,7 @@ function MultiSelectDemo() {
 function CtrlRow({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="flex items-center gap-6">
-      <span className="w-20 shrink-0 text-sm" style={{ color: "var(--gray-300)" }}>{label}</span>
+      <span className="w-20 shrink-0 text-sm" style={{ color: "var(--muted-foreground)" }}>{label}</span>
       <div className="flex flex-wrap items-center gap-6">{children}</div>
     </div>
   );
@@ -591,7 +592,7 @@ function SliderDemo() {
   return (
     <div className="w-full max-w-sm space-y-4">
       <Slider value={value} onValueChange={setValue} max={100} step={1} />
-      <div className="flex justify-between text-xs" style={{ color: "var(--gray-400)" }}>
+      <div className="flex justify-between text-xs" style={{ color: "var(--muted-foreground)" }}>
         <span>0</span>
         <span className="font-semibold" style={{ color: "var(--foreground)" }}>{value[0]}%</span>
         <span>100</span>
@@ -620,14 +621,14 @@ function InputGroupDemo() {
     <div className="flex flex-col gap-4 w-full max-w-xs">
       <InputGroup>
         <InputGroupAddon align="inline-start">
-          <Search className="size-4" style={{ color: "var(--gray-400)" }} />
+          <Search className="size-4" style={{ color: "var(--muted-foreground)" }} />
         </InputGroupAddon>
         <InputGroupInput placeholder="Suchen..." />
       </InputGroup>
       <InputGroup>
         <InputGroupInput placeholder="Betrag" />
         <InputGroupAddon align="inline-end">
-          <span className="text-sm" style={{ color: "var(--gray-400)" }}>€</span>
+          <span className="text-sm" style={{ color: "var(--muted-foreground)" }}>€</span>
         </InputGroupAddon>
       </InputGroup>
     </div>
@@ -649,7 +650,7 @@ function FieldDemo() {
       <Field>
         <FieldLabel htmlFor="field-name">Vollständiger Name</FieldLabel>
         <Input id="field-name" placeholder="Victoria Itter" />
-        <FieldDescription style={{ color: "var(--gray-400)", fontSize: "var(--text-body-sm)" }}>
+        <FieldDescription style={{ color: "var(--muted-foreground)", fontSize: "var(--text-body-sm)" }}>
           Dieser Name wird öffentlich angezeigt.
         </FieldDescription>
       </Field>
@@ -722,7 +723,7 @@ function BreadcrumbDemo() {
               ) : (
                 <BreadcrumbLink asChild>
                   <button
-                    style={{ color: "var(--gray-400)", background: "none", border: "none", padding: 0, cursor: "pointer", font: "inherit" }}
+                    style={{ color: "var(--muted-foreground)", background: "none", border: "none", padding: 0, cursor: "pointer", font: "inherit" }}
                     onClick={() => setActive(item.key)}
                   >
                     {item.label}
@@ -866,7 +867,7 @@ function ContextMenuDemo() {
       <ContextMenuTrigger asChild>
         <div
           className="flex h-24 w-48 items-center justify-center rounded-lg text-sm"
-          style={{ border: "2px dashed var(--border)", color: "var(--gray-400)" }}
+          style={{ border: "2px dashed var(--border)", color: "var(--muted-foreground)" }}
         >
           Rechtsklick hier
         </div>
@@ -902,7 +903,7 @@ function SidebarDemo() {
         ))}
       </div>
       <div className="flex flex-1 items-center justify-center p-4">
-        <p className="text-sm" style={{ color: "var(--gray-300)" }}>Inhalt</p>
+        <p className="text-sm" style={{ color: "var(--muted-foreground)" }}>Inhalt</p>
       </div>
     </div>
   );
@@ -922,7 +923,7 @@ function DialogDemo() {
         <DialogContent style={{ backgroundColor: "var(--popover)" }}>
           <DialogHeader>
             <DialogTitle style={{ color: "var(--foreground)" }}>Änderungen speichern?</DialogTitle>
-            <DialogDescription style={{ color: "var(--gray-400)" }}>
+            <DialogDescription style={{ color: "var(--muted-foreground)" }}>
               Deine Änderungen werden dauerhaft gespeichert.
             </DialogDescription>
           </DialogHeader>
@@ -951,7 +952,7 @@ function AlertDialogDemo() {
       <AlertDialogContent style={{ backgroundColor: "var(--popover)" }}>
         <AlertDialogHeader>
           <AlertDialogTitle style={{ color: "var(--foreground)" }}>Wirklich löschen?</AlertDialogTitle>
-          <AlertDialogDescription style={{ color: "var(--gray-400)" }}>
+          <AlertDialogDescription style={{ color: "var(--muted-foreground)" }}>
             Diese Aktion kann nicht rückgängig gemacht werden.
           </AlertDialogDescription>
         </AlertDialogHeader>
@@ -975,7 +976,7 @@ function DrawerDemo() {
       <DrawerContent style={{ backgroundColor: "var(--popover)" }}>
         <DrawerHeader>
           <DrawerTitle style={{ color: "var(--foreground)" }}>Details</DrawerTitle>
-          <DrawerDescription style={{ color: "var(--gray-400)" }}>
+          <DrawerDescription style={{ color: "var(--muted-foreground)" }}>
             Zusätzliche Informationen und Aktionen.
           </DrawerDescription>
         </DrawerHeader>
@@ -1000,7 +1001,7 @@ function SheetDemo() {
       <SheetContent side="right" showCloseButton={true} style={{ backgroundColor: "var(--popover)", borderColor: "var(--border)" }}>
         <SheetHeader className="px-4 pb-4">
           <SheetTitle style={{ color: "var(--foreground)" }}>Einstellungen</SheetTitle>
-          <SheetDescription style={{ color: "var(--gray-400)" }}>
+          <SheetDescription style={{ color: "var(--muted-foreground)" }}>
             Passe deine Einstellungen hier an.
           </SheetDescription>
         </SheetHeader>
@@ -1026,7 +1027,7 @@ function PopoverDemo() {
       </PopoverTrigger>
       <PopoverContent className="w-64" style={{ backgroundColor: "var(--popover)", borderColor: "var(--border)" }}>
         <p className="text-sm font-semibold" style={{ color: "var(--foreground)" }}>DAYONE UI</p>
-        <p className="mt-1 text-sm" style={{ color: "var(--gray-400)" }}>Designsystem für interne Anwendungen. Gebaut auf shadcn/ui.</p>
+        <p className="mt-1 text-sm" style={{ color: "var(--muted-foreground)" }}>Designsystem für interne Anwendungen. Gebaut auf shadcn/ui.</p>
       </PopoverContent>
     </Popover>
   );
@@ -1047,7 +1048,7 @@ function HoverCardDemo() {
           </Avatar>
           <div>
             <p className="text-sm font-semibold" style={{ color: "var(--foreground)" }}>Victoria Itter</p>
-            <p className="text-xs" style={{ color: "var(--gray-400)" }}>Product Design · DAYONE</p>
+            <p className="text-xs" style={{ color: "var(--muted-foreground)" }}>Product Design · DAYONE</p>
           </div>
         </div>
       </HoverCardContent>
@@ -1105,7 +1106,7 @@ function ProgressDemo() {
   const [value] = useState(65);
   return (
     <div className="w-full max-w-xs space-y-3">
-      <div className="flex justify-between text-xs" style={{ color: "var(--gray-400)" }}>
+      <div className="flex justify-between text-xs" style={{ color: "var(--muted-foreground)" }}>
         <span>Fortschritt</span>
         <span>{value}%</span>
       </div>
@@ -1147,7 +1148,7 @@ function TableDemo() {
         {rows.map((row) => (
           <TableRow key={row.name} style={{ borderColor: "var(--divider)" }}>
             <TableCell className="font-medium" style={{ color: "var(--foreground)" }}>{row.name}</TableCell>
-            <TableCell style={{ color: "var(--gray-400)" }}>{row.role}</TableCell>
+            <TableCell style={{ color: "var(--muted-foreground)" }}>{row.role}</TableCell>
             <TableCell>
               <Badge className="rounded-full text-xs" style={{ backgroundColor: row.status === "Aktiv" ? "var(--primary)" : "var(--disabled)", color: row.status === "Aktiv" ? "var(--primary-foreground)" : "var(--disabled-foreground)" }}>
                 {row.status}
@@ -1422,7 +1423,7 @@ function AvatarDemo() {
       ))}
       <div
         className="flex size-10 items-center justify-center rounded-full ring-2 ring-background text-xs font-semibold"
-        style={{ backgroundColor: "transparent", color: "var(--gray-400)", border: "1px solid var(--border)" }}
+        style={{ backgroundColor: "transparent", color: "var(--muted-foreground)", border: "1px solid var(--border)" }}
       >
         +4
       </div>
@@ -1437,7 +1438,7 @@ function AccordionDemo() {
         <AccordionTrigger className="font-semibold hover:no-underline" style={{ color: "var(--foreground)" }}>
           Was ist DAYONE UI?
         </AccordionTrigger>
-        <AccordionContent style={{ color: "var(--gray-400)" }}>
+        <AccordionContent style={{ color: "var(--muted-foreground)" }}>
           Eine Komponenten-Bibliothek für interne DAYONE Anwendungen.
         </AccordionContent>
       </AccordionItem>
@@ -1445,7 +1446,7 @@ function AccordionDemo() {
         <AccordionTrigger className="font-semibold hover:no-underline" style={{ color: "var(--foreground)" }}>
           Wie installiere ich es?
         </AccordionTrigger>
-        <AccordionContent style={{ color: "var(--gray-400)" }}>
+        <AccordionContent style={{ color: "var(--muted-foreground)" }}>
           Repository klonen und npm install ausführen.
         </AccordionContent>
       </AccordionItem>
@@ -1460,14 +1461,14 @@ function CollapsibleDemo() {
       <div className="flex items-center justify-between">
         <p className="text-sm font-semibold" style={{ color: "var(--foreground)" }}>Erweiterte Optionen</p>
         <CollapsibleTrigger asChild>
-          <button className="rounded p-1" style={{ color: "var(--gray-400)" }}>
+          <button className="rounded p-1" style={{ color: "var(--muted-foreground)" }}>
             <ChevronDown className={`size-4 transition-transform ${open ? "rotate-180" : ""}`} />
           </button>
         </CollapsibleTrigger>
       </div>
       <CollapsibleContent className="mt-3 space-y-2">
         {["Option A", "Option B", "Option C"].map((opt) => (
-          <p key={opt} className="text-sm" style={{ color: "var(--gray-400)" }}>{opt}</p>
+          <p key={opt} className="text-sm" style={{ color: "var(--muted-foreground)" }}>{opt}</p>
         ))}
       </CollapsibleContent>
     </Collapsible>
@@ -1479,7 +1480,7 @@ function CollapsibleDemo() {
 // Small category label used across Layout demos
 function DemoLabel({ children }: { children: React.ReactNode }) {
   return (
-    <p className="text-[11px] font-medium tracking-wide" style={{ color: "var(--gray-300)" }}>
+    <p className="text-[11px] font-medium tracking-wide" style={{ color: "var(--muted-foreground)" }}>
       {children}
     </p>
   );
@@ -1495,22 +1496,22 @@ function InfocardDemo() {
         <Card className="w-76" style={OUTLINE_RING}>
           <CardHeader>
             <CardTitle className="text-base font-semibold" style={{ color: "var(--foreground)" }}>Projektübersicht</CardTitle>
-            <CardDescription style={{ color: "var(--gray-400)" }}>Stand: Juni 2026</CardDescription>
+            <CardDescription style={{ color: "var(--muted-foreground)" }}>Stand: Juni 2026</CardDescription>
           </CardHeader>
           <CardContent>
-            <p className="text-sm" style={{ color: "var(--gray-400)" }}>Alle laufenden Projekte im Überblick — reine Darstellung.</p>
+            <p className="text-sm" style={{ color: "var(--muted-foreground)" }}>Alle laufenden Projekte im Überblick — reine Darstellung.</p>
           </CardContent>
         </Card>
 
         {/* Metric card */}
         <Card className="w-76" style={OUTLINE_RING}>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium" style={{ color: "var(--gray-400)" }}>Gesamtumsatz</CardTitle>
-            <TrendingUp className="size-4" style={{ color: "var(--gray-400)" }} />
+            <CardTitle className="text-sm font-medium" style={{ color: "var(--muted-foreground)" }}>Gesamtumsatz</CardTitle>
+            <TrendingUp className="size-4" style={{ color: "var(--muted-foreground)" }} />
           </CardHeader>
           <CardContent>
             <p className="text-2xl font-semibold tabular-nums" style={{ color: "var(--foreground)" }}>€ 24.500</p>
-            <p className="text-xs mt-1" style={{ color: "var(--gray-400)" }}>+12% gegenüber Vormonat</p>
+            <p className="text-xs mt-1" style={{ color: "var(--muted-foreground)" }}>+12% gegenüber Vormonat</p>
           </CardContent>
         </Card>
       </div>
@@ -1528,7 +1529,7 @@ function InfocardDemo() {
               <CalendarDays className="size-5" />
             </div>
             <div>
-              <p className="text-xs" style={{ color: "var(--gray-400)" }}>Sessions gesamt</p>
+              <p className="text-xs" style={{ color: "var(--muted-foreground)" }}>Sessions gesamt</p>
               <p className="text-sm font-semibold" style={{ color: "var(--foreground)" }}>10</p>
             </div>
           </div>
@@ -1541,7 +1542,7 @@ function InfocardDemo() {
               <Users className="size-5" />
             </div>
             <div>
-              <p className="text-xs" style={{ color: "var(--gray-400)" }}>Ø Teilnehmende</p>
+              <p className="text-xs" style={{ color: "var(--muted-foreground)" }}>Ø Teilnehmende</p>
               <p className="text-sm font-semibold" style={{ color: "var(--foreground)" }}>9 Personen</p>
             </div>
           </div>
@@ -1558,7 +1559,7 @@ function InfocardDemo() {
             </Avatar>
             <ItemContent className="gap-0.5">
               <ItemTitle className="font-semibold" style={{ color: "var(--foreground)" }}>Victoria Itter</ItemTitle>
-              <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>Product Design</ItemDescription>
+              <ItemDescription className="text-xs" style={{ color: "var(--muted-foreground)" }}>Product Design</ItemDescription>
             </ItemContent>
           </Item>
           <Item className="w-76 gap-3 border-transparent bg-[var(--secondary)] py-[15px]" style={{ "--tw-ring-color": "var(--secondary)" } as React.CSSProperties}>
@@ -1567,7 +1568,7 @@ function InfocardDemo() {
             </Avatar>
             <ItemContent className="gap-0.5">
               <ItemTitle className="font-semibold" style={{ color: "var(--foreground)" }}>Victoria Itter</ItemTitle>
-              <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>Product Design</ItemDescription>
+              <ItemDescription className="text-xs" style={{ color: "var(--muted-foreground)" }}>Product Design</ItemDescription>
             </ItemContent>
           </Item>
         </div>
@@ -1586,12 +1587,12 @@ function ButtoncardDemo() {
           <CardHeader className="flex flex-row items-center justify-between">
             <div className="flex flex-col gap-1">
               <CardTitle className="text-base font-semibold" style={{ color: "var(--foreground)" }}>Projektübersicht</CardTitle>
-              <CardDescription style={{ color: "var(--gray-400)" }}>Stand: Juni 2026</CardDescription>
+              <CardDescription style={{ color: "var(--muted-foreground)" }}>Stand: Juni 2026</CardDescription>
             </div>
-            <ChevronRight className="size-5 shrink-0" style={{ color: "var(--gray-400)" }} />
+            <ChevronRight className="size-5 shrink-0" style={{ color: "var(--muted-foreground)" }} />
           </CardHeader>
           <CardContent>
-            <p className="text-sm" style={{ color: "var(--gray-400)" }}>Alle laufenden Projekte im Überblick — reine Darstellung.</p>
+            <p className="text-sm" style={{ color: "var(--muted-foreground)" }}>Alle laufenden Projekte im Überblick — reine Darstellung.</p>
           </CardContent>
         </Card>
 
@@ -1599,12 +1600,12 @@ function ButtoncardDemo() {
           className="w-76 cursor-pointer transition-colors duration-150 hover:bg-[var(--secondary)] focus-visible:outline-none focus-visible:ring-2"
           style={OUTLINE_RING}>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium" style={{ color: "var(--gray-400)" }}>Gesamtumsatz</CardTitle>
-            <ChevronRight className="size-5 shrink-0" style={{ color: "var(--gray-400)" }} />
+            <CardTitle className="text-sm font-medium" style={{ color: "var(--muted-foreground)" }}>Gesamtumsatz</CardTitle>
+            <ChevronRight className="size-5 shrink-0" style={{ color: "var(--muted-foreground)" }} />
           </CardHeader>
           <CardContent>
             <p className="text-2xl font-semibold tabular-nums" style={{ color: "var(--foreground)" }}>€ 24.500</p>
-            <p className="text-xs mt-1" style={{ color: "var(--gray-400)" }}>+12% gegenüber Vormonat</p>
+            <p className="text-xs mt-1" style={{ color: "var(--muted-foreground)" }}>+12% gegenüber Vormonat</p>
           </CardContent>
         </Card>
       </div>
@@ -1620,9 +1621,9 @@ function ButtoncardDemo() {
             </Avatar>
             <ItemContent className="gap-0.5">
               <ItemTitle className="font-semibold" style={{ color: "var(--foreground)" }}>Victoria Itter</ItemTitle>
-              <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>Product Design</ItemDescription>
+              <ItemDescription className="text-xs" style={{ color: "var(--muted-foreground)" }}>Product Design</ItemDescription>
             </ItemContent>
-            <ChevronRight className="size-5 shrink-0 ml-auto" style={{ color: "var(--gray-400)" }} />
+            <ChevronRight className="size-5 shrink-0 ml-auto" style={{ color: "var(--muted-foreground)" }} />
           </Item>
           <Item role="button" tabIndex={0}
             className="w-76 gap-3 border-transparent bg-[var(--secondary)] py-[15px] cursor-pointer transition-colors hover:bg-[var(--muted)]"
@@ -1632,9 +1633,9 @@ function ButtoncardDemo() {
             </Avatar>
             <ItemContent className="gap-0.5">
               <ItemTitle className="font-semibold" style={{ color: "var(--foreground)" }}>Victoria Itter</ItemTitle>
-              <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>Product Design</ItemDescription>
+              <ItemDescription className="text-xs" style={{ color: "var(--muted-foreground)" }}>Product Design</ItemDescription>
             </ItemContent>
-            <ChevronRight className="size-5 shrink-0 ml-auto" style={{ color: "var(--gray-400)" }} />
+            <ChevronRight className="size-5 shrink-0 ml-auto" style={{ color: "var(--muted-foreground)" }} />
           </Item>
         </div>
       </div>
@@ -1672,9 +1673,9 @@ function ListDemo() {
             </Avatar>
             <ItemContent className="gap-0.5">
               <ItemTitle className="font-semibold" style={{ color: "var(--foreground)" }}>Victoria Itter</ItemTitle>
-              <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>Product Design</ItemDescription>
+              <ItemDescription className="text-xs" style={{ color: "var(--muted-foreground)" }}>Product Design</ItemDescription>
             </ItemContent>
-            {clickable && <ChevronRight className="size-4 shrink-0 ml-auto" style={{ color: "var(--gray-400)" }} />}
+            {clickable && <ChevronRight className="size-4 shrink-0 ml-auto" style={{ color: "var(--muted-foreground)" }} />}
           </Item>
 
           {/* Row 2: Document / FileText + ExternalLink */}
@@ -1684,9 +1685,9 @@ function ListDemo() {
             <FileText className="size-5 shrink-0" style={{ color: "var(--black)" }} />
             <ItemContent className="gap-0.5">
               <ItemTitle className="font-semibold" style={{ color: "var(--foreground)" }}>Projektbriefing.pdf</ItemTitle>
-              <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>Zuletzt bearbeitet</ItemDescription>
+              <ItemDescription className="text-xs" style={{ color: "var(--muted-foreground)" }}>Zuletzt bearbeitet</ItemDescription>
             </ItemContent>
-            {clickable && <ExternalLink className="size-4 shrink-0 ml-auto" style={{ color: "var(--gray-400)" }} />}
+            {clickable && <ExternalLink className="size-4 shrink-0 ml-auto" style={{ color: "var(--muted-foreground)" }} />}
           </Item>
 
           {/* Row 3: No left icon / Phone */}
@@ -1695,9 +1696,9 @@ function ListDemo() {
             style={{ borderColor: "var(--border)" }}>
             <ItemContent className="gap-0.5">
               <ItemTitle className="font-semibold" style={{ color: "var(--foreground)" }}>Max Moldovan</ItemTitle>
-              <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>+49 152 123 4567</ItemDescription>
+              <ItemDescription className="text-xs" style={{ color: "var(--muted-foreground)" }}>+49 152 123 4567</ItemDescription>
             </ItemContent>
-            {clickable && <Phone className="size-4 shrink-0 ml-auto" style={{ color: "var(--gray-400)" }} />}
+            {clickable && <Phone className="size-4 shrink-0 ml-auto" style={{ color: "var(--muted-foreground)" }} />}
           </Item>
         </div>
 
@@ -1712,9 +1713,9 @@ function ListDemo() {
             </Avatar>
             <ItemContent className="gap-0.5">
               <ItemTitle className="font-semibold" style={{ color: "var(--foreground)" }}>Victoria Itter</ItemTitle>
-              <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>Product Design</ItemDescription>
+              <ItemDescription className="text-xs" style={{ color: "var(--muted-foreground)" }}>Product Design</ItemDescription>
             </ItemContent>
-            {clickable && <ChevronRight className="size-4 shrink-0 ml-auto" style={{ color: "var(--gray-400)" }} />}
+            {clickable && <ChevronRight className="size-4 shrink-0 ml-auto" style={{ color: "var(--muted-foreground)" }} />}
           </Item>
 
           {/* Row 2: Document / FileText + ExternalLink */}
@@ -1724,9 +1725,9 @@ function ListDemo() {
             <FileText className="size-5 shrink-0" style={{ color: "var(--black)" }} />
             <ItemContent className="gap-0.5">
               <ItemTitle className="font-semibold" style={{ color: "var(--foreground)" }}>Projektbriefing.pdf</ItemTitle>
-              <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>Zuletzt bearbeitet</ItemDescription>
+              <ItemDescription className="text-xs" style={{ color: "var(--muted-foreground)" }}>Zuletzt bearbeitet</ItemDescription>
             </ItemContent>
-            {clickable && <ExternalLink className="size-4 shrink-0 ml-auto" style={{ color: "var(--gray-400)" }} />}
+            {clickable && <ExternalLink className="size-4 shrink-0 ml-auto" style={{ color: "var(--muted-foreground)" }} />}
           </Item>
 
           {/* Row 3: No left icon / Phone */}
@@ -1735,9 +1736,9 @@ function ListDemo() {
             style={filledRing}>
             <ItemContent className="gap-0.5">
               <ItemTitle className="font-semibold" style={{ color: "var(--foreground)" }}>Max Moldovan</ItemTitle>
-              <ItemDescription className="text-xs" style={{ color: "var(--gray-400)" }}>+49 152 123 4567</ItemDescription>
+              <ItemDescription className="text-xs" style={{ color: "var(--muted-foreground)" }}>+49 152 123 4567</ItemDescription>
             </ItemContent>
-            {clickable && <Phone className="size-4 shrink-0 ml-auto" style={{ color: "var(--gray-400)" }} />}
+            {clickable && <Phone className="size-4 shrink-0 ml-auto" style={{ color: "var(--muted-foreground)" }} />}
           </Item>
         </div>
       </div>
@@ -1749,7 +1750,7 @@ function AspectRatioDemo() {
   return (
     <div className="w-full max-w-xs">
       <AspectRatio ratio={16 / 9} className="overflow-hidden rounded-lg" style={{ backgroundColor: "var(--accent)" }}>
-        <div className="flex h-full w-full items-center justify-center text-sm" style={{ color: "var(--gray-400)" }}>
+        <div className="flex h-full w-full items-center justify-center text-sm" style={{ color: "var(--muted-foreground)" }}>
           16 / 9
         </div>
       </AspectRatio>
@@ -1775,13 +1776,13 @@ function ResizableDemo() {
   return (
     <ResizablePanelGroup className="w-full max-w-xs rounded-lg" style={{ border: "1px solid var(--border)", height: "100px" }}>
       <ResizablePanel defaultSize={50}>
-        <div className="flex h-full items-center justify-center text-sm" style={{ color: "var(--gray-400)" }}>
+        <div className="flex h-full items-center justify-center text-sm" style={{ color: "var(--muted-foreground)" }}>
           Links
         </div>
       </ResizablePanel>
       <ResizableHandle style={{ backgroundColor: "var(--accent)" }} />
       <ResizablePanel defaultSize={50}>
-        <div className="flex h-full items-center justify-center text-sm" style={{ color: "var(--gray-400)" }}>
+        <div className="flex h-full items-center justify-center text-sm" style={{ color: "var(--muted-foreground)" }}>
           Rechts
         </div>
       </ResizablePanel>
@@ -1834,10 +1835,15 @@ const ICONS_PER_ROW_DESKTOP = 8;
 const ICONS_INITIAL_ROWS = 5;
 const ICONS_INITIAL_COUNT = ICONS_PER_ROW_DESKTOP * ICONS_INITIAL_ROWS;
 
+const SORTED_ICONS: Array<{ name: string; slug: string; custom?: boolean }> = [
+  ...ICON_LIBRARY,
+  { name: "trash-heart", slug: "trash-heart", custom: true },
+].sort((a, b) => a.name.localeCompare(b.name));
+
 function IconsDemo() {
   const [expanded, setExpanded] = useState(false);
-  const visibleIcons = expanded ? ICON_LIBRARY : ICON_LIBRARY.slice(0, ICONS_INITIAL_COUNT);
-  const hasMore = ICON_LIBRARY.length > ICONS_INITIAL_COUNT;
+  const visibleIcons = expanded ? SORTED_ICONS : SORTED_ICONS.slice(0, ICONS_INITIAL_COUNT);
+  const hasMore = SORTED_ICONS.length > ICONS_INITIAL_COUNT;
 
   return (
     <div className="space-y-6">
@@ -1845,11 +1851,15 @@ function IconsDemo() {
         {visibleIcons.map((icon) => (
           <div
             key={icon.slug}
-            title={icon.name}
-            className="flex flex-col items-center justify-center gap-2 rounded-md p-3 text-center"
+            title={icon.custom ? "trash-heart — Default für Lösch-Aktionen (animiert bei Hover)" : icon.name}
+            className="group flex flex-col items-center justify-center gap-2 rounded-md p-3 text-center"
             style={{ border: "1px solid var(--border)" }}
           >
-            <DayoneIcon slug={icon.slug} size={24} />
+            {icon.custom ? (
+              <TrashHeartIcon className="size-6 text-foreground" />
+            ) : (
+              <DayoneIcon slug={icon.slug} size={24} />
+            )}
             <p className="w-full truncate text-[10px]" style={{ color: "var(--muted-foreground)" }}>
               {icon.name}
             </p>
@@ -1860,11 +1870,15 @@ function IconsDemo() {
       {hasMore && (
         <div className="flex justify-center">
           <Button variant="outline" size="sm" onClick={() => setExpanded((v) => !v)}>
-            {expanded ? "Weniger anzeigen" : `Mehr anzeigen (${ICON_LIBRARY.length - ICONS_INITIAL_COUNT})`}
+            {expanded ? "Weniger anzeigen" : `Mehr anzeigen (${SORTED_ICONS.length - ICONS_INITIAL_COUNT})`}
             <ChevronDown className={`size-4 transition-transform ${expanded ? "rotate-180" : ""}`} />
           </Button>
         </div>
       )}
+
+      <p className="text-xs" style={{ color: "var(--muted-foreground)" }}>
+        Für Lösch-Aktionen wird standardmäßig trash-heart verwendet (animiert bei Hover). trash und trashcan bleiben als statische Alternativen verfügbar.
+      </p>
     </div>
   );
 }
@@ -1942,7 +1956,7 @@ export function ComponentDemo({ slug }: { slug: string }) {
   const Demo = DEMOS[slug];
   if (!Demo) {
     return (
-      <p className="text-sm" style={{ color: "var(--gray-400)" }}>
+      <p className="text-sm" style={{ color: "var(--muted-foreground)" }}>
         Kein Demo verfügbar.
       </p>
     );
