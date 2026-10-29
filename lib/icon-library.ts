@@ -174,4 +174,6 @@ export const ICON_LIBRARY: { name: string; slug: string }[] = [
   { name: "font-size", slug: "font-size" },
   { name: "cloud", slug: "cloud" },
   { name: "user-centered", slug: "user-centered" },
+  { name: "success", slug: "success" },
+  { name: "error", slug: "error" },
 ];
