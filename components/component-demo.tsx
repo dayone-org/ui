@@ -7,7 +7,7 @@ import { DayoneButtonsContent } from "@/components/dayone-buttons";
 import { DayoneTypographyShowcase } from "@/components/dayone-typography-showcase";
 import { PlaygroundVariantHeading } from "@/components/playground-variant-heading";
 import { DayoneIcon } from "@/components/dayone-icon";
-import { ICON_LIBRARY } from "@/lib/icon-library";
+import { ICON_LIBRARY, ICON_CATEGORIES, type IconCategory } from "@/lib/icon-library";
 import TrashHeartIcon from "@/components/ui/trash-heart-icon";
 import { Button } from "@/components/ui/button";
 import { Bold, Italic, Underline, Search, ChevronRight, ChevronDown, TrendingUp, CalendarDays, Users, FileText, ExternalLink, Phone } from "lucide-react";
@@ -1831,50 +1831,46 @@ function LogoDemo() {
   );
 }
 
-const ICONS_PER_ROW_DESKTOP = 8;
-const ICONS_INITIAL_ROWS = 5;
-const ICONS_INITIAL_COUNT = ICONS_PER_ROW_DESKTOP * ICONS_INITIAL_ROWS;
-
-const SORTED_ICONS: Array<{ name: string; slug: string; custom?: boolean }> = [
+const ALL_ICONS: Array<{ name: string; slug: string; category: IconCategory; custom?: boolean }> = [
   ...ICON_LIBRARY,
-  { name: "trash-heart", slug: "trash-heart", custom: true },
-].sort((a, b) => a.name.localeCompare(b.name));
+  { name: "trash-heart", slug: "trash-heart", category: "aktionen", custom: true },
+];
 
 function IconsDemo() {
-  const [expanded, setExpanded] = useState(false);
-  const visibleIcons = expanded ? SORTED_ICONS : SORTED_ICONS.slice(0, ICONS_INITIAL_COUNT);
-  const hasMore = SORTED_ICONS.length > ICONS_INITIAL_COUNT;
-
   return (
-    <div className="space-y-6">
-      <div className="grid grid-cols-4 gap-3 sm:grid-cols-6 md:grid-cols-8">
-        {visibleIcons.map((icon) => (
-          <div
-            key={icon.slug}
-            title={icon.custom ? "trash-heart — Default für Lösch-Aktionen (animiert bei Hover)" : icon.name}
-            className="group flex flex-col items-center justify-center gap-2 rounded-md p-3 text-center"
-            style={{ border: "1px solid var(--border)" }}
-          >
-            {icon.custom ? (
-              <TrashHeartIcon className="size-6 text-foreground" />
-            ) : (
-              <DayoneIcon slug={icon.slug} size={24} />
-            )}
-            <p className="w-full truncate text-[10px]" style={{ color: "var(--muted-foreground)" }}>
-              {icon.name}
-            </p>
+    <div className="space-y-8">
+      {ICON_CATEGORIES.map((cat) => {
+        const icons = ALL_ICONS
+          .filter((icon) => icon.category === cat.id)
+          .sort((a, b) => a.name.localeCompare(b.name));
+        return (
+          <div key={cat.id}>
+            <PlaygroundVariantHeading className="mb-4">{cat.label}</PlaygroundVariantHeading>
+            <div className="grid grid-cols-4 gap-3 sm:grid-cols-6 md:grid-cols-8">
+              {icons.map((icon) => (
+                <div
+                  key={icon.slug}
+                  title={icon.custom ? "trash-heart — Default für Lösch-Aktionen (animiert bei Hover)" : icon.name}
+                  className="group flex flex-col items-center justify-center gap-2 rounded-md p-3 text-center"
+                  style={{ border: "1px solid var(--border)" }}
+                >
+                  {icon.custom ? (
+                    <TrashHeartIcon className="size-6 text-foreground" />
+                  ) : (
+                    <DayoneIcon slug={icon.slug} size={24} />
+                  )}
+                  <p className="w-full truncate text-[10px]" style={{ color: "var(--muted-foreground)" }}>
+                    {icon.name}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
-        ))}
-      </div>
-
-      {hasMore && (
-        <div className="flex justify-center">
-          <Button variant="outline" size="sm" onClick={() => setExpanded((v) => !v)}>
-            {expanded ? "Weniger anzeigen" : `Mehr anzeigen (${SORTED_ICONS.length - ICONS_INITIAL_COUNT})`}
-            <ChevronDown className={`size-4 transition-transform ${expanded ? "rotate-180" : ""}`} />
-          </Button>
-        </div>
-      )}
+        );
+      })}
+      <p className="text-xs" style={{ color: "var(--muted-foreground)" }}>
+        Für Lösch-Aktionen wird standardmäßig trash-heart verwendet (animiert bei Hover). trash und trashcan bleiben als statische Alternativen verfügbar.
+      </p>
     </div>
   );
 }
